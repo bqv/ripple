@@ -1,4 +1,4 @@
-package com.diegomalone.morsenotifier
+package com.diegomalone.morsenotifier.domain
 
 import com.diegomalone.morsenotifier.domain.SignalLength.SHORT
 import com.diegomalone.morsenotifier.domain.SignalLength.LONG

@@ -8,14 +8,24 @@ import android.service.notification.StatusBarNotification
 import android.widget.Toast
 import com.diegomalone.morsenotifier.domain.EncodedChar
 import com.diegomalone.morsenotifier.domain.SignalLength
-import com.diegomalone.morsenotifier.toMorseCode
+import com.diegomalone.morsenotifier.extensions.toMorseCode
+import timber.log.Timber
 
 class NotificationService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
 
-        vibrate(sbn?.notification?.tickerText.toString().toMorseCode())
+        val title: String? = sbn?.notification?.extras?.getString("android.title")
+        val text: String? = sbn?.notification?.extras?.getString("android.text")
+        val packageName: String? = sbn?.packageName
+
+        Timber.e("Malone")
+        Timber.e(title)
+        Timber.i(text)
+        Timber.i(packageName)
+
+        vibrate(text?.toMorseCode())
     }
 
     private fun vibrate(encodedCharList: List<EncodedChar>?) {
