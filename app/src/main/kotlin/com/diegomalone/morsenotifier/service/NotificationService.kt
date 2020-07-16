@@ -6,8 +6,8 @@ import android.os.Vibrator
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.widget.Toast
-import com.diegomalone.morsenotifier.domain.EncodedChar
-import com.diegomalone.morsenotifier.domain.SignalLength
+import com.diegomalone.morsenotifier.actuator.domain.EncodedChar
+import com.diegomalone.morsenotifier.actuator.domain.SignalLength
 import com.diegomalone.morsenotifier.extensions.toMorseCode
 import timber.log.Timber
 

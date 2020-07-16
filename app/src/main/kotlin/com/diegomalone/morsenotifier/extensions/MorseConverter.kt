@@ -1,7 +1,7 @@
 package com.diegomalone.morsenotifier.extensions
 
 import com.diegomalone.morsenotifier.domain.MorseCodeMap.map
-import com.diegomalone.morsenotifier.domain.EncodedChar
+import com.diegomalone.morsenotifier.actuator.domain.EncodedChar
 import org.apache.commons.lang3.StringUtils
 import java.util.Locale
 
