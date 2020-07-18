@@ -1,7 +1,7 @@
-package com.diegomalone.morsenotifier.domain
+package com.diegomalone.domain
 
-import com.diegomalone.morsenotifier.actuator.domain.SignalType.SHORT
-import com.diegomalone.morsenotifier.actuator.domain.SignalType.LONG
+import com.diegomalone.domain.SignalType.SHORT
+import com.diegomalone.domain.SignalType.LONG
 
 object MorseCodeMap {
     val map = mapOf(

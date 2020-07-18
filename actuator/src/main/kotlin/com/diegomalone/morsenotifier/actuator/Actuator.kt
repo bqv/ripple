@@ -1,6 +1,6 @@
 package com.diegomalone.morsenotifier.actuator
 
-import com.diegomalone.morsenotifier.actuator.domain.EncodedChar
+import com.diegomalone.domain.EncodedChar
 
 interface Actuator {
 
