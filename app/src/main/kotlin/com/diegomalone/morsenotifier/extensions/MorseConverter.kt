@@ -1,7 +1,7 @@
 package com.diegomalone.morsenotifier.extensions
 
-import com.diegomalone.morsenotifier.domain.MorseCodeMap.map
 import com.diegomalone.morsenotifier.actuator.domain.EncodedChar
+import com.diegomalone.morsenotifier.domain.MorseCodeMap.map
 import org.apache.commons.lang3.StringUtils
 import java.util.Locale
 
@@ -18,8 +18,7 @@ fun String.toMorseCode(): List<EncodedChar> {
     return morseCharList
 }
 
-private fun String.clearString() =
-    StringUtils.stripAccents(this).toLowerCase(Locale.getDefault())
+private fun String.clearString() = StringUtils.stripAccents(this).toLowerCase(Locale.getDefault())
 
 private fun Char.toMorseCode(): EncodedChar? {
     return map[this]?.let {

@@ -7,7 +7,7 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.widget.Toast
 import com.diegomalone.morsenotifier.actuator.domain.EncodedChar
-import com.diegomalone.morsenotifier.actuator.domain.SignalLength
+import com.diegomalone.morsenotifier.actuator.domain.SignalType
 import com.diegomalone.morsenotifier.extensions.toMorseCode
 import timber.log.Timber
 
@@ -33,7 +33,7 @@ class NotificationService : NotificationListenerService() {
 
         encodedCharList?.forEach {
             it.code.forEach {
-                if (it == SignalLength.SHORT) {
+                if (it == SignalType.SHORT) {
                     v.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE))
                     Thread.sleep(350)
                 } else {

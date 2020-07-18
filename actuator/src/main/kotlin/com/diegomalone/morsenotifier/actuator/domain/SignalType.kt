@@ -1,5 +1,5 @@
 package com.diegomalone.morsenotifier.actuator.domain
 
-enum class SignalLength {
+enum class SignalType {
     SHORT, LONG
 }
