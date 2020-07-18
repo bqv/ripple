@@ -18,9 +18,9 @@ fun String.toMorseCode(): List<EncodedChar> {
     return morseCharList
 }
 
-private fun String.clearString() = StringUtils.stripAccents(this).toLowerCase(Locale.getDefault())
+fun String.clearString() = StringUtils.stripAccents(this).toLowerCase(Locale.US)
 
-private fun Char.toMorseCode(): EncodedChar? {
+fun Char.toMorseCode(): EncodedChar? {
     return map[this]?.let {
         EncodedChar(it)
     }
