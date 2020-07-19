@@ -1,8 +1,18 @@
 package com.diegomalone.morsenotifier.actuator
 
-class SignalSender(private val actuator: Actuator) {
+import com.diegomalone.domain.extensions.toMorseCode
+
+class SignalSender(private val actuatorList: List<Actuator>) {
 
     fun sendMessage(message: String) {
-        TODO("Not yet implemented")
+        val morseMessage = message.toMorseCode()
+
+        actuatorList.forEach { actuator ->
+            morseMessage.forEach { morseChar ->
+                actuator.sendCharacter(morseChar)
+            }
+
+            actuator.endOfMessage()
+        }
     }
 }

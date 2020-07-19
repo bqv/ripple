@@ -19,6 +19,7 @@ class TextExtensionsTest {
     fun testCharToMorseCode() {
         assertEquals(EncodedChar(listOf(SignalType.SHORT, SignalType.LONG)), 'a'.toMorseCode())
         assertEquals(null, '%'.toMorseCode())
+        assertEquals(EncodedChar(listOf(SignalType.WORD_BREAKER)), ' '.toMorseCode())
     }
 
     @Test
@@ -30,6 +31,7 @@ class TextExtensionsTest {
             't'.toMorseCode(),
             '\''.toMorseCode(),
             's'.toMorseCode(),
+            ' '.toMorseCode(),
             'o'.toMorseCode(),
             'k'.toMorseCode()
         )

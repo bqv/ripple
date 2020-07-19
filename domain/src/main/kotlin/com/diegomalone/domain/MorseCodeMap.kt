@@ -1,10 +1,12 @@
 package com.diegomalone.domain
 
-import com.diegomalone.domain.SignalType.SHORT
 import com.diegomalone.domain.SignalType.LONG
+import com.diegomalone.domain.SignalType.SHORT
+import com.diegomalone.domain.SignalType.WORD_BREAKER
 
 object MorseCodeMap {
     val map = mapOf(
+        ' ' to listOf(WORD_BREAKER),
         'a' to listOf(SHORT, LONG),
         'b' to listOf(LONG, SHORT, SHORT, SHORT),
         'c' to listOf(LONG, SHORT, LONG, SHORT),

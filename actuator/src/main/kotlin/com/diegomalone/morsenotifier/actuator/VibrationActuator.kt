@@ -7,4 +7,8 @@ class VibrationActuator() : Actuator {
     override fun sendCharacter(encodedChar: EncodedChar) {
         TODO("Not yet implemented")
     }
+
+    override fun endOfMessage() {
+        TODO("Not yet implemented")
+    }
 }
