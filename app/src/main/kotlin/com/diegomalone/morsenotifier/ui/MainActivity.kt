@@ -1,11 +1,5 @@
 package com.diegomalone.morsenotifier.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
 
-class MainActivity: AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-}
+class MainActivity : Activity()
