@@ -5,3 +5,7 @@ include ':domain'
 
 include ':actuator'
 include ':notification'
+
+include ':customization'
+
+project(':customization').projectDir = new File('feature/customization')

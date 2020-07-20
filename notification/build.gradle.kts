@@ -5,6 +5,8 @@ plugins {
 
 android {
     compileSdkVersion(AndroidSdk.compile)
+
+    sourceSets["main"].java.srcDir("src/main/kotlin")
 }
 
 dependencies {

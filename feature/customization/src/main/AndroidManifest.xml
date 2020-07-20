@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.diegomalone.morsenotifier">
+
+    <application>
+
+        <activity android:name=".feature.customization.AppListActivity" />
+
+    </application>
+</manifest>

@@ -28,4 +28,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":actuator"))
     implementation(project(":notification"))
+
+    implementation(project(":customization"))
 }

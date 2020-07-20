@@ -11,5 +11,4 @@ android {
 
 dependencies {
     implementation(Dependencies.kotlinStandardLibrary)
-    implementation(project(":domain"))
 }
