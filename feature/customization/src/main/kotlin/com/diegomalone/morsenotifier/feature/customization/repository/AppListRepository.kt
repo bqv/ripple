@@ -1,0 +1,3 @@
+package com.diegomalone.morsenotifier.feature.customization.repository
+
+interface AppListRepository

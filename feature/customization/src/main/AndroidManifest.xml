@@ -3,7 +3,9 @@
 
     <application>
 
-        <activity android:name=".feature.customization.AppListActivity" />
+        <activity
+            android:name=".feature.customization.presentation.AppListActivity"
+            android:label="@string/app_selection_title" />
 
     </application>
 </manifest>

@@ -3,7 +3,7 @@ package com.diegomalone.morsenotifier.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.diegomalone.morsenotifier.feature.customization.AppListActivity
+import com.diegomalone.morsenotifier.feature.customization.presentation.AppListActivity
 
 class MainActivity : Activity() {
 
