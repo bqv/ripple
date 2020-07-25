@@ -12,4 +12,9 @@ android {
 dependencies {
     implementation(Dependencies.kotlinStandardLibrary)
     implementation(project(":domain"))
+
+    implementation(Dependencies.appCompat)
+
+    implementation(Dependencies.coroutines)
+    implementation(Dependencies.coroutinesAndroid)
 }

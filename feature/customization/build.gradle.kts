@@ -15,6 +15,8 @@ dependencies {
     implementation(project(":data"))
 
     implementation(Dependencies.appCompat)
+    implementation(Dependencies.coroutines)
+    implementation(Dependencies.coroutinesAndroid)
     implementation(Dependencies.koin)
     implementation(Dependencies.koinScope)
     implementation(Dependencies.koinViewModel)
