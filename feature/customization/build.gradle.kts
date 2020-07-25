@@ -15,8 +15,12 @@ dependencies {
     implementation(project(":data"))
 
     implementation(Dependencies.appCompat)
+
+    implementation(Dependencies.coreKtx)
     implementation(Dependencies.coroutines)
     implementation(Dependencies.coroutinesAndroid)
+    implementation(Dependencies.lifecycleViewModel)
+
     implementation(Dependencies.koin)
     implementation(Dependencies.koinScope)
     implementation(Dependencies.koinViewModel)

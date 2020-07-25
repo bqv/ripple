@@ -1,23 +1,32 @@
 package com.diegomalone.morsenotifier.data.usecase
 
+import com.diegomalone.morsenotifier.data.FlowUseCase
 import com.diegomalone.morsenotifier.data.Result
-import com.diegomalone.morsenotifier.data.UseCase
-import com.diegomalone.morsenotifier.data.model.ApplicationList
+import com.diegomalone.morsenotifier.data.model.Application
 import com.diegomalone.morsenotifier.data.repository.AppListRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class GetApplicationListUseCase(
-    private val appListRepository: AppListRepository
-) : UseCase<Unit, ApplicationList>() {
+    private val appListRepository: AppListRepository,
+    dispatcher: CoroutineDispatcher
+) : FlowUseCase<Unit, List<Application>>(dispatcher) {
 
-    override suspend fun run(params: Unit) {
-        resultChannel.send(Result.State.Loading)
+    override fun execute(params: Unit): Flow<Result<List<Application>>> {
+        return appListRepository.getApplicationList().map { observableResult ->
+            when (observableResult) {
+                is Result.Success -> {
+                    val list = observableResult.data
 
-        val applicationResult = appListRepository.getApplicationList()
-        resultChannel.send(applicationResult)
-
-        applicationResult.handleResult {
-            startAsync {
-                resultChannel.send(Result.State.Loaded)
+                    if (list.isNotEmpty()) {
+                        Result.Success(list)
+                    } else {
+                        Result.Failure(IllegalStateException("Application list is empty"))
+                    }
+                }
+                is Result.Failure -> observableResult
+                is Result.Loading -> Result.Failure(IllegalStateException("Result must be Success or Error"))
             }
         }
     }
