@@ -11,7 +11,5 @@ android {
 
 dependencies {
     implementation(Dependencies.kotlinStandardLibrary)
-
-    // TODO Remove domain dependency
     implementation(project(":domain"))
 }

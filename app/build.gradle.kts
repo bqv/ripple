@@ -28,7 +28,6 @@ dependencies {
     implementation(Dependencies.appCompat)
     implementation(Dependencies.koin)
 
-    implementation(project(":domain"))
     implementation(project(":actuator"))
     implementation(project(":notification"))
 

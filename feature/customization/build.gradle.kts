@@ -12,6 +12,8 @@ android {
 dependencies {
     implementation(Dependencies.kotlinStandardLibrary)
 
+    implementation(project(":data"))
+
     implementation(Dependencies.appCompat)
     implementation(Dependencies.koin)
     implementation(Dependencies.koinScope)
