@@ -4,13 +4,11 @@ import com.diegomalone.morsenotifier.data.repository.DeviceApplicationsRepositor
 import com.diegomalone.morsenotifier.data.usecase.GetApplicationListUseCase
 import com.diegomalone.morsenotifier.feature.customization.presentation.AppListViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
-@InternalCoroutinesApi
 object CustomizationModule {
     fun inject() = loadKoinModules(
         listOf(

@@ -8,11 +8,9 @@ import com.diegomalone.morsenotifier.data.Result
 import com.diegomalone.morsenotifier.data.model.Application
 import com.diegomalone.morsenotifier.data.successOr
 import com.diegomalone.morsenotifier.data.usecase.GetApplicationListUseCase
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@InternalCoroutinesApi
 class AppListViewModel(
     private val getApplicationListUseCase: GetApplicationListUseCase
 ) : ViewModel() {
