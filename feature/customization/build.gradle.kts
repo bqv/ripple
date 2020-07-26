@@ -15,6 +15,10 @@ dependencies {
     implementation(project(":data"))
 
     implementation(Dependencies.appCompat)
+
+    implementation(Dependencies.coroutines)
+    implementation(Dependencies.lifecycleViewModel)
+
     implementation(Dependencies.koin)
     implementation(Dependencies.koinScope)
     implementation(Dependencies.koinViewModel)

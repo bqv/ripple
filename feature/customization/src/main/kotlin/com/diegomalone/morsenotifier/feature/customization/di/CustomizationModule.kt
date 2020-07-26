@@ -1,7 +1,10 @@
 package com.diegomalone.morsenotifier.feature.customization.di
 
-import com.diegomalone.morsenotifier.data.GetApplicationListUseCase
+import com.diegomalone.morsenotifier.data.repository.DeviceApplicationsRepository
+import com.diegomalone.morsenotifier.data.usecase.GetApplicationListUseCase
 import com.diegomalone.morsenotifier.feature.customization.presentation.AppListViewModel
+import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -20,7 +23,8 @@ object CustomizationModule {
 
     private val useCaseModule = module {
         single {
-            GetApplicationListUseCase(get())
+            // TODO Inject ApplicationRepository dependency
+            GetApplicationListUseCase(DeviceApplicationsRepository(androidApplication()), Dispatchers.IO)
         }
     }
 }
