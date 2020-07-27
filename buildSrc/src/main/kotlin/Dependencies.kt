@@ -8,7 +8,6 @@ object Dependencies {
     const val koinScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
-    const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
@@ -16,5 +15,7 @@ object Dependencies {
 
     object TestDependencies {
         const val junit = "org.junit.jupiter:junit-jupiter:${Versions.junit}"
+        const val truth = "com.google.truth:truth:${Versions.truth}"
+        const val mockk = "io.mockk:mockk:${Versions.mockk}"
     }
 }

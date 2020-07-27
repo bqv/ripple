@@ -7,6 +7,7 @@ android {
     compileSdkVersion(AndroidSdk.compile)
 
     sourceSets["main"].java.srcDir("src/main/kotlin")
+    sourceSets["test"].java.srcDir("src/test/kotlin")
 }
 
 dependencies {
@@ -17,4 +18,8 @@ dependencies {
 
     implementation(Dependencies.coroutines)
     implementation(Dependencies.coroutinesAndroid)
+
+    testImplementation(Dependencies.TestDependencies.junit)
+    testImplementation(Dependencies.TestDependencies.truth)
+    testImplementation(Dependencies.TestDependencies.mockk)
 }

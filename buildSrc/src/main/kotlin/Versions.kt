@@ -11,4 +11,6 @@ object Versions {
     const val lifecycle = "2.2.0"
 
     const val junit = "5.6.2"
+    const val truth = "1.0.1"
+    const val mockk = "1.10.0"
 }
