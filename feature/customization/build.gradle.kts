@@ -17,6 +17,7 @@ dependencies {
     implementation(Dependencies.appCompat)
 
     implementation(Dependencies.coroutines)
+    implementation(Dependencies.lifecycleLiveData)
     implementation(Dependencies.lifecycleViewModel)
 
     implementation(Dependencies.koin)
