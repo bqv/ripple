@@ -16,15 +16,7 @@ class GetApplicationListUseCase(
     override fun execute(params: Unit): Flow<Result<List<Application>>> {
         return appListRepository.getApplicationList().map { observableResult ->
             when (observableResult) {
-                is Result.Success -> {
-                    val list = observableResult.data
-
-                    if (list.isNotEmpty()) {
-                        Result.Success(list)
-                    } else {
-                        Result.Failure(IllegalStateException("Application list is empty"))
-                    }
-                }
+                is Result.Success -> Result.Success(observableResult.data)
                 is Result.Failure -> observableResult
                 is Result.Loading -> Result.Failure(IllegalStateException("Result must be Success or Error"))
             }

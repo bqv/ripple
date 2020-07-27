@@ -4,7 +4,6 @@ object Versions {
     const val appCompat = "1.1.0"
 
     const val coroutines = "1.3.8"
-    const val coreKtx = "1.2.0"
     const val apacheCommons = "3.9"
     const val koin = "2.1.6"
 

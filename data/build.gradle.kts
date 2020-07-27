@@ -22,4 +22,5 @@ dependencies {
     testImplementation(Dependencies.TestDependencies.junit)
     testImplementation(Dependencies.TestDependencies.truth)
     testImplementation(Dependencies.TestDependencies.mockk)
+    testImplementation(Dependencies.TestDependencies.coroutinesTest)
 }
