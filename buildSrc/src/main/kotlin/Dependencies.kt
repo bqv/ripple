@@ -4,9 +4,9 @@ object Dependencies {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
 
     const val apacheCommons = "org.apache.commons:commons-lang3:${Versions.apacheCommons}"
-    const val koin = "org.koin:koin-android:${Versions.koin}"
-    const val koinScope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val koin = "io.insert-koin:koin-android:${Versions.koin}"
+    const val koinScope = "io.insert-koin:koin-androidx-scope:${Versions.koin}"
+    const val koinViewModel = "io.insert-koin:koin-androidx-viewmodel:${Versions.koin}"
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"

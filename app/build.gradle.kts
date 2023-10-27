@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    namespace = "io.fron.morse"
+    compileSdk = AndroidSdk.compile
     defaultConfig {
-        applicationId = "com.diegomalone.morsenotifier"
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        applicationId = "io.fron.morse"
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
         versionCode = 1
         versionName = "1.0"
     }
@@ -20,6 +21,14 @@ android {
     }
 
     sourceSets["main"].java.srcDir("src/main/kotlin")
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {

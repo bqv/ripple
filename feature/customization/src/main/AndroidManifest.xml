@@ -1,10 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.diegomalone.morsenotifier">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
 
         <activity
-            android:name=".feature.customization.presentation.AppListActivity"
+            android:name="com.diegomalone.morsenotifier.feature.customization.presentation.AppListActivity"
             android:label="@string/app_selection_title" />
 
     </application>
