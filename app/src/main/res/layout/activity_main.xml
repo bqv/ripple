@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/chk_global_enable"
-        android:onCheckedChanged="@{viewModel.onNotificationEnabledChanged}"
+        android:onCheckedChanged="@{viewModel::onNotificationEnabledChanged}"
         android:checked="@{viewModel.notificationEnabled}"
         />
       <TextView

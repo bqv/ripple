@@ -28,7 +28,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/btn_enable_me"
-      android:onClick="@{viewModel.openSettings}"/>
+      android:onClick="@{viewModel::openSettings}"/>
 
     <TextView
       android:layout_width="wrap_content"
