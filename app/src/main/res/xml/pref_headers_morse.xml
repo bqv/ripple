@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <header android:icon="@drawable/ic_action_settings_general" android:title="@string/pref_settings_general" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_general_morse" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_morse" android:title="@string/pref_settings_morse" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_morse" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_audio" android:title="@string/pref_settings_audio" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_audio" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_display" android:title="@string/pref_settings_display" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_display" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_call" android:title="@string/pref_settings_call" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_call" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_sms" android:title="@string/pref_settings_sms" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_sms" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_system" android:title="@string/pref_settings_system" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_system" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_chime" android:title="@string/pref_settings_chime" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_chime" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_reminder" android:title="@string/pref_settings_reminders" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_reminders" />
+    </header>
+    <header android:icon="@drawable/ic_action_settings_apps" android:title="@string/pref_settings_apps" android:fragment="com.dof100.morsenotifier.MyPreferencesFragment">
+        <extra android:name="prefxmlres" android:value="pref_fragment_apps" />
+    </header>
+</preference-headers>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/ll_apps_select" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textStyle="bold" android:paddingTop="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_what" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_what_text" />
+        <Spinner android:id="@id/sp_AppName" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <TextView android:textStyle="bold" android:paddingTop="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria_contains" />
+        <EditText android:id="@id/et_criteria_Contains" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_anything" android:inputType="text" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria_containsnot" />
+        <EditText android:id="@id/et_criteria_ContainsNot" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_na" android:inputType="text" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria_hint" />
+        <TextView android:textStyle="bold" android:paddingTop="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteriaadv" />
+        <GridLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:columnCount="2">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria_category" />
+            <EditText android:layout_gravity="end|fill_horizontal|start" android:id="@id/et_criteria_category" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_any" android:inputType="text" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteria_id" />
+            <EditText android:layout_gravity="end|fill_horizontal|start" android:id="@id/et_criteria_id" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_any" android:inputType="numberSigned" />
+        </GridLayout>
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_criteriaadv_text" />
+        <TextView android:textStyle="bold" android:paddingTop="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/activity_appfilter_how" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <CheckBox android:id="@id/cb_SayTitle" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/activity_appfilter_saytitle" android:layout_weight="1.0" />
+            <CheckBox android:id="@id/cb_SayText" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/activity_appfilter_saytext" android:layout_weight="1.0" />
+            <CheckBox android:id="@id/cb_SayTicker" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/activity_appfilter_sayticker" android:layout_weight="1.0" />
+        </LinearLayout>
+        <GridLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:columnCount="2">
+            <TextView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_appfilter_saybefore" />
+            <EditText android:layout_gravity="end|fill_horizontal|start|center" android:id="@id/et_SayBefore" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_nothing" android:inputType="text" />
+            <TextView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_appfilter_sayafter" />
+            <EditText android:layout_gravity="end|fill_horizontal|start|center" android:id="@id/et_SayAfter" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:hint="@string/string_nothing" android:inputType="text" />
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

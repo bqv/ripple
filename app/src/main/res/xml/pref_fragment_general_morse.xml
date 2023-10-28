@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/pref_settings_general" android:key="pref_general_morse"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:mypreferencenamespace="http://mypreferencenamespace.100dof.com">
+    <com.dof100.morsenotifier.MyPreferenceCheckbox android:title="@string/pref_general_dnd" android:key="pref_morse_general_dnd" android:summary="@string/pref_general_dnd_summary" />
+    <com.dof100.morsenotifier.MyPreferenceCheckbox android:title="@string/pref_general_muteincalls" android:key="pref_morse_general_muteincalls" android:summary="@string/pref_general_muteincalls_summary" />
+    <com.dof100.morsenotifier.MyPreferenceList android:entries="@array/pref_general_initialdelay_items" android:title="@string/pref_general_initialdelay" android:key="pref_morse_general_initialdelay" android:summary="@string/pref_general_initialdelay_summary" android:entryValues="@array/pref_general_initialdelay_values" mypreferencenamespace:valueShow="true" mypreferencenamespace:valueUnits="" />
+    <com.dof100.morsenotifier.MyPreferenceList android:entries="@array/pref_general_volumedownstop_items" android:title="@string/pref_general_volumedownstop_title" android:key="pref_morse_general_volumedownstop" android:summary="@string/pref_general_volumedownstop_summary" android:entryValues="@array/pref_general_volumedownstop_values" mypreferencenamespace:valueShow="true" mypreferencenamespace:valueUnits="" />
+</PreferenceScreen>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingTop="15.0dip" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_time" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_time" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_app" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_app" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Space android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_package" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_title" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_text" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_ticker" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_ticker" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_category" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_category" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/string_id" android:layout_weight="0.3" />
+        <TextView android:id="@id/tv_recentnotification_id" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="0.7" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:id="@id/tv_recentnotification_announced" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:id="@id/tv_recentnotification_matchingfilter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" />
+                <TextView android:id="@id/tv_recentnotification_matchingfilternum" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="" android:layout_weight="1.0" />
+            </LinearLayout>
+            <TextView android:id="@id/tv_recentnotification_announcement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" />
+        </LinearLayout>
+        <Button android:id="@id/b_test" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/action_test" />
+    </LinearLayout>
+</LinearLayout>

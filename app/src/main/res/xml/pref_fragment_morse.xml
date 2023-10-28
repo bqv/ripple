@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/pref_settings_morse" android:key="pref_general_morse"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:mypreferencenamespace="http://mypreferencenamespace.100dof.com">
+    <com.dof100.morsenotifier.MyPreferenceNumber android:title="@string/pref_morse_wpm" android:key="pref_morse_wpm" android:summary="@string/pref_morse_wpm_summary" mypreferencenamespace:valueMax="40" mypreferencenamespace:valueMin="5" mypreferencenamespace:valueShow="true" mypreferencenamespace:valueStep="1" mypreferencenamespace:valueUnits="wpm" />
+    <com.dof100.morsenotifier.MyPreferenceCheckbox android:title="@string/pref_morse_farnsworth_enable" android:key="pref_morse_farnsworth_enable" android:summary="@string/pref_morse_farnsworth_enable_summary" />
+    <com.dof100.morsenotifier.MyPreferenceNumber android:title="@string/pref_morse_farnsworth_wpm" android:key="pref_morse_farnsworth_wpm" android:summary="@string/pref_morse_farnsworth_wpm_summary" android:dependency="pref_morse_farnsworth_enable" mypreferencenamespace:valueMax="20" mypreferencenamespace:valueMin="2" mypreferencenamespace:valueShow="true" mypreferencenamespace:valueStep="1" mypreferencenamespace:valueUnits="wpm" />
+    <com.dof100.morsenotifier.MyPreferenceCheckbox android:title="@string/pref_morse_punctuation" android:key="pref_morse_punctuation" android:summary="@string/pref_morse_punctuation_summary" />
+    <com.dof100.morsenotifier.MyPreferenceButton android:key="pref_morse_test" mypreferencenamespace:buttonCaption="@string/action_test" mypreferencenamespace:buttonIntentClass="com.dof100.morsenotifier.ServiceMain" mypreferencenamespace:buttonMsgExtraText1="" mypreferencenamespace:buttonMsgExtraText2="" mypreferencenamespace:buttonMsgWhat="@string/MSG_MN_TEST" />
+</PreferenceScreen>

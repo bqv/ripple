@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="303" android:versionName="3.0.3"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="25" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <application android:theme="@style/AppTheme" android:label="@string/app_name_mnpro" android:icon="@mipmap/ic_launcher_mnpro" android:name="com.dof100.morsenotifier.App" android:allowClearUserData="true" android:allowBackup="true" android:vmSafeMode="true" android:hardwareAccelerated="true" android:supportsRtl="true" android:fullBackupContent="@xml/backup_config" android:roundIcon="@mipmap/ic_launcher_mnpro_round">
+        <meta-data android:name="shortlabel" android:value="MNP" />
+        <meta-data android:name="shortvalue" android:value="0" />
+        <service android:label="Main service for Morse Notifier" android:name="com.dof100.morsenotifier.ServiceMain" />
+        <service android:label="Notification listener service for Morse Notifier" android:name="com.dof100.morsenotifier.ServiceNotifications" android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" android:enabled="@bool/enableFeaturesAPI18">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <activity android:label="@string/app_name_mnpro" android:name="com.dof100.morsenotifier.ActivityMain" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name_mnpro">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="100dof.com" android:pathPrefix="/apps/morse-notifier" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_settings" android:name="com.dof100.morsenotifier.MyPreferencesActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.dof100.morsenotifier.ActivityMain" />
+        </activity>
+        <activity android:label="@string/title_activity_about" android:name="com.dof100.morsenotifier.ActivityAbout" />
+        <activity android:name="com.dof100.morsenotifier.ActivityHTML" />
+        <activity android:label="@string/title_activity_advanced" android:name="com.dof100.morsenotifier.ActivityAdvanced" android:windowSoftInputMode="stateHidden">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.dof100.morsenotifier.ActivityAdvanced" />
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/app_name_mnpro" android:name="com.dof100.morsenotifier.ActivityDisplayMessage" android:launchMode="singleInstance" />
+        <activity android:label="@string/title_activity_reminders" android:name="com.dof100.morsenotifier.ActivityReminders" />
+        <activity android:label="@string/title_activity_reminder_edit" android:name="com.dof100.morsenotifier.ActivityReminder" />
+        <activity android:label="@string/title_activity_recentnotifications" android:name="com.dof100.morsenotifier.ActivityRecentAppNotifications" />
+        <activity android:label="@string/title_activity_app_filters" android:name="com.dof100.morsenotifier.ActivityAppFilters" />
+        <activity android:label="@string/title_activity_app_filter" android:name="com.dof100.morsenotifier.ActivityAppFilter" android:windowSoftInputMode="stateHidden" />
+        <receiver android:name="com.dof100.morsenotifier.BRVolume">
+            <intent-filter>
+                <action android:name="android.media.VOLUME_CHANGED_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dof100.morsenotifier.BRSMS" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dof100.morsenotifier.BRMMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dof100.morsenotifier.BRCall">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dof100.morsenotifier.BRSystem">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
+                <action android:name="android.intent.action.ACTION_BATTERY_OK" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.evernote.android.job.v21.PlatformJobService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
+        <service android:name="com.evernote.android.job.v14.PlatformAlarmService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
+        <service android:name="com.evernote.android.job.v14.PlatformAlarmServiceExact" android:exported="false" />
+        <receiver android:name="com.evernote.android.job.v14.PlatformAlarmReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.evernote.android.job.v14.RUN_JOB" />
+                <action android:name="net.vrallev.android.job.v14.RUN_JOB" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.evernote.android.job.JobBootReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.evernote.android.job.gcm.PlatformGcmService" android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE" android:enabled="false" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+            </intent-filter>
+        </service>
+        <service android:name="com.evernote.android.job.JobRescheduleService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
+        <meta-data android:name="com.android.vending.derived.apk.id" android:value="1" />
+    </application>
+</manifest>
