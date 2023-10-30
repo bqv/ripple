@@ -31,7 +31,7 @@ public class MyPreferenceCheckbox extends CheckBoxPreference {
       LayoutParams var4 = var3.getLayoutParams();
       var4.height /= 2;
       var3.setLayoutParams(var4);
-      ((CheckBox)var2).setButtonDrawable(2131099665);
+      ((CheckBox)var2).setButtonDrawable(R.drawable.mycheckboxpreference);
       super.onBindView(var1);
    }
 }

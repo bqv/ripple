@@ -86,6 +86,6 @@ public class JobProxyGcm implements JobProxy {
    }
 
    protected String createTag(JobRequest var1) {
-      return this.createTag(var1.c());
+      return this.createTag(var1.getJobId());
    }
 }

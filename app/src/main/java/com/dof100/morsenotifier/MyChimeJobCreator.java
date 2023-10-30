@@ -1,47 +1,50 @@
 package com.dof100.morsenotifier;
 
+import com.evernote.android.job.Job;
+import com.evernote.android.job.JobCreator;
+
 import java.util.Locale;
 
-class MyChimeJobCreator implements com.evernote.android.job.f {
-   public com.evernote.android.job.c a(String var1) {
-      byte var7;
-      label24: {
+class MyChimeJobCreator implements JobCreator {
+   public Job create(String var1) {
+      byte ret;
+      label24: { // instanceof
          int var2 = var1.hashCode();
          if (var2 != 702277527) {
             if (var2 == 1483317271 && var1.equals("TAG_CHIME")) {
-               var7 = 0;
+               ret = 0;
                break label24;
             }
          } else if (var1.equals("TAG_REMINDER")) {
-            var7 = 1;
+            ret = 1;
             break label24;
          }
 
-         var7 = -1;
+         ret = -1;
       }
 
-      MyJob var3;
-      Locale var4;
-      Object[] var5;
-      Locale var6;
-      switch(var7) {
+      MyJob job;
+      Locale locale1;
+      Object[] tags;
+      Locale locale2;
+      switch(ret) {
       case 0:
-         var3 = new MyJob();
-         var4 = Locale.US;
-         var5 = new Object[]{var1};
-         var6 = var4;
+         job = new MyJob();
+         locale1 = Locale.US;
+         tags = new Object[]{var1};
+         locale2 = locale1;
          break;
       case 1:
-         var3 = new MyJob();
-         var4 = Locale.US;
-         var5 = new Object[]{var1};
-         var6 = var4;
+         job = new MyJob();
+         locale1 = Locale.US;
+         tags = new Object[]{var1};
+         locale2 = locale1;
          break;
       default:
          return null;
       }
 
-      MyLog.log(String.format(var6, "MyChimeJobCreator.create Creating job with tag=%s", var5));
-      return var3;
+      MyLog.log(String.format(locale2, "MyChimeJobCreator.create Creating job with tag=%s", tags));
+      return job;
    }
 }

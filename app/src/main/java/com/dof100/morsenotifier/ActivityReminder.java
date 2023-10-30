@@ -26,9 +26,9 @@ public class ActivityReminder extends Activity implements OnClickListener {
       MyLog.log("ActivityReminder.onActionTest");
       this.c();
       Intent var1 = new Intent(this, ServiceMain.class);
-      var1.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492886));
-      var1.putExtra(this.getResources().getString(2131492875), this.b.a());
-      var1.putExtra(this.getResources().getString(2131492876), "0");
+      var1.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_REMINDERS_ONE_TEST));
+      var1.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT1), this.b.a());
+      var1.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2), "0");
       this.startService(var1);
    }
 
@@ -76,13 +76,13 @@ public class ActivityReminder extends Activity implements OnClickListener {
       this.b.f = this.f.getText().toString();
       this.b.d = this.g.getSelectedItemPosition();
       this.a.b(this);
-      MyJob.a((Context)this);
+      MyJob.scheduleNextReminder((Context)this);
    }
 
    public void onClick(View var1) {
       MyLog.log("ActivityReminder.onClick");
       if (var1 != null) {
-         if (var1.getId() == 2131165217) {
+         if (var1.getId() == R.id.button_test) {
             this.a();
          }
 
@@ -92,8 +92,8 @@ public class ActivityReminder extends Activity implements OnClickListener {
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityReminder.onCreate");
-      this.setContentView(2131296264);
-      ((Button)this.findViewById(2131165217)).setOnClickListener(this);
+      this.setContentView(R.layout.activity_reminder);
+      ((Button)this.findViewById(R.id.button_test)).setOnClickListener(this);
       this.a = new MyReminders(this);
       var1 = this.getIntent().getExtras();
       int var2;
@@ -105,7 +105,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
          var3.append("ActivityReminder.onCreate loaded entry at position = ");
          var3.append(var2);
          MyLog.log(var3.toString());
-         var2 = 2131493317;
+         var2 = R.string.title_activity_reminders;
       } else {
          this.b = new MyReminder();
          this.a.a.add(this.b);
@@ -114,21 +114,21 @@ public class ActivityReminder extends Activity implements OnClickListener {
          var3.append("ActivityReminder.onCreate created new entry at position = ");
          var3.append(var2 - 1);
          MyLog.log(var3.toString());
-         var2 = 2131493318;
+         var2 = R.string.title_activity_settings;
       }
 
       this.setTitle(var2);
-      this.c[0] = (ToggleButton)this.findViewById(2131165274);
-      this.c[1] = (ToggleButton)this.findViewById(2131165275);
-      this.c[2] = (ToggleButton)this.findViewById(2131165276);
-      this.c[3] = (ToggleButton)this.findViewById(2131165277);
-      this.c[4] = (ToggleButton)this.findViewById(2131165278);
-      this.c[5] = (ToggleButton)this.findViewById(2131165279);
-      this.c[6] = (ToggleButton)this.findViewById(2131165280);
-      this.d = (TimePicker)this.findViewById(2131165286);
-      this.e = (EditText)this.findViewById(2131165232);
-      this.f = (EditText)this.findViewById(2131165231);
-      this.g = (Spinner)this.findViewById(2131165270);
+      this.c[0] = (ToggleButton)this.findViewById(R.id.tb_dow0);
+      this.c[1] = (ToggleButton)this.findViewById(R.id.tb_dow1);
+      this.c[2] = (ToggleButton)this.findViewById(R.id.tb_dow2);
+      this.c[3] = (ToggleButton)this.findViewById(R.id.tb_dow3);
+      this.c[4] = (ToggleButton)this.findViewById(R.id.tb_dow4);
+      this.c[5] = (ToggleButton)this.findViewById(R.id.tb_dow5);
+      this.c[6] = (ToggleButton)this.findViewById(R.id.tb_dow6);
+      this.d = (TimePicker)this.findViewById(R.id.tp_hourmin);
+      this.e = (EditText)this.findViewById(R.id.et_SayBefore);
+      this.f = (EditText)this.findViewById(R.id.et_SayAfter);
+      this.g = (Spinner)this.findViewById(R.id.sp_SayTime);
       this.d.setIs24HourView(true);
       this.b();
    }

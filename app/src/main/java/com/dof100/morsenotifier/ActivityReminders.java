@@ -20,29 +20,29 @@ public class ActivityReminders extends Activity implements OnClickListener, MyRe
 
    public void a(final MyReminder var1, int var2, View var3) {
       MyLog.log("ActivityReminders.onRowButtonClick");
-      if (var3.getId() == 2131165195) {
+      if (var3.getId() == R.id.b_delete) {
          MyLog.log("ActivityReminders.onRowButtonClick b_delete");
          Builder var5 = new Builder(this);
-         var5.setTitle(2131493321);
-         var5.setMessage(2131493311);
-         var5.setPositiveButton(2131492916, new android.content.DialogInterface.OnClickListener() {
+         var5.setTitle(R.string.uninstall_free_title);
+         var5.setMessage(R.string.title_activity_advanced);
+         var5.setPositiveButton(R.string.action_yes, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1x, int var2) {
                ActivityReminders.this.b.remove(var1);
                ActivityReminders.this.a.b(ActivityReminders.this);
                ActivityReminders.this.b.notifyDataSetChanged();
-               MyJob.a((Context)ActivityReminders.this);
+               MyJob.scheduleNextReminder((Context)ActivityReminders.this);
                ActivityReminders.this.c.invalidate();
                var1x.dismiss();
             }
          });
-         var5.setNegativeButton(2131492911, new android.content.DialogInterface.OnClickListener() {
+         var5.setNegativeButton(R.string.action_no, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1, int var2) {
                var1.dismiss();
             }
          });
          var5.create().show();
       } else {
-         if (var3.getId() == 2131165196) {
+         if (var3.getId() == R.id.b_edit) {
             MyLog.log("ActivityReminders.onRowButtonClick b_edit");
             Intent var4 = new Intent(this, ActivityReminder.class);
             var4.putExtra("OBJECTINDEX", var2);
@@ -74,7 +74,7 @@ public class ActivityReminders extends Activity implements OnClickListener, MyRe
    public void onClick(View var1) {
       MyLog.log("ActivityReminders.onClick");
       if (var1 != null) {
-         if (var1.getId() == 2131165199) {
+         if (var1.getId() == R.id.b_reminders_select_add) {
             MyLog.log("ActivityReminders.onClick b_Add");
             this.startActivityForResult(new Intent(this, ActivityReminder.class), 1);
          }
@@ -89,8 +89,8 @@ public class ActivityReminders extends Activity implements OnClickListener, MyRe
       MyLog.log("ActivityReminders.onCreate load");
       this.a.a(this);
       this.b = new MyRemindersArrayAdapter(this, this.a, this);
-      this.setContentView(2131296265);
-      this.c = (ListView)this.findViewById(2131165257);
+      this.setContentView(R.layout.activity_reminders);
+      this.c = (ListView)this.findViewById(R.id.lv_reminders_select);
       this.c.setAdapter(this.b);
       this.c.setOnItemClickListener(new OnItemClickListener() {
          public void onItemClick(AdapterView var1, View var2, int var3, long var4) {
@@ -100,6 +100,6 @@ public class ActivityReminders extends Activity implements OnClickListener, MyRe
             MyLog.log(var6.toString());
          }
       });
-      ((Button)this.findViewById(2131165199)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.b_reminders_select_add)).setOnClickListener(this);
    }
 }

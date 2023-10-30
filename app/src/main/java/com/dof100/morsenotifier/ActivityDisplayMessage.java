@@ -118,15 +118,15 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       MyLog.log("ActivityDisplayMessage.onClick");
       if (var1 != null) {
          switch(var1.getId()) {
-         case 2131165203:
+         case R.id.btn_configure:
             MyLog.log("ActivityDisplayMessage.onClick btn_configure");
             this.c();
             return;
-         case 2131165204:
+         case R.id.btn_hide:
             MyLog.log("ActivityDisplayMessage.onClick btn_hide");
             this.b();
             return;
-         case 2131165205:
+         case R.id.btn_stop:
             MyLog.log("ActivityDisplayMessage.onClick btn_stop");
             App.b(this.getApplicationContext());
             this.a();
@@ -300,12 +300,12 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       }
 
       this.setFinishOnTouchOutside(false);
-      this.setContentView(2131296260);
-      LinearLayout var4 = (LinearLayout)this.findViewById(2131165253);
-      Button var26 = (Button)this.findViewById(2131165203);
-      Button var28 = (Button)this.findViewById(2131165205);
-      Button var25 = (Button)this.findViewById(2131165204);
-      this.l = (GLSurfaceView)this.findViewById(2131165241);
+      this.setContentView(R.layout.activity_info);
+      LinearLayout var4 = (LinearLayout)this.findViewById(R.id.ll_btn);
+      Button var26 = (Button)this.findViewById(R.id.btn_configure);
+      Button var28 = (Button)this.findViewById(R.id.btn_stop);
+      Button var25 = (Button)this.findViewById(R.id.btn_hide);
+      this.l = (GLSurfaceView)this.findViewById(R.id.glsurfaceview);
 
       label98: {
          label97: {

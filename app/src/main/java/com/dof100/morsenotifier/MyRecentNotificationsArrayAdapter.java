@@ -21,7 +21,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
    private final MyRecentNotificationsArrayAdapter.a d;
 
    public MyRecentNotificationsArrayAdapter(Context var1, ArrayList var2, MyAppNotificationFilters var3, MyRecentNotificationsArrayAdapter.a var4) {
-      super(var1, 2131296263, var2);
+      super(var1, R.layout.activity_recent_notifications_listitem, var2);
       this.b = var3;
       this.d = var4;
       MyLog.log("MyRecentNotificationsArrayAdapter.constructor");
@@ -56,23 +56,23 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
 
       View var14 = var2;
       if (var2 == null) {
-         var14 = this.c.inflate(2131296263, var3, false);
+         var14 = this.c.inflate(R.layout.activity_recent_notifications_listitem, var3, false);
       }
 
       var14.setTag(var12);
-      TextView var6 = (TextView)var14.findViewById(2131165304);
+      TextView var6 = (TextView)var14.findViewById(R.id.tv_recentnotification_time);
       var6.setTag(var12);
       SimpleDateFormat var9 = new SimpleDateFormat("dd MMM yyyy, hh:mm:ss:ssss", Locale.US);
       Calendar var7 = Calendar.getInstance();
       var7.setTimeInMillis(var12.timestamp);
       var6.setText(var9.format(var7.getTime()));
-      TextView var8 = (TextView)var14.findViewById(2131165296);
+      TextView var8 = (TextView)var14.findViewById(R.id.tv_recentnotification_app);
       var8.setTag(var12);
       var8.setText(Utils.a(this.a, var12.b));
-      var8 = (TextView)var14.findViewById(2131165301);
+      var8 = (TextView)var14.findViewById(R.id.tv_recentnotification_package);
       var8.setTag(var12);
       var8.setText(String.format("(%s)", var12.b));
-      TextView var11 = (TextView)var14.findViewById(2131165305);
+      TextView var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_title);
       var11.setTag(var12);
       String var10;
       if (var12.c != null && !var12.c.isEmpty()) {
@@ -82,7 +82,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       }
 
       var11.setText(var10);
-      var11 = (TextView)var14.findViewById(2131165302);
+      var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_text);
       var11.setTag(var12);
       if (var12.d != null && !var12.d.isEmpty()) {
          var10 = var12.d;
@@ -91,7 +91,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       }
 
       var11.setText(var10);
-      var11 = (TextView)var14.findViewById(2131165303);
+      var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_ticker);
       var11.setTag(var12);
       if (var12.e != null && !var12.e.isEmpty()) {
          var10 = var12.e;
@@ -100,7 +100,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       }
 
       var11.setText(var10);
-      var11 = (TextView)var14.findViewById(2131165297);
+      var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_category);
       var11.setTag(var12);
       if (var12.f != null && !var12.f.isEmpty()) {
          var10 = var12.f;
@@ -112,26 +112,26 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       label74: {
          label73: {
             var11.setText(var10);
-            var8 = (TextView)var14.findViewById(2131165298);
+            var8 = (TextView)var14.findViewById(R.id.tv_recentnotification_id);
             var8.setTag(var12);
             var8.setText(String.format(Locale.US, "%d", var12.g));
-            var11 = (TextView)var14.findViewById(2131165294);
+            var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_announced);
             var11.setTag(var12);
             switch(var12.h) {
             case -4:
                var11.setTextColor(-256);
                var15 = this.a;
-               var1 = 2131493247;
+               var1 = R.string.recentnotifications_announced_multiple;
                break;
             case -3:
                var11.setTextColor(-256);
                var15 = this.a;
-               var1 = 2131493246;
+               var1 = R.string.recentnotifications_announced_identical;
                break;
             case -2:
                var11.setTextColor(-65536);
                var15 = this.a;
-               var1 = 2131493245;
+               var1 = R.string.recentnotifications_announced_filters;
                break;
             case -1:
                var11.setTextColor(-65536);
@@ -140,12 +140,12 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
             case 0:
                var11.setTextColor(-7829368);
                var15 = this.a;
-               var1 = 2131493248;
+               var1 = R.string.recentnotifications_announced_waiting;
                break;
             case 1:
                var11.setTextColor(-16711936);
                var15 = this.a;
-               var1 = 2131493244;
+               var1 = R.string.recentnotifications_announced_announced;
                break;
             default:
                break label74;
@@ -157,20 +157,20 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
          var11.setText(var10);
       }
 
-      var11 = (TextView)var14.findViewById(2131165299);
+      var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_matchingfilter);
       var11.setTag(var12);
       if (var12.i < 0) {
          var11.setTextColor(-16711681);
          var15 = this.a;
-         var1 = 2131493251;
+         var1 = R.string.recentnotifications_matchingfilter_nofilter;
       } else {
          var11.setTextColor(-16711681);
          var15 = this.a;
-         var1 = 2131493250;
+         var1 = R.string.recentnotifications_matchingfilter_meets;
       }
 
       var11.setText(var15.getString(var1));
-      var8 = (TextView)var14.findViewById(2131165300);
+      var8 = (TextView)var14.findViewById(R.id.tv_recentnotification_matchingfilternum);
       var8.setTag(var12);
       if (var12.i < 0) {
          var8.setText("");
@@ -178,11 +178,11 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       } else {
          var8.setTextColor(-16711681);
          var8.setPaintFlags(var8.getPaintFlags() | 8);
-         var8.setText(String.format(Locale.US, this.a.getString(2131493249), var12.i + 1));
+         var8.setText(String.format(Locale.US, this.a.getString(R.string.recentnotifications_matchingfilter_filter), var12.i + 1));
          var8.setOnClickListener(this);
       }
 
-      var11 = (TextView)var14.findViewById(2131165295);
+      var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_announcement);
       var11.setTag(var12);
       if (var12.i < 0) {
          var11.setTextColor(-65536);
@@ -193,7 +193,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       }
 
       var11.setText(var10);
-      Button var16 = (Button)var14.findViewById(2131165200);
+      Button var16 = (Button)var14.findViewById(R.id.b_test);
       var16.setTag(var12);
       if (var12.i >= 0) {
          var16.setOnClickListener(this);
@@ -216,8 +216,8 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
          } else if (var2.i < 0) {
             var3 = "MyRecentNotificationsArrayAdapter.onClick tmpfilter<0";
          } else {
-            if (var1.getId() != 2131165200) {
-               if (var1.getId() == 2131165300) {
+            if (var1.getId() != R.id.b_test) {
+               if (var1.getId() == R.id.tv_recentnotification_matchingfilternum) {
                   MyLog.log("MyAppFiltersArrayAdapter.onClick tv_recentnotification_announcedcriteria");
                   this.d.a(var2.i, var1);
                }
@@ -228,8 +228,8 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
             MyLog.log("MyRecentNotificationsArrayAdapter.onClick b_test");
             if (!var2.j.isEmpty()) {
                Intent var4 = new Intent(this.a, ServiceMain.class);
-               var4.putExtra(this.a.getResources().getString(2131492900), this.a.getResources().getString(2131492865));
-               var4.putExtra(this.a.getResources().getString(2131492876), var2.j);
+               var4.putExtra(this.a.getResources().getString(R.string.MSG_WHAT), this.a.getResources().getString(R.string.MSG_APPS_NOTIFY));
+               var4.putExtra(this.a.getResources().getString(R.string.MSG_EXTRATEXT2), var2.j);
                this.a.startService(var4);
                return;
             }

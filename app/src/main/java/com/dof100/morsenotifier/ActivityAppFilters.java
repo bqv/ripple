@@ -19,12 +19,12 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
 
    public void a(final MyAppNotificationFilter var1, int var2, View var3) {
       MyLog.log("ActivityAppFilters.onRowButtonClick");
-      if (var3.getId() == 2131165195) {
+      if (var3.getId() == R.id.b_delete) {
          MyLog.log("ActivityAppFilters.onRowButtonClick b_delete");
          Builder var5 = new Builder(this);
-         var5.setTitle(2131493321);
-         var5.setMessage(2131493311);
-         var5.setPositiveButton(2131492916, new android.content.DialogInterface.OnClickListener() {
+         var5.setTitle(R.string.uninstall_free_title);
+         var5.setMessage(R.string.title_activity_advanced);
+         var5.setPositiveButton(R.string.action_yes, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1x, int var2) {
                ActivityAppFilters.this.b.remove(var1);
                ActivityAppFilters.this.a.MyAppFilters(ActivityAppFilters.this);
@@ -33,14 +33,14 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
                var1x.dismiss();
             }
          });
-         var5.setNegativeButton(2131492911, new android.content.DialogInterface.OnClickListener() {
+         var5.setNegativeButton(R.string.action_no, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1, int var2) {
                var1.dismiss();
             }
          });
          var5.create().show();
       } else {
-         if (var3.getId() == 2131165196) {
+         if (var3.getId() == R.id.b_edit) {
             MyLog.log("ActivityAppFilters.onRowButtonClick b_edit");
             Intent var4 = new Intent(this, ActivityAppFilter.class);
             var4.putExtra("FILTERINDEX", var2);
@@ -73,19 +73,19 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
       MyLog.log("ActivityAppFilters.onClick");
       if (var1 != null) {
          Intent var2;
-         if (var1.getId() == 2131165193) {
+         if (var1.getId() == R.id.b_apps_select_add) {
             MyLog.log("ActivityAppFilters.onClick b_apps_select_add");
             this.b.a();
             var2 = new Intent(this, ActivityAppFilter.class);
             var2.putExtra("FILTERINDEX", this.a.a.size() - 1);
             this.startActivityForResult(var2, 1);
          } else {
-            if (var1.getId() == 2131165194) {
+            if (var1.getId() == R.id.b_apps_select_checkrecent) {
                MyLog.log("ActivityRecentNotifications.onClick b_apps_select_checkrecent");
                var2 = new Intent(this, ActivityRecentAppNotifications.class);
-               var2.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492879));
-               var2.putExtra(this.getResources().getString(2131492875), "");
-               var2.putExtra(this.getResources().getString(2131492876), "");
+               var2.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_MN_ACTIVITYRECENTNOTIFICATIONS_START));
+               var2.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT1), "");
+               var2.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2), "");
                this.startActivity(var2);
             }
 
@@ -100,8 +100,8 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
       MyLog.log("ActivityAppFilters.onCreate loadFilters");
       this.a.a(this);
       this.b = new MyAppFiltersArrayAdapter(this, this.a, this);
-      this.setContentView(2131296258);
-      this.c = (ListView)this.findViewById(2131165255);
+      this.setContentView(R.layout.activity_appfilters);
+      this.c = (ListView)this.findViewById(R.id.lv_apps_select);
       this.c.setAdapter(this.b);
       this.c.setOnItemClickListener(new OnItemClickListener() {
          public void onItemClick(AdapterView var1, View var2, int var3, long var4) {
@@ -111,7 +111,7 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
             MyLog.log(var6.toString());
          }
       });
-      ((Button)this.findViewById(2131165193)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165194)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.b_apps_select_add)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.b_apps_select_checkrecent)).setOnClickListener(this);
    }
 }

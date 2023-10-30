@@ -13,10 +13,10 @@ import com.evernote.android.job.JobRequest;
 
 public final class c {
    @TargetApi(17)
-   public static a a(Context var0) {
+   public static BatteryStatus a(Context var0) {
       Intent var6 = var0.registerReceiver((BroadcastReceiver)null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
       if (var6 == null) {
-         return a.a;
+         return BatteryStatus.DEFAULT;
       } else {
          int var1 = var6.getIntExtra("level", -1);
          int var2 = var6.getIntExtra("scale", -1);
@@ -35,7 +35,7 @@ public final class c {
             }
          }
 
-         return new a(var5, var3);
+         return new BatteryStatus(var5, var3);
       }
    }
 

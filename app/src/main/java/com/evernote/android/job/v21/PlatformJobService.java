@@ -6,9 +6,9 @@ import android.app.job.JobService;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Build.VERSION;
-import com.evernote.android.job.c;
-import com.evernote.android.job.e;
-import com.evernote.android.job.i;
+import com.evernote.android.job.Job;
+import com.evernote.android.job.JobConfig;
+import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobProxy;
 import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.JobCat;
@@ -23,7 +23,7 @@ public class PlatformJobService extends JobService {
    }
 
    public boolean onStartJob(final JobParameters var1) {
-      e.h().execute(new Runnable() {
+      JobConfig.h().execute(new Runnable() {
          public void run() {
             label577: {
                Throwable var10000;
@@ -147,7 +147,7 @@ public class PlatformJobService extends JobService {
    }
 
    public boolean onStopJob(JobParameters var1) {
-      c var2 = i.a((Context)this).a(var1.getJobId());
+      Job var2 = JobManager.create((Context)this).getJob(var1.getJobId());
       if (var2 != null) {
          var2.l();
          a.b("Called onStopJob for %s", var2);

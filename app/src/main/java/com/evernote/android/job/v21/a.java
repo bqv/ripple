@@ -87,7 +87,7 @@ public class a implements JobProxy {
    }
 
    protected Builder a(JobRequest var1, boolean var2) {
-      Builder var3 = (new Builder(var1.c(), new ComponentName(this.a, PlatformJobService.class))).setRequiresCharging(var1.m()).setRequiresDeviceIdle(var1.n()).setRequiredNetworkType(this.a(var1.q()));
+      Builder var3 = (new Builder(var1.getJobId(), new ComponentName(this.a, PlatformJobService.class))).setRequiresCharging(var1.m()).setRequiresDeviceIdle(var1.n()).setRequiredNetworkType(this.a(var1.q()));
       if (var2 && !var1.B() && g.a(this.a)) {
          var2 = true;
       } else {
@@ -126,7 +126,7 @@ public class a implements JobProxy {
    protected boolean a(JobInfo var1, JobRequest var2) {
       boolean var3 = true;
       boolean var4;
-      if (var1 != null && var1.getId() == var2.c()) {
+      if (var1 != null && var1.getId() == var2.getJobId()) {
          var4 = true;
       } else {
          var4 = false;
@@ -136,7 +136,7 @@ public class a implements JobProxy {
          return false;
       } else {
          if (var2.B()) {
-            if (com.evernote.android.job.v21.b.a(this.a, var2.c())) {
+            if (com.evernote.android.job.v21.b.a(this.a, var2.getJobId())) {
                return true;
             }
 

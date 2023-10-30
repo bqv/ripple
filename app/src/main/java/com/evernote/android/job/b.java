@@ -177,7 +177,7 @@ final class b {
 
    private static int b(Context var0) {
       if (c < 0) {
-         synchronized(d.class){}
+         synchronized(JobApi.class){}
 
          Throwable var10000;
          boolean var10001;

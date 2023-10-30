@@ -6,40 +6,42 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
+
+import com.evernote.android.job.util.JobCat;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public final class i {
-   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobManager");
+public final class JobManager {
+   private static final JobCat CAT = new JobCat("JobManager");
    @SuppressLint({"StaticFieldLeak"})
-   private static volatile i b;
-   private final Context c;
-   private final g d;
-   private final n e;
-   private final h f;
+   private static volatile JobManager instance;
+   private final Context mContext;
+   private final JobCreatorHolder mJobCreatorHolder;
+   private final JobStorage mJobStorage;
+   private final JobExecutor mJobExecutor;
 
-   private i(Context var1) {
-      this.c = var1;
-      this.d = new g();
-      this.e = new n(var1);
-      this.f = new h();
-      if (!com.evernote.android.job.e.d()) {
-         JobRescheduleService.a(this.c);
+   private JobManager(Context context) {
+      this.mContext = context;
+      this.mJobCreatorHolder = new JobCreatorHolder();
+      this.mJobStorage = new JobStorage(context);
+      this.mJobExecutor = new JobExecutor();
+      if (!JobConfig.isSkipJobRescheduled()) {
+         JobRescheduleService.startService(this.mContext);
       }
-
    }
 
-   public static i a() {
+   public static JobManager instance() {
       Throwable var10000;
       boolean var10001;
       label151: {
-         if (b == null) {
-            synchronized(i.class){}
+         if (instance == null) {
+            synchronized(JobManager.class){}
 
             try {
-               if (b == null) {
+               if (instance == null) {
                   IllegalStateException var13 = new IllegalStateException("You need to call create() at least once to create the singleton");
                   throw var13;
                }
@@ -58,7 +60,7 @@ public final class i {
             }
          }
 
-         return b;
+         return instance;
       }
 
       while(true) {
@@ -74,31 +76,31 @@ public final class i {
       }
    }
 
-   public static i a(Context var0) {
-      if (b == null) {
-         synchronized(i.class){}
+   public static JobManager create(Context context) {
+      if (instance == null) {
+         synchronized(JobManager.class){}
 
          Throwable var10000;
          boolean var10001;
          label670: {
             label676: {
                try {
-                  if (b != null) {
+                  if (instance != null) {
                      break label676;
                   }
 
-                  com.evernote.android.job.a.f.a(var0, "Context cannot be null");
+                  com.evernote.android.job.a.f.a(context, "Context cannot be null");
                } catch (Throwable var71) {
                   var10000 = var71;
                   var10001 = false;
                   break label670;
                }
 
-               Context var1 = var0;
+               Context var1 = context;
 
                try {
-                  if (var0.getApplicationContext() != null) {
-                     var1 = var0.getApplicationContext();
+                  if (context.getApplicationContext() != null) {
+                     var1 = context.getApplicationContext();
                   }
                } catch (Throwable var70) {
                   var10000 = var70;
@@ -107,8 +109,8 @@ public final class i {
                }
 
                try {
-                  d var74 = com.evernote.android.job.d.c(var1);
-                  if (var74 == com.evernote.android.job.d.e && !var74.a(var1)) {
+                  JobApi var74 = JobApi.c(var1);
+                  if (var74 == JobApi.e && !var74.a(var1)) {
                      j var76 = new j("All APIs are disabled, cannot schedule any job");
                      throw var76;
                   }
@@ -119,10 +121,10 @@ public final class i {
                }
 
                try {
-                  i var75 = new i(var1);
-                  b = var75;
+                  JobManager var75 = new JobManager(var1);
+                  instance = var75;
                   if (!com.evernote.android.job.a.g.b(var1)) {
-                     a.c("No wake lock permission");
+                     CAT.c("No wake lock permission");
                   }
                } catch (Throwable var69) {
                   var10000 = var69;
@@ -132,7 +134,7 @@ public final class i {
 
                try {
                   if (!com.evernote.android.job.a.g.a(var1)) {
-                     a.c("No boot permission");
+                     CAT.c("No boot permission");
                   }
                } catch (Throwable var72) {
                   var10000 = var72;
@@ -141,7 +143,7 @@ public final class i {
                }
 
                try {
-                  b(var1);
+                  sendAddJobCreatorIntent(var1);
                } catch (Throwable var68) {
                   var10000 = var68;
                   var10001 = false;
@@ -151,7 +153,7 @@ public final class i {
 
             label646:
             try {
-               return b;
+               return instance;
             } catch (Throwable var67) {
                var10000 = var67;
                var10001 = false;
@@ -171,40 +173,40 @@ public final class i {
             }
          }
       } else {
-         return b;
+         return instance;
       }
    }
 
-   private void a(JobRequest var1, d var2, boolean var3, boolean var4) {
-      JobProxy var5 = this.a(var2);
-      if (var3) {
-         if (var4) {
-            var5.plantPeriodicFlexsupport(var1);
+   private void scheduleWithApi(JobRequest request, JobApi jobApi, boolean periodic, boolean flexSupport) {
+      JobProxy proxy = this.getJobProxy(jobApi);
+      if (periodic) {
+         if (flexSupport) {
+            proxy.plantPeriodicFlexsupport(request);
          } else {
-            var5.plantPeriodic(var1);
+            proxy.plantPeriodic(request);
          }
       } else {
-         var5.plantOneOff(var1);
+         proxy.plantOneOff(request);
       }
    }
 
-   private boolean a(c var1) {
-      if (var1 != null && var1.b(true)) {
-         a.a("Cancel running %s", var1);
+   private boolean cancelInner(Job job) {
+      if (job != null && job.cancel(true)) {
+         CAT.i("Cancel running %s", job);
          return true;
       } else {
          return false;
       }
    }
 
-   private static void b(Context var0) {
-      String var1 = var0.getPackageName();
+   private static void sendAddJobCreatorIntent(Context context) {
+      String var1 = context.getPackageName();
       Intent var2 = new Intent("com.evernote.android.job.ADD_JOB_CREATOR");
       var2.setPackage(var1);
 
       List var6;
       try {
-         var6 = var0.getPackageManager().queryBroadcastReceivers(var2, 0);
+         var6 = context.getPackageManager().queryBroadcastReceivers(var2, 0);
       } catch (Exception var5) {
          var6 = Collections.emptyList();
       }
@@ -215,7 +217,7 @@ public final class i {
          ActivityInfo var3 = ((ResolveInfo)var7.next()).activityInfo;
          if (var3 != null && !var3.exported && var1.equals(var3.packageName) && !TextUtils.isEmpty(var3.name)) {
             try {
-               ((f.a)Class.forName(var3.name).newInstance()).a(var0, b);
+               ((JobCreator.a)Class.forName(var3.name).newInstance()).a(context, instance);
             } catch (Exception var4) {
             }
          }
@@ -223,28 +225,27 @@ public final class i {
 
    }
 
-   private boolean b(JobRequest var1) {
-      if (var1 != null) {
-         a.a("Found pending job %s, canceling", var1);
-         this.a(var1.w()).cancel(var1.c());
-         this.e().b(var1);
-         var1.a(0L);
+   private boolean cancelInner(JobRequest request) {
+      if (request != null) {
+         CAT.i("Found pending job %s, canceling", request);
+         this.getJobProxy(request.getJobApi()).cancel(request.getJobId());
+         this.getJobStorage().remove(request);
+         request.setScheduledAt(0L);
          return true;
       } else {
          return false;
       }
    }
 
-   private int c(String var1) {
-      synchronized(this){}
-      int var2 = 0;
+   private synchronized int cancelAllInner(String tag) {
+      int canceled = 0;
 
       Throwable var10000;
       label459: {
          Iterator var3;
          boolean var10001;
          try {
-            var3 = this.a(var1, true, false).iterator();
+            var3 = this.getAllJobRequests(tag, true, false).iterator();
          } catch (Throwable var45) {
             var10000 = var45;
             var10001 = false;
@@ -256,7 +257,7 @@ public final class i {
             label464: {
                try {
                   while(var3.hasNext()) {
-                     if (this.b((JobRequest)var3.next())) {
+                     if (this.cancelInner((JobRequest)var3.next())) {
                         break label464;
                      }
                   }
@@ -269,7 +270,7 @@ public final class i {
                Set var47;
                label465: {
                   try {
-                     if (TextUtils.isEmpty(var1)) {
+                     if (TextUtils.isEmpty(tag)) {
                         var47 = this.c();
                         break label465;
                      }
@@ -280,7 +281,7 @@ public final class i {
                   }
 
                   try {
-                     var47 = this.a(var1);
+                     var47 = this.getAllJobsForTag(tag);
                   } catch (Throwable var43) {
                      var10000 = var43;
                      var10001 = false;
@@ -301,10 +302,10 @@ public final class i {
                   boolean var4;
                   try {
                      if (!var48.hasNext()) {
-                        return var2;
+                        return canceled;
                      }
 
-                     var4 = this.a((c)var48.next());
+                     var4 = this.cancelInner((Job)var48.next());
                   } catch (Throwable var41) {
                      var10000 = var41;
                      var10001 = false;
@@ -312,12 +313,12 @@ public final class i {
                   }
 
                   if (var4) {
-                     ++var2;
+                     ++canceled;
                   }
                }
             }
 
-            ++var2;
+            ++canceled;
          }
       }
 
@@ -325,18 +326,18 @@ public final class i {
       throw var49;
    }
 
-   public c a(int var1) {
-      return this.f.a(var1);
+   public Job getJob(int var1) {
+      return this.mJobExecutor.getJob(var1);
    }
 
-   JobProxy a(d var1) {
-      return var1.b(this.c);
+   JobProxy getJobProxy(JobApi var1) {
+      return var1.b(this.mContext);
    }
 
-   JobRequest a(int var1, boolean var2) {
-      JobRequest var3 = this.e.a(var1);
+   JobRequest getJobRequest(int jobId, boolean includeStarted) {
+      JobRequest var3 = this.mJobStorage.a(jobId);
       JobRequest var4 = var3;
-      if (!var2) {
+      if (!includeStarted) {
          var4 = var3;
          if (var3 != null) {
             var4 = var3;
@@ -349,19 +350,19 @@ public final class i {
       return var4;
    }
 
-   public Set a(String var1) {
-      return this.f.a(var1);
+   public Set<Job> getAllJobsForTag(String tag) {
+      return this.mJobExecutor.getAllJobsForTag(tag);
    }
 
-   Set a(String var1, boolean var2, boolean var3) {
-      Set var6 = this.e.a(var1, var2);
-      if (var3) {
+   Set<JobRequest> getAllJobRequests(String tag, boolean includeStarted, boolean cleanUpTransient) {
+      Set var6 = this.mJobStorage.a(tag, includeStarted);
+      if (cleanUpTransient) {
          Iterator var4 = var6.iterator();
 
          while(var4.hasNext()) {
             JobRequest var5 = (JobRequest)var4.next();
-            if (var5.B() && !var5.w().b(this.c).isPlatformJobScheduled(var5)) {
-               this.e.b(var5);
+            if (var5.B() && !var5.getJobApi().b(this.mContext).isPlatformJobScheduled(var5)) {
+               this.mJobStorage.remove(var5);
                var4.remove();
             }
          }
@@ -370,8 +371,8 @@ public final class i {
       return var6;
    }
 
-   public void a(f var1) {
-      this.d.a(var1);
+   public void addJobCreator(JobCreator var1) {
+      this.mJobCreatorHolder.addJobCreator(var1);
    }
 
    public void a(JobRequest param1) {
@@ -379,41 +380,41 @@ public final class i {
    }
 
    public int b(String var1) {
-      return this.c(var1);
+      return this.cancelAllInner(var1);
    }
 
-   public Set b() {
-      return this.a((String)null, false, true);
+   public Set<JobRequest> getAllJobRequests() {
+      return this.getAllJobRequests((String)null, false, true);
    }
 
    public boolean b(int var1) {
-      boolean var2 = this.b(this.a(var1, true));
-      boolean var3 = this.a(this.a(var1));
-      JobProxy.a.a(this.c, var1);
+      boolean var2 = this.cancelInner(this.getJobRequest(var1, true));
+      boolean var3 = this.cancelInner(this.getJob(var1));
+      JobProxy.a.a(this.mContext, var1);
       return var2 | var3;
    }
 
    public Set c() {
-      return this.f.a();
+      return this.mJobExecutor.a();
    }
 
-   public int d() {
-      return this.c((String)null);
+   public int cancelAll() {
+      return this.cancelAllInner((String)null);
    }
 
-   n e() {
-      return this.e;
+   JobStorage getJobStorage() {
+      return this.mJobStorage;
    }
 
-   h f() {
-      return this.f;
+   JobExecutor getJobExecutor() {
+      return this.mJobExecutor;
    }
 
-   g g() {
-      return this.d;
+   JobCreatorHolder getJobCreatorHolder() {
+      return this.mJobCreatorHolder;
    }
 
-   Context h() {
-      return this.c;
+   Context getContext() {
+      return this.mContext;
    }
 }

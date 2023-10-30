@@ -28,7 +28,7 @@ public class BRSMS extends BroadcastReceiver {
             if (var3 != null) {
                label99: {
                   try {
-                     var6 = var1.getResources().getString(2131492889);
+                     var6 = var1.getResources().getString(R.string.MSG_SMS_NEWSMS);
                   } catch (Exception var18) {
                      var10000 = var18;
                      var10001 = false;
@@ -169,9 +169,9 @@ public class BRSMS extends BroadcastReceiver {
 
       MyLog.log(var1, String.format(Locale.US, "BRSMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var5, var19, var4));
       Intent var23 = new Intent(var1, ServiceMain.class);
-      var23.putExtra(var1.getResources().getString(2131492900), var5);
-      var23.putExtra(var1.getResources().getString(2131492875), var19);
-      var23.putExtra(var1.getResources().getString(2131492876), var4);
+      var23.putExtra(var1.getResources().getString(R.string.MSG_WHAT), var5);
+      var23.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT1), var19);
+      var23.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT2), var4);
       var1.startService(var23);
    }
 }

@@ -15,9 +15,9 @@ public class MyPreferencesActivity extends PreferenceActivity {
    public void onBuildHeaders(List var1) {
       int var2;
       if (App.c) {
-         var2 = 2131689485;
+         var2 = R.xml.pref_headers_morse;
       } else {
-         var2 = 2131689486;
+         var2 = R.xml.pref_headers_voice;
       }
 
       this.loadHeadersFromResource(var2, var1);

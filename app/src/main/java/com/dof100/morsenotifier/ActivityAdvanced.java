@@ -43,10 +43,10 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
 
    private void a() {
       if (android.support.v4.app.a.a(this, "android.permission.READ_PHONE_STATE") == 0) {
-         this.b.setText(2131493270);
+         this.b.setText(R.string.string_advanced_permissions_readsms_granted);
          this.b.setTextColor(-16711936);
       } else {
-         this.b.setText(2131493269);
+         this.b.setText(R.string.string_advanced_permissions_readsms_denied);
          this.b.setTextColor(-65536);
       }
 
@@ -55,33 +55,33 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       } else {
          this.c.setVisibility(0);
          if (android.support.v4.app.a.a(this, "android.permission.READ_CALL_LOG") == 0) {
-            this.c.setText(2131493266);
+            this.c.setText(R.string.string_advanced_permissions_readcontacts_granted);
             this.c.setTextColor(-16711936);
          } else {
-            this.c.setText(2131493265);
+            this.c.setText(R.string.string_advanced_permissions_readcontacts_denied);
             this.c.setTextColor(-65536);
          }
       }
 
       if (android.support.v4.app.a.a(this, "android.permission.READ_SMS") == 0) {
-         this.d.setText(2131493272);
+         this.d.setText(R.string.string_advanced_permissions_text);
          this.d.setTextColor(-16711936);
       } else {
-         this.d.setText(2131493271);
+         this.d.setText(R.string.string_advanced_permissions_settings);
          this.d.setTextColor(-65536);
       }
 
       if (android.support.v4.app.a.a(this, "android.permission.READ_CONTACTS") == 0) {
-         this.e.setText(2131493268);
+         this.e.setText(R.string.string_advanced_permissions_readphonestate_granted);
          this.e.setTextColor(-16711936);
       } else {
-         this.e.setText(2131493267);
+         this.e.setText(R.string.string_advanced_permissions_readphonestate_denied);
          this.e.setTextColor(-65536);
       }
 
       if (App.b) {
          if (a((Activity)this)) {
-            this.f.setText(2131493261);
+            this.f.setText(R.string.string_advanced_notificationlistener_running);
             this.f.setTextColor(-16711936);
          } else {
             this.f.setTextColor(-65536);
@@ -89,16 +89,16 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
             int var2;
             if (d(this)) {
                var1 = this.f;
-               var2 = 2131493260;
+               var2 = R.string.string_advanced_notificationlistener_notrunning;
             } else {
                var1 = this.f;
-               var2 = 2131493259;
+               var2 = R.string.string_advanced_notificationlistener_notenabled;
             }
 
             var1.setText(var2);
          }
       } else {
-         this.f.setText(2131493258);
+         this.f.setText(R.string.string_advanced_notificationlistener_disabled);
          this.f.setEnabled(false);
          this.f.setTextColor(-7829368);
       }
@@ -107,19 +107,19 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          this.g.setVisibility(8);
       } else {
          this.g.setVisibility(0);
-         this.h.setText(this.getResources().getText(2131493255).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
+         this.h.setText(this.getResources().getText(R.string.string_advanced_autostart_text).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       }
 
       if (!App.h && !App.i) {
          this.i.setVisibility(8);
       } else {
          this.i.setVisibility(0);
-         this.j.setText(this.getResources().getText(2131493277).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
+         this.j.setText(this.getResources().getText(R.string.string_advanced_protectedapps).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       }
 
       if (App.k) {
          this.k.setVisibility(0);
-         this.l.setText(this.getResources().getText(2131493281).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
+         this.l.setText(this.getResources().getText(R.string.string_advanced_service_command).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       } else {
          this.k.setVisibility(8);
       }
@@ -212,7 +212,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
    }
 
    public static boolean a(Activity var0) {
-      boolean var1 = Boolean.valueOf(var0.getResources().getBoolean(2130903041));
+      boolean var1 = Boolean.valueOf(var0.getResources().getBoolean(R.bool.enableFeaturesAPI18));
       boolean var2 = false;
       if (!var1) {
          MyLog.log("ActivityMain.isCollectorRunning. Notifications are disabled");
@@ -303,8 +303,8 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
                   }
                } else if (var1.startsWith("play ")) {
                   Intent var6 = new Intent(this, ServiceMain.class);
-                  var6.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492865));
-                  var6.putExtra(this.getResources().getString(2131492876), var1.substring(5));
+                  var6.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_APPS_NOTIFY));
+                  var6.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2), var1.substring(5));
                   this.startService(var6);
                   break label88;
                }
@@ -480,27 +480,27 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
    public void onClick(View var1) {
       if (var1 != null) {
          switch(var1.getId()) {
-         case 2131165207:
+         case R.id.button_advanced_autostart_settings:
             a((Context)this);
             return;
-         case 2131165208:
+         case R.id.button_advanced_powersave_settings:
             b((Context)this);
             return;
-         case 2131165209:
+         case R.id.button_advanced_protectedapps_settings:
             c(this);
             return;
-         case 2131165210:
-         case 2131165212:
-         case 2131165213:
+         case R.id.button_instructions:
+         case R.id.button_rate:
+         case R.id.button_service_command:
          default:
             return;
-         case 2131165211:
+         case R.id.button_ok:
             this.b();
             return;
-         case 2131165214:
+         case R.id.button_service_notificationlistener_settings:
             f(this);
             return;
-         case 2131165215:
+         case R.id.button_service_permissions_settings:
             e(this);
          }
       }
@@ -509,31 +509,31 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityService.oncreate");
-      this.setContentView(2131296256);
-      this.a = (EditText)this.findViewById(2131165228);
-      this.b = (TextView)this.findViewById(2131165314);
-      this.c = (TextView)this.findViewById(2131165312);
+      this.setContentView(R.layout.activity_advanced);
+      this.a = (EditText)this.findViewById(R.id.editText_command);
+      this.b = (TextView)this.findViewById(R.id.tv_service_permissions_readsms);
+      this.c = (TextView)this.findViewById(R.id.tv_service_permissions_readcontacts);
       this.d = (TextView)this.findViewById(2131165315);
-      this.e = (TextView)this.findViewById(2131165313);
-      this.g = (LinearLayout)this.findViewById(2131165249);
-      this.h = (TextView)this.findViewById(2131165287);
-      this.i = (LinearLayout)this.findViewById(2131165250);
-      this.j = (TextView)this.findViewById(2131165289);
-      this.k = (LinearLayout)this.findViewById(2131165251);
-      this.l = (TextView)this.findViewById(2131165291);
-      TextView var2 = (TextView)this.findViewById(2131165311);
-      TextView var3 = (TextView)this.findViewById(2131165310);
-      Button var4 = (Button)this.findViewById(2131165214);
-      this.f = (TextView)this.findViewById(2131165309);
-      TextView var5 = (TextView)this.findViewById(2131165307);
-      TextView var6 = (TextView)this.findViewById(2131165308);
-      TextView var11 = (TextView)this.findViewById(2131165306);
-      ((Button)this.findViewById(2131165211)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165215)).setOnClickListener(this);
+      this.e = (TextView)this.findViewById(R.id.tv_service_permissions_readphonestate);
+      this.g = (LinearLayout)this.findViewById(R.id.ll_advanced_autostart);
+      this.h = (TextView)this.findViewById(R.id.tv_advanced_autostart_text);
+      this.i = (LinearLayout)this.findViewById(R.id.ll_advanced_powersave);
+      this.j = (TextView)this.findViewById(R.id.tv_advanced_powersave_text);
+      this.k = (LinearLayout)this.findViewById(R.id.ll_advanced_protectedapps);
+      this.l = (TextView)this.findViewById(R.id.tv_advanced_protectedapps_text);
+      TextView var2 = (TextView)this.findViewById(R.id.tv_service_notificationlistener_title);
+      TextView var3 = (TextView)this.findViewById(R.id.tv_service_notificationlistener_text);
+      Button var4 = (Button)this.findViewById(R.id.button_service_notificationlistener_settings);
+      this.f = (TextView)this.findViewById(R.id.tv_service_notificationlistener_status);
+      TextView var5 = (TextView)this.findViewById(R.id.tv_service_notificationlistener_notepro);
+      TextView var6 = (TextView)this.findViewById(R.id.tv_service_notificationlistener_notereboot);
+      TextView var11 = (TextView)this.findViewById(R.id.tv_service_notificationlistener_note18);
+      ((Button)this.findViewById(R.id.button_ok)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_service_permissions_settings)).setOnClickListener(this);
       var4.setOnClickListener(this);
-      ((Button)this.findViewById(2131165207)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165208)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165209)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_advanced_autostart_settings)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_advanced_powersave_settings)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_advanced_protectedapps_settings)).setOnClickListener(this);
       boolean var7;
       if (VERSION.SDK_INT >= 18 && App.b) {
          var7 = true;

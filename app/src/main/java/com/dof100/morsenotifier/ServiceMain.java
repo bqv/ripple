@@ -111,8 +111,8 @@ public class ServiceMain extends IntentService {
                MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
                MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
-               MyJob.a();
-               MyJob.a((Context)ServiceMain.this);
+               MyJob.scheduleNextChime();
+               MyJob.scheduleNextReminder((Context)ServiceMain.this);
             }
 
          }
@@ -128,8 +128,8 @@ public class ServiceMain extends IntentService {
                MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
                MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
-               MyJob.a();
-               MyJob.a((Context)ServiceMain.this);
+               MyJob.scheduleNextChime();
+               MyJob.scheduleNextReminder((Context)ServiceMain.this);
             }
 
          }
@@ -138,9 +138,9 @@ public class ServiceMain extends IntentService {
 
    private void a() {
       MyLog.log(this, (String)"ServiceMain.alarm_init");
-      MyJob.b();
-      MyJob.a();
-      MyJob.a((Context)this);
+      MyJob.clearAllJobs();
+      MyJob.scheduleNextChime();
+      MyJob.scheduleNextReminder((Context)this);
       if (App.d) {
          App.a(this.getApplicationContext());
       }
@@ -330,7 +330,7 @@ public class ServiceMain extends IntentService {
       MyLog.log(String.format(Locale.US, "ServiceMain.play_message Audio=%b Vibration=%b Display=%b", var11, var12, var13));
       if (var4) {
          var5 = new StringBuilder();
-         var5.append(this.getString(2131493310));
+         var5.append(this.getString(R.string.title_activity_about));
          var5.append(" ");
          var5.append(var1);
          MyLog.toast(this, var5.toString());
@@ -417,17 +417,17 @@ public class ServiceMain extends IntentService {
          Calendar var6 = Calendar.getInstance();
          int var7 = var6.get(11);
          int var8 = var6.get(12);
-         if (var1.equals(this.getResources().getString(2131492886))) {
+         if (var1.equals(this.getResources().getString(R.string.MSG_REMINDERS_ONE_TEST))) {
             MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTONE)");
             this.a(var2, a[this.av], 1, var5);
-         } else if (var1.equals(this.getResources().getString(2131492884))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_REMINDERS_ALL_TEST))) {
             MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)");
             MyReminder var10 = (new MyReminders(this)).a();
             if (var10 != null) {
                var1 = var10.a();
                var3 = a[this.av];
             } else {
-               var1 = this.getResources().getString(2131493309);
+               var1 = this.getResources().getString(R.string.text_confirm);
                var3 = a[this.av];
             }
 
@@ -849,20 +849,20 @@ public class ServiceMain extends IntentService {
       if (this.af) {
          MyLog.log(this, (String)"ServiceMain.handleSystem");
          String var4 = "";
-         if (var1.equals(this.getResources().getString(2131492894))) {
+         if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_BOOT))) {
             this.a();
             var2 = var4;
-         } else if (var1.equals(this.getResources().getString(2131492897))) {
-            var2 = this.getResources().getString(2131493309);
-         } else if (var1.equals(this.getResources().getString(2131492895))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_TEST))) {
+            var2 = this.getResources().getString(R.string.text_confirm);
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_POWER_CONNECTED))) {
             var2 = this.ah;
-         } else if (var1.equals(this.getResources().getString(2131492896))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_POWER_DISCONNECTED))) {
             var2 = this.ai;
-         } else if (var1.equals(this.getResources().getString(2131492892))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_BATTERY_LOW))) {
             var2 = this.aj;
-         } else if (var1.equals(this.getResources().getString(2131492893))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_BATTERY_OK))) {
             var2 = this.ak;
-         } else if (var1.equals(this.getResources().getString(2131492898))) {
+         } else if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_WF_CONNECTED))) {
             StringBuilder var6 = new StringBuilder();
             var6.append(this.am);
             if (this.an) {
@@ -878,7 +878,7 @@ public class ServiceMain extends IntentService {
             var2 = var6.toString();
          } else {
             var2 = var4;
-            if (var1.equals(this.getResources().getString(2131492899))) {
+            if (var1.equals(this.getResources().getString(R.string.MSG_SYSTEM_WF_DISCONNECTED))) {
                var2 = this.al;
             }
          }
@@ -893,7 +893,7 @@ public class ServiceMain extends IntentService {
       if (this.aw) {
          MyLog.log(this, (String)"ServiceMain.handleApps");
          if (var2) {
-            var1 = this.getString(2131493309);
+            var1 = this.getString(R.string.text_confirm);
          }
 
          if (!var1.isEmpty()) {
@@ -1465,35 +1465,35 @@ public class ServiceMain extends IntentService {
       this.c();
       String var4;
       if (var1 != null) {
-         var4 = var1.getStringExtra(this.getResources().getString(2131492900));
+         var4 = var1.getStringExtra(this.getResources().getString(R.string.MSG_WHAT));
       } else {
          var4 = "";
       }
 
       String var10;
       if (var1 != null) {
-         var10 = var1.getStringExtra(this.getResources().getString(2131492875));
+         var10 = var1.getStringExtra(this.getResources().getString(R.string.MSG_EXTRATEXT1));
       } else {
          var10 = "";
       }
 
       String var9;
       if (var1 != null) {
-         var9 = var1.getStringExtra(this.getResources().getString(2131492876));
+         var9 = var1.getStringExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2));
       } else {
          var9 = "";
       }
 
       int var5;
       if (var1 != null) {
-         var5 = var1.getIntExtra(this.getResources().getString(2131492873), -1);
+         var5 = var1.getIntExtra(this.getResources().getString(R.string.MSG_EXTRAINT1), -1);
       } else {
          var5 = 0;
       }
 
       int var6;
       if (var1 != null) {
-         var6 = var1.getIntExtra(this.getResources().getString(2131492874), -1);
+         var6 = var1.getIntExtra(this.getResources().getString(R.string.MSG_EXTRAINT2), -1);
       } else {
          var6 = 0;
       }
@@ -1514,23 +1514,23 @@ public class ServiceMain extends IntentService {
          MyLog.log("ServiceMain.onHandleIntent isTest=true");
       }
 
-      if (var4.equals(this.getResources().getString(2131492882))) {
-         this.a(this.getString(2131493309), 5, 1, true);
-      } else if (var4.equals(this.getResources().getString(2131492878))) {
+      if (var4.equals(this.getResources().getString(R.string.MSG_MN_TEST))) {
+         this.a(this.getString(R.string.text_confirm), 5, 1, true);
+      } else if (var4.equals(this.getResources().getString(R.string.MSG_MN_ACTIVITYMAIN))) {
          this.a();
-      } else if (var4.equals(this.getResources().getString(2131492881))) {
+      } else if (var4.equals(this.getResources().getString(R.string.MSG_MN_STOP))) {
          MyLog.log("ServiceMain.onHandleIntent MSG_MN_STOP");
-      } else if (var4.startsWith(this.getResources().getString(2131492867))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_CALL))) {
          this.a(var8, var7);
-      } else if (var4.startsWith(this.getResources().getString(2131492887))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_SMS))) {
          this.a(var8, var10, var7);
-      } else if (var4.startsWith(this.getResources().getString(2131492891))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_SYSTEM))) {
          this.b(var4, var10, var7);
-      } else if (var4.startsWith(this.getResources().getString(2131492870))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_CHIME))) {
          this.a(var5, var6, var7);
-      } else if (var4.startsWith(this.getResources().getString(2131492883))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_REMINDERS))) {
          this.a(var4, var8, var5, var6, var7);
-      } else if (var4.startsWith(this.getResources().getString(2131492864))) {
+      } else if (var4.startsWith(this.getResources().getString(R.string.MSG_APPS))) {
          this.b(var10, var7);
       }
 

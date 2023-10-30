@@ -4,23 +4,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-class g {
+class JobCreatorHolder {
    private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobCreatorHolder");
-   private final List b = new CopyOnWriteArrayList();
+   private final List mJobCreators = new CopyOnWriteArrayList();
 
-   public g() {
+   public JobCreatorHolder() {
    }
 
-   public c a(String var1) {
-      Iterator var2 = this.b.iterator();
-      c var3 = null;
+   public Job a(String var1) {
+      Iterator var2 = this.mJobCreators.iterator();
+      Job var3 = null;
       boolean var4 = false;
 
       while(var2.hasNext()) {
-         f var7 = (f)var2.next();
+         JobCreator var7 = (JobCreator)var2.next();
          boolean var5 = true;
          var4 = true;
-         c var6 = var7.a(var1);
+         Job var6 = var7.create(var1);
          var3 = var6;
          if (var6 != null) {
             var4 = var5;
@@ -36,11 +36,11 @@ class g {
       return var3;
    }
 
-   public void a(f var1) {
-      this.b.add(var1);
+   public void addJobCreator(JobCreator var1) {
+      this.mJobCreators.add(var1);
    }
 
    public boolean a() {
-      return this.b.isEmpty();
+      return this.mJobCreators.isEmpty();
    }
 }

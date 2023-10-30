@@ -93,10 +93,10 @@ public class BRSystem extends BroadcastReceiver {
       String var5 = var2.getAction();
       if (var5 != null) {
          if (var5.equals("android.intent.action.BOOT_COMPLETED")) {
-            var3 = var1.getResources().getString(2131492894);
+            var3 = var1.getResources().getString(R.string.MSG_SYSTEM_BOOT);
             var2 = new Intent(var1, ServiceMain.class);
-            var2.putExtra(var1.getResources().getString(2131492900), var3);
-            var2.putExtra(var1.getResources().getString(2131492876), "");
+            var2.putExtra(var1.getResources().getString(R.string.MSG_WHAT), var3);
+            var2.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT2), "");
             var1.startService(var2);
          } else {
             byte var6 = -1;
@@ -134,24 +134,24 @@ public class BRSystem extends BroadcastReceiver {
                switch(var6) {
                case 0:
                   var9 = var1.getResources();
-                  var12 = 2131492895;
+                  var12 = R.string.MSG_SYSTEM_POWER_CONNECTED;
                   break;
                case 1:
                   var9 = var1.getResources();
-                  var12 = 2131492896;
+                  var12 = R.string.MSG_SYSTEM_POWER_DISCONNECTED;
                   break;
                case 2:
                   var9 = var1.getResources();
-                  var12 = 2131492892;
+                  var12 = R.string.MSG_SYSTEM_BATTERY_LOW;
                   break;
                case 3:
                   var9 = var1.getResources();
-                  var12 = 2131492893;
+                  var12 = R.string.MSG_SYSTEM_BATTERY_OK;
                   break;
                case 4:
                   var12 = this.a(var1, (NetworkInfo)var2.getParcelableExtra("networkInfo"));
                   if (var12 == 1) {
-                     var4 = var1.getResources().getString(2131492898);
+                     var4 = var1.getResources().getString(R.string.MSG_SYSTEM_WF_CONNECTED);
                      WifiManager var10 = (WifiManager)var1.getApplicationContext().getSystemService("wifi");
 
                      try {
@@ -172,7 +172,7 @@ public class BRSystem extends BroadcastReceiver {
                   }
 
                   var9 = var1.getResources();
-                  var12 = 2131492899;
+                  var12 = R.string.MSG_SYSTEM_WF_DISCONNECTED;
                   break;
                default:
                   var8 = var3;
@@ -187,8 +187,8 @@ public class BRSystem extends BroadcastReceiver {
             if (!var8.isEmpty()) {
                MyLog.log(var1, String.format(Locale.US, "BRSystem.onReceive Sending intent to ServiceMain info=%s text2=%s", var8, var3));
                Intent var11 = new Intent(var1, ServiceMain.class);
-               var11.putExtra(var1.getResources().getString(2131492900), var8);
-               var11.putExtra(var1.getResources().getString(2131492876), var3);
+               var11.putExtra(var1.getResources().getString(R.string.MSG_WHAT), var8);
+               var11.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT2), var3);
                var1.startService(var11);
             } else {
                MyLog.log(var1, "BRSystem.onReceive Not sending intent");

@@ -17,7 +17,7 @@ class MyAppFiltersArrayAdapter extends ArrayAdapter implements OnClickListener {
    private final MyAppFiltersArrayAdapter.a d;
 
    public MyAppFiltersArrayAdapter(Context context, MyAppNotificationFilters var2, MyAppFiltersArrayAdapter.a var3) {
-      super(context, 2131296259, var2.a);
+      super(context, R.layout.activity_appfilters_listitem, var2.a);
       MyLog.log("MyAppFiltersArrayAdapter.constructor");
       this.a = context;
       this.b = var2;
@@ -41,17 +41,17 @@ class MyAppFiltersArrayAdapter extends ArrayAdapter implements OnClickListener {
       MyAppNotificationFilter var5 = (MyAppNotificationFilter)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
-         var8 = this.c.inflate(2131296259, var3, false);
+         var8 = this.c.inflate(R.layout.activity_appfilters_listitem, var3, false);
       }
 
       var8.setTag(var5);
-      TextView var6 = (TextView)var8.findViewById(2131165293);
+      TextView var6 = (TextView)var8.findViewById(R.id.tv_info);
       var6.setTag(var5);
       var6.setText(String.format(Locale.US, "%d. %s", var1 + 1, var5.a(this.a)));
-      ImageButton var7 = (ImageButton)var8.findViewById(2131165196);
+      ImageButton var7 = (ImageButton)var8.findViewById(R.id.b_edit);
       var7.setTag(var5);
       var7.setOnClickListener(this);
-      var7 = (ImageButton)var8.findViewById(2131165195);
+      var7 = (ImageButton)var8.findViewById(R.id.b_delete);
       var7.setTag(var5);
       var7.setOnClickListener(this);
       return var8;
@@ -74,10 +74,10 @@ class MyAppFiltersArrayAdapter extends ArrayAdapter implements OnClickListener {
             var3.append(var4);
             MyLog.log(var3.toString());
             String var5;
-            if (var1.getId() == 2131165195) {
+            if (var1.getId() == R.id.b_delete) {
                var5 = "MyAppFiltersArrayAdapter.onClick b_delete";
             } else {
-               if (var1.getId() != 2131165196) {
+               if (var1.getId() != R.id.b_edit) {
                   return;
                }
 

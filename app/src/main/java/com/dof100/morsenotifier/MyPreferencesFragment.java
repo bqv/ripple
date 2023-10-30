@@ -209,14 +209,14 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
       MyPreferenceText var4;
       if (var2 > 1) {
          var4 = (MyPreferenceText)var1;
-         var3 = String.format(Locale.US, this.getString(2131492959), var2);
+         var3 = String.format(Locale.US, this.getString(R.string.pref_apps_filters_dfilters), var2);
       } else {
          if (var2 == 1) {
             var4 = (MyPreferenceText)var1;
-            var2 = 2131492958;
+            var2 = R.string.pref_apps_filters_1filter;
          } else {
             var4 = (MyPreferenceText)var1;
-            var2 = 2131492960;
+            var2 = R.string.pref_apps_filters_nofilters;
          }
 
          var3 = this.getString(var2);

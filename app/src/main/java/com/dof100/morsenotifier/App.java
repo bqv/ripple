@@ -12,6 +12,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import com.evernote.android.job.JobCreator;
+import com.evernote.android.job.JobManager;
+
 public class App extends Application {
    public static boolean a;
    public static boolean b;
@@ -180,6 +183,6 @@ public class App extends Application {
       m = l.replace(".free", "");
       q = null;
       MyLog.log("App.onCreate Initializing job manager...");
-      com.evernote.android.job.i.a((Context)this).a((com.evernote.android.job.f)(new MyChimeJobCreator()));
+      JobManager.create((Context)this).addJobCreator((JobCreator)(new MyChimeJobCreator()));
    }
 }

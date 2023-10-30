@@ -92,10 +92,10 @@ public class BRCall extends BroadcastReceiver {
                         MyLog.log(var1, "BRCall.onReceive oldstate=RINGING (ERROR), dt>DTRESETRINGS, proceed as normal");
                      }
 
-                     MyLog.log(var1, String.format(Locale.US, "BRCall.onReceive Sending intent to ServiceMain info=%s text1=%s", var1.getResources().getString(2131492868), var13));
+                     MyLog.log(var1, String.format(Locale.US, "BRCall.onReceive Sending intent to ServiceMain info=%s text1=%s", var1.getResources().getString(R.string.MSG_CALL_RINGING), var13));
                      Intent var16 = new Intent(var1, ServiceMain.class);
-                     var16.putExtra(var1.getResources().getString(2131492900), var1.getResources().getString(2131492868));
-                     var16.putExtra(var1.getResources().getString(2131492875), var13);
+                     var16.putExtra(var1.getResources().getString(R.string.MSG_WHAT), var1.getResources().getString(R.string.MSG_CALL_RINGING));
+                     var16.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT1), var13);
                      var1.startService(var16);
                   }
                }

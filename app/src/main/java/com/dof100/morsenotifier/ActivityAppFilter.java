@@ -75,7 +75,7 @@ public class ActivityAppFilter extends Activity {
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityAppFilter.onCreate");
-      this.setContentView(2131296257);
+      this.setContentView(R.layout.activity_appfilter);
       this.c = null;
       this.b = new MyAppNotificationFilters(this);
       this.a = new MyAppFilters(this);
@@ -111,20 +111,20 @@ public class ActivityAppFilter extends Activity {
          MyLog.log(var5.toString());
       }
 
-      this.setTitle(String.format(Locale.US, "%s %d", this.getResources().getString(2131492925), var2 + 1));
-      this.d = (Spinner)this.findViewById(2131165269);
+      this.setTitle(String.format(Locale.US, "%s %d", this.getResources().getString(R.string.activity_appfilter_filter), var2 + 1));
+      this.d = (Spinner)this.findViewById(R.id.sp_AppName);
       ArrayAdapter var6 = new ArrayAdapter(this, 17367048, (String[])this.a.a().toArray(new String[this.b.a.size()]));
       var6.setDropDownViewResource(17367049);
       this.d.setAdapter(var6);
-      this.e = (EditText)this.findViewById(2131165233);
-      this.f = (EditText)this.findViewById(2131165234);
-      this.g = (EditText)this.findViewById(2131165235);
-      this.h = (EditText)this.findViewById(2131165236);
-      this.i = (CheckBox)this.findViewById(2131165221);
-      this.j = (CheckBox)this.findViewById(2131165219);
-      this.k = (CheckBox)this.findViewById(2131165220);
-      this.l = (EditText)this.findViewById(2131165232);
-      this.m = (EditText)this.findViewById(2131165231);
+      this.e = (EditText)this.findViewById(R.id.et_criteria_Contains);
+      this.f = (EditText)this.findViewById(R.id.et_criteria_ContainsNot);
+      this.g = (EditText)this.findViewById(R.id.et_criteria_category);
+      this.h = (EditText)this.findViewById(R.id.et_criteria_id);
+      this.i = (CheckBox)this.findViewById(R.id.cb_SayTitle);
+      this.j = (CheckBox)this.findViewById(R.id.cb_SayText);
+      this.k = (CheckBox)this.findViewById(R.id.cb_SayTicker);
+      this.l = (EditText)this.findViewById(R.id.et_SayBefore);
+      this.m = (EditText)this.findViewById(R.id.et_SayAfter);
       this.a();
    }
 

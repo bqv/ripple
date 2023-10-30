@@ -33,7 +33,7 @@ public class BRMMS extends BroadcastReceiver {
                label303: {
                   label318: {
                      try {
-                        var7 = var1.getResources().getString(2131492888);
+                        var7 = var1.getResources().getString(R.string.MSG_SMS_NEWMMS);
                      } catch (Exception var48) {
                         var50 = "nothing";
                         break label318;
@@ -372,9 +372,9 @@ public class BRMMS extends BroadcastReceiver {
 
          MyLog.log(var1, String.format(Locale.US, "BRMMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var50, var3, ""));
          Intent var54 = new Intent(var1, ServiceMain.class);
-         var54.putExtra(var1.getResources().getString(2131492900), var50);
-         var54.putExtra(var1.getResources().getString(2131492875), var3);
-         var54.putExtra(var1.getResources().getString(2131492876), "");
+         var54.putExtra(var1.getResources().getString(R.string.MSG_WHAT), var50);
+         var54.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT1), var3);
+         var54.putExtra(var1.getResources().getString(R.string.MSG_EXTRATEXT2), "");
          var1.startService(var54);
       }
    }

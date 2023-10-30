@@ -77,9 +77,9 @@ public class ActivityMain extends Activity implements OnClickListener {
    private void d() {
       MyLog.log("onActionTest");
       Intent var1 = new Intent(this, ServiceMain.class);
-      var1.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492882));
-      var1.putExtra(this.getResources().getString(2131492875), "0");
-      var1.putExtra(this.getResources().getString(2131492876), "0");
+      var1.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_MN_TEST));
+      var1.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT1), "0");
+      var1.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2), "0");
       this.startService(var1);
    }
 
@@ -143,7 +143,7 @@ public class ActivityMain extends Activity implements OnClickListener {
 
    private void h() {
       MyLog.log("ActivityMain.checkNotificationAccess");
-      if (!Boolean.valueOf(this.getResources().getBoolean(2130903041))) {
+      if (!Boolean.valueOf(this.getResources().getBoolean(R.bool.enableFeaturesAPI18))) {
          MyLog.log("ActivityMain.checkNotificationAccess api18=false");
       } else if (App.a) {
          MyLog.log("ActivityMain.checkNotificationAccess Free version");
@@ -154,7 +154,7 @@ public class ActivityMain extends Activity implements OnClickListener {
          MyLog.toast(this, "No notification access!");
       } else {
          App.b(this, "NOTIFICATIONACCESS");
-         (new Builder(this)).setTitle(2131493257).setMessage(this.getResources().getText(2131493300).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039379, new android.content.DialogInterface.OnClickListener() {
+         (new Builder(this)).setTitle(R.string.string_advanced_notificationlistener).setMessage(this.getResources().getText(R.string.string_notify_protectedapps_text).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039379, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1, int var2) {
                MyLog.log("ActivityMain.checkNotificationAccess: collector is not running. Opening settings...");
                var2 = VERSION.SDK_INT;
@@ -175,7 +175,7 @@ public class ActivityMain extends Activity implements OnClickListener {
             }
 
             App.b(this, "AUTOSTART");
-            (new Builder(this)).setTitle(2131493253).setMessage(this.getResources().getText(2131493299).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
+            (new Builder(this)).setTitle(R.string.string_advanced_autostart).setMessage(this.getResources().getText(R.string.string_notify_powersave_text).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
                public void onClick(DialogInterface var1, int var2) {
                   ActivityAdvanced.a((Context)ActivityMain.this);
                }
@@ -191,7 +191,7 @@ public class ActivityMain extends Activity implements OnClickListener {
             }
 
             App.b(this, "POWERSAVE");
-            (new Builder(this)).setTitle(2131493275).setMessage(this.getResources().getText(2131493301).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
+            (new Builder(this)).setTitle(R.string.string_advanced_powersave_text).setMessage(this.getResources().getText(R.string.string_reminder).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
                public void onClick(DialogInterface var1, int var2) {
                   ActivityAdvanced.b((Context)ActivityMain.this);
                }
@@ -207,7 +207,7 @@ public class ActivityMain extends Activity implements OnClickListener {
 
          if (!App.a(this, "PROTECTEDAPPS")) {
             App.b(this, "PROTECTEDAPPS");
-            (new Builder(this)).setTitle(2131493279).setMessage(this.getResources().getText(2131493302).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
+            (new Builder(this)).setTitle(R.string.string_advanced_protectedapps_text).setMessage(this.getResources().getText(R.string.string_stop).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039370, new android.content.DialogInterface.OnClickListener() {
                public void onClick(DialogInterface var1, int var2) {
                   ActivityAdvanced.c(ActivityMain.this);
                }
@@ -233,22 +233,22 @@ public class ActivityMain extends Activity implements OnClickListener {
    public void onClick(View var1) {
       if (var1 != null) {
          switch(var1.getId()) {
-         case 2131165206:
+         case R.id.button_about:
             this.b();
             return;
-         case 2131165210:
+         case R.id.button_instructions:
             this.e();
             return;
-         case 2131165212:
+         case R.id.button_rate:
             this.c();
             return;
-         case 2131165213:
+         case R.id.button_service_command:
             this.f();
             return;
-         case 2131165216:
+         case R.id.button_settings:
             this.a();
             return;
-         case 2131165217:
+         case R.id.button_test:
             this.d();
             return;
          default:
@@ -258,15 +258,15 @@ public class ActivityMain extends Activity implements OnClickListener {
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      this.setContentView(2131296261);
-      ((Button)this.findViewById(2131165216)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165206)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165212)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165217)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165210)).setOnClickListener(this);
-      ((Button)this.findViewById(2131165213)).setOnClickListener(this);
+      this.setContentView(R.layout.activity_main);
+      ((Button)this.findViewById(R.id.button_settings)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_about)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_rate)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_test)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_instructions)).setOnClickListener(this);
+      ((Button)this.findViewById(R.id.button_service_command)).setOnClickListener(this);
       Intent var4 = new Intent(this, ServiceMain.class);
-      var4.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492878));
+      var4.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_MN_ACTIVITYMAIN));
       this.startService(var4);
       MyLog.log("ActivityMain.oncreate");
       if ("MorseNotifierPro".equals("pro")) {
@@ -302,12 +302,12 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    public boolean onCreateOptionsMenu(Menu var1) {
-      this.getMenuInflater().inflate(2131361792, var1);
+      this.getMenuInflater().inflate(R.menu.activity_main, var1);
       return super.onCreateOptionsMenu(var1);
    }
 
    public boolean onOptionsItemSelected(MenuItem var1) {
-      if (var1.getItemId() == 2131165188) {
+      if (var1.getItemId() == R.id.action_settings) {
          this.a();
          return true;
       } else {

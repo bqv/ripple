@@ -16,25 +16,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-class n {
+class JobStorage {
    private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobStorage");
    private final SharedPreferences b;
-   private final n.a c;
+   private final JobStorage.a c;
    private AtomicInteger d;
    private final Set e;
-   private final n.b f;
+   private final JobStorage.b f;
    private SQLiteDatabase g;
    private final ReadWriteLock h;
 
-   public n(Context var1) {
+   public JobStorage(Context var1) {
       this(var1, "evernote_jobs.db");
    }
 
-   public n(Context var1, String var2) {
+   public JobStorage(Context var1, String var2) {
       this.b = var1.getSharedPreferences("evernote_jobs", 0);
       this.h = new ReentrantReadWriteLock();
-      this.c = new n.a();
-      this.f = new n.b(var1, var2);
+      this.c = new JobStorage.a();
+      this.f = new JobStorage.b(var1, var2);
       this.e = this.b.getStringSet("FAILED_DELETE_IDS", new HashSet());
       if (!this.e.isEmpty()) {
          this.e();
@@ -47,7 +47,7 @@ class n {
    }
 
    // $FF: synthetic method
-   static Set a(n var0) {
+   static Set a(JobStorage var0) {
       return var0.e;
    }
 
@@ -62,7 +62,7 @@ class n {
    }
 
    private static void a(SQLiteDatabase var0) {
-      if (var0 != null && com.evernote.android.job.e.i()) {
+      if (var0 != null && JobConfig.i()) {
          try {
             var0.close();
          } catch (Exception var1) {
@@ -150,7 +150,7 @@ class n {
    }
 
    // $FF: synthetic method
-   static boolean a(n var0, JobRequest var1, int var2) {
+   static boolean a(JobStorage var0, JobRequest var1, int var2) {
       return var0.a(var1, var2);
    }
 
@@ -159,7 +159,7 @@ class n {
    }
 
    private void c(JobRequest var1) {
-      this.c.put(var1.c(), var1);
+      this.c.put(var1.getJobId(), var1);
    }
 
    private boolean c(int var1) {
@@ -268,7 +268,7 @@ class n {
          int var3;
          try {
             var2 = this.d.incrementAndGet();
-            var3 = com.evernote.android.job.e.e();
+            var3 = JobConfig.e();
          } catch (Throwable var23) {
             var10000 = var23;
             var10001 = false;
@@ -357,8 +357,8 @@ class n {
       }
    }
 
-   public void b(JobRequest var1) {
-      this.a(var1, var1.c());
+   public void remove(JobRequest var1) {
+      this.a(var1, var1.getJobId());
    }
 
    int c() {
@@ -371,7 +371,7 @@ class n {
       }
 
       protected JobRequest a(Integer var1) {
-         return n.this.a(var1, true);
+         return JobStorage.this.a(var1, true);
       }
 
       // $FF: synthetic method

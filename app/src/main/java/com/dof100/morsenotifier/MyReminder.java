@@ -126,7 +126,7 @@ public class MyReminder {
          if (this.c[0]) {
             var8 = new StringBuilder();
             var8.append("");
-            var8.append(var1.getResources().getString(2131492934));
+            var8.append(var1.getResources().getString(R.string.activity_reminder_dow0));
             var8.append(", ");
             var5 = var8.toString();
          }
@@ -136,7 +136,7 @@ public class MyReminder {
          if (this.c[1]) {
             var9 = new StringBuilder();
             var9.append(var5);
-            var9.append(var1.getResources().getString(2131492935));
+            var9.append(var1.getResources().getString(R.string.activity_reminder_dow1));
             var9.append(", ");
             var6 = var9.toString();
          }
@@ -145,7 +145,7 @@ public class MyReminder {
          if (this.c[2]) {
             var8 = new StringBuilder();
             var8.append(var6);
-            var8.append(var1.getResources().getString(2131492936));
+            var8.append(var1.getResources().getString(R.string.activity_reminder_dow2));
             var8.append(", ");
             var5 = var8.toString();
          }
@@ -154,7 +154,7 @@ public class MyReminder {
          if (this.c[3]) {
             var9 = new StringBuilder();
             var9.append(var5);
-            var9.append(var1.getResources().getString(2131492937));
+            var9.append(var1.getResources().getString(R.string.activity_reminder_dow3));
             var9.append(", ");
             var6 = var9.toString();
          }
@@ -163,7 +163,7 @@ public class MyReminder {
          if (this.c[4]) {
             var8 = new StringBuilder();
             var8.append(var6);
-            var8.append(var1.getResources().getString(2131492938));
+            var8.append(var1.getResources().getString(R.string.activity_reminder_dow4));
             var8.append(", ");
             var5 = var8.toString();
          }
@@ -172,7 +172,7 @@ public class MyReminder {
          if (this.c[5]) {
             var9 = new StringBuilder();
             var9.append(var5);
-            var9.append(var1.getResources().getString(2131492939));
+            var9.append(var1.getResources().getString(R.string.activity_reminder_dow5));
             var9.append(", ");
             var6 = var9.toString();
          }
@@ -180,7 +180,7 @@ public class MyReminder {
          if (this.c[6]) {
             var8 = new StringBuilder();
             var8.append(var6);
-            var8.append(var1.getResources().getString(2131492940));
+            var8.append(var1.getResources().getString(R.string.activity_reminder_dow6));
             var7 = var8.toString();
          } else {
             var7 = var6;

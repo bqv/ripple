@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-class h {
+class JobExecutor {
    private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobExecutor");
    private static final long b;
    private final SparseArray c = new SparseArray();
@@ -29,18 +29,18 @@ class h {
       b = TimeUnit.MINUTES.toMillis(3L);
    }
 
-   public h() {
+   public JobExecutor() {
    }
 
-   public c a(int var1) {
+   public Job getJob(int var1) {
       synchronized(this){}
 
       Throwable var10000;
       label137: {
          boolean var10001;
-         c var2;
+         Job var2;
          try {
-            var2 = (c)this.c.get(var1);
+            var2 = (Job)this.c.get(var1);
          } catch (Throwable var14) {
             var10000 = var14;
             var10001 = false;
@@ -62,7 +62,7 @@ class h {
 
          if (var15 != null) {
             try {
-               var2 = (c)var15.get();
+               var2 = (Job)var15.get();
             } catch (Throwable var12) {
                var10000 = var12;
                var10001 = false;
@@ -84,7 +84,7 @@ class h {
 
       Set var1;
       try {
-         var1 = this.a((String)null);
+         var1 = this.getAllJobsForTag((String)null);
       } finally {
          ;
       }
@@ -92,7 +92,7 @@ class h {
       return var1;
    }
 
-   public Set a(String var1) {
+   public Set<Job> getAllJobsForTag(String var1) {
       synchronized(this){}
 
       Throwable var10000;
@@ -109,14 +109,14 @@ class h {
 
          int var3 = 0;
 
-         c var4;
+         Job var4;
          while(true) {
             try {
                if (var3 >= this.c.size()) {
                   break;
                }
 
-               var4 = (c)this.c.valueAt(var3);
+               var4 = (Job)this.c.valueAt(var3);
             } catch (Throwable var75) {
                var10000 = var75;
                var10001 = false;
@@ -163,7 +163,7 @@ class h {
                   return var2;
                }
 
-               var4 = (c)((WeakReference)var5.next()).get();
+               var4 = (Job)((WeakReference)var5.next()).get();
             } catch (Throwable var72) {
                var10000 = var72;
                var10001 = false;
@@ -198,7 +198,7 @@ class h {
       throw var78;
    }
 
-   public Future a(Context var1, JobRequest var2, c var3, Bundle var4) {
+   public Future a(Context var1, JobRequest var2, Job var3, Bundle var4) {
       synchronized(this){}
 
       Throwable var10000;
@@ -215,7 +215,7 @@ class h {
          if (var3 == null) {
             label182: {
                try {
-                  a.c("JobCreator returned null for tag %s", var2.d());
+                  a.c("JobCreator returned null for tag %s", var2.getTag());
                } catch (Throwable var21) {
                   var10000 = var21;
                   var10001 = false;
@@ -228,7 +228,7 @@ class h {
             label201: {
                try {
                   if (var3.m()) {
-                     IllegalStateException var27 = new IllegalStateException(String.format(Locale.ENGLISH, "Job for tag %s was already run, a creator should always create a new Job instance", var2.d()));
+                     IllegalStateException var27 = new IllegalStateException(String.format(Locale.ENGLISH, "Job for tag %s was already run, a creator should always create a new Job instance", var2.getTag()));
                      throw var27;
                   }
                } catch (Throwable var24) {
@@ -241,9 +241,9 @@ class h {
                try {
                   var3.b(var1).a(var2, var4);
                   a.a("Executing %s, context %s", var2, var1.getClass().getSimpleName());
-                  this.c.put(var2.c(), var3);
-                  ExecutorService var25 = com.evernote.android.job.e.h();
-                  h.a var29 = new h.a(var3);
+                  this.c.put(var2.getJobId(), var3);
+                  ExecutorService var25 = JobConfig.h();
+                  JobExecutor.a var29 = new JobExecutor.a(var3);
                   var26 = var25.submit(var29);
                } catch (Throwable var22) {
                   var10000 = var22;
@@ -279,7 +279,7 @@ class h {
       }
    }
 
-   void a(c var1) {
+   void a(Job var1) {
       synchronized(this){}
 
       try {
@@ -334,20 +334,20 @@ class h {
    }
 
    private final class a implements Callable {
-      private final c b;
+      private final Job b;
       private final WakeLock c;
 
-      private a(c var2) {
+      private a(Job var2) {
          this.b = var2;
-         this.c = p.a(this.b.k(), "JobExecutor", h.b);
+         this.c = p.a(this.b.k(), "JobExecutor", JobExecutor.b);
       }
 
       // $FF: synthetic method
-      a(c var2, Object var3) {
+      a(Job var2, Object var3) {
          this(var2);
       }
 
-      private void a(c var1, c.b var2) {
+      private void a(Job var1, Job.Result var2) {
          JobRequest var3 = this.b.j().e();
          boolean var4 = var3.i();
          boolean var5 = false;
@@ -355,7 +355,7 @@ class h {
          JobRequest var7;
          if (!var4 && c.b.c.equals(var2) && !var1.p()) {
             var7 = var3.a(true, true);
-            this.b.a(var7.c());
+            this.b.a(var7.getJobId());
             var4 = var6;
          } else if (var3.i()) {
             var7 = var3;
@@ -376,27 +376,27 @@ class h {
 
       }
 
-      private c.b b() {
+      private Job.Result b() {
          try {
-            c.b var1 = this.b.d();
-            h.a.a("Finished %s", this.b);
+            Job.Result var1 = this.b.d();
+            JobExecutor.a.a("Finished %s", this.b);
             this.a(this.b, var1);
             return var1;
          } catch (Throwable var2) {
-            h.a.b(var2, "Crashed %s", this.b);
+            JobExecutor.a.b(var2, "Crashed %s", this.b);
             return this.b.o();
          }
       }
 
-      public c.b a() {
-         c.b var1;
+      public Job.Result a() {
+         Job.Result var1;
          try {
-            p.a(this.b.k(), this.c, h.b);
+            p.a(this.b.k(), this.c, JobExecutor.b);
             var1 = this.b();
          } finally {
-            h.this.a(this.b);
+            JobExecutor.this.a(this.b);
             if (this.c == null || !this.c.isHeld()) {
-               h.a.c("Wake lock was not held after job %s was done. The job took too long to complete. This could have unintended side effects on your app.", this.b);
+               JobExecutor.a.c("Wake lock was not held after job %s was done. The job took too long to complete. This could have unintended side effects on your app.", this.b);
             }
 
             p.a(this.c);

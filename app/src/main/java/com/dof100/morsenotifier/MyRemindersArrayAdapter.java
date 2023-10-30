@@ -16,7 +16,7 @@ class MyRemindersArrayAdapter extends ArrayAdapter implements OnClickListener {
    private final MyRemindersArrayAdapter.a d;
 
    public MyRemindersArrayAdapter(Context var1, MyReminders var2, MyRemindersArrayAdapter.a var3) {
-      super(var1, 2131296266, var2.a);
+      super(var1, R.layout.activity_reminders_listitem, var2.a);
       MyLog.log("MyRemindersArrayAdapter.constructor");
       this.a = var1;
       this.b = var2;
@@ -34,17 +34,17 @@ class MyRemindersArrayAdapter extends ArrayAdapter implements OnClickListener {
       MyReminder var5 = (MyReminder)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
-         var8 = this.c.inflate(2131296266, var3, false);
+         var8 = this.c.inflate(R.layout.activity_reminders_listitem, var3, false);
       }
 
       var8.setTag(var5);
-      TextView var6 = (TextView)var8.findViewById(2131165293);
+      TextView var6 = (TextView)var8.findViewById(R.id.tv_info);
       var6.setTag(var5);
       var6.setText(var5.a(this.a));
-      ImageButton var7 = (ImageButton)var8.findViewById(2131165196);
+      ImageButton var7 = (ImageButton)var8.findViewById(R.id.b_edit);
       var7.setTag(var5);
       var7.setOnClickListener(this);
-      var7 = (ImageButton)var8.findViewById(2131165195);
+      var7 = (ImageButton)var8.findViewById(R.id.b_delete);
       var7.setTag(var5);
       var7.setOnClickListener(this);
       return var8;
@@ -63,10 +63,10 @@ class MyRemindersArrayAdapter extends ArrayAdapter implements OnClickListener {
             var4.append(var3);
             MyLog.log(var4.toString());
             String var5;
-            if (var1.getId() == 2131165195) {
+            if (var1.getId() == R.id.b_delete) {
                var5 = "MyRemindersArrayAdapter.onClick b_delete";
             } else {
-               if (var1.getId() != 2131165196) {
+               if (var1.getId() != R.id.b_edit) {
                   return;
                }
 

@@ -38,7 +38,7 @@ final class o implements DatabaseErrorHandler {
                return;
             }
 
-            this.a(i.a().h(), var6);
+            this.a(JobManager.instance().getContext(), var6);
             return;
          } catch (Exception var4) {
             com.evernote.android.job.util.d var5 = a;

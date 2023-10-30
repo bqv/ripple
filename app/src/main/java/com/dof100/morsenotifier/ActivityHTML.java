@@ -103,7 +103,7 @@ public class ActivityHTML extends Activity implements OnClickListener {
       var21.addView(var22);
       if (var16 != null) {
          this.a = new Button(this);
-         this.a.setText(2131492912);
+         this.a.setText(R.string.action_ok);
          var17 = new LayoutParams(-2, -2);
          this.a.setLayoutParams(var17);
          var17.gravity = 17;

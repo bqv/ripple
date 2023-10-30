@@ -30,7 +30,7 @@ public class a extends com.evernote.android.job.v21.a {
 
    public boolean isPlatformJobScheduled(JobRequest var1) {
       try {
-         boolean var2 = this.a(this.a().getPendingJob(var1.c()), var1);
+         boolean var2 = this.a(this.a().getPendingJob(var1.getJobId()), var1);
          return var2;
       } catch (Exception var3) {
          this.b.a((Throwable)var3);

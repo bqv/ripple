@@ -51,8 +51,8 @@ final class b {
    }
 
    public static void a(Context var0, JobRequest var1) {
-      Intent var2 = PlatformAlarmServiceExact.a(var0, var1.c(), var1.C());
-      PendingIntent var7 = PendingIntent.getService(var0, var1.c(), var2, 134217728);
+      Intent var2 = PlatformAlarmServiceExact.a(var0, var1.getJobId(), var1.C());
+      PendingIntent var7 = PendingIntent.getService(var0, var1.getJobId(), var2, 134217728);
       long var3 = System.currentTimeMillis();
       long var5 = TimeUnit.DAYS.toMillis(1000L);
       ((AlarmManager)var0.getSystemService("alarm")).setExact(1, var3 + var5, var7);
@@ -63,8 +63,8 @@ final class b {
    }
 
    public static boolean b(Context var0, JobRequest var1) {
-      Intent var2 = PlatformAlarmServiceExact.a(var0, var1.c(), (Bundle)null);
-      PendingIntent var4 = PendingIntent.getService(var0, var1.c(), var2, 536870912);
+      Intent var2 = PlatformAlarmServiceExact.a(var0, var1.getJobId(), (Bundle)null);
+      PendingIntent var4 = PendingIntent.getService(var0, var1.getJobId(), var2, 536870912);
       if (var4 == null) {
          return false;
       } else {
@@ -77,7 +77,7 @@ final class b {
          }
 
          if (!var1.i()) {
-            a(var0, var1.c(), var4);
+            a(var0, var1.getJobId(), var4);
          }
 
          return true;

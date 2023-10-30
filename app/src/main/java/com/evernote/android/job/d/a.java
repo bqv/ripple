@@ -4,10 +4,12 @@ import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobInfo.Builder;
 import android.content.Context;
+
+import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
 
 @TargetApi(26)
-public class a extends com.evernote.android.job.c.a {
+public class a extends Job.Params {
    public a(Context var1) {
       super(var1, "JobProxy26");
    }
@@ -25,6 +27,6 @@ public class a extends com.evernote.android.job.c.a {
    }
 
    protected boolean a(JobInfo var1, JobRequest var2) {
-      return var1 != null && var1.getId() == var2.c();
+      return var1 != null && var1.getId() == var2.getJobId();
    }
 }

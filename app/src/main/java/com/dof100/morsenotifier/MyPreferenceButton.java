@@ -43,9 +43,9 @@ public class MyPreferenceButton extends Preference {
    private void a() {
       try {
          Intent var1 = new Intent(this.a, Class.forName(this.b));
-         var1.putExtra(this.a.getResources().getString(2131492900), this.d);
-         var1.putExtra(this.a.getResources().getString(2131492875), this.e);
-         var1.putExtra(this.a.getResources().getString(2131492876), this.f);
+         var1.putExtra(this.a.getResources().getString(R.string.MSG_WHAT), this.d);
+         var1.putExtra(this.a.getResources().getString(R.string.MSG_EXTRATEXT1), this.e);
+         var1.putExtra(this.a.getResources().getString(R.string.MSG_EXTRATEXT2), this.f);
          if (this.b.contains("ervice")) {
             this.a.startService(var1);
          } else {
@@ -75,7 +75,7 @@ public class MyPreferenceButton extends Preference {
          var6.addRule(3, var2.getId());
          var6.addRule(5, var2.getId());
          var5.setLayoutParams(var6);
-         var5.setId(2131165259);
+         var5.setId(R.id.myPreferenceButton_button);
          var4.addView(var5);
          LayoutParams var7 = new LayoutParams(-2, -2);
          var7.addRule(3, var5.getId());

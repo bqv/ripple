@@ -2,28 +2,32 @@ package com.evernote.android.job;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import com.evernote.android.job.util.BatteryStatus;
+import com.evernote.android.job.util.support.PersistableBundleCompat;
+
 import java.lang.ref.WeakReference;
 
-public abstract class c {
+public abstract class Job {
    private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("Job");
-   private c.a b;
+   private Params b;
    private WeakReference c;
    private Context d;
    private volatile boolean e;
    private volatile boolean f;
    private volatile long g = -1L;
-   private c.b h;
+   private Result h;
    private final Object i;
 
-   public c() {
+   public Job() {
       this.h = c.b.b;
       this.i = new Object();
    }
 
-   protected abstract c.b a(c.a var1);
+   protected abstract Result onRunJob(Params var1);
 
-   final c a(JobRequest var1, Bundle var2) {
-      this.b = new c.a(var1, var2);
+   final Job a(JobRequest var1, Bundle var2) {
+      this.b = new Params(var1, var2);
       return this;
    }
 
@@ -53,13 +57,13 @@ public abstract class c {
       }
    }
 
-   final c b(Context var1) {
+   final Job b(Context var1) {
       this.c = new WeakReference(var1);
       this.d = var1.getApplicationContext();
       return this;
    }
 
-   final boolean b(boolean var1) {
+   final boolean cancel(boolean var1) {
       Object var2 = this.i;
       synchronized(var2){}
 
@@ -71,7 +75,7 @@ public abstract class c {
                if (!this.m()) {
                   if (!this.e) {
                      this.e = true;
-                     this.c();
+                     this.Job();
                   }
                   break label207;
                }
@@ -117,8 +121,8 @@ public abstract class c {
    protected void c() {
    }
 
-   final c.b d() {
-      c.b var1;
+   final Result d() {
+      Result var1;
       label406: {
          Throwable var10000;
          label408: {
@@ -159,7 +163,7 @@ public abstract class c {
                }
 
                try {
-                  var1 = this.a(this.j());
+                  var1 = this.onRunJob(this.j());
                } catch (Throwable var40) {
                   var10000 = var40;
                   var10001 = false;
@@ -203,7 +207,7 @@ public abstract class c {
       if (this == var1) {
          return true;
       } else if (var1 != null && this.getClass() == var1.getClass()) {
-         c var2 = (c)var1;
+         Job var2 = (Job)var1;
          return this.b.equals(var2.b);
       } else {
          return false;
@@ -278,7 +282,7 @@ public abstract class c {
       }
    }
 
-   protected final c.a j() {
+   protected final Params j() {
       return this.b;
    }
 
@@ -293,7 +297,7 @@ public abstract class c {
    }
 
    public final void l() {
-      this.b(false);
+      this.cancel(false);
    }
 
    public final boolean m() {
@@ -350,7 +354,7 @@ public abstract class c {
       // $FF: Couldn't be decompiled
    }
 
-   final c.b o() {
+   final Result o() {
       return this.h;
    }
 
@@ -378,38 +382,38 @@ public abstract class c {
       return var1.toString();
    }
 
-   public static final class a {
-      private final JobRequest a;
-      private com.evernote.android.job.util.a.b b;
+   public static final class Params {
+      private final JobRequest jobRequest;
+      private PersistableBundleCompat b;
       private Bundle c;
 
-      private a(JobRequest var1, Bundle var2) {
-         this.a = var1;
+      private Params(JobRequest var1, Bundle var2) {
+         this.jobRequest = var1;
          this.c = var2;
       }
 
       // $FF: synthetic method
-      a(JobRequest var1, Bundle var2, Object var3) {
+      Params(JobRequest var1, Bundle var2, Object var3) {
          this(var1, var2);
       }
 
       public int a() {
-         return this.a.c();
+         return this.jobRequest.getJobId();
       }
 
       public String b() {
-         return this.a.d();
+         return this.jobRequest.getTag();
       }
 
       public boolean c() {
-         return this.a.i();
+         return this.jobRequest.i();
       }
 
-      public com.evernote.android.job.util.a.b d() {
+      public PersistableBundleCompat getExtras() {
          if (this.b == null) {
-            this.b = this.a.s();
+            this.b = this.jobRequest.s();
             if (this.b == null) {
-               this.b = new com.evernote.android.job.util.a.b();
+               this.b = new BatteryStatus.b();
             }
          }
 
@@ -417,28 +421,28 @@ public abstract class c {
       }
 
       JobRequest e() {
-         return this.a;
+         return this.jobRequest;
       }
 
       public boolean equals(Object var1) {
          if (this == var1) {
             return true;
          } else if (var1 != null && this.getClass() == var1.getClass()) {
-            c.a var2 = (c.a)var1;
-            return this.a.equals(var2.a);
+            Params var2 = (Params)var1;
+            return this.jobRequest.equals(var2.jobRequest);
          } else {
             return false;
          }
       }
 
       public int hashCode() {
-         return this.a.hashCode();
+         return this.jobRequest.hashCode();
       }
    }
 
-   public static enum b {
-      a,
-      b,
-      c;
+   public static enum Result {
+      SUCCESS,
+      FAILURE,
+      RESCHEDULE;
    }
 }

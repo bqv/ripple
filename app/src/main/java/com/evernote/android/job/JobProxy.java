@@ -22,7 +22,7 @@ public interface JobProxy {
       private final Context b;
       private final int c;
       private final com.evernote.android.job.util.d d;
-      private final i e;
+      private final JobManager e;
 
       public a(Service var1, com.evernote.android.job.util.d var2, int var3) {
          this((Context)var1, var2, var3);
@@ -33,9 +33,9 @@ public interface JobProxy {
          this.c = var3;
          this.d = var2;
 
-         i var5;
+         JobManager var5;
          try {
-            var5 = i.a(var1);
+            var5 = JobManager.create(var1);
          } catch (j var4) {
             this.d.a((Throwable)var4);
             var5 = null;
@@ -66,7 +66,7 @@ public interface JobProxy {
       }
 
       public static long a(JobRequest var0) {
-         return var0.y() > 0 ? var0.v() : var0.e();
+         return var0.y() > 0 ? var0.v() : var0.getStartMs();
       }
 
       public static long a(JobRequest var0, boolean var1) {
@@ -96,11 +96,11 @@ public interface JobProxy {
       }
 
       static void a(Context var0, int var1) {
-         d[] var2 = d.values();
+         JobApi[] var2 = d.values();
          int var3 = var2.length;
 
          for(int var4 = 0; var4 < var3; ++var4) {
-            d var5 = var2[var4];
+            JobApi var5 = var2[var4];
             if (var5.a(var0)) {
                try {
                   var5.b(var0).cancel(var1);
@@ -187,7 +187,7 @@ public interface JobProxy {
          return var0.y();
       }
 
-      public c.b a(JobRequest param1, Bundle param2) {
+      public Job.Result a(JobRequest param1, Bundle param2) {
          // $FF: Couldn't be decompiled
       }
 
@@ -209,10 +209,10 @@ public interface JobProxy {
             }
 
             JobRequest var4;
-            c var5;
+            Job var5;
             try {
-               var4 = this.e.a(this.c, true);
-               var5 = this.e.a(this.c);
+               var4 = this.e.getJobRequest(this.c, true);
+               var5 = this.e.getJob(this.c);
             } catch (Throwable var161) {
                var10000 = var161;
                var10001 = false;
@@ -295,7 +295,7 @@ public interface JobProxy {
 
                   if (var4 != null) {
                      try {
-                        if (this.e.f().b(var4)) {
+                        if (this.e.getJobExecutor().b(var4)) {
                            this.d.b("Request %d is in the queue to start, %s", this.c, var4);
                            return null;
                         }
@@ -357,7 +357,7 @@ public interface JobProxy {
       }
 
       public void h(JobRequest var1) {
-         this.e.f().a(var1);
+         this.e.getJobExecutor().a(var1);
       }
    }
 }

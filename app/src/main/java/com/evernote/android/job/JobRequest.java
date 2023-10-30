@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
+
+import com.evernote.android.job.util.BatteryStatus;
+import com.evernote.android.job.util.support.PersistableBundleCompat;
+
 import java.util.concurrent.TimeUnit;
 
 public final class JobRequest {
@@ -14,9 +18,9 @@ public final class JobRequest {
    public static final long d;
    public static final long e;
    private static final com.evernote.android.job.util.d f;
-   private final JobRequest.b g;
+   private final Builder mBuilder;
    private int h;
-   private long i;
+   private long mScheduledAt;
    private boolean j;
    private boolean k;
    private long l;
@@ -31,27 +35,27 @@ public final class JobRequest {
       f = new com.evernote.android.job.util.d("JobRequest");
    }
 
-   private JobRequest(JobRequest.b var1) {
-      this.g = var1;
+   private JobRequest(Builder var1) {
+      this.mBuilder = var1;
    }
 
    // $FF: synthetic method
-   JobRequest(JobRequest.b var1, Object var2) {
+   JobRequest(Builder var1, Object var2) {
       this(var1);
    }
 
    private static Context H() {
-      return com.evernote.android.job.i.a().h();
+      return JobManager.instance().getContext();
    }
 
    static long a() {
-      return com.evernote.android.job.e.a() ? TimeUnit.MINUTES.toMillis(1L) : d;
+      return JobConfig.a() ? TimeUnit.MINUTES.toMillis(1L) : d;
    }
 
    static JobRequest a(Cursor var0) {
-      JobRequest var1 = (new JobRequest.b(var0)).a();
+      JobRequest var1 = (new Builder(var0)).build();
       var1.h = var0.getInt(var0.getColumnIndex("numFailures"));
-      var1.i = var0.getLong(var0.getColumnIndex("scheduledAt"));
+      var1.mScheduledAt = var0.getLong(var0.getColumnIndex("scheduledAt"));
       int var2 = var0.getInt(var0.getColumnIndex("started"));
       boolean var3 = false;
       boolean var4;
@@ -70,12 +74,12 @@ public final class JobRequest {
       var1.k = var4;
       var1.l = var0.getLong(var0.getColumnIndex("lastRun"));
       com.evernote.android.job.a.f.a(var1.h, "failure count can't be negative");
-      com.evernote.android.job.a.f.a(var1.i, "scheduled at can't be negative");
+      com.evernote.android.job.a.f.a(var1.mScheduledAt, "scheduled at can't be negative");
       return var1;
    }
 
    static long b() {
-      return com.evernote.android.job.e.a() ? TimeUnit.SECONDS.toMillis(30L) : e;
+      return JobConfig.a() ? TimeUnit.SECONDS.toMillis(30L) : e;
    }
 
    boolean A() {
@@ -83,26 +87,26 @@ public final class JobRequest {
    }
 
    public boolean B() {
-      return this.g.s;
+      return this.mBuilder.s;
    }
 
    public Bundle C() {
-      return this.g.t;
+      return this.mBuilder.mTransientExtras;
    }
 
-   public int D() {
-      com.evernote.android.job.i.a().a(this);
-      return this.c();
+   public int schedule() {
+      JobManager.instance().a(this);
+      return this.getJobId();
    }
 
-   public JobRequest.b E() {
-      long var1 = this.i;
-      com.evernote.android.job.i.a().b(this.c());
-      JobRequest.b var3 = new JobRequest.b(this.g);
+   public Builder E() {
+      long var1 = this.mScheduledAt;
+      JobManager.instance().b(this.getJobId());
+      Builder var3 = new Builder(this.mBuilder);
       this.j = false;
       if (!this.i()) {
-         var1 = com.evernote.android.job.e.g().a() - var1;
-         var3.a(Math.max(1L, this.e() - var1), Math.max(1L, this.f() - var1));
+         var1 = JobConfig.g().a() - var1;
+         var3.a(Math.max(1L, this.getStartMs() - var1), Math.max(1L, this.f() - var1));
       }
 
       return var3;
@@ -110,9 +114,9 @@ public final class JobRequest {
 
    ContentValues F() {
       ContentValues var1 = new ContentValues();
-      this.g.a(var1);
+      this.mBuilder.a(var1);
       var1.put("numFailures", this.h);
-      var1.put("scheduledAt", this.i);
+      var1.put("scheduledAt", this.mScheduledAt);
       var1.put("started", this.j);
       var1.put("flexSupport", this.k);
       var1.put("lastRun", this.l);
@@ -120,13 +124,13 @@ public final class JobRequest {
    }
 
    JobRequest a(boolean var1, boolean var2) {
-      JobRequest var3 = (new JobRequest.b(this.g, var2)).a();
+      JobRequest var3 = (new Builder(this.mBuilder, var2)).build();
       if (var1) {
          var3.h = this.h + 1;
       }
 
       try {
-         var3.D();
+         var3.schedule();
          return var3;
       } catch (Exception var5) {
          f.a((Throwable)var5);
@@ -134,8 +138,8 @@ public final class JobRequest {
       }
    }
 
-   void a(long var1) {
-      this.i = var1;
+   void setScheduledAt(long var1) {
+      this.mScheduledAt = var1;
    }
 
    void a(boolean var1) {
@@ -146,7 +150,7 @@ public final class JobRequest {
       this.j = var1;
       ContentValues var2 = new ContentValues();
       var2.put("started", this.j);
-      com.evernote.android.job.i.a().e().a(this, var2);
+      JobManager.instance().getJobStorage().a(this, var2);
    }
 
    void b(boolean var1, boolean var2) {
@@ -157,23 +161,23 @@ public final class JobRequest {
       }
 
       if (var2) {
-         this.l = com.evernote.android.job.e.g().a();
+         this.l = JobConfig.g().a();
          var3.put("lastRun", this.l);
       }
 
-      com.evernote.android.job.i.a().e().a(this, var3);
+      JobManager.instance().getJobStorage().a(this, var3);
    }
 
-   public int c() {
-      return this.g.b;
+   public int getJobId() {
+      return this.mBuilder.CREATE_ID;
    }
 
-   public String d() {
-      return this.g.a;
+   public String getTag() {
+      return this.mBuilder.mTag;
    }
 
-   public long e() {
-      return this.g.c;
+   public long getStartMs() {
+      return this.mBuilder.mStartMs;
    }
 
    public boolean equals(Object var1) {
@@ -181,26 +185,26 @@ public final class JobRequest {
          return true;
       } else if (var1 != null && this.getClass() == var1.getClass()) {
          JobRequest var2 = (JobRequest)var1;
-         return this.g.equals(var2.g);
+         return this.mBuilder.equals(var2.mBuilder);
       } else {
          return false;
       }
    }
 
    public long f() {
-      return this.g.d;
+      return this.mBuilder.mEndMs;
    }
 
    public JobRequest.a g() {
-      return this.g.f;
+      return this.mBuilder.f;
    }
 
    public long h() {
-      return this.g.e;
+      return this.mBuilder.e;
    }
 
    public int hashCode() {
-      return this.g.hashCode();
+      return this.mBuilder.hashCode();
    }
 
    public boolean i() {
@@ -208,59 +212,59 @@ public final class JobRequest {
    }
 
    public long j() {
-      return this.g.g;
+      return this.mBuilder.g;
    }
 
    public long k() {
-      return this.g.h;
+      return this.mBuilder.h;
    }
 
    public boolean l() {
-      return this.g.i;
+      return this.mBuilder.mRequirementsEnforced;
    }
 
    public boolean m() {
-      return this.g.j;
+      return this.mBuilder.j;
    }
 
    public boolean n() {
-      return this.g.k;
+      return this.mBuilder.k;
    }
 
    public boolean o() {
-      return this.g.l;
+      return this.mBuilder.l;
    }
 
    public boolean p() {
-      return this.g.m;
+      return this.mBuilder.m;
    }
 
    public NetworkType q() {
-      return this.g.o;
+      return this.mBuilder.o;
    }
 
    public boolean r() {
       return this.m() || this.n() || this.o() || this.p() || this.q() != b;
    }
 
-   public com.evernote.android.job.util.a.b s() {
-      if (this.g.p == null && !TextUtils.isEmpty(this.g.q)) {
-         this.g.p = com.evernote.android.job.a.a.b.a(this.g.q);
+   public BatteryStatus.b s() {
+      if (this.mBuilder.p == null && !TextUtils.isEmpty(this.mBuilder.q)) {
+         this.mBuilder.p = Job.Params.b.a(this.mBuilder.q);
       }
 
-      return this.g.p;
+      return this.mBuilder.p;
    }
 
    public boolean t() {
-      return this.g.r;
+      return this.mBuilder.mUpdateCurrent;
    }
 
    public String toString() {
       StringBuilder var1 = new StringBuilder();
       var1.append("request{id=");
-      var1.append(this.c());
+      var1.append(this.getJobId());
       var1.append(", tag=");
-      var1.append(this.d());
+      var1.append(this.getTag());
       var1.append(", transient=");
       var1.append(this.B());
       var1.append('}');
@@ -268,7 +272,7 @@ public final class JobRequest {
    }
 
    public boolean u() {
-      return this.g.n;
+      return this.mBuilder.n;
    }
 
    long v() {
@@ -294,12 +298,12 @@ public final class JobRequest {
       }
    }
 
-   com.evernote.android.job.d w() {
-      return this.g.n ? com.evernote.android.job.d.e : com.evernote.android.job.d.c(H());
+   JobApi getJobApi() {
+      return this.mBuilder.n ? JobApi.e : JobApi.c(H());
    }
 
-   public long x() {
-      return this.i;
+   public long getScheduledAt() {
+      return this.mScheduledAt;
    }
 
    public int y() {
@@ -315,34 +319,34 @@ public final class JobRequest {
       b;
    }
 
-   public static final class b {
-      final String a;
-      private int b;
-      private long c;
-      private long d;
+   public static final class Builder {
+      final String mTag;
+      private int CREATE_ID;
+      private long mStartMs;
+      private long mEndMs;
       private long e;
       private JobRequest.a f;
       private long g;
       private long h;
-      private boolean i;
+      private boolean mRequirementsEnforced;
       private boolean j;
       private boolean k;
       private boolean l;
       private boolean m;
       private boolean n;
       private NetworkType o;
-      private com.evernote.android.job.util.a.b p;
+      private PersistableBundleCompat p;
       private String q;
-      private boolean r;
+      private boolean mUpdateCurrent;
       private boolean s;
-      private Bundle t;
+      private Bundle mTransientExtras;
 
-      private b(Cursor var1) {
-         this.t = Bundle.EMPTY;
-         this.b = var1.getInt(var1.getColumnIndex("_id"));
-         this.a = var1.getString(var1.getColumnIndex("tag"));
-         this.c = var1.getLong(var1.getColumnIndex("startMs"));
-         this.d = var1.getLong(var1.getColumnIndex("endMs"));
+      private Builder(Cursor var1) {
+         this.mTransientExtras = Bundle.EMPTY;
+         this.CREATE_ID = var1.getInt(var1.getColumnIndex("_id"));
+         this.mTag = var1.getString(var1.getColumnIndex("tag"));
+         this.mStartMs = var1.getLong(var1.getColumnIndex("startMs"));
+         this.mEndMs = var1.getLong(var1.getColumnIndex("endMs"));
          this.e = var1.getLong(var1.getColumnIndex("backoffMs"));
 
          try {
@@ -363,7 +367,7 @@ public final class JobRequest {
             var5 = false;
          }
 
-         this.i = var5;
+         this.mRequirementsEnforced = var5;
          if (var1.getInt(var1.getColumnIndex("requiresCharging")) > 0) {
             var5 = true;
          } else {
@@ -417,37 +421,37 @@ public final class JobRequest {
       }
 
       // $FF: synthetic method
-      b(Cursor var1, Object var2) {
+      Builder(Cursor var1, Object var2) {
          this(var1);
       }
 
-      private b(JobRequest.b var1) {
+      private Builder(Builder var1) {
          this(var1, false);
       }
 
       // $FF: synthetic method
-      b(JobRequest.b var1, Object var2) {
+      Builder(Builder var1, Object var2) {
          this(var1);
       }
 
-      private b(JobRequest.b var1, boolean var2) {
-         this.t = Bundle.EMPTY;
+      private Builder(Builder var1, boolean var2) {
+         this.mTransientExtras = Bundle.EMPTY;
          int var3;
          if (var2) {
             var3 = -8765;
          } else {
-            var3 = var1.b;
+            var3 = var1.CREATE_ID;
          }
 
-         this.b = var3;
-         this.a = var1.a;
-         this.c = var1.c;
-         this.d = var1.d;
+         this.CREATE_ID = var3;
+         this.mTag = var1.mTag;
+         this.mStartMs = var1.mStartMs;
+         this.mEndMs = var1.mEndMs;
          this.e = var1.e;
          this.f = var1.f;
          this.g = var1.g;
          this.h = var1.h;
-         this.i = var1.i;
+         this.mRequirementsEnforced = var1.mRequirementsEnforced;
          this.j = var1.j;
          this.k = var1.k;
          this.l = var1.l;
@@ -456,22 +460,22 @@ public final class JobRequest {
          this.o = var1.o;
          this.p = var1.p;
          this.q = var1.q;
-         this.r = var1.r;
+         this.mUpdateCurrent = var1.mUpdateCurrent;
          this.s = var1.s;
-         this.t = var1.t;
+         this.mTransientExtras = var1.mTransientExtras;
       }
 
       // $FF: synthetic method
-      b(JobRequest.b var1, boolean var2, Object var3) {
+      Builder(Builder var1, boolean var2, Object var3) {
          this(var1, var2);
       }
 
-      public b(String var1) {
-         this.t = Bundle.EMPTY;
-         this.a = (String)com.evernote.android.job.a.f.a((CharSequence)var1);
-         this.b = -8765;
-         this.c = -1L;
-         this.d = -1L;
+      public Builder(String tag) {
+         this.mTransientExtras = Bundle.EMPTY;
+         this.mTag = (String)com.evernote.android.job.a.f.a((CharSequence)tag);
+         this.CREATE_ID = -8765;
+         this.mStartMs = -1L;
+         this.mEndMs = -1L;
          this.e = 30000L;
          this.f = m.a;
          this.o = m.b;
@@ -479,15 +483,15 @@ public final class JobRequest {
 
       private void a(ContentValues var1) {
          label14: {
-            var1.put("_id", this.b);
-            var1.put("tag", this.a);
-            var1.put("startMs", this.c);
-            var1.put("endMs", this.d);
+            var1.put("_id", this.CREATE_ID);
+            var1.put("tag", this.mTag);
+            var1.put("startMs", this.mStartMs);
+            var1.put("endMs", this.mEndMs);
             var1.put("backoffMs", this.e);
             var1.put("backoffPolicy", this.f.toString());
             var1.put("intervalMs", this.g);
             var1.put("flexMs", this.h);
-            var1.put("requirementsEnforced", this.i);
+            var1.put("requirementsEnforced", this.mRequirementsEnforced);
             var1.put("requiresCharging", this.j);
             var1.put("requiresDeviceIdle", this.k);
             var1.put("requiresBatteryNotLow", this.l);
@@ -511,51 +515,51 @@ public final class JobRequest {
          var1.put("transient", this.s);
       }
 
-      public JobRequest.b a(long var1) {
+      public Builder setExact(long exactInMs) {
          this.n = true;
-         long var3 = var1;
-         if (var1 > 6148914691236517204L) {
-            m.f.a("exactInMs clamped from %d days to %d days", TimeUnit.MILLISECONDS.toDays(var1), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
+         long var3 = exactInMs;
+         if (exactInMs > 6148914691236517204L) {
+            m.f.a("exactInMs clamped from %d days to %d days", TimeUnit.MILLISECONDS.toDays(exactInMs), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
             var3 = 6148914691236517204L;
          }
 
          return this.a(var3, var3);
       }
 
-      public JobRequest.b a(long var1, long var3) {
-         this.c = com.evernote.android.job.a.f.b(var1, "startInMs must be greater than 0");
-         this.d = com.evernote.android.job.a.f.a(var3, var1, Long.MAX_VALUE, "endInMs");
-         if (this.c > 6148914691236517204L) {
-            m.f.a("startInMs reduced from %d days to %d days", TimeUnit.MILLISECONDS.toDays(this.c), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
-            this.c = 6148914691236517204L;
+      public Builder a(long var1, long var3) {
+         this.mStartMs = com.evernote.android.job.a.f.b(var1, "startInMs must be greater than 0");
+         this.mEndMs = com.evernote.android.job.a.f.a(var3, var1, Long.MAX_VALUE, "endInMs");
+         if (this.mStartMs > 6148914691236517204L) {
+            m.f.a("startInMs reduced from %d days to %d days", TimeUnit.MILLISECONDS.toDays(this.mStartMs), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
+            this.mStartMs = 6148914691236517204L;
          }
 
-         if (this.d > 6148914691236517204L) {
-            m.f.a("endInMs reduced from %d days to %d days", TimeUnit.MILLISECONDS.toDays(this.d), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
-            this.d = 6148914691236517204L;
+         if (this.mEndMs > 6148914691236517204L) {
+            m.f.a("endInMs reduced from %d days to %d days", TimeUnit.MILLISECONDS.toDays(this.mEndMs), TimeUnit.MILLISECONDS.toDays(6148914691236517204L));
+            this.mEndMs = 6148914691236517204L;
          }
 
          return this;
       }
 
-      public JobRequest.b a(com.evernote.android.job.util.a.b var1) {
+      public Builder setExtras(PersistableBundleCompat var1) {
          if (var1 == null) {
             this.p = null;
             this.q = null;
             return this;
          } else {
-            this.p = new com.evernote.android.job.util.a.b(var1);
+            this.p = new PersistableBundleCompat(var1);
             return this;
          }
       }
 
-      public JobRequest.b a(boolean var1) {
-         this.i = var1;
+      public Builder setRequirementsEnforced(boolean var1) {
+         this.mRequirementsEnforced = var1;
          return this;
       }
 
-      public JobRequest a() {
-         com.evernote.android.job.a.f.a((CharSequence)this.a);
+      public JobRequest build() {
+         com.evernote.android.job.a.f.a((CharSequence)this.mTag);
          com.evernote.android.job.a.f.b(this.e, "backoffMs must be > 0");
          com.evernote.android.job.a.f.a((Object)this.f);
          com.evernote.android.job.a.f.a((Object)this.o);
@@ -569,31 +573,31 @@ public final class JobRequest {
 
          if (this.n && this.g > 0L) {
             throw new IllegalArgumentException("Can't call setExact() on a periodic job.");
-         } else if (this.n && this.c != this.d) {
+         } else if (this.n && this.mStartMs != this.mEndMs) {
             throw new IllegalArgumentException("Can't call setExecutionWindow() for an exact job.");
-         } else if (!this.n || !this.i && !this.k && !this.j && m.b.equals(this.o) && !this.l && !this.m) {
-            if (this.g > 0L || this.c != -1L && this.d != -1L) {
-               if (this.g > 0L && (this.c != -1L || this.d != -1L)) {
+         } else if (!this.n || !this.mRequirementsEnforced && !this.k && !this.j && m.b.equals(this.o) && !this.l && !this.m) {
+            if (this.g > 0L || this.mStartMs != -1L && this.mEndMs != -1L) {
+               if (this.g > 0L && (this.mStartMs != -1L || this.mEndMs != -1L)) {
                   throw new IllegalArgumentException("Can't call setExecutionWindow() on a periodic job.");
                } else if (this.g > 0L && (this.e != 30000L || !m.a.equals(this.f))) {
                   throw new IllegalArgumentException("A periodic job will not respect any back-off policy, so calling setBackoffCriteria() with setPeriodic() is an error.");
                } else {
-                  if (this.g <= 0L && (this.c > 3074457345618258602L || this.d > 3074457345618258602L)) {
+                  if (this.g <= 0L && (this.mStartMs > 3074457345618258602L || this.mEndMs > 3074457345618258602L)) {
                      m.f.c("Attention: your execution window is too large. This could result in undesired behavior, see https://github.com/evernote/android-job/wiki/FAQ");
                   }
 
-                  if (this.g <= 0L && this.c > TimeUnit.DAYS.toMillis(365L)) {
-                     m.f.c("Warning: job with tag %s scheduled over a year in the future", this.a);
+                  if (this.g <= 0L && this.mStartMs > TimeUnit.DAYS.toMillis(365L)) {
+                     m.f.c("Warning: job with tag %s scheduled over a year in the future", this.mTag);
                   }
 
-                  if (this.b != -8765) {
-                     com.evernote.android.job.a.f.a(this.b, "id can't be negative");
+                  if (this.CREATE_ID != -8765) {
+                     com.evernote.android.job.a.f.a(this.CREATE_ID, "id can't be negative");
                   }
 
-                  JobRequest.b var1 = new JobRequest.b(this);
-                  if (this.b == -8765) {
-                     var1.b = com.evernote.android.job.i.a().e().a();
-                     com.evernote.android.job.a.f.a(var1.b, "id can't be negative");
+                  Builder var1 = new Builder(this);
+                  if (this.CREATE_ID == -8765) {
+                     var1.CREATE_ID = JobManager.instance().getJobStorage().a();
+                     com.evernote.android.job.a.f.a(var1.CREATE_ID, "id can't be negative");
                   }
 
                   return new JobRequest(var1);
@@ -606,8 +610,8 @@ public final class JobRequest {
          }
       }
 
-      public JobRequest.b b(boolean var1) {
-         this.r = var1;
+      public Builder setUpdateCurrent(boolean var1) {
+         this.mUpdateCurrent = var1;
          return this;
       }
 
@@ -618,8 +622,8 @@ public final class JobRequest {
             if (this.getClass() != var1.getClass()) {
                return false;
             } else {
-               JobRequest.b var2 = (JobRequest.b)var1;
-               return this.b == var2.b;
+               Builder var2 = (Builder)var1;
+               return this.CREATE_ID == var2.CREATE_ID;
             }
          } else {
             return false;
@@ -627,7 +631,7 @@ public final class JobRequest {
       }
 
       public int hashCode() {
-         return this.b;
+         return this.CREATE_ID;
       }
    }
 

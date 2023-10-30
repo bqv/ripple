@@ -92,9 +92,9 @@ public class MyPreferenceText extends Preference {
             }
 
             try {
-               var1.putExtra(this.c.getResources().getString(2131492900), this.f);
-               var1.putExtra(this.c.getResources().getString(2131492875), this.g);
-               var1.putExtra(this.c.getResources().getString(2131492876), this.h);
+               var1.putExtra(this.c.getResources().getString(R.string.MSG_WHAT), this.f);
+               var1.putExtra(this.c.getResources().getString(R.string.MSG_EXTRATEXT1), this.g);
+               var1.putExtra(this.c.getResources().getString(R.string.MSG_EXTRATEXT2), this.h);
                break label67;
             } catch (ClassNotFoundException var8) {
                var2 = var8;

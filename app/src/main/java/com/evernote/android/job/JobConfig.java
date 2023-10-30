@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class e {
+public final class JobConfig {
    private static final EnumMap a;
    private static final com.evernote.android.job.util.d b = new com.evernote.android.job.util.d("JobConfig");
    private static final ExecutorService c = Executors.newCachedThreadPool(new ThreadFactory() {
@@ -40,14 +40,14 @@ public final class e {
    private static volatile boolean l;
 
    static {
-      j = com.evernote.android.job.a.b.a;
+      j = Job.Result.SUCCESS;
       k = c;
-      a = new EnumMap(d.class);
-      d[] var0 = com.evernote.android.job.d.values();
+      a = new EnumMap(JobApi.class);
+      JobApi[] var0 = JobApi.values();
       int var1 = var0.length;
 
       for(int var2 = 0; var2 < var1; ++var2) {
-         d var3 = var0[var2];
+         JobApi var3 = var0[var2];
          a.put(var3, Boolean.TRUE);
       }
 
@@ -57,7 +57,7 @@ public final class e {
       return d && VERSION.SDK_INT < 24;
    }
 
-   public static boolean a(d var0) {
+   public static boolean a(JobApi var0) {
       return (Boolean)a.get(var0);
    }
 
@@ -69,7 +69,7 @@ public final class e {
       return f;
    }
 
-   static boolean d() {
+   static boolean isSkipJobRescheduled() {
       return g;
    }
 

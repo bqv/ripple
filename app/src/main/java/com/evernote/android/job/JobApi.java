@@ -13,7 +13,7 @@ import com.evernote.android.job.v21.PlatformJobService;
 import java.util.Iterator;
 import java.util.List;
 
-public enum d {
+public enum JobApi {
    a(true, false, true),
    b(true, false, false),
    c(true, true, false),
@@ -26,7 +26,7 @@ public enum d {
    private final boolean i;
    private final boolean j;
 
-   private d(boolean var3, boolean var4, boolean var5) {
+   private JobApi(boolean var3, boolean var4, boolean var5) {
       this.h = var3;
       this.i = var4;
       this.j = var5;
@@ -172,18 +172,18 @@ public enum d {
       return var5;
    }
 
-   public static d c(Context var0) {
-      if (a.a(var0) && com.evernote.android.job.e.a(a)) {
+   public static JobApi c(Context var0) {
+      if (a.a(var0) && JobConfig.a(a)) {
          return a;
-      } else if (b.a(var0) && com.evernote.android.job.e.a(b)) {
+      } else if (b.a(var0) && JobConfig.a(b)) {
          return b;
-      } else if (c.a(var0) && com.evernote.android.job.e.a(c)) {
+      } else if (c.a(var0) && JobConfig.a(c)) {
          return c;
-      } else if (f.a(var0) && com.evernote.android.job.e.a(f)) {
+      } else if (f.a(var0) && JobConfig.a(f)) {
          return f;
-      } else if (d.a(var0) && com.evernote.android.job.e.a(d)) {
+      } else if (d.a(var0) && JobConfig.a(d)) {
          return d;
-      } else if (com.evernote.android.job.e.a(e)) {
+      } else if (JobConfig.a(e)) {
          return e;
       } else {
          throw new IllegalStateException("All supported APIs are disabled");
@@ -193,9 +193,9 @@ public enum d {
    private JobProxy d(Context var1) {
       switch(this) {
       case a:
-         return new com.evernote.android.job.d.a(var1);
+         return new JobApi.a(var1);
       case b:
-         return new com.evernote.android.job.c.a(var1);
+         return new Job.Params(var1);
       case c:
          return new com.evernote.android.job.v21.a(var1);
       case d:
@@ -242,7 +242,7 @@ public enum d {
 
          return false;
       case 5:
-         if (!com.evernote.android.job.e.b()) {
+         if (!JobConfig.b()) {
             if (this.a(var1, PlatformAlarmService.class) && this.a(var1, PlatformAlarmServiceExact.class) && this.b(var1, PlatformAlarmReceiver.class)) {
                return true;
             }

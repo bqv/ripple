@@ -96,8 +96,8 @@ public class ServiceNotifications extends NotificationListenerService {
       MyLog.log(this, (String)"ServiceNotifications.notificationAnnounceNow Starting service");
       var1.h = 1;
       Intent var2 = new Intent(this, ServiceMain.class);
-      var2.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492865));
-      var2.putExtra(this.getResources().getString(2131492876), var1.j);
+      var2.putExtra(this.getResources().getString(R.string.MSG_WHAT), this.getResources().getString(R.string.MSG_APPS_NOTIFY));
+      var2.putExtra(this.getResources().getString(R.string.MSG_EXTRATEXT2), var1.j);
       this.startService(var2);
    }
 

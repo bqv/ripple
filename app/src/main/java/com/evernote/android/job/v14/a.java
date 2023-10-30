@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Build.VERSION;
-import com.evernote.android.job.e;
+import com.evernote.android.job.JobConfig;
 import com.evernote.android.job.JobProxy;
 import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.JobCat;
@@ -32,9 +32,9 @@ public class a implements JobProxy {
 
    protected int a(boolean var1) {
       if (var1) {
-         return e.f() ? 0 : 2;
+         return JobConfig.f() ? 0 : 2;
       } else {
-         return e.f() ? 1 : 3;
+         return JobConfig.f() ? 1 : 3;
       }
    }
 
@@ -63,7 +63,7 @@ public class a implements JobProxy {
    }
 
    protected PendingIntent a(JobRequest var1, int var2) {
-      return this.a(var1.c(), var1.u(), var1.C(), var2);
+      return this.a(var1.getJobId(), var1.u(), var1.C(), var2);
    }
 
    protected PendingIntent a(JobRequest var1, boolean var2) {
@@ -90,8 +90,8 @@ public class a implements JobProxy {
       if (var3 != null) {
          try {
             if (var1.u()) {
-               if (var1.e() == 1L && var1.y() <= 0) {
-                  PlatformAlarmService.a(this.a, var1.c(), var1.C());
+               if (var1.getStartMs() == 1L && var1.y() <= 0) {
+                  PlatformAlarmService.a(this.a, var1.getJobId(), var1.C());
                } else {
                   this.b(var1, var3, var2);
                }
@@ -149,7 +149,7 @@ public class a implements JobProxy {
    }
 
    protected void c(JobRequest var1, AlarmManager var2, PendingIntent var3) {
-      var2.set(1, e.g().a() + JobProxy.a.f(var1), var3);
+      var2.set(1, JobConfig.g().a() + JobProxy.a.f(var1), var3);
       this.b.b("Scheduled repeating alarm (flex support), %s, interval %s, flex %s", var1, g.a(var1.j()), g.a(var1.k()));
    }
 
@@ -159,10 +159,10 @@ public class a implements JobProxy {
 
    protected long e(JobRequest var1) {
       long var2;
-      if (e.f()) {
-         var2 = e.g().a();
+      if (JobConfig.f()) {
+         var2 = JobConfig.g().a();
       } else {
-         var2 = e.g().b();
+         var2 = JobConfig.g().b();
       }
 
       return var2 + JobProxy.a.c(var1);

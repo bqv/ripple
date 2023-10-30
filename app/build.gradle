@@ -3,7 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace "io.fron.morse"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId "io.fron.morse"
         minSdk = 28
