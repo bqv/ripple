@@ -9,13 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-class r extends ArrayAdapter implements OnClickListener {
+class MyRemindersArrayAdapter extends ArrayAdapter implements OnClickListener {
    private final Context a;
-   private q b;
+   private MyReminders b;
    private final LayoutInflater c;
-   private final r.a d;
+   private final MyRemindersArrayAdapter.a d;
 
-   public r(Context var1, q var2, r.a var3) {
+   public MyRemindersArrayAdapter(Context var1, MyReminders var2, MyRemindersArrayAdapter.a var3) {
       super(var1, 2131296266, var2.a);
       MyLog.log("MyRemindersArrayAdapter.constructor");
       this.a = var1;
@@ -31,7 +31,7 @@ class r extends ArrayAdapter implements OnClickListener {
       var4.append("  v=");
       var4.append(var2);
       MyLog.log(var4.toString());
-      p var5 = (p)this.b.a.get(var1);
+      MyReminder var5 = (MyReminder)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
          var8 = this.c.inflate(2131296266, var3, false);
@@ -53,7 +53,7 @@ class r extends ArrayAdapter implements OnClickListener {
    public void onClick(View var1) {
       if (var1 != null) {
          MyLog.log("MyRemindersArrayAdapter.onClick");
-         p var2 = (p)var1.getTag();
+         MyReminder var2 = (MyReminder)var1.getTag();
          if (var2 == null) {
             MyLog.log(this.a, "MyRemindersArrayAdapter.onClick ERROR f=null");
          } else {
@@ -80,6 +80,6 @@ class r extends ArrayAdapter implements OnClickListener {
    }
 
    public interface a {
-      void a(p var1, int var2, View var3);
+      void a(MyReminder var1, int var2, View var3);
    }
 }

@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ActivityAppFilters extends Activity implements OnClickListener, c.a {
-   private b a;
-   private c b;
+public class ActivityAppFilters extends Activity implements OnClickListener, MyAppFiltersArrayAdapter.a {
+   private MyAppNotificationFilters a;
+   private MyAppFiltersArrayAdapter b;
    private ListView c;
 
-   public void a(final a var1, int var2, View var3) {
+   public void a(final MyAppNotificationFilter var1, int var2, View var3) {
       MyLog.log("ActivityAppFilters.onRowButtonClick");
       if (var3.getId() == 2131165195) {
          MyLog.log("ActivityAppFilters.onRowButtonClick b_delete");
@@ -27,7 +27,7 @@ public class ActivityAppFilters extends Activity implements OnClickListener, c.a
          var5.setPositiveButton(2131492916, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1x, int var2) {
                ActivityAppFilters.this.b.remove(var1);
-               ActivityAppFilters.this.a.b(ActivityAppFilters.this);
+               ActivityAppFilters.this.a.MyAppFilters(ActivityAppFilters.this);
                ActivityAppFilters.this.b.notifyDataSetChanged();
                ActivityAppFilters.this.c.invalidate();
                var1x.dismiss();
@@ -96,10 +96,10 @@ public class ActivityAppFilters extends Activity implements OnClickListener, c.a
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityAppFilters.onCreate");
-      this.a = new b(this);
+      this.a = new MyAppNotificationFilters(this);
       MyLog.log("ActivityAppFilters.onCreate loadFilters");
       this.a.a(this);
-      this.b = new c(this, this.a, this);
+      this.b = new MyAppFiltersArrayAdapter(this, this.a, this);
       this.setContentView(2131296258);
       this.c = (ListView)this.findViewById(2131165255);
       this.c.setAdapter(this.b);

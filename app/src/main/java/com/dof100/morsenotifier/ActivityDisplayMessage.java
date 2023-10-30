@@ -33,7 +33,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    private int j = 0;
    private int k = 1;
    private GLSurfaceView l = null;
-   private s m = null;
+   private MyMorseRenderer m = null;
    private ArrayList n = new ArrayList();
    private long o = System.currentTimeMillis();
    private long p = 0L;
@@ -359,7 +359,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       }
 
       try {
-         s var29 = new s(this.n, this.c, this.e, this.f, this.g, this.h, this.i, this.j);
+         MyMorseRenderer var29 = new MyMorseRenderer(this.n, this.c, this.e, this.f, this.g, this.h, this.i, this.j);
          this.m = var29;
          this.l.setZOrderOnTop(true);
          this.l.setEGLConfigChooser(8, 8, 8, 8, 16, 0);

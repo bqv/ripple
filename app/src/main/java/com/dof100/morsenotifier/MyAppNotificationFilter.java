@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import java.util.Locale;
 
-class a {
+class MyAppNotificationFilter {
    String a = "All non-system apps";
    String b = "";
    String c = "";
@@ -20,8 +20,8 @@ class a {
    String i = "";
    String j = "";
 
-   public a() {
-      this.a();
+   public MyAppNotificationFilter() {
+      this.MyAppNotificationFilter();
    }
 
    private void a() {
@@ -475,7 +475,7 @@ class a {
    }
 
    public void a(SharedPreferences var1, int var2) {
-      this.a();
+      this.MyAppNotificationFilter();
       StringBuilder var3 = new StringBuilder();
       var3.append("app_filter_");
       var3.append(var2);

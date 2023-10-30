@@ -2,7 +2,7 @@ package com.dof100.morsenotifier;
 
 import java.util.Locale;
 
-class h implements com.evernote.android.job.f {
+class MyChimeJobCreator implements com.evernote.android.job.f {
    public com.evernote.android.job.c a(String var1) {
       byte var7;
       label24: {
@@ -20,19 +20,19 @@ class h implements com.evernote.android.job.f {
          var7 = -1;
       }
 
-      g var3;
+      MyJob var3;
       Locale var4;
       Object[] var5;
       Locale var6;
       switch(var7) {
       case 0:
-         var3 = new g();
+         var3 = new MyJob();
          var4 = Locale.US;
          var5 = new Object[]{var1};
          var6 = var4;
          break;
       case 1:
-         var3 = new g();
+         var3 = new MyJob();
          var4 = Locale.US;
          var5 = new Object[]{var1};
          var6 = var4;

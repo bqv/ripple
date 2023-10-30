@@ -9,9 +9,9 @@ import android.widget.Spinner;
 import java.util.Locale;
 
 public class ActivityAppFilter extends Activity {
-   private f a = null;
-   private b b = null;
-   private a c = null;
+   private MyAppFilters a = null;
+   private MyAppNotificationFilters b = null;
+   private MyAppNotificationFilter c = null;
    private Spinner d = null;
    private EditText e = null;
    private EditText f = null;
@@ -77,15 +77,15 @@ public class ActivityAppFilter extends Activity {
       MyLog.log("ActivityAppFilter.onCreate");
       this.setContentView(2131296257);
       this.c = null;
-      this.b = new b(this);
-      this.a = new f(this);
+      this.b = new MyAppNotificationFilters(this);
+      this.a = new MyAppFilters(this);
       var1 = this.getIntent().getExtras();
       int var2;
       StringBuilder var5;
       if (var1 != null) {
          var2 = var1.getInt("FILTERINDEX");
          if (var2 >= 0 && var2 < this.b.a.size()) {
-            this.c = (a)this.b.a.get(var2);
+            this.c = (MyAppNotificationFilter)this.b.a.get(var2);
             var5 = new StringBuilder();
             var5.append("ActivityAppFilter.onCreate loaded filter at position = ");
             var5.append(var2);
@@ -102,7 +102,7 @@ public class ActivityAppFilter extends Activity {
       }
 
       if (this.c == null) {
-         this.c = new a();
+         this.c = new MyAppNotificationFilter();
          this.b.a.add(this.c);
          var2 = this.b.a.size() - 1;
          var5 = new StringBuilder();
@@ -136,7 +136,7 @@ public class ActivityAppFilter extends Activity {
    protected void onPause() {
       MyLog.log("ActivityAppFilter.onPause");
       this.b();
-      this.b.b(this);
+      this.b.MyAppFilters(this);
       super.onPause();
    }
 

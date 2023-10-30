@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-class s implements Renderer {
+class MyMorseRenderer implements Renderer {
    private int a;
    private boolean b;
    private boolean c;
@@ -36,7 +36,7 @@ class s implements Renderer {
    private float y = 0.0F;
    private float z = 0.0F;
 
-   s(ArrayList var1, int var2, boolean var3, boolean var4, int var5, int var6, int var7, int var8) {
+   MyMorseRenderer(ArrayList var1, int var2, boolean var3, boolean var4, int var5, int var6, int var7, int var8) {
       MyLog.log("MyMorseRenderer constructor");
       this.a = var2;
       this.b = var3;

@@ -7,10 +7,10 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Locale;
 
-class b {
+class MyAppNotificationFilters {
    public ArrayList a;
 
-   public b(Context var1) {
+   public MyAppNotificationFilters(Context var1) {
       MyLog.log("MyAppFilters.constructor");
       this.a = new ArrayList();
       MyLog.log("MyAppNotificationFilters.constructor load");
@@ -29,7 +29,7 @@ class b {
       this.a.clear();
 
       while(var3 < var4) {
-         a var5 = new a();
+         MyAppNotificationFilter var5 = new MyAppNotificationFilter();
          var5.a(var2, var3);
          this.a.add(var5);
          ++var3;
@@ -46,7 +46,7 @@ class b {
       MyLog.log(String.format(var3, "MyAppFilters.save - saving %d entries", var2));
 
       while(var4 < var2) {
-         ((a)this.a.get(var4)).a(var5, var4);
+         ((MyAppNotificationFilter)this.a.get(var4)).a(var5, var4);
          ++var4;
       }
 

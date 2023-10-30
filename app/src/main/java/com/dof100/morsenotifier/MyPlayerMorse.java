@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-class j extends AsyncTask {
+class MyPlayerMorse extends AsyncTask {
    private WeakReference a;
    private int b;
    private boolean c = false;
@@ -47,14 +47,14 @@ class j extends AsyncTask {
       public void onReceive(Context var1, Intent var2) {
          if ("LBR_ACTION_FINISH".equals(var2.getAction())) {
             MyLog.log(var1, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ");
-            j.this.u = true;
-            j.this.y.countDown();
+            MyPlayerMorse.this.u = true;
+            MyPlayerMorse.this.y.countDown();
          }
 
       }
    };
 
-   j(Context var1, int var2) {
+   MyPlayerMorse(Context var1, int var2) {
       this.a = new WeakReference(var1);
       this.b = var2;
       StringBuilder var3 = new StringBuilder();
@@ -1039,11 +1039,11 @@ class j extends AsyncTask {
             int var3;
             int var4;
             boolean var10001;
-            u var28;
+            MyTone var28;
             label161: {
                label170: {
                   try {
-                     var28 = new u(this.q * this.o, this.p);
+                     var28 = new MyTone(this.q * this.o, this.p);
                   } catch (Exception var26) {
                      var10001 = false;
                      break label170;
@@ -1293,7 +1293,7 @@ class j extends AsyncTask {
                            if (var1 == null) {
                               var3 = new StringBuilder();
                               var3.append("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=");
-                              var3.append(j.this.b);
+                              var3.append(MyPlayerMorse.this.b);
                               MyLog.log(var3.toString());
                            } else {
                               try {
@@ -1304,9 +1304,9 @@ class j extends AsyncTask {
 
                               var3 = new StringBuilder();
                               var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=");
-                              var3.append(j.this.b);
+                              var3.append(MyPlayerMorse.this.b);
                               MyLog.log(var3.toString());
-                              j.this.y.countDown();
+                              MyPlayerMorse.this.y.countDown();
                            }
                         }
 
@@ -1315,7 +1315,7 @@ class j extends AsyncTask {
                            if (var1 == null) {
                               var44 = new StringBuilder();
                               var44.append("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=");
-                              var44.append(j.this.b);
+                              var44.append(MyPlayerMorse.this.b);
                               MyLog.log(var44.toString());
                            } else {
                               String var43;
@@ -1352,8 +1352,8 @@ class j extends AsyncTask {
                                        label230: {
                                           label231: {
                                              try {
-                                                var2x = var1.getPlaybackHeadPosition() / j.this.t;
-                                                if (var2x >= j.this.q) {
+                                                var2x = var1.getPlaybackHeadPosition() / MyPlayerMorse.this.t;
+                                                if (var2x >= MyPlayerMorse.this.q) {
                                                    break label231;
                                                 }
                                              } catch (IllegalStateException var35) {
@@ -1367,7 +1367,7 @@ class j extends AsyncTask {
                                              var3 = var2x * 2;
 
                                              try {
-                                                if (var3 < j.this.x.size()) {
+                                                if (var3 < MyPlayerMorse.this.x.size()) {
                                                    break label230;
                                                 }
                                              } catch (IllegalStateException var33) {
@@ -1408,9 +1408,9 @@ class j extends AsyncTask {
                                              var1.stop();
                                              var44 = new StringBuilder();
                                              var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=");
-                                             var44.append(j.this.b);
+                                             var44.append(MyPlayerMorse.this.b);
                                              MyLog.log(var44.toString());
-                                             j.this.y.countDown();
+                                             MyPlayerMorse.this.y.countDown();
                                              return;
                                           } catch (IllegalStateException var27) {
                                              var10001 = false;
@@ -1422,7 +1422,7 @@ class j extends AsyncTask {
                                        }
 
                                        try {
-                                          var3 = (Integer)j.this.x.get(var3);
+                                          var3 = (Integer) MyPlayerMorse.this.x.get(var3);
                                        } catch (IllegalStateException var25) {
                                           var10001 = false;
                                           break label223;
@@ -1438,7 +1438,7 @@ class j extends AsyncTask {
                                                 var4.append("MyPlayerMorse.doInBackground onPeriodicNotification STOP detected at ");
                                                 var4.append(var2x);
                                                 var4.append("...  Muting... instance=");
-                                                var4.append(j.this.b);
+                                                var4.append(MyPlayerMorse.this.b);
                                                 MyLog.log(var4.toString());
                                                 if (VERSION.SDK_INT >= 21) {
                                                    var1.setVolume(0.0F);
@@ -1467,7 +1467,7 @@ class j extends AsyncTask {
                                        long[] var45;
                                        try {
                                           App.a(var2, var2x);
-                                          if (!j.this.d || j.this.w == null) {
+                                          if (!MyPlayerMorse.this.d || MyPlayerMorse.this.w == null) {
                                              return;
                                           }
 
@@ -1486,16 +1486,16 @@ class j extends AsyncTask {
 
                                        Vibrator var42;
                                        label172: {
-                                          j var41;
+                                          MyPlayerMorse var41;
                                           switch(var3) {
                                           case 1:
                                              var45[0] = 0L;
 
                                              try {
-                                                var45[1] = (long)j.this.o;
-                                                var45[2] = (long)j.this.o;
+                                                var45[1] = (long) MyPlayerMorse.this.o;
+                                                var45[2] = (long) MyPlayerMorse.this.o;
                                                 if (VERSION.SDK_INT >= 26) {
-                                                   var42 = j.this.w;
+                                                   var42 = MyPlayerMorse.this.w;
                                                    break label172;
                                                 }
                                              } catch (IllegalStateException var17) {
@@ -1507,7 +1507,7 @@ class j extends AsyncTask {
                                              }
 
                                              try {
-                                                var41 = j.this;
+                                                var41 = MyPlayerMorse.this;
                                                 break;
                                              } catch (IllegalStateException var11) {
                                                 var10001 = false;
@@ -1520,10 +1520,10 @@ class j extends AsyncTask {
                                              var45[0] = 0L;
 
                                              try {
-                                                var45[1] = (long)(j.this.o * 3);
-                                                var45[2] = (long)j.this.o;
+                                                var45[1] = (long)(MyPlayerMorse.this.o * 3);
+                                                var45[2] = (long) MyPlayerMorse.this.o;
                                                 if (VERSION.SDK_INT >= 26) {
-                                                   var42 = j.this.w;
+                                                   var42 = MyPlayerMorse.this.w;
                                                    break label172;
                                                 }
                                              } catch (IllegalStateException var15) {
@@ -1535,7 +1535,7 @@ class j extends AsyncTask {
                                              }
 
                                              try {
-                                                var41 = j.this;
+                                                var41 = MyPlayerMorse.this;
                                                 break;
                                              } catch (IllegalStateException var13) {
                                                 var10001 = false;
@@ -1549,7 +1549,7 @@ class j extends AsyncTask {
                                              var45[1] = 0L;
 
                                              try {
-                                                var45[2] = (long)j.this.o;
+                                                var45[2] = (long) MyPlayerMorse.this.o;
                                                 return;
                                              } catch (IllegalStateException var9) {
                                                 var10001 = false;
@@ -1591,7 +1591,7 @@ class j extends AsyncTask {
                               }
 
                               MyLog.log(var43);
-                              j.this.y.countDown();
+                              MyPlayerMorse.this.y.countDown();
                            }
                         }
                      };

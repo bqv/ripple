@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ActivityReminders extends Activity implements OnClickListener, r.a {
-   private q a;
-   private r b;
+public class ActivityReminders extends Activity implements OnClickListener, MyRemindersArrayAdapter.a {
+   private MyReminders a;
+   private MyRemindersArrayAdapter b;
    private ListView c;
 
-   public void a(final p var1, int var2, View var3) {
+   public void a(final MyReminder var1, int var2, View var3) {
       MyLog.log("ActivityReminders.onRowButtonClick");
       if (var3.getId() == 2131165195) {
          MyLog.log("ActivityReminders.onRowButtonClick b_delete");
@@ -30,7 +30,7 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
                ActivityReminders.this.b.remove(var1);
                ActivityReminders.this.a.b(ActivityReminders.this);
                ActivityReminders.this.b.notifyDataSetChanged();
-               g.a((Context)ActivityReminders.this);
+               MyJob.a((Context)ActivityReminders.this);
                ActivityReminders.this.c.invalidate();
                var1x.dismiss();
             }
@@ -85,10 +85,10 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityReminders.onCreate");
-      this.a = new q(this);
+      this.a = new MyReminders(this);
       MyLog.log("ActivityReminders.onCreate load");
       this.a.a(this);
-      this.b = new r(this, this.a, this);
+      this.b = new MyRemindersArrayAdapter(this, this.a, this);
       this.setContentView(2131296265);
       this.c = (ListView)this.findViewById(2131165257);
       this.c.setAdapter(this.b);

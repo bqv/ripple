@@ -180,6 +180,6 @@ public class App extends Application {
       m = l.replace(".free", "");
       q = null;
       MyLog.log("App.onCreate Initializing job manager...");
-      com.evernote.android.job.i.a((Context)this).a((com.evernote.android.job.f)(new h()));
+      com.evernote.android.job.i.a((Context)this).a((com.evernote.android.job.f)(new MyChimeJobCreator()));
    }
 }

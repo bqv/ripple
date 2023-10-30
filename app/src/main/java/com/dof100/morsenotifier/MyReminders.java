@@ -7,24 +7,24 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Locale;
 
-class q {
+class MyReminders {
    public ArrayList a;
 
-   public q(Context var1) {
+   public MyReminders(Context var1) {
       MyLog.log("MyReminders.constructor");
       this.a = new ArrayList();
       this.a(var1);
    }
 
-   public p a() {
-      p var1 = null;
+   public MyReminder a() {
+      MyReminder var1 = null;
       long var2 = Long.MAX_VALUE;
 
       long var7;
       for(int var4 = 0; var4 < this.a.size(); var2 = var7) {
-         p var5 = (p)this.a.get(var4);
+         MyReminder var5 = (MyReminder)this.a.get(var4);
          var5.b();
-         p var6 = var1;
+         MyReminder var6 = var1;
          var7 = var2;
          if (var5.g >= 0L) {
             var6 = var1;
@@ -50,7 +50,7 @@ class q {
       this.a.clear();
 
       while(var2 < var3) {
-         p var4 = new p();
+         MyReminder var4 = new MyReminder();
          var4.a(var5, var2);
          this.a.add(var4);
          ++var2;
@@ -67,7 +67,7 @@ class q {
       var2.putInt("reminders_n", var3);
 
       while(var4 < var3) {
-         ((p)this.a.get(var4)).a(var2, var4);
+         ((MyReminder)this.a.get(var4)).a(var2, var4);
          ++var4;
       }
 

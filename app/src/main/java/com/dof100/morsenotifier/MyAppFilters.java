@@ -9,10 +9,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-class f {
+class MyAppFilters {
    public final List a = new ArrayList();
 
-   public f(Context var1) {
+   public MyAppFilters(Context var1) {
       ArrayList var2 = new ArrayList();
       PackageManager var3 = var1.getPackageManager();
       Object var4 = var2;

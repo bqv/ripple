@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-class g extends com.evernote.android.job.c {
+class MyJob extends com.evernote.android.job.c {
    public static void a() {
       MyLog.log("MyJob.scheduleNextChime");
       com.evernote.android.job.i var0 = com.evernote.android.job.i.a();
@@ -59,7 +59,7 @@ class g extends com.evernote.android.job.c {
             MyLog.log(String.format(Locale.US, "   MyJob.scheduleNextReminder Job tag=%15s id=%d t=%s start=%d min", var3.d(), var3.c(), var5.toString(), var3.e() / 1000L / 60L));
          }
 
-         p var6 = (new q(var0)).a();
+         MyReminder var6 = (new MyReminders(var0)).a();
          if (var6 != null) {
             MyLog.log(String.format(Locale.US, "MyJob.scheduleNextReminder Next reminder %s", var6.c()));
             com.evernote.android.job.util.a.b var4 = new com.evernote.android.job.util.a.b();

@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class p {
+public class MyReminder {
    int a = 0;
    int b = 0;
    final boolean[] c = new boolean[]{true, true, true, true, true, true, true};
@@ -15,7 +15,7 @@ public class p {
    String f = "";
    long g;
 
-   public p() {
+   public MyReminder() {
       this.d();
    }
 

@@ -111,8 +111,8 @@ public class ServiceMain extends IntentService {
                MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
                MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
-               com.dof100.morsenotifier.g.a();
-               com.dof100.morsenotifier.g.a((Context)ServiceMain.this);
+               MyJob.a();
+               MyJob.a((Context)ServiceMain.this);
             }
 
          }
@@ -128,8 +128,8 @@ public class ServiceMain extends IntentService {
                MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
                MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
-               com.dof100.morsenotifier.g.a();
-               com.dof100.morsenotifier.g.a((Context)ServiceMain.this);
+               MyJob.a();
+               MyJob.a((Context)ServiceMain.this);
             }
 
          }
@@ -138,9 +138,9 @@ public class ServiceMain extends IntentService {
 
    private void a() {
       MyLog.log(this, (String)"ServiceMain.alarm_init");
-      com.dof100.morsenotifier.g.b();
-      com.dof100.morsenotifier.g.a();
-      com.dof100.morsenotifier.g.a((Context)this);
+      MyJob.b();
+      MyJob.a();
+      MyJob.a((Context)this);
       if (App.d) {
          App.a(this.getApplicationContext());
       }
@@ -249,7 +249,7 @@ public class ServiceMain extends IntentService {
    }
 
    private void a(String var1, int var2, int var3, int var4, int var5, int var6, boolean var7, boolean var8, boolean var9, boolean var10) {
-      j var11 = new j(this.getApplicationContext(), this.aF);
+      MyPlayerMorse var11 = new MyPlayerMorse(this.getApplicationContext(), this.aF);
       Context var12 = this.getApplicationContext();
       boolean var13 = this.l;
       int var14 = this.d;
@@ -422,7 +422,7 @@ public class ServiceMain extends IntentService {
             this.a(var2, a[this.av], 1, var5);
          } else if (var1.equals(this.getResources().getString(2131492884))) {
             MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)");
-            p var10 = (new q(this)).a();
+            MyReminder var10 = (new MyReminders(this)).a();
             if (var10 != null) {
                var1 = var10.a();
                var3 = a[this.av];

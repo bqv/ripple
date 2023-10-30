@@ -10,24 +10,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.Locale;
 
-class c extends ArrayAdapter implements OnClickListener {
+class MyAppFiltersArrayAdapter extends ArrayAdapter implements OnClickListener {
    private final Context a;
-   private b b;
+   private MyAppNotificationFilters b;
    private final LayoutInflater c;
-   private final c.a d;
+   private final MyAppFiltersArrayAdapter.a d;
 
-   public c(Context var1, b var2, c.a var3) {
-      super(var1, 2131296259, var2.a);
+   public MyAppFiltersArrayAdapter(Context context, MyAppNotificationFilters var2, MyAppFiltersArrayAdapter.a var3) {
+      super(context, 2131296259, var2.a);
       MyLog.log("MyAppFiltersArrayAdapter.constructor");
-      this.a = var1;
+      this.a = context;
       this.b = var2;
       this.d = var3;
       this.c = (LayoutInflater)this.a.getSystemService("layout_inflater");
    }
 
    public void a() {
-      this.insert(new com.dof100.morsenotifier.a(), this.b.a.size());
-      this.b.b(this.a);
+      this.insert(new MyAppNotificationFilter(), this.b.a.size());
+      this.b.MyAppFilters(this.a);
       this.notifyDataSetChanged();
    }
 
@@ -38,7 +38,7 @@ class c extends ArrayAdapter implements OnClickListener {
       var4.append("  v=");
       var4.append(var2);
       MyLog.log(var4.toString());
-      com.dof100.morsenotifier.a var5 = (com.dof100.morsenotifier.a)this.b.a.get(var1);
+      MyAppNotificationFilter var5 = (MyAppNotificationFilter)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
          var8 = this.c.inflate(2131296259, var3, false);
@@ -60,7 +60,7 @@ class c extends ArrayAdapter implements OnClickListener {
    public void onClick(View var1) {
       if (var1 != null) {
          MyLog.log("MyAppFiltersArrayAdapter.onClick");
-         com.dof100.morsenotifier.a var2 = (com.dof100.morsenotifier.a)var1.getTag();
+         MyAppNotificationFilter var2 = (MyAppNotificationFilter)var1.getTag();
          if (var2 == null) {
             MyLog.log(this.a, "MyAppFiltersArrayAdapter.onClick ERROR f=null");
          } else {
@@ -91,6 +91,6 @@ class c extends ArrayAdapter implements OnClickListener {
    }
 
    public interface a {
-      void a(com.dof100.morsenotifier.a var1, int var2, View var3);
+      void a(MyAppNotificationFilter var1, int var2, View var3);
    }
 }

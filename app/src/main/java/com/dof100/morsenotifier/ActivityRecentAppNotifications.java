@@ -8,10 +8,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ActivityRecentAppNotifications extends Activity implements OnClickListener, o.a {
+public class ActivityRecentAppNotifications extends Activity implements OnClickListener, MyRecentNotificationsArrayAdapter.a {
    private MyRecentAppNotifications a = null;
-   private b b;
-   private o c;
+   private MyAppNotificationFilters b;
+   private MyRecentNotificationsArrayAdapter c;
 
    public void a(int var1, View var2) {
       MyLog.log("ActivityRecentAppNotifications.onRowButtonClick");
@@ -50,11 +50,11 @@ public class ActivityRecentAppNotifications extends Activity implements OnClickL
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
       MyLog.log("ActivityRecentAppNotifications.onCreate");
-      this.b = new b(this);
+      this.b = new MyAppNotificationFilters(this);
       MyLog.log("ActivityRecentAppNotifications.onCreate loadfilters");
       this.b.a(this);
       this.a = new MyRecentAppNotifications(this);
-      this.c = new o(this, this.a.notifications, this.b, this);
+      this.c = new MyRecentNotificationsArrayAdapter(this, this.a.notifications, this.b, this);
       this.setContentView(2131296262);
       ((ListView)this.findViewById(2131165256)).setAdapter(this.c);
       ((Button)this.findViewById(2131165197)).setOnClickListener(this);

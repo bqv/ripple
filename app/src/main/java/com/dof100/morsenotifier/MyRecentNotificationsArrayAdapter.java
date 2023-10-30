@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-class o extends ArrayAdapter implements OnClickListener {
+class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickListener {
    private final Context a;
-   private final b b;
+   private final MyAppNotificationFilters b;
    private final LayoutInflater c;
-   private final o.a d;
+   private final MyRecentNotificationsArrayAdapter.a d;
 
-   public o(Context var1, ArrayList var2, b var3, o.a var4) {
+   public MyRecentNotificationsArrayAdapter(Context var1, ArrayList var2, MyAppNotificationFilters var3, MyRecentNotificationsArrayAdapter.a var4) {
       super(var1, 2131296263, var2);
       this.b = var3;
       this.d = var4;
@@ -46,7 +46,7 @@ class o extends ArrayAdapter implements OnClickListener {
       var12.j = "";
 
       for(var1 = 0; var1 < this.b.a.size(); ++var1) {
-         String var13 = ((com.dof100.morsenotifier.a)this.b.a.get(var1)).a(var12);
+         String var13 = ((MyAppNotificationFilter)this.b.a.get(var1)).a(var12);
          if (!var13.isEmpty()) {
             var12.i = var1;
             var12.j = var13;

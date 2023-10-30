@@ -14,8 +14,8 @@ import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 public class ActivityReminder extends Activity implements OnClickListener {
-   private q a = null;
-   private p b = null;
+   private MyReminders a = null;
+   private MyReminder b = null;
    private final ToggleButton[] c = new ToggleButton[]{null, null, null, null, null, null, null};
    private TimePicker d = null;
    private EditText e = null;
@@ -60,7 +60,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
          this.b.c[var1] = this.c[var1].isChecked();
       }
 
-      p var2;
+      MyReminder var2;
       if (VERSION.SDK_INT < 23) {
          this.b.a = this.d.getCurrentHour();
          var2 = this.b;
@@ -76,7 +76,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
       this.b.f = this.f.getText().toString();
       this.b.d = this.g.getSelectedItemPosition();
       this.a.b(this);
-      com.dof100.morsenotifier.g.a((Context)this);
+      MyJob.a((Context)this);
    }
 
    public void onClick(View var1) {
@@ -94,20 +94,20 @@ public class ActivityReminder extends Activity implements OnClickListener {
       MyLog.log("ActivityReminder.onCreate");
       this.setContentView(2131296264);
       ((Button)this.findViewById(2131165217)).setOnClickListener(this);
-      this.a = new q(this);
+      this.a = new MyReminders(this);
       var1 = this.getIntent().getExtras();
       int var2;
       StringBuilder var3;
       if (var1 != null) {
          var2 = var1.getInt("OBJECTINDEX");
-         this.b = (p)this.a.a.get(var2);
+         this.b = (MyReminder)this.a.a.get(var2);
          var3 = new StringBuilder();
          var3.append("ActivityReminder.onCreate loaded entry at position = ");
          var3.append(var2);
          MyLog.log(var3.toString());
          var2 = 2131493317;
       } else {
-         this.b = new p();
+         this.b = new MyReminder();
          this.a.a.add(this.b);
          var2 = this.a.a.size();
          var3 = new StringBuilder();

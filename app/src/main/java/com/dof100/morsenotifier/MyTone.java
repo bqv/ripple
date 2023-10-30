@@ -2,12 +2,12 @@ package com.dof100.morsenotifier;
 
 import java.util.Locale;
 
-class u {
+class MyTone {
    public int a;
    byte[] b;
    private int c;
 
-   u(int var1, int var2) {
+   MyTone(int var1, int var2) {
       this.c = var2;
       this.a = (int)((long)var1 * (long)this.c / 1000L);
       MyLog.log(String.format(Locale.getDefault(), "MyTone constructor Element Dur=%d msec  Sample Rate=%d s/sec   NSamples=%d", var1, this.c, this.a));

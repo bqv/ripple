@@ -29,7 +29,7 @@ public class ServiceNotifications extends NotificationListenerService {
    private boolean d = false;
    private boolean e = false;
    private MyRecentAppNotifications f = null;
-   private b g = null;
+   private MyAppNotificationFilters g = null;
    private final BroadcastReceiver h = new BroadcastReceiver() {
       public void onReceive(Context var1, Intent var2) {
          if ("LBR_ACTION_RECENTNOTIFICATIONSCHANGED".equals(var2.getAction())) {
@@ -283,7 +283,7 @@ public class ServiceNotifications extends NotificationListenerService {
       super.onCreate();
       MyLog.log(this, (String)"ServiceNotifications.OnCreate");
       this.f = new MyRecentAppNotifications(this);
-      this.g = new b(this);
+      this.g = new MyAppNotificationFilters(this);
       this.a();
       IntentFilter var1 = new IntentFilter();
       var1.addAction("LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
@@ -403,7 +403,7 @@ public class ServiceNotifications extends NotificationListenerService {
 
             for(int var9 = 0; var9 < this.g.a.size(); ++var9) {
                MyLog.log("ServiceNotifications.onNotificationPosted for 1");
-               String var11 = ((a)this.g.a.get(var9)).a(var13);
+               String var11 = ((MyAppNotificationFilter)this.g.a.get(var9)).a(var13);
                if (!var11.isEmpty()) {
                   var13.i = var9;
                   var13.j = var11;

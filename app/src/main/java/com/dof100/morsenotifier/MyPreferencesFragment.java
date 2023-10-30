@@ -204,7 +204,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
 
    private void d(Preference var1) {
       MyLog.log("MyPreferencesFragment.check_pref_apps_filters");
-      int var2 = b.c(this.getActivity().getApplicationContext());
+      int var2 = MyAppNotificationFilters.c(this.getActivity().getApplicationContext());
       String var3;
       MyPreferenceText var4;
       if (var2 > 1) {
