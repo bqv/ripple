@@ -23,7 +23,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    private final Handler a = new Handler();
    private final Runnable b = new Runnable() {
       public void run() {
-         ActivityMain.this.g();
+         ActivityMain.this.checkPermissions();
          ActivityMain.this.h();
          ActivityMain.this.i();
       }
@@ -128,7 +128,7 @@ public class ActivityMain extends Activity implements OnClickListener {
       this.startActivity(new Intent(this, ActivityAdvanced.class));
    }
 
-   private void g() {
+   private void checkPermissions() {
       MyLog.log("ActivityMain.checkPermissions");
       if (ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG") == 0) {
          MyLog.log("ActivityMain.checkPermissions all permissions granted");

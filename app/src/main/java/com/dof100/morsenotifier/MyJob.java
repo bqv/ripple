@@ -110,9 +110,9 @@ class MyJob extends Job {
       int var3 = extras.getInt("EXTRASMIN", -1);
       int var4 = extras.getInt("EXTRASWHAT", -1);
       String var5 = extras.getString("EXTRASTEXT", "");
-      Context var6 = this.k();
+      Context var6 = this.getContext();
       SharedPreferences var7 = PreferenceManager.getDefaultSharedPreferences(var6);
-      Context var8 = this.k();
+      Context var8 = this.getContext();
       String var14;
       if (App.c) {
          var14 = "_morsedef";
@@ -121,7 +121,7 @@ class MyJob extends Job {
       }
 
       boolean var9 = Utils.prefGetBoolean(var8, var7, "pref_chime_enable", (String)null, var14, "_def");
-      var8 = this.k();
+      var8 = this.getContext();
       if (App.c) {
          var14 = "_morsedef";
       } else {
@@ -133,19 +133,19 @@ class MyJob extends Job {
       Intent var15;
       if (var4 == 1 && var9) {
          MyLog.log("MyJob.onRunJob chime...");
-         var15 = new Intent(this.k(), ServiceMain.class);
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_WHAT), this.k().getResources().getString(R.string.MSG_CHIME_FIRE));
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_EXTRAINT1), var2);
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_EXTRAINT2), var3);
-         this.k().startService(var15);
+         var15 = new Intent(this.getContext(), ServiceMain.class);
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_WHAT), this.getContext().getResources().getString(R.string.MSG_CHIME_FIRE));
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_EXTRAINT1), var2);
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_EXTRAINT2), var3);
+         this.getContext().startService(var15);
       } else if (var4 == 2 && var10) {
          MyLog.log("MyJob.onRunJob reminder...");
-         var15 = new Intent(this.k(), ServiceMain.class);
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_WHAT), this.k().getResources().getString(R.string.MSG_REMINDERS_FIRE));
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_EXTRATEXT1), var5);
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_EXTRAINT1), var2);
-         var15.putExtra(this.k().getResources().getString(R.string.MSG_EXTRAINT2), var3);
-         this.k().startService(var15);
+         var15 = new Intent(this.getContext(), ServiceMain.class);
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_WHAT), this.getContext().getResources().getString(R.string.MSG_REMINDERS_FIRE));
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_EXTRATEXT1), var5);
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_EXTRAINT1), var2);
+         var15.putExtra(this.getContext().getResources().getString(R.string.MSG_EXTRAINT2), var3);
+         this.getContext().startService(var15);
       }
 
       Result result;

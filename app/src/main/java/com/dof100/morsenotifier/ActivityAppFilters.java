@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ActivityAppFilters extends Activity implements OnClickListener, MyAppFiltersArrayAdapter.a {
+public class ActivityAppFilters extends Activity implements OnClickListener, MyAppFiltersArrayAdapter.Handler {
    private MyAppNotificationFilters a;
    private MyAppFiltersArrayAdapter b;
    private ListView c;
 
-   public void a(final MyAppNotificationFilter var1, int var2, View var3) {
+   public void handle(final MyAppNotificationFilter var1, int var2, View var3) {
       MyLog.log("ActivityAppFilters.onRowButtonClick");
       if (var3.getId() == R.id.b_delete) {
          MyLog.log("ActivityAppFilters.onRowButtonClick b_delete");
@@ -27,7 +27,7 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
          var5.setPositiveButton(R.string.action_yes, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1x, int var2) {
                ActivityAppFilters.this.b.remove(var1);
-               ActivityAppFilters.this.a.MyAppFilters(ActivityAppFilters.this);
+               //TODO: ActivityAppFilters.this.a.MyAppFilters(ActivityAppFilters.this);
                ActivityAppFilters.this.b.notifyDataSetChanged();
                ActivityAppFilters.this.c.invalidate();
                var1x.dismiss();
@@ -77,7 +77,7 @@ public class ActivityAppFilters extends Activity implements OnClickListener, MyA
             MyLog.log("ActivityAppFilters.onClick b_apps_select_add");
             this.b.a();
             var2 = new Intent(this, ActivityAppFilter.class);
-            var2.putExtra("FILTERINDEX", this.a.a.size() - 1);
+            var2.putExtra("FILTERINDEX", this.a.list.size() - 1);
             this.startActivityForResult(var2, 1);
          } else {
             if (var1.getId() == R.id.b_apps_select_checkrecent) {

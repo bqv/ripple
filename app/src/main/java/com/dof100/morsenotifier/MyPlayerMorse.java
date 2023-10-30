@@ -1092,10 +1092,10 @@ class MyPlayerMorse extends AsyncTask {
             var5.append("MyPlayerMorse.doInBackground registering broadcast receiver instance=");
             var5.append(this.b);
             MyLog.log(var5.toString());
-            android.support.v4.a.b var6 = android.support.v4.a.b.a(var2);
+            androidx.localbroadcastmanager.content.LocalBroadcastManager var6 = androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(var2);
             IntentFilter var30 = new IntentFilter();
             var30.addAction("LBR_ACTION_FINISH");
-            var6.a(this.z, var30);
+            var6.registerReceiver(this.z, var30);
             this.t = var28.a / this.q;
             var5 = new StringBuilder();
             var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=");
@@ -1661,7 +1661,7 @@ class MyPlayerMorse extends AsyncTask {
             var2.append("MyPlayerMorse.playDone unregistering broadcast receiver  instance=");
             var2.append(this.b);
             MyLog.log(var1, var2.toString());
-            android.support.v4.a.b.a(var1).a(this.z);
+            androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(var1).unregisterReceiver(this.z);
          } catch (Exception var13) {
             var13.printStackTrace();
          }

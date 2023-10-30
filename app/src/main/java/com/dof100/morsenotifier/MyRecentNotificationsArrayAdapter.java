@@ -45,8 +45,8 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       var12.i = -1;
       var12.j = "";
 
-      for(var1 = 0; var1 < this.b.a.size(); ++var1) {
-         String var13 = ((MyAppNotificationFilter)this.b.a.get(var1)).a(var12);
+      for(var1 = 0; var1 < this.b.list.size(); ++var1) {
+         String var13 = ((MyAppNotificationFilter)this.b.list.get(var1)).a(var12);
          if (!var13.isEmpty()) {
             var12.i = var1;
             var12.j = var13;

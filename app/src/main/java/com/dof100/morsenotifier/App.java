@@ -3,6 +3,7 @@ package com.dof100.morsenotifier;
 import android.app.Activity;
 import android.app.Application;
 import android.app.UiModeManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,58 +33,54 @@ public class App extends Application {
    private static boolean n;
    private static boolean o;
    private static boolean p;
-   private static l q;
+   private static MyPlayerTTS q;
 
-   public static l a(Context var0) {
+   public static MyPlayerTTS a(Context var0) {
       if (q == null) {
-         q = new l(var0, 0);
+         q = new MyPlayerTTS(var0, 0);
       }
 
       return q;
    }
 
-   public static void a(Context var0, int var1) {
-      Intent var2 = new Intent();
-      var2.setAction("LBR_ACTION_SETPOS");
-      var2.putExtra("LBR_ACTION_DATA_POS", var1);
-      android.support.v4.a.b.a(var0).a(var2);
+   public static void a(Context context, int var1) {
+      Intent intent = new Intent();
+      intent.setAction("LBR_ACTION_SETPOS");
+      intent.putExtra("LBR_ACTION_DATA_POS", var1);
+      LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
    }
 
    public static boolean a(Activity var0, String var1) {
       SharedPreferences var3 = PreferenceManager.getDefaultSharedPreferences(var0);
-      StringBuilder var2 = new StringBuilder();
-      var2.append("question_asked_");
-      var2.append(var1);
-      return var3.getBoolean(var2.toString(), false);
+      String var2 = "question_asked_" + var1;
+      return var3.getBoolean(var2, false);
    }
 
    public static void b(Activity var0, String var1) {
       Editor var2 = PreferenceManager.getDefaultSharedPreferences(var0).edit();
-      StringBuilder var3 = new StringBuilder();
-      var3.append("question_asked_");
-      var3.append(var1);
-      var2.putBoolean(var3.toString(), true).apply();
+      String var3 = "question_asked_" + var1;
+      var2.putBoolean(var3, true).apply();
    }
 
    public static void b(Context var0) {
       MyLog.log(var0, "App.broadcastFinish sending LBR_ACTION_FINISH");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_FINISH");
-      android.support.v4.a.b.a(var0).a(var1);
+      LocalBroadcastManager.getInstance(var0).sendBroadcast(var1);
    }
 
    public static void c(Context var0) {
       MyLog.log("App.broadcastSettingsChanged sending LBR_ACTION_SETTINGSCHANGED");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_SETTINGSCHANGED");
-      android.support.v4.a.b.a(var0.getApplicationContext()).a(var1);
+      LocalBroadcastManager.getInstance(var0.getApplicationContext()).sendBroadcast(var1);
    }
 
    public static void d(Context var0) {
       MyLog.log("App.broadcastSettingsChanged sending LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
-      android.support.v4.a.b.a(var0.getApplicationContext()).a(var1);
+      LocalBroadcastManager.getInstance(var0.getApplicationContext()).sendBroadcast(var1);
    }
 
    public void onCreate() {
@@ -103,7 +100,7 @@ public class App extends Application {
             boolean var10001;
             label65: {
                try {
-                  if (((UiModeManager)this.getSystemService("uimode")).getCurrentModeType() == 4) {
+                  if (((UiModeManager)this.getSystemService(Context.UI_MODE_SERVICE)).getCurrentModeType() == 4) {
                      break label65;
                   }
                } catch (Exception var6) {

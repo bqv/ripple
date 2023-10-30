@@ -287,13 +287,13 @@ public class ServiceNotifications extends NotificationListenerService {
       this.a();
       IntentFilter var1 = new IntentFilter();
       var1.addAction("LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
-      android.support.v4.a.b.a((Context)this).a(this.h, var1);
+      androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance((Context)this).registerReceiver(this.h, var1);
    }
 
    public void onDestroy() {
       MyLog.log(this, (String)"ServiceNotifications.OnDestroy");
       MyLog.log("ServiceMain.OnDestroy unregistering local BroadcastReceiver");
-      android.support.v4.a.b.a((Context)this).a(this.h);
+      androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance((Context)this).unregisterReceiver(this.h);
       super.onDestroy();
    }
 
@@ -401,9 +401,9 @@ public class ServiceNotifications extends NotificationListenerService {
          } else {
             var13.h = -2;
 
-            for(int var9 = 0; var9 < this.g.a.size(); ++var9) {
+            for(int var9 = 0; var9 < this.g.list.size(); ++var9) {
                MyLog.log("ServiceNotifications.onNotificationPosted for 1");
-               String var11 = ((MyAppNotificationFilter)this.g.a.get(var9)).a(var13);
+               String var11 = ((MyAppNotificationFilter)this.g.list.get(var9)).a(var13);
                if (!var11.isEmpty()) {
                   var13.i = var9;
                   var13.j = var11;

@@ -95,19 +95,17 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    }
 
    private void b() {
-      StringBuilder var1 = new StringBuilder();
-      var1.append("ActivityDisplayMessage.action_hide  instance=");
-      var1.append(this.a);
-      MyLog.log(var1.toString());
+      String var1 = "ActivityDisplayMessage.action_hide  instance=" +
+              this.a;
+      MyLog.log(var1);
       this.l.setVisibility(4);
       this.finish();
    }
 
    private void c() {
-      StringBuilder var1 = new StringBuilder();
-      var1.append("ActivityDisplayMessage.action_configure  instance=");
-      var1.append(this.a);
-      MyLog.log(var1.toString());
+      String var1 = "ActivityDisplayMessage.action_configure  instance=" +
+              this.a;
+      MyLog.log(var1);
       App.b(this.getApplicationContext());
       this.startActivity(new Intent(this, ActivityMain.class));
       this.l.setVisibility(4);
@@ -276,10 +274,9 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                      var27.addFlags(262192);
                      LayoutParams var3 = var27.getAttributes();
                      var3.width = var2.x;
-                     StringBuilder var23 = new StringBuilder();
-                     var23.append("ActivityDisplayMessage.onCreate (scroll) params.width =");
-                     var23.append(var3.width);
-                     MyLog.log(var23.toString());
+                     String var23 = "ActivityDisplayMessage.onCreate (scroll) params.width =" +
+                             var3.width;
+                     MyLog.log(var23);
                      var27.setAttributes(var3);
                      break label151;
                   } catch (Exception var10) {
@@ -377,10 +374,9 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    }
 
    public void onDestroy() {
-      StringBuilder var1 = new StringBuilder();
-      var1.append("ActivityDisplayMessage.onDestroy  instance=");
-      var1.append(this.a);
-      MyLog.log(var1.toString());
+      String var1 = "ActivityDisplayMessage.onDestroy  instance=" +
+              this.a;
+      MyLog.log(var1);
       super.onDestroy();
    }
 
@@ -422,11 +418,8 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    }
 
    public void onPause() {
-      StringBuilder var1 = new StringBuilder();
-      var1.append("ActivityDisplayMessage.onPause  instance=");
-      var1.append(this.a);
-      MyLog.log(var1.toString());
-      android.support.v4.a.b.a(this.getApplicationContext()).a(this.r);
+      MyLog.log("ActivityDisplayMessage.onPause  instance=" + this.a);
+      androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this.getApplicationContext()).unregisterReceiver(this.r);
       this.s.removeCallbacks(this.t);
       super.onPause();
    }
@@ -438,11 +431,11 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       MyLog.log(var1.toString());
       super.onResume();
       this.t.run();
-      android.support.v4.a.b var2 = android.support.v4.a.b.a(this.getApplicationContext());
+      androidx.localbroadcastmanager.content.LocalBroadcastManager var2 = androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this.getApplicationContext());
       IntentFilter var3 = new IntentFilter();
       var3.addAction("LBR_ACTION_SETPOS");
       var3.addAction("LBR_ACTION_FINISH");
-      var2.a(this.r, var3);
+      var2.registerReceiver(this.r, var3);
       this.o = System.currentTimeMillis();
       this.s.postDelayed(this.t, 1000L);
       var1 = new StringBuilder();
@@ -452,10 +445,9 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    }
 
    protected void onStop() {
-      StringBuilder var1 = new StringBuilder();
-      var1.append("ActivityDisplayMessage.onStop   instance=");
-      var1.append(this.a);
-      MyLog.log(var1.toString());
+      String var1 = "ActivityDisplayMessage.onStop   instance=" +
+              this.a;
+      MyLog.log(var1);
       super.onStop();
    }
 }

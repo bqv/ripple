@@ -1,5 +1,6 @@
 package com.dof100.morsenotifier;
 
+import androidx.core.app.NotificationManagerCompat;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -17,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,7 +46,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
    };
 
    private void a() {
-      if (android.support.v4.app.a.a(this, "android.permission.READ_PHONE_STATE") == 0) {
+      if (ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE") == 0) {
          this.b.setText(R.string.string_advanced_permissions_readsms_granted);
          this.b.setTextColor(-16711936);
       } else {
@@ -54,7 +58,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          this.c.setVisibility(8);
       } else {
          this.c.setVisibility(0);
-         if (android.support.v4.app.a.a(this, "android.permission.READ_CALL_LOG") == 0) {
+         if (ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG") == 0) {
             this.c.setText(R.string.string_advanced_permissions_readcontacts_granted);
             this.c.setTextColor(-16711936);
          } else {
@@ -63,7 +67,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          }
       }
 
-      if (android.support.v4.app.a.a(this, "android.permission.READ_SMS") == 0) {
+      if (ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS") == 0) {
          this.d.setText(R.string.string_advanced_permissions_text);
          this.d.setTextColor(-16711936);
       } else {
@@ -71,7 +75,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          this.d.setTextColor(-65536);
       }
 
-      if (android.support.v4.app.a.a(this, "android.permission.READ_CONTACTS") == 0) {
+      if (ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS") == 0) {
          this.e.setText(R.string.string_advanced_permissions_readphonestate_granted);
          this.e.setTextColor(-16711936);
       } else {
@@ -438,16 +442,16 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       }
    }
 
-   private static boolean d(Context var0) {
-      return android.support.v4.app.f.a(var0).contains(var0.getPackageName());
+   private static boolean d(Context context) {
+      return NotificationManagerCompat.getEnabledListenerPackages(context).contains(context.getPackageName());
    }
 
    private static void e(Context var0) {
       try {
-         Intent var1 = new Intent();
-         var1.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-         var1.setData(Uri.fromParts("package", var0.getPackageName(), (String)null));
-         var0.startActivity(var1);
+         Intent intent = new Intent();
+         intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+         intent.setData(Uri.fromParts("package", var0.getPackageName(), (String)null));
+         var0.startActivity(intent);
       } catch (Exception var2) {
       }
 

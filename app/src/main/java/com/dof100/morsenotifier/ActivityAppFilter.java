@@ -84,8 +84,8 @@ public class ActivityAppFilter extends Activity {
       StringBuilder var5;
       if (var1 != null) {
          var2 = var1.getInt("FILTERINDEX");
-         if (var2 >= 0 && var2 < this.b.a.size()) {
-            this.c = (MyAppNotificationFilter)this.b.a.get(var2);
+         if (var2 >= 0 && var2 < this.b.list.size()) {
+            this.c = (MyAppNotificationFilter)this.b.list.get(var2);
             var5 = new StringBuilder();
             var5.append("ActivityAppFilter.onCreate loaded filter at position = ");
             var5.append(var2);
@@ -103,8 +103,8 @@ public class ActivityAppFilter extends Activity {
 
       if (this.c == null) {
          this.c = new MyAppNotificationFilter();
-         this.b.a.add(this.c);
-         var2 = this.b.a.size() - 1;
+         this.b.list.add(this.c);
+         var2 = this.b.list.size() - 1;
          var5 = new StringBuilder();
          var5.append("ActivityAppFilter.onCreate created new filter at position = ");
          var5.append(var2);
@@ -113,7 +113,7 @@ public class ActivityAppFilter extends Activity {
 
       this.setTitle(String.format(Locale.US, "%s %d", this.getResources().getString(R.string.activity_appfilter_filter), var2 + 1));
       this.d = (Spinner)this.findViewById(R.id.sp_AppName);
-      ArrayAdapter var6 = new ArrayAdapter(this, 17367048, (String[])this.a.a().toArray(new String[this.b.a.size()]));
+      ArrayAdapter var6 = new ArrayAdapter(this, 17367048, (String[])this.a.a().toArray(new String[this.b.list.size()]));
       var6.setDropDownViewResource(17367049);
       this.d.setAdapter(var6);
       this.e = (EditText)this.findViewById(R.id.et_criteria_Contains);
@@ -136,7 +136,7 @@ public class ActivityAppFilter extends Activity {
    protected void onPause() {
       MyLog.log("ActivityAppFilter.onPause");
       this.b();
-      this.b.MyAppFilters(this);
+      //TODO: this.b.MyAppFilters(this);
       super.onPause();
    }
 

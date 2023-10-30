@@ -21,7 +21,7 @@ class MyAppNotificationFilter {
    String j = "";
 
    public MyAppNotificationFilter() {
-      this.MyAppNotificationFilter();
+      //TODO: this.MyAppNotificationFilter();
    }
 
    private void a() {
@@ -37,30 +37,30 @@ class MyAppNotificationFilter {
       this.j = "";
    }
 
-   private String b(Context var1) {
-      byte var8;
+   private String b(Context context) {
+      byte ret;
       label47: {
          String var2 = this.a;
          int var3 = var2.hashCode();
          if (var3 != 1354875300) {
             if (var3 != 1655429668) {
                if (var3 == 1804173745 && var2.equals("All apps")) {
-                  var8 = 0;
+                  ret = 0;
                   break label47;
                }
             } else if (var2.equals("All non-system apps")) {
-               var8 = 2;
+               ret = 2;
                break label47;
             }
          } else if (var2.equals("All system apps")) {
-            var8 = 1;
+            ret = 1;
             break label47;
          }
 
-         var8 = -1;
+         ret = -1;
       }
 
-      switch(var8) {
+      switch(ret) {
       case 0:
          return "All apps";
       case 1:
@@ -69,28 +69,28 @@ class MyAppNotificationFilter {
          return "All non-system apps";
       default:
          MyLog.log(String.format("MyAppNotificationFilter.getAppName mPackage=%s", this.a));
-         PackageManager var6 = var1.getPackageManager();
-         if (var6 == null) {
+         PackageManager packageManager = context.getPackageManager();
+         if (packageManager == null) {
             MyLog.log("MyAppNotificationFilter.getAppName ERROR PackageManager=null");
             return this.a;
          } else {
-            ApplicationInfo var5;
+            ApplicationInfo applicationInfo;
             try {
-               var5 = var6.getApplicationInfo(this.a, 0);
+               applicationInfo = packageManager.getApplicationInfo(this.a, 0);
             } catch (NameNotFoundException var4) {
                var4.printStackTrace();
-               var5 = null;
+               applicationInfo = null;
             }
 
-            if (var5 == null) {
+            if (applicationInfo == null) {
                return "-";
             } else {
-               String var7 = (String)var6.getApplicationLabel(var5);
-               if (var7 == null) {
+               String appname = (String)packageManager.getApplicationLabel(applicationInfo);
+               if (appname == null) {
                   return this.a;
                } else {
-                  MyLog.log(String.format("MyAppNotificationFilter.getAppName appname=%s", var7));
-                  return var7;
+                  MyLog.log(String.format("MyAppNotificationFilter.getAppName appname=%s", appname));
+                  return appname;
                }
             }
          }
@@ -475,7 +475,7 @@ class MyAppNotificationFilter {
    }
 
    public void a(SharedPreferences var1, int var2) {
-      this.MyAppNotificationFilter();
+      //TODO: this.MyAppNotificationFilter();
       StringBuilder var3 = new StringBuilder();
       var3.append("app_filter_");
       var3.append(var2);

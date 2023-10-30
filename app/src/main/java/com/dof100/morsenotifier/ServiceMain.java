@@ -34,7 +34,7 @@ public class ServiceMain extends IntentService {
    private String O = "";
    private String P = "";
    private int Q = 1;
-   private boolean R = true;
+   private boolean R2 = true;
    private int S = 3;
    private String T = "";
    private int U = 0;
@@ -242,10 +242,10 @@ public class ServiceMain extends IntentService {
    }
 
    private void a(String var1, int var2, int var3, int var4, int var5, int var6) {
-      l var7 = App.a(this.getApplicationContext());
-      var7.a(this.getApplicationContext(), this.h, var3, this.m, var4, var5, var6, var2, var1);
-      var7.b(this.getApplicationContext());
-      var7.a(this.getApplicationContext());
+      MyPlayerTTS var7 = App.a(this.getApplicationContext());
+      var7.mo495a(this.getApplicationContext(), this.h, var3, this.m, var4, var5, var6, var2, var1);
+      var7.mo496b(this.getApplicationContext());
+      var7.mo494a(this.getApplicationContext());
    }
 
    private void a(String var1, int var2, int var3, int var4, int var5, int var6, boolean var7, boolean var8, boolean var9, boolean var10) {
@@ -445,7 +445,7 @@ public class ServiceMain extends IntentService {
    }
 
    private void a(String var1, String var2, boolean var3) {
-      if (this.R) {
+      if (this.R2) {
          MyLog.log(this, (String)"ServiceMain.handleSMS");
          this.b();
          if (var1.length() > 0) {
@@ -1206,7 +1206,7 @@ public class ServiceMain extends IntentService {
          var2 = "_voicedef";
       }
 
-      this.R = Utils.prefGetBoolean(this, var1, "pref_sms_enable", (String)null, var2, "_def");
+      this.R2 = Utils.prefGetBoolean(this, var1, "pref_sms_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
@@ -1458,10 +1458,10 @@ public class ServiceMain extends IntentService {
       MyLog.log("-----------------------------------------------------------------------------------------");
       MyLog.log("ServiceMain.onHandleIntent");
       MyLog.log("ServiceMain.onCreate registering broadcast receiver");
-      android.support.v4.a.b var2 = android.support.v4.a.b.a((Context)this);
+      androidx.localbroadcastmanager.content.LocalBroadcastManager var2 = androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance((Context)this);
       IntentFilter var3 = new IntentFilter();
       var3.addAction("LBR_ACTION_SETTINGSCHANGED");
-      var2.a(this.aG, var3);
+      var2.registerReceiver(this.aG, var3);
       this.c();
       String var4;
       if (var1 != null) {
@@ -1535,7 +1535,7 @@ public class ServiceMain extends IntentService {
       }
 
       MyLog.log("ServiceMain.onHandleIntent unregistering local BroadcastReceiver");
-      android.support.v4.a.b.a((Context)this).a(this.aG);
+      androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance((Context)this).unregisterReceiver(this.aG);
       MyLog.log(this, (String)"ServiceMain.onHandleIntent OUT");
       MyLog.log("-----------------------------------------------------------------------------------------");
    }

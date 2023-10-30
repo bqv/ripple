@@ -21,12 +21,12 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
          if (var1 == null) {
             MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR pref_voice_locale=null");
          } else {
-            C0149l var2 = App.a(this.getActivity().getApplicationContext());
+            MyPlayerTTS var2 = App.a(this.getActivity().getApplicationContext());
             if (var2 == null) {
                MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR mPlayerTTS=null");
-            } else if (var2.b == null) {
+            } else if (var2.mTTS == null) {
                MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR App.mPlayerTTS.mTTS=null");
-            } else if (var2.a == -1) {
+            } else if (var2.mTTSStatus == -1) {
                MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR mTTSStatus=ERROR");
             } else {
                Locale[] var3 = Locale.getAvailableLocales();
@@ -39,7 +39,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
                   if (var7.toString().equals("en_US_POSIX")) {
                      var8 = "MyPreferencesFragment.init_pref_voice_locale Locale en_US_POSIX not supported";
                   } else {
-                     int var9 = var2.b.isLanguageAvailable(var7);
+                     int var9 = var2.mTTS.isLanguageAvailable(var7);
                      if (var9 < 1) {
                         continue;
                      }

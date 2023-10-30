@@ -56,6 +56,6 @@
         <enum name="start" value="8388611" />
         <enum name="top" value="48" />
     </attr>
-    <attr name="layout_keyline" format="integer" />
-    <attr name="statusBarBackground" format="reference|color" /-->
+    <attr name="layout_keyline" format="integer" /-->
+    <attr name="statusBarBackground" format="reference|color" />
 </resources>
