@@ -7,14 +7,14 @@ import android.app.PendingIntent.CanceledException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.evernote.android.job.m;
-import com.evernote.android.job.a.d;
+import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.JobCat;
 import com.evernote.android.job.v14.PlatformAlarmServiceExact;
 import java.util.concurrent.TimeUnit;
 
 @TargetApi(21)
 final class b {
-   private static final d a = new d("TransientBundleCompat");
+   private static final JobCat a = new JobCat("TransientBundleCompat");
 
    public static void a(Context var0, int var1, PendingIntent var2) {
       Exception var10000;
@@ -50,7 +50,7 @@ final class b {
       a.a((Throwable)var6);
    }
 
-   public static void a(Context var0, m var1) {
+   public static void a(Context var0, JobRequest var1) {
       Intent var2 = PlatformAlarmServiceExact.a(var0, var1.c(), var1.C());
       PendingIntent var7 = PendingIntent.getService(var0, var1.c(), var2, 134217728);
       long var3 = System.currentTimeMillis();
@@ -62,7 +62,7 @@ final class b {
       return PendingIntent.getService(var0, var1, PlatformAlarmServiceExact.a(var0, var1, (Bundle)null), 536870912) != null;
    }
 
-   public static boolean b(Context var0, m var1) {
+   public static boolean b(Context var0, JobRequest var1) {
       Intent var2 = PlatformAlarmServiceExact.a(var0, var1.c(), (Bundle)null);
       PendingIntent var4 = PendingIntent.getService(var0, var1.c(), var2, 536870912);
       if (var4 == null) {

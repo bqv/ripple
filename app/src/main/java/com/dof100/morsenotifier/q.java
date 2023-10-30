@@ -11,7 +11,7 @@ class q {
    public ArrayList a;
 
    public q(Context var1) {
-      i.a("MyReminders.constructor");
+      MyLog.log("MyReminders.constructor");
       this.a = new ArrayList();
       this.a(var1);
    }
@@ -46,7 +46,7 @@ class q {
       SharedPreferences var5 = PreferenceManager.getDefaultSharedPreferences(var1);
       int var2 = 0;
       int var3 = var5.getInt("reminders_n", 0);
-      i.a(String.format(Locale.US, "MyReminders.load - loading %d entries", var3));
+      MyLog.log(String.format(Locale.US, "MyReminders.load - loading %d entries", var3));
       this.a.clear();
 
       while(var2 < var3) {
@@ -63,7 +63,7 @@ class q {
       int var3 = this.a.size();
       Locale var5 = Locale.US;
       int var4 = 0;
-      i.a(String.format(var5, "MyReminders.save - saving %d entries", var3));
+      MyLog.log(String.format(var5, "MyReminders.save - saving %d entries", var3));
       var2.putInt("reminders_n", var3);
 
       while(var4 < var3) {

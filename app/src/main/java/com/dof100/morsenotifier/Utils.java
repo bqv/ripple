@@ -11,7 +11,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import java.util.Locale;
 
-class v {
+class Utils {
    public static int a(int var0, int var1, int var2, int var3) {
       int var4 = var2 * 60;
       var2 = Math.abs(var0 * 60 + var1 - var4 - var3);
@@ -40,7 +40,7 @@ class v {
             try {
                var8 = Integer.parseInt(var0);
             } catch (NumberFormatException var9) {
-               i.a(String.format(Locale.US, "getTagValue ERROR could not convers %s to int", var0));
+               MyLog.log(String.format(Locale.US, "getTagValue ERROR could not convers %s to int", var0));
                return var2;
             }
 
@@ -72,7 +72,7 @@ class v {
          } else if (var3 != null && !var3.isEmpty()) {
             return var1.getAll().get(var3) instanceof Boolean ? Boolean.toString(var1.getBoolean(var3, Boolean.parseBoolean("0"))) : var1.getString(var3, "0");
          } else {
-            i.a(String.format(Locale.US, "prefGetDefaultValue key %s ERROR: default value not found in resources...", var2));
+            MyLog.log(String.format(Locale.US, "prefGetDefaultValue key %s ERROR: default value not found in resources...", var2));
             return "0";
          }
       }
@@ -200,7 +200,7 @@ class v {
       }
    }
 
-   public static String a(String var0, String var1, int var2) {
+   public static String XMLDo(String var0, String var1, int var2) {
       StringBuilder var3 = new StringBuilder();
       var3.append("<");
       var3.append(var1);
@@ -237,19 +237,19 @@ class v {
             var1 = var6.toString();
          }
 
-         i.a(String.format(Locale.US, "Utils.XMLDo Input = %s, p1=%d, p2=%d , res=%s", var0, var4, var5, var1));
+         MyLog.log(String.format(Locale.US, "Utils.XMLDo Input = %s, p1=%d, p2=%d , res=%s", var0, var4, var5, var1));
          return var1;
       }
    }
 
    public static boolean a(String var0, String var1, boolean var2) {
-      return a(var0, var1, var2, 0, 1) > 0;
+      return a(var0, var1, var2 ? 1 : 0, 0, 1) > 0;
    }
 
-   static String b(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
+   static String prefGetString(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
       String var7;
       if (var1.getString(var2, "IMPOSSIBLE!STRING").equals("IMPOSSIBLE!STRING")) {
-         i.a(String.format(Locale.US, "prefGetString       key %s not initialized. Initializing now...", var2));
+         MyLog.log(String.format(Locale.US, "prefGetString       key %s not initialized. Initializing now...", var2));
          Editor var6 = var1.edit();
          var7 = a(var0, var1, var2, var3, var4, var5);
          var6.putString(var2, var7);
@@ -261,10 +261,10 @@ class v {
       return var1.getString(var2, var7);
    }
 
-   static int c(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
+   static int prefGetInt(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
       String var7;
       if (var1.getString(var2, "IMPOSSIBLE!STRING").equals("IMPOSSIBLE!STRING")) {
-         i.a(String.format(Locale.US, "prefGetInt          key %s not initialized. Initializing now...", var2));
+         MyLog.log(String.format(Locale.US, "prefGetInt          key %s not initialized. Initializing now...", var2));
          Editor var6 = var1.edit();
          var7 = a(var0, var1, var2, var3, var4, var5);
          var6.putString(var2, var7);
@@ -276,10 +276,10 @@ class v {
       return Integer.parseInt(var1.getString(var2, var7));
    }
 
-   static boolean d(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
+   static boolean prefGetBoolean(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
       boolean var7;
       if (!var1.getBoolean(var2, false) && var1.getBoolean(var2, true)) {
-         i.a(String.format(Locale.US, "prefGetBoolean      key %s not initialized. Initializing now...", var2));
+         MyLog.log(String.format(Locale.US, "prefGetBoolean      key %s not initialized. Initializing now...", var2));
          Editor var6 = var1.edit();
          var7 = Boolean.parseBoolean(a(var0, var1, var2, var3, var4, var5));
          var6.putBoolean(var2, var7);
@@ -291,10 +291,10 @@ class v {
       return var1.getBoolean(var2, var7);
    }
 
-   static int e(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
+   static int prefGetColor(Context var0, SharedPreferences var1, String var2, String var3, String var4, String var5) {
       String var7;
       if (var1.getString(var2, "IMPOSSIBLE!STRING").equals("IMPOSSIBLE!STRING")) {
-         i.a(String.format(Locale.US, "prefGetColor        key %s not initialized. Initializing now...", var2));
+         MyLog.log(String.format(Locale.US, "prefGetColor        key %s not initialized. Initializing now...", var2));
          Editor var6 = var1.edit();
          var7 = a(var0, var1, var2, var3, var4, var5);
          var6.putString(var2, var7);

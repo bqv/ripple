@@ -19,9 +19,9 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
    private ListView c;
 
    public void a(final p var1, int var2, View var3) {
-      i.a("ActivityReminders.onRowButtonClick");
+      MyLog.log("ActivityReminders.onRowButtonClick");
       if (var3.getId() == 2131165195) {
-         i.a("ActivityReminders.onRowButtonClick b_delete");
+         MyLog.log("ActivityReminders.onRowButtonClick b_delete");
          Builder var5 = new Builder(this);
          var5.setTitle(2131493321);
          var5.setMessage(2131493311);
@@ -43,7 +43,7 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
          var5.create().show();
       } else {
          if (var3.getId() == 2131165196) {
-            i.a("ActivityReminders.onRowButtonClick b_edit");
+            MyLog.log("ActivityReminders.onRowButtonClick b_edit");
             Intent var4 = new Intent(this, ActivityReminder.class);
             var4.putExtra("OBJECTINDEX", var2);
             this.startActivityForResult(var4, 1);
@@ -53,17 +53,17 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
    }
 
    protected void onActivityResult(int var1, int var2, Intent var3) {
-      i.a("ActivityReminders.onActivityResult");
+      MyLog.log("ActivityReminders.onActivityResult");
       if (var1 == 1) {
          if (var2 == -1) {
-            i.a("ActivityReminders.onActivityResult OK");
+            MyLog.log("ActivityReminders.onActivityResult OK");
          }
 
          if (var2 == 0) {
-            i.a("ActivityReminders.onActivityResult CANCEL");
+            MyLog.log("ActivityReminders.onActivityResult CANCEL");
          }
 
-         i.a("ActivityReminders.onActivityResult loadFilters");
+         MyLog.log("ActivityReminders.onActivityResult loadFilters");
          this.a.a(this);
          this.b.notifyDataSetChanged();
          this.c.invalidate();
@@ -72,10 +72,10 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
    }
 
    public void onClick(View var1) {
-      i.a("ActivityReminders.onClick");
+      MyLog.log("ActivityReminders.onClick");
       if (var1 != null) {
          if (var1.getId() == 2131165199) {
-            i.a("ActivityReminders.onClick b_Add");
+            MyLog.log("ActivityReminders.onClick b_Add");
             this.startActivityForResult(new Intent(this, ActivityReminder.class), 1);
          }
 
@@ -84,9 +84,9 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      i.a("ActivityReminders.onCreate");
+      MyLog.log("ActivityReminders.onCreate");
       this.a = new q(this);
-      i.a("ActivityReminders.onCreate load");
+      MyLog.log("ActivityReminders.onCreate load");
       this.a.a(this);
       this.b = new r(this, this.a, this);
       this.setContentView(2131296265);
@@ -97,7 +97,7 @@ public class ActivityReminders extends Activity implements OnClickListener, r.a 
             StringBuilder var6 = new StringBuilder();
             var6.append("ActivityReminders.onItemClick ");
             var6.append(var2);
-            i.a(var6.toString());
+            MyLog.log(var6.toString());
          }
       });
       ((Button)this.findViewById(2131165199)).setOnClickListener(this);

@@ -18,7 +18,7 @@ class c extends ArrayAdapter implements OnClickListener {
 
    public c(Context var1, b var2, c.a var3) {
       super(var1, 2131296259, var2.a);
-      i.a("MyAppFiltersArrayAdapter.constructor");
+      MyLog.log("MyAppFiltersArrayAdapter.constructor");
       this.a = var1;
       this.b = var2;
       this.d = var3;
@@ -37,7 +37,7 @@ class c extends ArrayAdapter implements OnClickListener {
       var4.append(var1);
       var4.append("  v=");
       var4.append(var2);
-      i.a(var4.toString());
+      MyLog.log(var4.toString());
       com.dof100.morsenotifier.a var5 = (com.dof100.morsenotifier.a)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
@@ -59,20 +59,20 @@ class c extends ArrayAdapter implements OnClickListener {
 
    public void onClick(View var1) {
       if (var1 != null) {
-         i.a("MyAppFiltersArrayAdapter.onClick");
+         MyLog.log("MyAppFiltersArrayAdapter.onClick");
          com.dof100.morsenotifier.a var2 = (com.dof100.morsenotifier.a)var1.getTag();
          if (var2 == null) {
-            i.a(this.a, "MyAppFiltersArrayAdapter.onClick ERROR f=null");
+            MyLog.log(this.a, "MyAppFiltersArrayAdapter.onClick ERROR f=null");
          } else {
             StringBuilder var3 = new StringBuilder();
             var3.append("MyAppFiltersArrayAdapter.onClick f.package=");
             var3.append(var2.a);
-            i.a(var3.toString());
+            MyLog.log(var3.toString());
             int var4 = this.b.a.indexOf(var2);
             var3 = new StringBuilder();
             var3.append("MyAppFiltersArrayAdapter.onClick index=");
             var3.append(var4);
-            i.a(var3.toString());
+            MyLog.log(var3.toString());
             String var5;
             if (var1.getId() == 2131165195) {
                var5 = "MyAppFiltersArrayAdapter.onClick b_delete";
@@ -84,7 +84,7 @@ class c extends ArrayAdapter implements OnClickListener {
                var5 = "MyAppFiltersArrayAdapter.onClick b_edit";
             }
 
-            i.a(var5);
+            MyLog.log(var5);
             this.d.a(var2, var4, var1);
          }
       }

@@ -30,9 +30,9 @@ public class ActivityMain extends Activity implements OnClickListener {
    };
 
    private void a() {
-      i.a("ActivityMain.onActionSettings");
+      MyLog.log("ActivityMain.onActionSettings");
       Intent var1 = new Intent(this, MyPreferencesActivity.class);
-      i.a("ActivityMain.onActionSettings before startActivityForResult");
+      MyLog.log("ActivityMain.onActionSettings before startActivityForResult");
       this.startActivityForResult(var1, 1);
    }
 
@@ -50,7 +50,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void b() {
-      i.a("onActionAbout");
+      MyLog.log("onActionAbout");
       Intent var1 = new Intent(this, ActivityHTML.class);
       var1.putExtra("TITLE", "About");
       var1.putExtra("FILENAME", "about.html");
@@ -60,7 +60,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void c() {
-      i.a("onActionRate");
+      MyLog.log("onActionRate");
       StringBuilder var1 = new StringBuilder();
       var1.append("market://details?id=");
       var1.append(this.getPackageName());
@@ -75,7 +75,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void d() {
-      i.a("onActionTest");
+      MyLog.log("onActionTest");
       Intent var1 = new Intent(this, ServiceMain.class);
       var1.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492882));
       var1.putExtra(this.getResources().getString(2131492875), "0");
@@ -84,7 +84,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void e() {
-      i.a("onActionTips");
+      MyLog.log("onActionTips");
       String var1;
       if (App.c) {
          var1 = "http://www.100dof.com/software/morsenotifier/manual_morse_notifier.pdf";
@@ -113,7 +113,7 @@ public class ActivityMain extends Activity implements OnClickListener {
                try {
                   ActivityMain.this.startActivity(var4);
                } catch (Exception var3) {
-                  i.b(ActivityMain.this, "Could not open Google Play");
+                  MyLog.toast(ActivityMain.this, "Could not open Google Play");
                }
             }
          }).setNegativeButton(17039369, new android.content.DialogInterface.OnClickListener() {
@@ -124,17 +124,17 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void f() {
-      i.a("onActionServiceCommand");
+      MyLog.log("onActionServiceCommand");
       this.startActivity(new Intent(this, ActivityAdvanced.class));
    }
 
    private void g() {
-      i.a("ActivityMain.checkPermissions");
+      MyLog.log("ActivityMain.checkPermissions");
       if (ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS") == 0 && ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG") == 0) {
-         i.a("ActivityMain.checkPermissions all permissions granted");
+         MyLog.log("ActivityMain.checkPermissions all permissions granted");
       } else if (App.a(this, "PERMISSIONS")) {
-         i.a("ActivityMain.checkPermissions question_AlreadyAsked");
-         i.b(this, "Permissions needed!");
+         MyLog.log("ActivityMain.checkPermissions question_AlreadyAsked");
+         MyLog.toast(this, "Permissions needed!");
       } else {
          App.b(this, "PERMISSIONS");
          ActivityCompat.requestPermissions(this, new String[]{"android.permission.READ_PHONE_STATE", "android.permission.READ_SMS", "android.permission.READ_CONTACTS", "android.permission.READ_CALL_LOG"}, 100);
@@ -142,21 +142,21 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    private void h() {
-      i.a("ActivityMain.checkNotificationAccess");
+      MyLog.log("ActivityMain.checkNotificationAccess");
       if (!Boolean.valueOf(this.getResources().getBoolean(2130903041))) {
-         i.a("ActivityMain.checkNotificationAccess api18=false");
+         MyLog.log("ActivityMain.checkNotificationAccess api18=false");
       } else if (App.a) {
-         i.a("ActivityMain.checkNotificationAccess Free version");
+         MyLog.log("ActivityMain.checkNotificationAccess Free version");
       } else if (ActivityAdvanced.a((Activity)this)) {
-         i.a("ActivityMain.checkNotificationAccess collector is running");
+         MyLog.log("ActivityMain.checkNotificationAccess collector is running");
       } else if (App.a(this, "NOTIFICATIONACCESS")) {
-         i.a("ActivityMain.checkNotificationAccess question_AlreadyAsked");
-         i.b(this, "No notification access!");
+         MyLog.log("ActivityMain.checkNotificationAccess question_AlreadyAsked");
+         MyLog.toast(this, "No notification access!");
       } else {
          App.b(this, "NOTIFICATIONACCESS");
          (new Builder(this)).setTitle(2131493257).setMessage(this.getResources().getText(2131493300).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e)).setPositiveButton(17039379, new android.content.DialogInterface.OnClickListener() {
             public void onClick(DialogInterface var1, int var2) {
-               i.a("ActivityMain.checkNotificationAccess: collector is not running. Opening settings...");
+               MyLog.log("ActivityMain.checkNotificationAccess: collector is not running. Opening settings...");
                var2 = VERSION.SDK_INT;
                ActivityMain.this.startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
             }
@@ -219,11 +219,11 @@ public class ActivityMain extends Activity implements OnClickListener {
          }
       }
 
-      i.a("ActivityMain.checkAutostart question_AlreadyAsked");
+      MyLog.log("ActivityMain.checkAutostart question_AlreadyAsked");
    }
 
    protected void onActivityResult(int var1, int var2, Intent var3) {
-      i.a("ActivityMain.onActivityResult");
+      MyLog.log("ActivityMain.onActivityResult");
       if (var1 == 1) {
          App.c(this.getApplicationContext());
       }
@@ -268,9 +268,9 @@ public class ActivityMain extends Activity implements OnClickListener {
       Intent var4 = new Intent(this, ServiceMain.class);
       var4.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492878));
       this.startService(var4);
-      i.a("ActivityMain.oncreate");
+      MyLog.log("ActivityMain.oncreate");
       if ("MorseNotifierPro".equals("pro")) {
-         i.a("ActivityMain.oncreate ispro");
+         MyLog.log("ActivityMain.oncreate ispro");
          boolean var2 = false;
          boolean var3 = var2;
          if (App.c) {
@@ -296,7 +296,7 @@ public class ActivityMain extends Activity implements OnClickListener {
             return;
          }
       } else {
-         i.a("ActivityMain.oncreate isfree");
+         MyLog.log("ActivityMain.oncreate isfree");
       }
 
    }
@@ -321,7 +321,7 @@ public class ActivityMain extends Activity implements OnClickListener {
    }
 
    public void onRequestPermissionsResult(int var1, String[] var2, int[] var3) {
-      i.a("ActivityMain.onRequestPermissionsResult");
+      MyLog.log("ActivityMain.onRequestPermissionsResult");
    }
 
    protected void onResume() {

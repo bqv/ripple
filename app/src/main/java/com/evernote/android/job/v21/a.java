@@ -7,18 +7,18 @@ import android.app.job.JobScheduler;
 import android.app.job.JobInfo.Builder;
 import android.content.ComponentName;
 import android.content.Context;
-import com.evernote.android.job.k;
-import com.evernote.android.job.l;
-import com.evernote.android.job.m;
-import com.evernote.android.job.a.d;
-import com.evernote.android.job.a.g;
+import com.evernote.android.job.JobProxy;
+import com.evernote.android.job.JobProxyIllegalStateException;
+import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.JobCat;
+import com.evernote.android.job.util.g;
 import java.util.Iterator;
 import java.util.List;
 
 @TargetApi(21)
-public class a implements k {
+public class a implements JobProxy {
    protected final Context a;
-   protected final d b;
+   protected final JobCat b;
 
    public a(Context var1) {
       this(var1, "JobProxy21");
@@ -26,7 +26,7 @@ public class a implements k {
 
    protected a(Context var1, String var2) {
       this.a = var1;
-      this.b = new d(var2);
+      this.b = new JobCat(var2);
    }
 
    protected static String b(int var0) {
@@ -36,7 +36,7 @@ public class a implements k {
    protected final int a(JobInfo var1) {
       JobScheduler var2 = this.a();
       if (var2 == null) {
-         throw new l("JobScheduler is null");
+         throw new JobProxyIllegalStateException("JobScheduler is null");
       } else {
          try {
             int var3 = var2.schedule(var1);
@@ -47,18 +47,18 @@ public class a implements k {
             if (var6 != null && var6.contains("RECEIVE_BOOT_COMPLETED")) {
                return -123;
             } else if (var6 != null && var6.contains("No such service ComponentInfo")) {
-               throw new l(var4);
+               throw new JobProxyIllegalStateException(var4);
             } else {
                throw var4;
             }
          } catch (NullPointerException var5) {
             this.b.a((Throwable)var5);
-            throw new l(var5);
+            throw new JobProxyIllegalStateException(var5);
          }
       }
    }
 
-   protected int a(m.d var1) {
+   protected int a(JobRequest.NetworkType var1) {
       switch(var1) {
       case a:
          return 0;
@@ -78,7 +78,7 @@ public class a implements k {
       return var1.setMinimumLatency(var2).setOverrideDeadline(var4);
    }
 
-   protected Builder a(m var1, Builder var2) {
+   protected Builder a(JobRequest var1, Builder var2) {
       if (var1.B()) {
          com.evernote.android.job.v21.b.a(this.a, var1);
       }
@@ -86,7 +86,7 @@ public class a implements k {
       return var2;
    }
 
-   protected Builder a(m var1, boolean var2) {
+   protected Builder a(JobRequest var1, boolean var2) {
       Builder var3 = (new Builder(var1.c(), new ComponentName(this.a, PlatformJobService.class))).setRequiresCharging(var1.m()).setRequiresDeviceIdle(var1.n()).setRequiredNetworkType(this.a(var1.q()));
       if (var2 && !var1.B() && g.a(this.a)) {
          var2 = true;
@@ -101,7 +101,7 @@ public class a implements k {
       return (JobScheduler)this.a.getSystemService("jobscheduler");
    }
 
-   public void a(int var1) {
+   public void cancel(int var1) {
       try {
          this.a().cancel(var1);
       } catch (Exception var3) {
@@ -111,19 +111,19 @@ public class a implements k {
       com.evernote.android.job.v21.b.a(this.a, var1, (PendingIntent)null);
    }
 
-   public void a(m var1) {
-      long var2 = k.a.a(var1);
-      long var4 = k.a.a(var1, true);
+   public void plantOneOff(JobRequest var1) {
+      long var2 = JobProxy.a.a(var1);
+      long var4 = JobProxy.a.a(var1, true);
       int var6 = this.a(this.a(this.a(var1, true), var2, var4).build());
       int var7 = var6;
       if (var6 == -123) {
          var7 = this.a(this.a(this.a(var1, false), var2, var4).build());
       }
 
-      this.b.b("Schedule one-off jobInfo %s, %s, start %s, end %s (from now), reschedule count %d", b(var7), var1, g.a(var2), g.a(k.a.a(var1, false)), k.a.g(var1));
+      this.b.b("Schedule one-off jobInfo %s, %s, start %s, end %s (from now), reschedule count %d", b(var7), var1, g.a(var2), g.a(JobProxy.a.a(var1, false)), JobProxy.a.g(var1));
    }
 
-   protected boolean a(JobInfo var1, m var2) {
+   protected boolean a(JobInfo var1, JobRequest var2) {
       boolean var3 = true;
       boolean var4;
       if (var1 != null && var1.getId() == var2.c()) {
@@ -151,7 +151,7 @@ public class a implements k {
       return var1.setPeriodic(var2);
    }
 
-   public void b(m var1) {
+   public void plantPeriodic(JobRequest var1) {
       long var2 = var1.j();
       long var4 = var1.k();
       int var6 = this.a(this.b(this.a(var1, true), var2, var4).build());
@@ -163,9 +163,9 @@ public class a implements k {
       this.b.b("Schedule periodic jobInfo %s, %s, interval %s, flex %s", b(var7), var1, g.a(var2), g.a(var4));
    }
 
-   public void c(m var1) {
-      long var2 = k.a.d(var1);
-      long var4 = k.a.e(var1);
+   public void plantPeriodicFlexsupport(JobRequest var1) {
+      long var2 = JobProxy.a.d(var1);
+      long var4 = JobProxy.a.e(var1);
       int var6 = this.a(this.a(this.a(var1, true), var2, var4).build());
       int var7 = var6;
       if (var6 == -123) {
@@ -175,7 +175,7 @@ public class a implements k {
       this.b.b("Schedule periodic (flex support) jobInfo %s, %s, start %s, end %s, flex %s", b(var7), var1, g.a(var2), g.a(var4), g.a(var1.k()));
    }
 
-   public boolean d(m var1) {
+   public boolean isPlatformJobScheduled(JobRequest var1) {
       List var2;
       try {
          var2 = this.a().getAllPendingJobs();

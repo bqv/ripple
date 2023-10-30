@@ -63,21 +63,21 @@ public class App extends Application {
    }
 
    public static void b(Context var0) {
-      com.dof100.morsenotifier.i.a(var0, "App.broadcastFinish sending LBR_ACTION_FINISH");
+      MyLog.log(var0, "App.broadcastFinish sending LBR_ACTION_FINISH");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_FINISH");
       android.support.v4.a.b.a(var0).a(var1);
    }
 
    public static void c(Context var0) {
-      com.dof100.morsenotifier.i.a("App.broadcastSettingsChanged sending LBR_ACTION_SETTINGSCHANGED");
+      MyLog.log("App.broadcastSettingsChanged sending LBR_ACTION_SETTINGSCHANGED");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_SETTINGSCHANGED");
       android.support.v4.a.b.a(var0.getApplicationContext()).a(var1);
    }
 
    public static void d(Context var0) {
-      com.dof100.morsenotifier.i.a("App.broadcastSettingsChanged sending LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
+      MyLog.log("App.broadcastSettingsChanged sending LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
       Intent var1 = new Intent();
       var1.setAction("LBR_ACTION_RECENTNOTIFICATIONSCHANGED");
       android.support.v4.a.b.a(var0.getApplicationContext()).a(var1);
@@ -85,8 +85,8 @@ public class App extends Application {
 
    public void onCreate() {
       super.onCreate();
-      com.dof100.morsenotifier.i.a((Context)this);
-      com.dof100.morsenotifier.i.a("App.onCreate");
+      MyLog.logClear((Context)this);
+      MyLog.log("App.onCreate");
       n = false;
       boolean var1 = true;
       o = true;
@@ -123,31 +123,31 @@ public class App extends Application {
       }
 
       if (n) {
-         com.dof100.morsenotifier.i.a("App.onCreate debug build");
+         MyLog.log("App.onCreate debug build");
       }
 
       if (o) {
-         com.dof100.morsenotifier.i.a("App.onCreate release build");
+         MyLog.log("App.onCreate release build");
       }
 
       if (c) {
-         com.dof100.morsenotifier.i.a("App.onCreate flavor=MorseNotifier");
+         MyLog.log("App.onCreate flavor=MorseNotifier");
       }
 
       if (d) {
-         com.dof100.morsenotifier.i.a("App.onCreate flavor=VoiceNotifier");
+         MyLog.log("App.onCreate flavor=VoiceNotifier");
       }
 
       if (a) {
-         com.dof100.morsenotifier.i.a("App.onCreate flavor=free");
+         MyLog.log("App.onCreate flavor=free");
       }
 
       if (b) {
-         com.dof100.morsenotifier.i.a("App.onCreate flavor=pro");
+         MyLog.log("App.onCreate flavor=pro");
       }
 
       if (p) {
-         com.dof100.morsenotifier.i.a("App.onCreate Running on TV");
+         MyLog.log("App.onCreate Running on TV");
       }
 
       e = this.getString(this.getApplicationInfo().labelRes);
@@ -170,7 +170,7 @@ public class App extends Application {
          var7 = new StringBuilder();
          var7.append("App.onCreate brand=");
          var7.append(g);
-         com.dof100.morsenotifier.i.a(var7.toString());
+         MyLog.log(var7.toString());
       }
 
       var7 = new StringBuilder();
@@ -179,7 +179,7 @@ public class App extends Application {
       l = var7.toString();
       m = l.replace(".free", "");
       q = null;
-      com.dof100.morsenotifier.i.a("App.onCreate Initializing job manager...");
+      MyLog.log("App.onCreate Initializing job manager...");
       com.evernote.android.job.i.a((Context)this).a((com.evernote.android.job.f)(new h()));
    }
 }

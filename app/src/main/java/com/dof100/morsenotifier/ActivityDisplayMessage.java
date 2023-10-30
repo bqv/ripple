@@ -45,7 +45,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
             if (var3 >= 0) {
                int var4 = var3 * 2;
                if (var4 < ActivityDisplayMessage.this.n.size() && (Integer)ActivityDisplayMessage.this.n.get(var4) == -8) {
-                  com.dof100.morsenotifier.i.a("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_SETPOS -> MORSE_ELEMENT_STOP");
+                  MyLog.log("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_SETPOS -> MORSE_ELEMENT_STOP");
                   ActivityDisplayMessage.this.a();
                }
             }
@@ -65,11 +65,11 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                StringBuilder var5 = new StringBuilder();
                var5.append("ActivityDisplayMessage.BroadcastReceiver LBR_ACTION_FINISH instance=");
                var5.append(ActivityDisplayMessage.this.a);
-               com.dof100.morsenotifier.i.a(var5.toString());
+               MyLog.log(var5.toString());
                var5 = new StringBuilder();
                var5.append("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_FINISH  (stopping) instance=");
                var5.append(ActivityDisplayMessage.this.a);
-               com.dof100.morsenotifier.i.a(var5.toString());
+               MyLog.log(var5.toString());
                ActivityDisplayMessage.this.a();
             }
 
@@ -80,7 +80,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    private final Runnable t = new Runnable() {
       public void run() {
          if (System.currentTimeMillis() - ActivityDisplayMessage.this.o > 9000L && !ActivityDisplayMessage.this.isFinishing()) {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage mLastTime) > DELAY_MSEC");
+            MyLog.log("ActivityDisplayMessage mLastTime) > DELAY_MSEC");
             ActivityDisplayMessage.this.a();
          }
 
@@ -89,7 +89,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    };
 
    private void a() {
-      com.dof100.morsenotifier.i.a("ActivityDisplayMessage.action_finish");
+      MyLog.log("ActivityDisplayMessage.action_finish");
       this.l.setVisibility(4);
       this.finish();
    }
@@ -98,7 +98,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.action_hide  instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       this.l.setVisibility(4);
       this.finish();
    }
@@ -107,7 +107,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.action_configure  instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       App.b(this.getApplicationContext());
       this.startActivity(new Intent(this, ActivityMain.class));
       this.l.setVisibility(4);
@@ -115,24 +115,24 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
    }
 
    public void onClick(View var1) {
-      com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onClick");
+      MyLog.log("ActivityDisplayMessage.onClick");
       if (var1 != null) {
          switch(var1.getId()) {
          case 2131165203:
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onClick btn_configure");
+            MyLog.log("ActivityDisplayMessage.onClick btn_configure");
             this.c();
             return;
          case 2131165204:
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onClick btn_hide");
+            MyLog.log("ActivityDisplayMessage.onClick btn_hide");
             this.b();
             return;
          case 2131165205:
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onClick btn_stop");
+            MyLog.log("ActivityDisplayMessage.onClick btn_stop");
             App.b(this.getApplicationContext());
             this.a();
             return;
          default:
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onClick  other");
+            MyLog.log("ActivityDisplayMessage.onClick  other");
          }
       }
    }
@@ -161,7 +161,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
          var20 = new StringBuilder();
          var20.append("ActivityDisplayMessage.onCreate instance=");
          var20.append(this.a);
-         com.dof100.morsenotifier.i.a(var20.toString());
+         MyLog.log(var20.toString());
          var2 = new Point();
          WindowManager var21 = this.getWindowManager();
          String var24;
@@ -178,7 +178,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
             var24 = "ActivityDisplayMessage.onCreate ERROR getWindowManager=null";
          }
 
-         com.dof100.morsenotifier.i.a(this, (String)var24);
+         MyLog.log(this, (String)var24);
          var2.set(320, 100);
       }
 
@@ -215,7 +215,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                            }
 
                            try {
-                              com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onCreate setGravity(BOTTOM)");
+                              MyLog.log("ActivityDisplayMessage.onCreate setGravity(BOTTOM)");
                               var27.setGravity(80);
                               break label143;
                            } catch (Exception var15) {
@@ -225,7 +225,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                         }
 
                         try {
-                           com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onCreate setGravity(CENTER)");
+                           MyLog.log("ActivityDisplayMessage.onCreate setGravity(CENTER)");
                            var27.setGravity(17);
                            break label143;
                         } catch (Exception var14) {
@@ -235,7 +235,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                      }
 
                      try {
-                        com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onCreate setGravity(TOP)");
+                        MyLog.log("ActivityDisplayMessage.onCreate setGravity(TOP)");
                         var27.setGravity(48);
                      } catch (Exception var13) {
                         var10001 = false;
@@ -260,7 +260,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                      }
 
                      try {
-                        com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onCreate (window)");
+                        MyLog.log("ActivityDisplayMessage.onCreate (window)");
                         var27.setType(256);
                         break label151;
                      } catch (Exception var11) {
@@ -279,7 +279,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                      StringBuilder var23 = new StringBuilder();
                      var23.append("ActivityDisplayMessage.onCreate (scroll) params.width =");
                      var23.append(var3.width);
-                     com.dof100.morsenotifier.i.a(var23.toString());
+                     MyLog.log(var23.toString());
                      var27.setAttributes(var3);
                      break label151;
                   } catch (Exception var10) {
@@ -288,7 +288,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
                }
             } else {
                try {
-                  com.dof100.morsenotifier.i.a(this, (String)"ActivityDisplayMessage.onCreate ERROR getWindow=null");
+                  MyLog.log(this, (String)"ActivityDisplayMessage.onCreate ERROR getWindow=null");
                   break label151;
                } catch (Exception var17) {
                   var10001 = false;
@@ -296,7 +296,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
             }
          }
 
-         com.dof100.morsenotifier.i.a(this, (String)"ActivityDisplayMessage.onCreate ERROR try getwindow");
+         MyLog.log(this, (String)"ActivityDisplayMessage.onCreate ERROR try getwindow");
       }
 
       this.setFinishOnTouchOutside(false);
@@ -355,7 +355,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
             }
          }
 
-         com.dof100.morsenotifier.i.a(this, (String)"ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener");
+         MyLog.log(this, (String)"ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener");
       }
 
       try {
@@ -366,41 +366,41 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
          this.l.getHolder().setFormat(1);
          this.l.setRenderer(this.m);
       } catch (Exception var5) {
-         com.dof100.morsenotifier.i.a(this, (String)"ActivityDisplayMessage.onCreate ERROR try setRenderer");
+         MyLog.log(this, (String)"ActivityDisplayMessage.onCreate ERROR try setRenderer");
       }
 
       this.o = System.currentTimeMillis();
       var20 = new StringBuilder();
       var20.append("ActivityDisplayMessage.onCreate OUT instance=");
       var20.append(this.a);
-      com.dof100.morsenotifier.i.a(var20.toString());
+      MyLog.log(var20.toString());
    }
 
    public void onDestroy() {
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.onDestroy  instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       super.onDestroy();
    }
 
    public boolean onKeyDown(int var1, KeyEvent var2) {
-      com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown");
+      MyLog.log("ActivityDisplayMessage.onKeyDown");
       long var3 = System.currentTimeMillis();
       if (var1 == 25) {
          this.q = var3;
          if (this.k == 1 || this.k == 2 || this.k == 3 || this.k == 4 && var3 - this.p < 2000L) {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN Broadcasting Finish");
+            MyLog.log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN Broadcasting Finish");
             App.b(this.getApplicationContext());
             this.a();
             return false;
          } else {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN");
+            MyLog.log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN");
             return false;
          }
       } else if (var1 != 24) {
          if (var1 == 4) {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown KEYCODE_BACK");
+            MyLog.log("ActivityDisplayMessage.onKeyDown KEYCODE_BACK");
             App.b(this.getApplicationContext());
             this.a();
             return false;
@@ -410,10 +410,10 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       } else {
          this.p = var3;
          if (this.k != 3 && (this.k != 4 || var3 - this.q >= 2000L)) {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP");
+            MyLog.log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP");
             return false;
          } else {
-            com.dof100.morsenotifier.i.a("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP   Broadcasting Finish");
+            MyLog.log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP   Broadcasting Finish");
             App.b(this.getApplicationContext());
             this.a();
             return false;
@@ -425,7 +425,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.onPause  instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       android.support.v4.a.b.a(this.getApplicationContext()).a(this.r);
       this.s.removeCallbacks(this.t);
       super.onPause();
@@ -435,7 +435,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.onResume  instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       super.onResume();
       this.t.run();
       android.support.v4.a.b var2 = android.support.v4.a.b.a(this.getApplicationContext());
@@ -448,14 +448,14 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.onResume  OUT instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
    }
 
    protected void onStop() {
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityDisplayMessage.onStop   instance=");
       var1.append(this.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       super.onStop();
    }
 }

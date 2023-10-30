@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Build.VERSION;
+
+import com.evernote.android.job.gcm.JobProxyGcm;
 import com.evernote.android.job.v14.PlatformAlarmReceiver;
 import com.evernote.android.job.v14.PlatformAlarmService;
 import com.evernote.android.job.v14.PlatformAlarmServiceExact;
@@ -19,7 +21,7 @@ public enum d {
    e(false, true, true),
    f(true, false, true);
 
-   private volatile k g;
+   private volatile JobProxy g;
    private final boolean h;
    private final boolean i;
    private final boolean j;
@@ -188,7 +190,7 @@ public enum d {
       }
    }
 
-   private k d(Context var1) {
+   private JobProxy d(Context var1) {
       switch(this) {
       case a:
          return new com.evernote.android.job.d.a(var1);
@@ -201,7 +203,7 @@ public enum d {
       case e:
          return new com.evernote.android.job.v14.a(var1);
       case f:
-         return new com.evernote.android.job.gcm.a(var1);
+         return new JobProxyGcm(var1);
       default:
          throw new IllegalStateException("not implemented");
       }
@@ -256,10 +258,10 @@ public enum d {
       }
    }
 
-   k b(Context var1) {
+   JobProxy b(Context var1) {
       synchronized(this){}
 
-      k var4;
+      JobProxy var4;
       try {
          if (this.g == null) {
             this.g = this.d(var1);

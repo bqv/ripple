@@ -34,7 +34,7 @@ public class BRVolume extends BroadcastReceiver {
                   var22 = "_voicedef";
                }
 
-               int var7 = v.c(var1, var23, "pref_morse_volumedownstop", (String)null, var22, "_def");
+               int var7 = Utils.prefGetInt(var1, var23, "pref_morse_volumedownstop", (String)null, var22, "_def");
                int[] var8 = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
                StringBuilder var24;
@@ -150,7 +150,7 @@ public class BRVolume extends BroadcastReceiver {
                }
 
                var16.apply();
-               i.a(var1, String.format(Locale.US, "BRVolume.onReceive StreamType=%02d Vol:%02d old = %02d %02d %02d %02d %02d %02d %02d %02d %02d %02d (pref=%d) %s", var5, var6, var8[0], var8[1], var8[2], var8[3], var8[4], var8[5], var8[6], var8[7], var8[8], var8[9], var7, var3));
+               MyLog.log(var1, String.format(Locale.US, "BRVolume.onReceive StreamType=%02d Vol:%02d old = %02d %02d %02d %02d %02d %02d %02d %02d %02d %02d (pref=%d) %s", var5, var6, var8[0], var8[1], var8[2], var8[3], var8[4], var8[5], var8[6], var8[7], var8[8], var8[9], var7, var3));
                if (var26) {
                   App.b(var1);
                }
@@ -161,7 +161,7 @@ public class BRVolume extends BroadcastReceiver {
             var22 = String.format(Locale.US, "BRVolume.onReceive ERROR Stream type =%d  Volume: %d", var5, var6);
          }
 
-         i.a(var1, var22);
+         MyLog.log(var1, var22);
       }
    }
 }

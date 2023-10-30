@@ -9,7 +9,7 @@ import android.util.SparseArray;
 import java.util.concurrent.TimeUnit;
 
 final class p {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("WakeLockUtil");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("WakeLockUtil");
    private static final SparseArray b = new SparseArray();
    private static int c;
 

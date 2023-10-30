@@ -1,4 +1,4 @@
-package com.evernote.android.job.a;
+package com.evernote.android.job.util;
 
 import android.text.TextUtils;
 import java.util.Locale;

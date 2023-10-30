@@ -10,7 +10,7 @@ class u {
    u(int var1, int var2) {
       this.c = var2;
       this.a = (int)((long)var1 * (long)this.c / 1000L);
-      i.a(String.format(Locale.getDefault(), "MyTone constructor Element Dur=%d msec  Sample Rate=%d s/sec   NSamples=%d", var1, this.c, this.a));
+      MyLog.log(String.format(Locale.getDefault(), "MyTone constructor Element Dur=%d msec  Sample Rate=%d s/sec   NSamples=%d", var1, this.c, this.a));
 
       label32: {
          boolean var10001;
@@ -39,7 +39,7 @@ class u {
          }
       }
 
-      i.a("MyTone constructor ERROR creating/initializing byte array");
+      MyLog.log("MyTone constructor ERROR creating/initializing byte array");
    }
 
    void a(int var1, int var2, float var3, float var4, float var5) {

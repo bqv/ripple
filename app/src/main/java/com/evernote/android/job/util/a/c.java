@@ -1,4 +1,4 @@
-package com.evernote.android.job.a.a;
+package com.evernote.android.job.util.a;
 
 import android.util.Xml;
 import java.io.InputStream;
@@ -403,7 +403,7 @@ final class c {
    }
 
    public static final void a(Map var0, OutputStream var1) {
-      com.evernote.android.job.a.a.a var2 = new com.evernote.android.job.a.a.a();
+      com.evernote.android.job.util.a.a var2 = new com.evernote.android.job.util.a.a();
       var2.setOutput(var1, "utf-8");
       var2.startDocument((String)null, true);
       var2.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);

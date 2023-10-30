@@ -11,9 +11,9 @@ class b {
    public ArrayList a;
 
    public b(Context var1) {
-      i.a("MyAppFilters.constructor");
+      MyLog.log("MyAppFilters.constructor");
       this.a = new ArrayList();
-      i.a("MyAppNotificationFilters.constructor load");
+      MyLog.log("MyAppNotificationFilters.constructor load");
       this.a(var1);
    }
 
@@ -25,7 +25,7 @@ class b {
       SharedPreferences var2 = PreferenceManager.getDefaultSharedPreferences(var1);
       int var3 = 0;
       int var4 = var2.getInt("app_filters_n", 0);
-      i.a(String.format(Locale.US, "MyAppFilters.load - loading %d entries", var4));
+      MyLog.log(String.format(Locale.US, "MyAppFilters.load - loading %d entries", var4));
       this.a.clear();
 
       while(var3 < var4) {
@@ -43,7 +43,7 @@ class b {
       var5.putInt("app_filters_n", var2);
       Locale var3 = Locale.US;
       int var4 = 0;
-      i.a(String.format(var3, "MyAppFilters.save - saving %d entries", var2));
+      MyLog.log(String.format(var3, "MyAppFilters.save - saving %d entries", var2));
 
       while(var4 < var2) {
          ((a)this.a.get(var4)).a(var5, var4);

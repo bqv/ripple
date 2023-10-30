@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 class h {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("JobExecutor");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobExecutor");
    private static final long b;
    private final SparseArray c = new SparseArray();
    private final LruCache d = new LruCache(20);
@@ -198,7 +198,7 @@ class h {
       throw var78;
    }
 
-   public Future a(Context var1, m var2, c var3, Bundle var4) {
+   public Future a(Context var1, JobRequest var2, c var3, Bundle var4) {
       synchronized(this){}
 
       Throwable var10000;
@@ -296,7 +296,7 @@ class h {
 
    }
 
-   public void a(m var1) {
+   public void a(JobRequest var1) {
       synchronized(this){}
 
       try {
@@ -307,7 +307,7 @@ class h {
 
    }
 
-   public boolean b(m var1) {
+   public boolean b(JobRequest var1) {
       synchronized(this){}
       boolean var2;
       if (var1 != null) {
@@ -348,11 +348,11 @@ class h {
       }
 
       private void a(c var1, c.b var2) {
-         m var3 = this.b.j().e();
+         JobRequest var3 = this.b.j().e();
          boolean var4 = var3.i();
          boolean var5 = false;
          boolean var6 = true;
-         m var7;
+         JobRequest var7;
          if (!var4 && c.b.c.equals(var2) && !var1.p()) {
             var7 = var3.a(true, true);
             this.b.a(var7.c());

@@ -12,12 +12,12 @@ import android.widget.TextView;
 public class MyPreferenceCheckbox extends CheckBoxPreference {
    public MyPreferenceCheckbox(Context var1, AttributeSet var2) {
       super(var1, var2);
-      boolean var3 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
+      boolean var3 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
       if (App.a) {
          this.setEnabled(var3);
       }
 
-      var3 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
+      var3 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
       if (App.b) {
          this.setEnabled(var3);
       }

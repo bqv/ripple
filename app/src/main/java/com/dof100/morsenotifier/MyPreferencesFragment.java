@@ -19,15 +19,15 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
       if (App.d) {
          MyPreferenceList var1 = (MyPreferenceList)this.findPreference("pref_voice_locale");
          if (var1 == null) {
-            i.a("MyPreferencesFragment.init_pref_voice_locale ERROR pref_voice_locale=null");
+            MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR pref_voice_locale=null");
          } else {
             C0149l var2 = App.a(this.getActivity().getApplicationContext());
             if (var2 == null) {
-               i.a("MyPreferencesFragment.init_pref_voice_locale ERROR mPlayerTTS=null");
+               MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR mPlayerTTS=null");
             } else if (var2.b == null) {
-               i.a("MyPreferencesFragment.init_pref_voice_locale ERROR App.mPlayerTTS.mTTS=null");
+               MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR App.mPlayerTTS.mTTS=null");
             } else if (var2.a == -1) {
-               i.a("MyPreferencesFragment.init_pref_voice_locale ERROR mTTSStatus=ERROR");
+               MyLog.log("MyPreferencesFragment.init_pref_voice_locale ERROR mTTSStatus=ERROR");
             } else {
                Locale[] var3 = Locale.getAvailableLocales();
                ArrayList var4 = new ArrayList();
@@ -53,7 +53,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
                      var8 = var10.toString();
                   }
 
-                  i.a(var8);
+                  MyLog.log(var8);
                }
 
                String[] var11;
@@ -73,7 +73,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
 
    private void a(Preference var1) {
       if (var1 == null) {
-         i.a("MyPreferencesFragment.checkAllPreferences: p=null");
+         MyLog.log("MyPreferencesFragment.checkAllPreferences: p=null");
       } else {
          if (var1 instanceof PreferenceCategory || var1 instanceof PreferenceScreen) {
             PreferenceGroup var2 = (PreferenceGroup)var1;
@@ -88,12 +88,12 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
    }
 
    private void b() {
-      i.a("MyPreferencesFragment.check_pref_voice_locale");
+      MyLog.log("MyPreferencesFragment.check_pref_voice_locale");
    }
 
    private void b(Preference var1) {
       if (var1 == null) {
-         i.a("MyPreferencesFragment.checkPreference: aP = null");
+         MyLog.log("MyPreferencesFragment.checkPreference: aP = null");
       } else {
          String var2 = var1.getKey();
          if (var2 != null) {
@@ -133,7 +133,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
 
                   var3.append(var4);
                   var3.append(var2);
-                  i.a(var3.toString());
+                  MyLog.log(var3.toString());
                   var1.setEnabled(false);
                }
 
@@ -162,7 +162,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
    }
 
    private void c(Preference var1) {
-      i.a("MyPreferencesFragment.check_pref_reminders_select");
+      MyLog.log("MyPreferencesFragment.check_pref_reminders_select");
       int var2 = PreferenceManager.getDefaultSharedPreferences(this.getActivity().getApplicationContext()).getInt("reminders_n", 0);
       MyPreferenceText var3;
       String var4;
@@ -203,7 +203,7 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
    }
 
    private void d(Preference var1) {
-      i.a("MyPreferencesFragment.check_pref_apps_filters");
+      MyLog.log("MyPreferencesFragment.check_pref_apps_filters");
       int var2 = b.c(this.getActivity().getApplicationContext());
       String var3;
       MyPreferenceText var4;
@@ -226,8 +226,8 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
    }
 
    private void e(Preference var1) {
-      i.a("MyPreferencesFragment.check_pref_apps_recentnotifications");
-      int var2 = n.c(this.getActivity().getApplicationContext());
+      MyLog.log("MyPreferencesFragment.check_pref_apps_recentnotifications");
+      int var2 = MyRecentAppNotifications.n(this.getActivity().getApplicationContext());
       MyPreferenceText var3;
       String var4;
       if (var2 > 1) {
@@ -245,18 +245,18 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
    }
 
    public void onActivityCreated(Bundle var1) {
-      i.a("MyPreferencesFragment.onActivityCreated");
+      MyLog.log("MyPreferencesFragment.onActivityCreated");
       super.onActivityCreated(var1);
    }
 
    public void onActivityResult(int var1, int var2, Intent var3) {
       if (var1 == 203) {
          if (var2 == 1) {
-            i.a("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS");
+            MyLog.log("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS");
             return;
          }
 
-         i.a("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS failed! No voice data!");
+         MyLog.log("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS failed! No voice data!");
 
          try {
             var3 = new Intent();
@@ -264,15 +264,15 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
             this.startActivity(var3);
             return;
          } catch (Exception var4) {
-            i.a("MyPreferencesFragment.onActivityResult startActivity(ACTION_INSTALL_TTS_DATA) failed!");
-            i.b(this.getActivity(), "No voice data. This function is not available in your device!");
+            MyLog.log("MyPreferencesFragment.onActivityResult startActivity(ACTION_INSTALL_TTS_DATA) failed!");
+            MyLog.toast(this.getActivity(), "No voice data. This function is not available in your device!");
          }
       }
 
    }
 
    public void onCreate(Bundle var1) {
-      i.a("MyPreferencesFragment.onCreate");
+      MyLog.log("MyPreferencesFragment.onCreate");
       super.onCreate(var1);
       MyPreferencesActivity var5 = (MyPreferencesActivity)this.getActivity();
       Bundle var2 = this.getArguments();
@@ -289,26 +289,26 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
             this.a();
             return;
          } catch (Exception var4) {
-            i.a("MyPreferencesFragment.onCreate ERROR in starting CHECK_TTS_DATA");
+            MyLog.log("MyPreferencesFragment.onCreate ERROR in starting CHECK_TTS_DATA");
          }
       }
 
    }
 
    public void onDestroy() {
-      i.a("MyPreferencesFragment.onDestroy");
+      MyLog.log("MyPreferencesFragment.onDestroy");
       App.c(this.getActivity().getApplicationContext());
       super.onDestroy();
    }
 
    public void onPause() {
-      i.a("MyPreferencesFragment.onPause");
+      MyLog.log("MyPreferencesFragment.onPause");
       this.getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
       super.onPause();
    }
 
    public void onResume() {
-      i.a("MyPreferencesFragment.onResume");
+      MyLog.log("MyPreferencesFragment.onResume");
       this.getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
       this.a(this.getPreferenceScreen());
       super.onResume();
@@ -320,14 +320,14 @@ public class MyPreferencesFragment extends PreferenceFragment implements OnShare
          StringBuilder var4 = new StringBuilder();
          var4.append("MyPreferencesFragment.onSharedPreferenceChanged: p=null key=");
          var4.append(var2);
-         i.a(var4.toString());
+         MyLog.log(var4.toString());
       } else {
          this.b(var3);
       }
    }
 
    public void onStart() {
-      i.a("MyPreferencesFragment.onDestroy");
+      MyLog.log("MyPreferencesFragment.onDestroy");
       super.onStart();
    }
 }

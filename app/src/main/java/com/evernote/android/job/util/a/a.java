@@ -1,4 +1,4 @@
-package com.evernote.android.job.a.a;
+package com.evernote.android.job.util.a;
 
 import java.io.IOException;
 import java.io.OutputStream;

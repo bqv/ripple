@@ -7,14 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Build.VERSION;
 import com.evernote.android.job.e;
-import com.evernote.android.job.k;
-import com.evernote.android.job.m;
-import com.evernote.android.job.a.d;
-import com.evernote.android.job.a.g;
+import com.evernote.android.job.JobProxy;
+import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.JobCat;
+import com.evernote.android.job.util.g;
 
-public class a implements k {
+public class a implements JobProxy {
    protected final Context a;
-   protected final d b;
+   protected final JobCat b;
    private AlarmManager c;
 
    public a(Context var1) {
@@ -23,11 +23,11 @@ public class a implements k {
 
    protected a(Context var1, String var2) {
       this.a = var1;
-      this.b = new d(var2);
+      this.b = new JobCat(var2);
    }
 
-   private void f(m var1) {
-      this.b.b("Scheduled alarm, %s, delay %s (from now), exact %b, reschedule count %d", var1, g.a(k.a.c(var1)), var1.u(), k.a.g(var1));
+   private void f(JobRequest var1) {
+      this.b.b("Scheduled alarm, %s, delay %s (from now), exact %b, reschedule count %d", var1, g.a(JobProxy.a.c(var1)), var1.u(), JobProxy.a.g(var1));
    }
 
    protected int a(boolean var1) {
@@ -44,7 +44,7 @@ public class a implements k {
       }
 
       if (this.c == null) {
-         this.b.d("AlarmManager is null");
+         this.b.JobCat("AlarmManager is null");
       }
 
       return this.c;
@@ -62,15 +62,15 @@ public class a implements k {
       }
    }
 
-   protected PendingIntent a(m var1, int var2) {
+   protected PendingIntent a(JobRequest var1, int var2) {
       return this.a(var1.c(), var1.u(), var1.C(), var2);
    }
 
-   protected PendingIntent a(m var1, boolean var2) {
+   protected PendingIntent a(JobRequest var1, boolean var2) {
       return this.a(var1, this.b(var2));
    }
 
-   public void a(int var1) {
+   public void cancel(int var1) {
       AlarmManager var2 = this.a();
       if (var2 != null) {
          try {
@@ -84,7 +84,7 @@ public class a implements k {
 
    }
 
-   public void a(m var1) {
+   public void plantOneOff(JobRequest var1) {
       PendingIntent var2 = this.a(var1, false);
       AlarmManager var3 = this.a();
       if (var3 != null) {
@@ -104,7 +104,7 @@ public class a implements k {
       }
    }
 
-   protected void a(m var1, AlarmManager var2, PendingIntent var3) {
+   protected void a(JobRequest var1, AlarmManager var2, PendingIntent var3) {
       var2.set(this.a(false), this.e(var1), var3);
       this.f(var1);
    }
@@ -113,7 +113,7 @@ public class a implements k {
       return !var1 ? 1207959552 : 134217728;
    }
 
-   public void b(m var1) {
+   public void plantPeriodic(JobRequest var1) {
       PendingIntent var2 = this.a(var1, true);
       AlarmManager var3 = this.a();
       if (var3 != null) {
@@ -123,7 +123,7 @@ public class a implements k {
       this.b.b("Scheduled repeating alarm, %s, interval %s", var1, g.a(var1.j()));
    }
 
-   protected void b(m var1, AlarmManager var2, PendingIntent var3) {
+   protected void b(JobRequest var1, AlarmManager var2, PendingIntent var3) {
       long var4 = this.e(var1);
       if (VERSION.SDK_INT >= 23) {
          var2.setExactAndAllowWhileIdle(this.a(true), var4, var3);
@@ -136,7 +136,7 @@ public class a implements k {
       this.f(var1);
    }
 
-   public void c(m var1) {
+   public void plantPeriodicFlexsupport(JobRequest var1) {
       PendingIntent var2 = this.a(var1, false);
       AlarmManager var3 = this.a();
       if (var3 != null) {
@@ -148,16 +148,16 @@ public class a implements k {
       }
    }
 
-   protected void c(m var1, AlarmManager var2, PendingIntent var3) {
-      var2.set(1, e.g().a() + k.a.f(var1), var3);
+   protected void c(JobRequest var1, AlarmManager var2, PendingIntent var3) {
+      var2.set(1, e.g().a() + JobProxy.a.f(var1), var3);
       this.b.b("Scheduled repeating alarm (flex support), %s, interval %s, flex %s", var1, g.a(var1.j()), g.a(var1.k()));
    }
 
-   public boolean d(m var1) {
+   public boolean isPlatformJobScheduled(JobRequest var1) {
       return this.a(var1, 536870912) != null;
    }
 
-   protected long e(m var1) {
+   protected long e(JobRequest var1) {
       long var2;
       if (e.f()) {
          var2 = e.g().a();
@@ -165,6 +165,6 @@ public class a implements k {
          var2 = e.g().b();
       }
 
-      return var2 + k.a.c(var1);
+      return var2 + JobProxy.a.c(var1);
    }
 }

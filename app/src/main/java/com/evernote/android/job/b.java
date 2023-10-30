@@ -5,13 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+
+import com.evernote.android.job.gcm.JobProxyGcm;
 import com.evernote.android.job.gcm.PlatformGcmService;
 import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.Iterator;
 import java.util.List;
 
 final class b {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("GcmAvailableHelper");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("GcmAvailableHelper");
    private static final boolean b;
    private static int c;
    private static boolean d;
@@ -34,7 +36,7 @@ final class b {
 
    private static void a(Context var0, boolean var1) {
       boolean var10001;
-      com.evernote.android.job.a.d var9;
+      com.evernote.android.job.util.d var9;
       String var10;
       label51: {
          PackageManager var2;
@@ -43,7 +45,7 @@ final class b {
             try {
                var2 = var0.getPackageManager();
                StringBuilder var3 = new StringBuilder();
-               var3.append(com.evernote.android.job.gcm.a.class.getPackage().getName());
+               var3.append(JobProxyGcm.class.getPackage().getName());
                var3.append(".PlatformGcmService");
                String var11 = var3.toString();
                var4 = new ComponentName(var0, var11);

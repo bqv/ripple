@@ -37,12 +37,12 @@ public class MyPreferenceList extends ListPreference {
          }
       }
 
-      boolean var6 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
+      boolean var6 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
       if (App.a) {
          this.setEnabled(var6);
       }
 
-      var6 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
+      var6 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
       if (App.b) {
          this.setEnabled(var6);
       }
@@ -51,7 +51,7 @@ public class MyPreferenceList extends ListPreference {
 
    private String b() {
       if (this.getEntry() == null) {
-         i.a("MyListPreference.getValueStr cs=null");
+         MyLog.log("MyListPreference.getValueStr cs=null");
          return "";
       } else {
          String var1 = this.getEntry().toString();
@@ -86,14 +86,14 @@ public class MyPreferenceList extends ListPreference {
       var2.append("MyPreferenceList ");
       var2.append(this.getKey());
       var2.append(" myCreateView");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       RelativeLayout var7 = (RelativeLayout)((TextView)var1.findViewById(16908304)).getParent();
       if (this.d != null) {
          StringBuilder var3 = new StringBuilder();
          var3.append("MyPreferenceList ");
          var3.append(this.getKey());
          var3.append(" myCreateView mValueTV!=null");
-         i.a(var3.toString());
+         MyLog.log(var3.toString());
          var7.removeView(this.d);
          this.d = null;
       }
@@ -123,7 +123,7 @@ public class MyPreferenceList extends ListPreference {
    }
 
    protected void onBindView(View var1) {
-      i.a("MyPreferenceList.onBindView");
+      MyLog.log("MyPreferenceList.onBindView");
       RelativeLayout var2 = (RelativeLayout)((TextView)var1.findViewById(16908304)).getParent();
       this.d = null;
 
@@ -152,7 +152,7 @@ public class MyPreferenceList extends ListPreference {
       var2.append("MyPreferenceList ");
       var2.append(this.getKey());
       var2.append(" onCreateView");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       View var3 = super.onCreateView(var1);
       this.a(var3);
       return var3;

@@ -9,13 +9,13 @@ import android.os.Build.VERSION;
 import com.evernote.android.job.c;
 import com.evernote.android.job.e;
 import com.evernote.android.job.i;
-import com.evernote.android.job.k;
-import com.evernote.android.job.m;
-import com.evernote.android.job.a.d;
+import com.evernote.android.job.JobProxy;
+import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.JobCat;
 
 @TargetApi(21)
 public class PlatformJobService extends JobService {
-   private static final d a = new d("PlatformJobService");
+   private static final JobCat a = new JobCat("PlatformJobService");
 
    @TargetApi(26)
    private Bundle a(JobParameters var1) {
@@ -28,12 +28,12 @@ public class PlatformJobService extends JobService {
             label577: {
                Throwable var10000;
                label579: {
-                  k.a var2;
-                  m var3;
+                  JobProxy.a var2;
+                  JobRequest var3;
                   boolean var10001;
                   try {
                      int var1x = var1.getJobId();
-                     var2 = new k.a(PlatformJobService.this, PlatformJobService.a, var1x);
+                     var2 = new JobProxy.a(PlatformJobService.this, PlatformJobService.a, var1x);
                      var3 = var2.a(true, false);
                   } catch (Throwable var61) {
                      var10000 = var61;
@@ -45,7 +45,7 @@ public class PlatformJobService extends JobService {
                      break label577;
                   }
 
-                  d var4;
+                  JobCat var4;
                   Object[] var5;
                   String var62;
                   label580: {

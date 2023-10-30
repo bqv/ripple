@@ -215,7 +215,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       boolean var1 = Boolean.valueOf(var0.getResources().getBoolean(2130903041));
       boolean var2 = false;
       if (!var1) {
-         com.dof100.morsenotifier.i.a("ActivityMain.isCollectorRunning. Notifications are disabled");
+         MyLog.log("ActivityMain.isCollectorRunning. Notifications are disabled");
          return false;
       } else {
          ComponentName var3 = new ComponentName(var0, ServiceNotifications.class);
@@ -230,7 +230,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          }
 
          if (var8 == null) {
-            com.dof100.morsenotifier.i.a("ActivityMain.isCollectorRunning. getRunningServices returned NULL");
+            MyLog.log("ActivityMain.isCollectorRunning. getRunningServices returned NULL");
             return true;
          } else {
             Iterator var5 = var8.iterator();
@@ -256,48 +256,48 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          var2 = new StringBuilder();
          var2.append("ActivityMain.onActionOK command=");
          var2.append(var1);
-         com.dof100.morsenotifier.i.a(var2.toString());
+         MyLog.log(var2.toString());
          boolean var3 = var1.startsWith("recent notifications on");
          var4 = true;
          String var5;
          if (var3) {
-            (new n(this)).a(this, true);
+            (new MyRecentAppNotifications(this)).setEnable(this, true);
             App.d(this);
             var5 = "Recent notifications enabled.";
          } else if (var1.startsWith("recent notifications off")) {
-            (new n(this)).a(this, false);
+            (new MyRecentAppNotifications(this)).setEnable(this, false);
             App.d(this);
             var5 = "Recent notifications disabled.";
          } else if (var1.startsWith("recent notifications clear")) {
-            (new n(this)).a(this);
+            (new MyRecentAppNotifications(this)).clear(this);
             App.d(this);
             var5 = "Recent notifications cleared.";
          } else {
             label93: {
                if (var1.contains("log")) {
-                  com.dof100.morsenotifier.i.a("ActivityMain.onActionOK command contains log");
+                  MyLog.log("ActivityMain.onActionOK command contains log");
                   if (var1.contains("cl") || var1.contains("del") || var1.contains("cl") || var1.contains("del")) {
-                     com.dof100.morsenotifier.i.a((Context)this);
+                     MyLog.logClear((Context)this);
                      var5 = "Log file cleared.";
                      break label93;
                   }
 
                   if (var1.contains("sh") || var1.contains("display") || var1.contains("view")) {
-                     com.dof100.morsenotifier.i.a((Activity)this);
+                     MyLog.logShow((Activity)this);
                      break label88;
                   }
 
                   if (var1.contains("on") || var1.contains("en")) {
-                     com.dof100.morsenotifier.i.a(this, (Boolean)true);
-                     com.dof100.morsenotifier.i.a("Log file enabled");
-                     com.dof100.morsenotifier.i.a((Context)this);
+                     MyLog.setEnabled(this, (Boolean)true);
+                     MyLog.log("Log file enabled");
+                     MyLog.logClear((Context)this);
                      var5 = "Log file enabled";
                      break label93;
                   }
 
                   if (var1.contains("off") || var1.contains("dis")) {
-                     com.dof100.morsenotifier.i.a("Log file disabled");
-                     com.dof100.morsenotifier.i.a(this, (Boolean)false);
+                     MyLog.log("Log file disabled");
+                     MyLog.setEnabled(this, (Boolean)false);
                      var5 = "Log file disabled";
                      break label93;
                   }
@@ -314,14 +314,14 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
             }
          }
 
-         com.dof100.morsenotifier.i.b(this, var5);
+         MyLog.toast(this, var5);
       }
 
       if (!var4) {
          var2 = new StringBuilder();
          var2.append("Unknown service command: ");
          var2.append(var1);
-         com.dof100.morsenotifier.i.b(this, var2.toString());
+         MyLog.toast(this, var2.toString());
       }
 
    }
@@ -455,9 +455,9 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
 
    private static void f(Context var0) {
       if (App.a) {
-         com.dof100.morsenotifier.i.b(var0, "App notifications are only available in the pro version");
+         MyLog.toast(var0, "App notifications are only available in the pro version");
       } else if (VERSION.SDK_INT < 18) {
-         com.dof100.morsenotifier.i.a(var0, "ActivityMain.onActionNotificationListenerSettings ERROR Android version<4.3");
+         MyLog.log(var0, "ActivityMain.onActionNotificationListenerSettings ERROR Android version<4.3");
       } else {
          String var1;
          if (VERSION.SDK_INT >= 22) {
@@ -466,7 +466,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
             var1 = "ActivityMain.onActionNotificationListenerSettings 4.3<Android version<5.1";
          }
 
-         com.dof100.morsenotifier.i.a(var1);
+         MyLog.log(var1);
 
          try {
             Intent var3 = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
@@ -508,7 +508,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      com.dof100.morsenotifier.i.a("ActivityService.oncreate");
+      MyLog.log("ActivityService.oncreate");
       this.setContentView(2131296256);
       this.a = (EditText)this.findViewById(2131165228);
       this.b = (TextView)this.findViewById(2131165314);

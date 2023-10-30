@@ -24,7 +24,7 @@ class o extends ArrayAdapter implements OnClickListener {
       super(var1, 2131296263, var2);
       this.b = var3;
       this.d = var4;
-      i.a("MyRecentNotificationsArrayAdapter.constructor");
+      MyLog.log("MyRecentNotificationsArrayAdapter.constructor");
       this.a = var1;
       this.c = (LayoutInflater)this.a.getSystemService("layout_inflater");
    }
@@ -35,11 +35,11 @@ class o extends ArrayAdapter implements OnClickListener {
       var4.append(var1);
       var4.append("  v=");
       var4.append(var2);
-      i.a(var4.toString());
-      m var5 = (m)this.getItem(var1);
-      m var12 = var5;
+      MyLog.log(var4.toString());
+      MyRecentAppNotification var5 = (MyRecentAppNotification)this.getItem(var1);
+      MyRecentAppNotification var12 = var5;
       if (var5 == null) {
-         var12 = new m();
+         var12 = new MyRecentAppNotification();
       }
 
       var12.i = -1;
@@ -64,11 +64,11 @@ class o extends ArrayAdapter implements OnClickListener {
       var6.setTag(var12);
       SimpleDateFormat var9 = new SimpleDateFormat("dd MMM yyyy, hh:mm:ss:ssss", Locale.US);
       Calendar var7 = Calendar.getInstance();
-      var7.setTimeInMillis(var12.a);
+      var7.setTimeInMillis(var12.timestamp);
       var6.setText(var9.format(var7.getTime()));
       TextView var8 = (TextView)var14.findViewById(2131165296);
       var8.setTag(var12);
-      var8.setText(v.a(this.a, var12.b));
+      var8.setText(Utils.a(this.a, var12.b));
       var8 = (TextView)var14.findViewById(2131165301);
       var8.setTag(var12);
       var8.setText(String.format("(%s)", var12.b));
@@ -208,8 +208,8 @@ class o extends ArrayAdapter implements OnClickListener {
 
    public void onClick(View var1) {
       if (var1 != null) {
-         i.a("MyRecentNotificationsArrayAdapter.onClick");
-         m var2 = (m)var1.getTag();
+         MyLog.log("MyRecentNotificationsArrayAdapter.onClick");
+         MyRecentAppNotification var2 = (MyRecentAppNotification)var1.getTag();
          String var3;
          if (var2 == null) {
             var3 = "MyRecentNotificationsArrayAdapter.onClick n=null";
@@ -218,14 +218,14 @@ class o extends ArrayAdapter implements OnClickListener {
          } else {
             if (var1.getId() != 2131165200) {
                if (var1.getId() == 2131165300) {
-                  i.a("MyAppFiltersArrayAdapter.onClick tv_recentnotification_announcedcriteria");
+                  MyLog.log("MyAppFiltersArrayAdapter.onClick tv_recentnotification_announcedcriteria");
                   this.d.a(var2.i, var1);
                }
 
                return;
             }
 
-            i.a("MyRecentNotificationsArrayAdapter.onClick b_test");
+            MyLog.log("MyRecentNotificationsArrayAdapter.onClick b_test");
             if (!var2.j.isEmpty()) {
                Intent var4 = new Intent(this.a, ServiceMain.class);
                var4.putExtra(this.a.getResources().getString(2131492900), this.a.getResources().getString(2131492865));
@@ -237,7 +237,7 @@ class o extends ArrayAdapter implements OnClickListener {
             var3 = "MyRecentNotificationsArrayAdapter.onClick tmpAnnouncement.isEmpty";
          }
 
-         i.a(var3);
+         MyLog.log(var3);
       }
    }
 

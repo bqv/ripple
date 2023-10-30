@@ -23,13 +23,13 @@ public class MyPreferenceButton extends Preference {
       super(var1, var2);
       this.a = var1;
       this.setSelectable(false);
-      this.c = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonCaption", "");
-      this.b = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "");
-      this.d = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0");
-      this.e = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText1", "0");
-      this.f = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText2", "0");
-      boolean var3 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
-      boolean var4 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
+      this.c = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonCaption", "");
+      this.b = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "");
+      this.d = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0");
+      this.e = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText1", "0");
+      this.f = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText2", "0");
+      boolean var3 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
+      boolean var4 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
       if (App.a) {
          this.setEnabled(var3);
       }
@@ -57,7 +57,7 @@ public class MyPreferenceButton extends Preference {
    }
 
    protected void onBindView(View var1) {
-      i.a("MyPreferenceButton.onBindView");
+      MyLog.log("MyPreferenceButton.onBindView");
       TextView var2 = (TextView)var1.findViewById(16908310);
       TextView var3 = (TextView)var1.findViewById(16908304);
       if (var3 != null && var2 != null) {
@@ -82,7 +82,7 @@ public class MyPreferenceButton extends Preference {
          var7.addRule(5, var5.getId());
          var3.setLayoutParams(var7);
       } else {
-         i.a("MyPreferenceButton.onBindView title or summary = null");
+         MyLog.log("MyPreferenceButton.onBindView title or summary = null");
       }
 
       super.onBindView(var1);

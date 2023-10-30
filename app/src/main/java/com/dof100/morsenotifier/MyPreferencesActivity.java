@@ -25,7 +25,7 @@ public class MyPreferencesActivity extends PreferenceActivity {
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      i.a("MyPreferencesActivity.onCreate ");
+      MyLog.log("MyPreferencesActivity.onCreate ");
       ActionBar var2 = this.getActionBar();
       if (var2 != null) {
          var2.setDisplayHomeAsUpEnabled(true);

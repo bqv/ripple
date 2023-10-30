@@ -48,11 +48,11 @@ public class MyPreferenceText extends Preference {
       this.l = "";
       this.c = var1;
       this.setSelectable(false);
-      this.e = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "");
-      this.f = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0");
-      this.g = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText1", "0");
+      this.e = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "");
+      this.f = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0");
+      this.g = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText1", "0");
 
-      for(this.h = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText2", "0"); var3 < var2.getAttributeCount(); ++var3) {
+      for(this.h = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgExtraText2", "0"); var3 < var2.getAttributeCount(); ++var3) {
          String var4 = var2.getAttributeName(var3);
          String var5 = var2.getAttributeValue(var3);
          if (var4.equalsIgnoreCase("valueShow")) {
@@ -62,10 +62,10 @@ public class MyPreferenceText extends Preference {
          }
       }
 
-      boolean var6 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
-      boolean var7 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
-      boolean var8 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visibleFree", "true").equalsIgnoreCase("true");
-      boolean var9 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visiblePro", "true").equalsIgnoreCase("true");
+      boolean var6 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
+      boolean var7 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
+      boolean var8 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visibleFree", "true").equalsIgnoreCase("true");
+      boolean var9 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visiblePro", "true").equalsIgnoreCase("true");
       if (App.a) {
          this.setEnabled(var6);
          this.d = var8;
@@ -169,14 +169,14 @@ public class MyPreferenceText extends Preference {
    public void a(String var1) {
       this.l = var1;
       if (this.k == null) {
-         com.dof100.morsenotifier.i.a("MyPreferenceText.setValue ERROR  mValueTV == null");
+         MyLog.log("MyPreferenceText.setValue ERROR  mValueTV == null");
       } else {
          this.k.setText(var1);
       }
    }
 
    protected void onBindView(View var1) {
-      com.dof100.morsenotifier.i.a("MyPreferenceText.onBindView");
+      MyLog.log("MyPreferenceText.onBindView");
       TextView var2 = (TextView)var1.findViewById(16908310);
       if (this.i && var2 != null) {
          var2.setTextColor(a);
@@ -243,7 +243,7 @@ public class MyPreferenceText extends Preference {
    }
 
    protected View onCreateView(ViewGroup var1) {
-      com.dof100.morsenotifier.i.a("MyPreferenceText.onBindView");
+      MyLog.log("MyPreferenceText.onBindView");
       View var2 = super.onCreateView(var1);
       if (!this.d) {
          var2 = new View(var1.getContext());

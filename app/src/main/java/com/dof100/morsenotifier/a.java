@@ -68,10 +68,10 @@ class a {
       case 2:
          return "All non-system apps";
       default:
-         com.dof100.morsenotifier.i.a(String.format("MyAppNotificationFilter.getAppName mPackage=%s", this.a));
+         MyLog.log(String.format("MyAppNotificationFilter.getAppName mPackage=%s", this.a));
          PackageManager var6 = var1.getPackageManager();
          if (var6 == null) {
-            com.dof100.morsenotifier.i.a("MyAppNotificationFilter.getAppName ERROR PackageManager=null");
+            MyLog.log("MyAppNotificationFilter.getAppName ERROR PackageManager=null");
             return this.a;
          } else {
             ApplicationInfo var5;
@@ -89,7 +89,7 @@ class a {
                if (var7 == null) {
                   return this.a;
                } else {
-                  com.dof100.morsenotifier.i.a(String.format("MyAppNotificationFilter.getAppName appname=%s", var7));
+                  MyLog.log(String.format("MyAppNotificationFilter.getAppName appname=%s", var7));
                   return var7;
                }
             }
@@ -180,7 +180,7 @@ class a {
       return var11.toString();
    }
 
-   public String a(m var1) {
+   public String a(MyRecentAppNotification var1) {
       String var2;
       byte var12;
       label157: {
@@ -236,7 +236,7 @@ class a {
       if (!var15) {
          return "";
       } else {
-         com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.checkNotification package name OK (%s)", var1.b));
+         MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.checkNotification package name OK (%s)", var1.b));
          StringBuilder var11 = new StringBuilder();
          var11.append(var1.c);
          var11.append(var1.d);
@@ -247,7 +247,7 @@ class a {
          int var6;
          boolean var7;
          if (this.b.isEmpty()) {
-            com.dof100.morsenotifier.i.a("MyAppNotificationFilter.checkNotification mCriteriaContains OK (empty)");
+            MyLog.log("MyAppNotificationFilter.checkNotification mCriteriaContains OK (empty)");
             var15 = true;
          } else {
             var4 = this.b.toLowerCase().split(" or ");
@@ -263,7 +263,7 @@ class a {
 
                String var8 = var4[var6];
                if (var2.contains(var8.trim())) {
-                  com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaContains OK (contains %s)", var8));
+                  MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaContains OK (contains %s)", var8));
                   var7 = true;
                }
 
@@ -277,7 +277,7 @@ class a {
          } else {
             String var14;
             if (this.c.isEmpty()) {
-               com.dof100.morsenotifier.i.a("MyAppNotificationFilter.checkNotification mFilterContainsnot OK (empty)");
+               MyLog.log("MyAppNotificationFilter.checkNotification mFilterContainsnot OK (empty)");
                var7 = var15;
             } else {
                String[] var18 = this.c.toLowerCase().split(" or ");
@@ -292,7 +292,7 @@ class a {
 
                   var14 = var18[var6];
                   if (var2.contains(var14.trim())) {
-                     com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mFilterContainsnot found (contasins %s)", var14));
+                     MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mFilterContainsnot found (contasins %s)", var14));
                      var15 = false;
                   }
 
@@ -304,7 +304,7 @@ class a {
                var10 = "MyAppNotificationFilter.checkNotification Filter does not match (contains not)";
             } else {
                if (this.d.isEmpty()) {
-                  com.dof100.morsenotifier.i.a("MyAppNotificationFilter.checkNotification mCriteriaAdvCategory OK (empty)");
+                  MyLog.log("MyAppNotificationFilter.checkNotification mCriteriaAdvCategory OK (empty)");
                } else {
                   var4 = this.d.toLowerCase().split(" or ");
                   var5 = var4.length;
@@ -322,7 +322,7 @@ class a {
                      if (var1.f != null) {
                         var7 = var15;
                         if (var1.f.toLowerCase().equals(var2.trim())) {
-                           com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaAdvCategory found (cat=%s)", var2));
+                           MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaAdvCategory found (cat=%s)", var2));
                            var7 = true;
                         }
                      }
@@ -337,7 +337,7 @@ class a {
                } else {
                   boolean var17;
                   if (this.e.isEmpty()) {
-                     com.dof100.morsenotifier.i.a("MyAppNotificationFilter.checkNotification mCriteriaAdvID OK (empty)");
+                     MyLog.log("MyAppNotificationFilter.checkNotification mCriteriaAdvID OK (empty)");
                      var17 = var7;
                   } else {
                      String[] var13 = this.e.toLowerCase().split(" or ");
@@ -362,7 +362,7 @@ class a {
                            }
 
                            if (var1.g == var6) {
-                              com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaAdvID found (id=%d)", var6));
+                              MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.checkNotification mCriteriaAdvID found (id=%d)", var6));
                               var15 = true;
                            }
                         }
@@ -372,7 +372,7 @@ class a {
                   }
 
                   if (var17) {
-                     com.dof100.morsenotifier.i.a("MyAppNotificationFilter.checkNotification Filter matches OK");
+                     MyLog.log("MyAppNotificationFilter.checkNotification Filter matches OK");
                      var2 = this.i;
                      var14 = var2;
                      StringBuilder var16;
@@ -410,13 +410,13 @@ class a {
             }
          }
 
-         com.dof100.morsenotifier.i.a(var10);
+         MyLog.log(var10);
          return "";
       }
    }
 
    public void a(Editor var1, int var2) {
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save - filter no %d, package    =%s", var2, this.a));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save - filter no %d, package    =%s", var2, this.a));
       StringBuilder var3 = new StringBuilder();
       var3.append("app_filter_");
       var3.append(var2);
@@ -467,11 +467,11 @@ class a {
       var3.append(var2);
       var3.append("_SayAfter");
       var1.putString(var3.toString(), this.j);
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save %d", var2));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save package    =%s", this.a));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save contains   =%s contains not=%s", this.b, this.c));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save Say title  =%b text =%b ticker=%b", this.f, this.g, this.h));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.save Say before =%s after=%s", this.i, this.j));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save %d", var2));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save package    =%s", this.a));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save contains   =%s contains not=%s", this.b, this.c));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save Say title  =%b text =%b ticker=%b", this.f, this.g, this.h));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.save Say before =%s after=%s", this.i, this.j));
    }
 
    public void a(SharedPreferences var1, int var2) {
@@ -526,6 +526,6 @@ class a {
       var3.append(var2);
       var3.append("_SayAfter");
       this.j = var1.getString(var3.toString(), this.j);
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyAppNotificationFilter.load - filter no %d, package    =%s", var2, this.a));
+      MyLog.log(String.format(Locale.US, "MyAppNotificationFilter.load - filter no %d, package    =%s", var2, this.a));
    }
 }

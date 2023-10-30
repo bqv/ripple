@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 class g {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("JobCreatorHolder");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobCreatorHolder");
    private final List b = new CopyOnWriteArrayList();
 
    public g() {

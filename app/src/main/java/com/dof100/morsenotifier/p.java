@@ -201,7 +201,7 @@ public class p {
    public void a(Editor var1, int var2) {
       Locale var3 = Locale.US;
       int var4 = 0;
-      i.a(String.format(var3, "MyReminder.save - no %d", var2));
+      MyLog.log(String.format(var3, "MyReminder.save - no %d", var2));
       StringBuilder var5 = new StringBuilder();
       var5.append("reminder_");
       var5.append(var2);

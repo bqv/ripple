@@ -6,29 +6,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-public interface k {
-   void a(int var1);
+public interface JobProxy {
+   void cancel(int var1);
 
-   void a(m var1);
+   void plantOneOff(JobRequest var1);
 
-   void b(m var1);
+   void plantPeriodic(JobRequest var1);
 
-   void c(m var1);
+   void plantPeriodicFlexsupport(JobRequest var1);
 
-   boolean d(m var1);
+   boolean isPlatformJobScheduled(JobRequest var1);
 
    public static final class a {
       private static final Object a = new Object();
       private final Context b;
       private final int c;
-      private final com.evernote.android.job.a.d d;
+      private final com.evernote.android.job.util.d d;
       private final i e;
 
-      public a(Service var1, com.evernote.android.job.a.d var2, int var3) {
+      public a(Service var1, com.evernote.android.job.util.d var2, int var3) {
          this((Context)var1, var2, var3);
       }
 
-      a(Context var1, com.evernote.android.job.a.d var2, int var3) {
+      a(Context var1, com.evernote.android.job.util.d var2, int var3) {
          this.b = var1;
          this.c = var3;
          this.d = var2;
@@ -65,11 +65,11 @@ public interface k {
          return var2 ? var0 : Long.MAX_VALUE;
       }
 
-      public static long a(m var0) {
+      public static long a(JobRequest var0) {
          return var0.y() > 0 ? var0.v() : var0.e();
       }
 
-      public static long a(m var0, boolean var1) {
+      public static long a(JobRequest var0, boolean var1) {
          long var2;
          if (var0.y() > 0) {
             var2 = var0.v();
@@ -103,7 +103,7 @@ public interface k {
             d var5 = var2[var4];
             if (var5.a(var0)) {
                try {
-                  var5.b(var0).a(var1);
+                  var5.b(var0).cancel(var1);
                } catch (Exception var6) {
                }
             }
@@ -163,35 +163,35 @@ public interface k {
          }
       }
 
-      public static long b(m var0) {
+      public static long b(JobRequest var0) {
          return a(var0, false);
       }
 
-      public static long c(m var0) {
+      public static long c(JobRequest var0) {
          return a(a(var0), (b(var0) - a(var0)) / 2L);
       }
 
-      public static long d(m var0) {
+      public static long d(JobRequest var0) {
          return Math.max(1L, var0.j() - var0.k());
       }
 
-      public static long e(m var0) {
+      public static long e(JobRequest var0) {
          return var0.j();
       }
 
-      public static long f(m var0) {
+      public static long f(JobRequest var0) {
          return a(d(var0), (e(var0) - d(var0)) / 2L);
       }
 
-      public static int g(m var0) {
+      public static int g(JobRequest var0) {
          return var0.y();
       }
 
-      public c.b a(m param1, Bundle param2) {
+      public c.b a(JobRequest param1, Bundle param2) {
          // $FF: Couldn't be decompiled
       }
 
-      public m a(boolean var1, boolean var2) {
+      public JobRequest a(boolean var1, boolean var2) {
          Object var3 = a;
          synchronized(var3){}
 
@@ -208,7 +208,7 @@ public interface k {
                break label1438;
             }
 
-            m var4;
+            JobRequest var4;
             c var5;
             try {
                var4 = this.e.a(this.c, true);
@@ -356,7 +356,7 @@ public interface k {
          }
       }
 
-      public void h(m var1) {
+      public void h(JobRequest var1) {
          this.e.f().a(var1);
       }
    }

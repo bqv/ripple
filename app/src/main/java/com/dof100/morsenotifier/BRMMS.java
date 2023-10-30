@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class BRMMS extends BroadcastReceiver {
    public void onReceive(Context var1, Intent var2) {
-      i.a(var1, "BRMMS.onReceive");
+      MyLog.log(var1, "BRMMS.onReceive");
       String var3 = var2.getAction();
       String var4 = var2.getType();
 
@@ -105,7 +105,7 @@ public class BRMMS extends BroadcastReceiver {
                         var50 = var3;
 
                         try {
-                           i.a(var1, var53.toString());
+                           MyLog.log(var1, var53.toString());
                         } catch (Exception var40) {
                            var10001 = false;
                            break label319;
@@ -187,7 +187,7 @@ public class BRMMS extends BroadcastReceiver {
                               var50 = var4;
 
                               try {
-                                 i.a(var1, var51.toString());
+                                 MyLog.log(var1, var51.toString());
                               } catch (Exception var31) {
                                  var10001 = false;
                                  break label319;
@@ -234,7 +234,7 @@ public class BRMMS extends BroadcastReceiver {
                         var50 = var4;
 
                         try {
-                           i.a(var51.toString());
+                           MyLog.log(var51.toString());
                         } catch (Exception var25) {
                            var10001 = false;
                            break label319;
@@ -279,7 +279,7 @@ public class BRMMS extends BroadcastReceiver {
                         var50 = var4;
 
                         try {
-                           i.a(var1, var51.toString());
+                           MyLog.log(var1, var51.toString());
                         } catch (Exception var19) {
                            var10001 = false;
                            break label319;
@@ -348,7 +348,7 @@ public class BRMMS extends BroadcastReceiver {
                         var50 = var4;
 
                         try {
-                           i.a(var1, var56.toString());
+                           MyLog.log(var1, var56.toString());
                            break label303;
                         } catch (Exception var11) {
                            var10001 = false;
@@ -359,7 +359,7 @@ public class BRMMS extends BroadcastReceiver {
                      var50 = var7;
                   }
 
-                  i.a(var1, "BRMMS.onReceive ERROR: Exception");
+                  MyLog.log(var1, "BRMMS.onReceive ERROR: Exception");
                   break label304;
                }
 
@@ -370,7 +370,7 @@ public class BRMMS extends BroadcastReceiver {
             var50 = "nothing";
          }
 
-         i.a(var1, String.format(Locale.US, "BRMMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var50, var3, ""));
+         MyLog.log(var1, String.format(Locale.US, "BRMMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var50, var3, ""));
          Intent var54 = new Intent(var1, ServiceMain.class);
          var54.putExtra(var1.getResources().getString(2131492900), var50);
          var54.putExtra(var1.getResources().getString(2131492875), var3);

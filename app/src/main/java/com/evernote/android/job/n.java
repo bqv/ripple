@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class n {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("JobStorage");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobStorage");
    private final SharedPreferences b;
    private final n.a c;
    private AtomicInteger d;
@@ -42,7 +42,7 @@ class n {
 
    }
 
-   private m a(int param1, boolean param2) {
+   private JobRequest a(int param1, boolean param2) {
       // $FF: Couldn't be decompiled
    }
 
@@ -71,7 +71,7 @@ class n {
 
    }
 
-   private boolean a(m var1, int var2) {
+   private boolean a(JobRequest var1, int var2) {
       this.h.writeLock().lock();
 
       SQLiteDatabase var3;
@@ -150,7 +150,7 @@ class n {
    }
 
    // $FF: synthetic method
-   static boolean a(n var0, m var1, int var2) {
+   static boolean a(n var0, JobRequest var1, int var2) {
       return var0.a(var1, var2);
    }
 
@@ -158,7 +158,7 @@ class n {
       // $FF: Couldn't be decompiled
    }
 
-   private void c(m var1) {
+   private void c(JobRequest var1) {
       this.c.put(var1.c(), var1);
    }
 
@@ -213,11 +213,11 @@ class n {
    }
 
    // $FF: synthetic method
-   static com.evernote.android.job.a.d d() {
+   static com.evernote.android.job.util.d d() {
       return a;
    }
 
-   private void d(m var1) {
+   private void d(JobRequest var1) {
       Object var9 = var1.F();
 
       SQLiteDatabase var2;
@@ -309,12 +309,12 @@ class n {
       throw var25;
    }
 
-   public m a(int var1) {
+   public JobRequest a(int var1) {
       this.h.readLock().lock();
 
-      m var2;
+      JobRequest var2;
       try {
-         var2 = (m)this.c.get(var1);
+         var2 = (JobRequest)this.c.get(var1);
       } finally {
          this.h.readLock().unlock();
       }
@@ -326,7 +326,7 @@ class n {
       // $FF: Couldn't be decompiled
    }
 
-   public void a(m var1) {
+   public void a(JobRequest var1) {
       this.h.writeLock().lock();
 
       try {
@@ -338,7 +338,7 @@ class n {
 
    }
 
-   public void a(m param1, ContentValues param2) {
+   public void a(JobRequest param1, ContentValues param2) {
       // $FF: Couldn't be decompiled
    }
 
@@ -357,7 +357,7 @@ class n {
       }
    }
 
-   public void b(m var1) {
+   public void b(JobRequest var1) {
       this.a(var1, var1.c());
    }
 
@@ -370,7 +370,7 @@ class n {
          super(30);
       }
 
-      protected m a(Integer var1) {
+      protected JobRequest a(Integer var1) {
          return n.this.a(var1, true);
       }
 
@@ -402,10 +402,10 @@ class n {
          var1.execSQL("alter table jobs add column flexMs integer;");
          var1.execSQL("alter table jobs add column flexSupport integer;");
          ContentValues var2 = new ContentValues();
-         var2.put("intervalMs", m.d);
+         var2.put("intervalMs", JobRequest.d);
          StringBuilder var3 = new StringBuilder();
          var3.append("intervalMs>0 AND intervalMs<");
-         var3.append(m.d);
+         var3.append(JobRequest.d);
          var1.update("jobs", var2, var3.toString(), new String[0]);
          var1.execSQL("update jobs set flexMs = intervalMs;");
       }

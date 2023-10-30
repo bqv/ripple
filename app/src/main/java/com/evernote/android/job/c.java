@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.lang.ref.WeakReference;
 
 public abstract class c {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("Job");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("Job");
    private c.a b;
    private WeakReference c;
    private Context d;
@@ -22,7 +22,7 @@ public abstract class c {
 
    protected abstract c.b a(c.a var1);
 
-   final c a(m var1, Bundle var2) {
+   final c a(JobRequest var1, Bundle var2) {
       this.b = new c.a(var1, var2);
       return this;
    }
@@ -227,8 +227,8 @@ public abstract class c {
    }
 
    protected boolean i() {
-      m.d var1 = this.j().e().q();
-      m.d var2 = m.d.a;
+      JobRequest.NetworkType var1 = this.j().e().q();
+      JobRequest.NetworkType var2 = JobRequest.d.a;
       boolean var3 = true;
       boolean var4 = true;
       if (var1 == var2) {
@@ -237,17 +237,17 @@ public abstract class c {
          var2 = com.evernote.android.job.a.c.c(this.k());
          switch(var1) {
          case b:
-            if (var2 != m.d.a) {
+            if (var2 != JobRequest.d.a) {
                return true;
             }
 
             return false;
          case d:
             var4 = var3;
-            if (var2 != m.d.d) {
+            if (var2 != JobRequest.d.d) {
                var4 = var3;
-               if (var2 != m.d.c) {
-                  if (var2 == m.d.e) {
+               if (var2 != JobRequest.d.c) {
+                  if (var2 == JobRequest.d.e) {
                      return true;
                   }
 
@@ -257,14 +257,14 @@ public abstract class c {
 
             return var4;
          case c:
-            if (var2 == m.d.c) {
+            if (var2 == JobRequest.d.c) {
                return true;
             }
 
             return false;
          case e:
-            if (var2 != m.d.b) {
-               if (var2 == m.d.d) {
+            if (var2 != JobRequest.d.b) {
+               if (var2 == JobRequest.d.d) {
                   return true;
                }
 
@@ -379,17 +379,17 @@ public abstract class c {
    }
 
    public static final class a {
-      private final m a;
-      private com.evernote.android.job.a.a.b b;
+      private final JobRequest a;
+      private com.evernote.android.job.util.a.b b;
       private Bundle c;
 
-      private a(m var1, Bundle var2) {
+      private a(JobRequest var1, Bundle var2) {
          this.a = var1;
          this.c = var2;
       }
 
       // $FF: synthetic method
-      a(m var1, Bundle var2, Object var3) {
+      a(JobRequest var1, Bundle var2, Object var3) {
          this(var1, var2);
       }
 
@@ -405,18 +405,18 @@ public abstract class c {
          return this.a.i();
       }
 
-      public com.evernote.android.job.a.a.b d() {
+      public com.evernote.android.job.util.a.b d() {
          if (this.b == null) {
             this.b = this.a.s();
             if (this.b == null) {
-               this.b = new com.evernote.android.job.a.a.b();
+               this.b = new com.evernote.android.job.util.a.b();
             }
          }
 
          return this.b;
       }
 
-      m e() {
+      JobRequest e() {
          return this.a;
       }
 

@@ -4,8 +4,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import java.util.Locale;
 
-public class m {
-   long a = -1L;
+public class MyRecentAppNotification {
+   long timestamp = -1L;
    String b = "";
    String c = "";
    String d = "";
@@ -16,13 +16,13 @@ public class m {
    int i = -1;
    String j = "";
 
-   public void a(Editor var1, int var2) {
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyRecentAppNotification_.save - notif no %d, package    =%s", var2, this.b));
+   public void save(Editor var1, int var2) {
+      MyLog.log(String.format(Locale.US, "MyRecentAppNotification_.save - notif no %d, package    =%s", var2, this.b));
       StringBuilder var3 = new StringBuilder();
       var3.append("MyRecentAppNotification_");
       var3.append(var2);
       var3.append("_mDateTime");
-      var1.putLong(var3.toString(), this.a);
+      var1.putLong(var3.toString(), this.timestamp);
       var3 = new StringBuilder();
       var3.append("MyRecentAppNotification_");
       var3.append(var2);
@@ -70,12 +70,12 @@ public class m {
       var1.putString(var3.toString(), this.j);
    }
 
-   public void a(SharedPreferences var1, int var2) {
+   public void load(SharedPreferences var1, int var2) {
       StringBuilder var3 = new StringBuilder();
       var3.append("MyRecentAppNotification_");
       var3.append(var2);
       var3.append("_mDateTime");
-      this.a = var1.getLong(var3.toString(), 0L);
+      this.timestamp = var1.getLong(var3.toString(), 0L);
       var3 = new StringBuilder();
       var3.append("MyRecentAppNotification_");
       var3.append(var2);
@@ -121,6 +121,6 @@ public class m {
       var3.append(var2);
       var3.append("_tmpAnnouncement");
       this.j = var1.getString(var3.toString(), "");
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyRecentAppNotification.load - notif no %d, package    =%s", var2, this.b));
+      MyLog.log(String.format(Locale.US, "MyRecentAppNotification.load - notif no %d, package    =%s", var2, this.b));
    }
 }

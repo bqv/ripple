@@ -3,7 +3,7 @@ package com.evernote.android.job.c;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo.Builder;
 import android.content.Context;
-import com.evernote.android.job.m;
+import com.evernote.android.job.JobRequest;
 
 @TargetApi(24)
 public class a extends com.evernote.android.job.v21.a {
@@ -15,7 +15,7 @@ public class a extends com.evernote.android.job.v21.a {
       super(var1, var2);
    }
 
-   protected int a(m.d var1) {
+   protected int a(JobRequest.NetworkType var1) {
       return null.a[var1.ordinal()] != 1 ? super.a(var1) : 3;
    }
 
@@ -23,12 +23,12 @@ public class a extends com.evernote.android.job.v21.a {
       return var1.setPeriodic(var2, var4);
    }
 
-   public void c(m var1) {
+   public void plantPeriodicFlexsupport(JobRequest var1) {
       this.b.c("plantPeriodicFlexSupport called although flex is supported");
-      super.c(var1);
+      super.plantPeriodicFlexsupport(var1);
    }
 
-   public boolean d(m var1) {
+   public boolean isPlatformJobScheduled(JobRequest var1) {
       try {
          boolean var2 = this.a(this.a().getPendingJob(var1.c()), var1);
          return var2;

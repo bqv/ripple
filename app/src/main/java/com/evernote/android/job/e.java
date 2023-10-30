@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public final class e {
    private static final EnumMap a;
-   private static final com.evernote.android.job.a.d b = new com.evernote.android.job.a.d("JobConfig");
+   private static final com.evernote.android.job.util.d b = new com.evernote.android.job.util.d("JobConfig");
    private static final ExecutorService c = Executors.newCachedThreadPool(new ThreadFactory() {
       private final AtomicInteger a = new AtomicInteger();
 
@@ -35,7 +35,7 @@ public final class e {
    private static volatile boolean g;
    private static volatile int h;
    private static volatile boolean i;
-   private static volatile com.evernote.android.job.a.b j;
+   private static volatile com.evernote.android.job.util.b j;
    private static volatile ExecutorService k;
    private static volatile boolean l;
 
@@ -81,7 +81,7 @@ public final class e {
       return i;
    }
 
-   public static com.evernote.android.job.a.b g() {
+   public static com.evernote.android.job.util.b g() {
       return j;
    }
 

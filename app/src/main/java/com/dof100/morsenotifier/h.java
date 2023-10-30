@@ -41,7 +41,7 @@ class h implements com.evernote.android.job.f {
          return null;
       }
 
-      i.a(String.format(var6, "MyChimeJobCreator.create Creating job with tag=%s", var5));
+      MyLog.log(String.format(var6, "MyChimeJobCreator.create Creating job with tag=%s", var5));
       return var3;
    }
 }

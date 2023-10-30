@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class i {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("JobManager");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("JobManager");
    @SuppressLint({"StaticFieldLeak"})
    private static volatile i b;
    private final Context c;
@@ -175,16 +175,16 @@ public final class i {
       }
    }
 
-   private void a(m var1, d var2, boolean var3, boolean var4) {
-      k var5 = this.a(var2);
+   private void a(JobRequest var1, d var2, boolean var3, boolean var4) {
+      JobProxy var5 = this.a(var2);
       if (var3) {
          if (var4) {
-            var5.c(var1);
+            var5.plantPeriodicFlexsupport(var1);
          } else {
-            var5.b(var1);
+            var5.plantPeriodic(var1);
          }
       } else {
-         var5.a(var1);
+         var5.plantOneOff(var1);
       }
    }
 
@@ -223,10 +223,10 @@ public final class i {
 
    }
 
-   private boolean b(m var1) {
+   private boolean b(JobRequest var1) {
       if (var1 != null) {
          a.a("Found pending job %s, canceling", var1);
-         this.a(var1.w()).a(var1.c());
+         this.a(var1.w()).cancel(var1.c());
          this.e().b(var1);
          var1.a(0L);
          return true;
@@ -256,7 +256,7 @@ public final class i {
             label464: {
                try {
                   while(var3.hasNext()) {
-                     if (this.b((m)var3.next())) {
+                     if (this.b((JobRequest)var3.next())) {
                         break label464;
                      }
                   }
@@ -329,13 +329,13 @@ public final class i {
       return this.f.a(var1);
    }
 
-   k a(d var1) {
+   JobProxy a(d var1) {
       return var1.b(this.c);
    }
 
-   m a(int var1, boolean var2) {
-      m var3 = this.e.a(var1);
-      m var4 = var3;
+   JobRequest a(int var1, boolean var2) {
+      JobRequest var3 = this.e.a(var1);
+      JobRequest var4 = var3;
       if (!var2) {
          var4 = var3;
          if (var3 != null) {
@@ -359,8 +359,8 @@ public final class i {
          Iterator var4 = var6.iterator();
 
          while(var4.hasNext()) {
-            m var5 = (m)var4.next();
-            if (var5.B() && !var5.w().b(this.c).d(var5)) {
+            JobRequest var5 = (JobRequest)var4.next();
+            if (var5.B() && !var5.w().b(this.c).isPlatformJobScheduled(var5)) {
                this.e.b(var5);
                var4.remove();
             }
@@ -374,7 +374,7 @@ public final class i {
       this.d.a(var1);
    }
 
-   public void a(m param1) {
+   public void a(JobRequest param1) {
       // $FF: Couldn't be decompiled
    }
 
@@ -389,7 +389,7 @@ public final class i {
    public boolean b(int var1) {
       boolean var2 = this.b(this.a(var1, true));
       boolean var3 = this.a(this.a(var1));
-      k.a.a(this.c, var1);
+      JobProxy.a.a(this.c, var1);
       return var2 | var3;
    }
 

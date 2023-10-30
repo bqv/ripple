@@ -37,7 +37,7 @@ class s implements Renderer {
    private float z = 0.0F;
 
    s(ArrayList var1, int var2, boolean var3, boolean var4, int var5, int var6, int var7, int var8) {
-      com.dof100.morsenotifier.i.a("MyMorseRenderer constructor");
+      MyLog.log("MyMorseRenderer constructor");
       this.a = var2;
       this.b = var3;
       this.c = var4;
@@ -243,7 +243,7 @@ class s implements Renderer {
    }
 
    public void onSurfaceChanged(GL10 var1, int var2, int var3) {
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width=%d  height=%d ", var2, var3));
+      MyLog.log(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width=%d  height=%d ", var2, var3));
       int var4 = var3;
       if (var3 == 0) {
          var4 = 1;
@@ -260,11 +260,11 @@ class s implements Renderer {
 
       this.z = 4.0F;
       float var6 = (float)(Math.toDegrees(Math.atan2((double)this.y, (double)(this.z + 25.0F))) * 2.0D);
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width,height = %d,%d", var2, var4));
+      MyLog.log(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width,height = %d,%d", var2, var4));
       StringBuilder var7 = new StringBuilder();
       var7.append("MyMorseRenderer.onSurfaceChanged aspect=");
       var7.append(var5);
-      com.dof100.morsenotifier.i.a(var7.toString());
+      MyLog.log(var7.toString());
       var1.glViewport(0, 0, var2, var4);
       var1.glMatrixMode(5889);
       var1.glLoadIdentity();
@@ -272,7 +272,7 @@ class s implements Renderer {
    }
 
    public void onSurfaceCreated(GL10 var1, EGLConfig var2) {
-      com.dof100.morsenotifier.i.a("MyMorseRenderer.onSurfacecreated");
+      MyLog.log("MyMorseRenderer.onSurfacecreated");
       if (this.a == 1) {
          this.t = 0.0F;
          this.u = 0.0F;

@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 
 public final class JobRescheduleService extends android.support.v4.app.c {
    static CountDownLatch j;
-   private static final com.evernote.android.job.a.d k = new com.evernote.android.job.a.d("JobRescheduleService", false);
+   private static final com.evernote.android.job.util.d k = new com.evernote.android.job.util.d("JobRescheduleService", false);
 
    static void a(Context var0) {
       try {
@@ -29,14 +29,14 @@ public final class JobRescheduleService extends android.support.v4.app.c {
       boolean var4 = false;
 
       while(true) {
-         m var5;
+         JobRequest var5;
          boolean var6;
          do {
             if (!var8.hasNext()) {
                return var3;
             }
 
-            var5 = (m)var8.next();
+            var5 = (JobRequest)var8.next();
             if (var5.z()) {
                if (var1.a(var5.c()) == null) {
                   var6 = true;
@@ -44,7 +44,7 @@ public final class JobRescheduleService extends android.support.v4.app.c {
                   var6 = false;
                }
             } else {
-               var6 = var1.a(var5.w()).d(var5) ^ true;
+               var6 = var1.a(var5.w()).isPlatformJobScheduled(var5) ^ true;
             }
          } while(!var6);
 

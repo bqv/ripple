@@ -73,7 +73,7 @@ class f {
       case 2:
          return 2;
       default:
-         i.a("MyAppFilters.getApplicationInfoIndex");
+         MyLog.log("MyAppFilters.getApplicationInfoIndex");
 
          for(var2 = 3; var2 < this.a.size(); ++var2) {
             e var3 = (e)this.a.get(var2);

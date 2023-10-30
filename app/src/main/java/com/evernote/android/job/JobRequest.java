@@ -7,14 +7,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import java.util.concurrent.TimeUnit;
 
-public final class m {
-   public static final m.a a;
-   public static final m.d b;
-   public static final m.c c;
+public final class JobRequest {
+   public static final JobRequest.a a;
+   public static final NetworkType b;
+   public static final JobRequest.c c;
    public static final long d;
    public static final long e;
-   private static final com.evernote.android.job.a.d f;
-   private final m.b g;
+   private static final com.evernote.android.job.util.d f;
+   private final JobRequest.b g;
    private int h;
    private long i;
    private boolean j;
@@ -22,21 +22,21 @@ public final class m {
    private long l;
 
    static {
-      a = m.a.b;
-      b = m.d.a;
-      c = new m.c() {
+      a = JobRequest.a.b;
+      b = JobRequest.d.a;
+      c = new JobRequest.c() {
       };
       d = TimeUnit.MINUTES.toMillis(15L);
       e = TimeUnit.MINUTES.toMillis(5L);
-      f = new com.evernote.android.job.a.d("JobRequest");
+      f = new com.evernote.android.job.util.d("JobRequest");
    }
 
-   private m(m.b var1) {
+   private JobRequest(JobRequest.b var1) {
       this.g = var1;
    }
 
    // $FF: synthetic method
-   m(m.b var1, Object var2) {
+   JobRequest(JobRequest.b var1, Object var2) {
       this(var1);
    }
 
@@ -48,8 +48,8 @@ public final class m {
       return com.evernote.android.job.e.a() ? TimeUnit.MINUTES.toMillis(1L) : d;
    }
 
-   static m a(Cursor var0) {
-      m var1 = (new m.b(var0)).a();
+   static JobRequest a(Cursor var0) {
+      JobRequest var1 = (new JobRequest.b(var0)).a();
       var1.h = var0.getInt(var0.getColumnIndex("numFailures"));
       var1.i = var0.getLong(var0.getColumnIndex("scheduledAt"));
       int var2 = var0.getInt(var0.getColumnIndex("started"));
@@ -95,10 +95,10 @@ public final class m {
       return this.c();
    }
 
-   public m.b E() {
+   public JobRequest.b E() {
       long var1 = this.i;
       com.evernote.android.job.i.a().b(this.c());
-      m.b var3 = new m.b(this.g);
+      JobRequest.b var3 = new JobRequest.b(this.g);
       this.j = false;
       if (!this.i()) {
          var1 = com.evernote.android.job.e.g().a() - var1;
@@ -119,8 +119,8 @@ public final class m {
       return var1;
    }
 
-   m a(boolean var1, boolean var2) {
-      m var3 = (new m.b(this.g, var2)).a();
+   JobRequest a(boolean var1, boolean var2) {
+      JobRequest var3 = (new JobRequest.b(this.g, var2)).a();
       if (var1) {
          var3.h = this.h + 1;
       }
@@ -180,7 +180,7 @@ public final class m {
       if (this == var1) {
          return true;
       } else if (var1 != null && this.getClass() == var1.getClass()) {
-         m var2 = (m)var1;
+         JobRequest var2 = (JobRequest)var1;
          return this.g.equals(var2.g);
       } else {
          return false;
@@ -191,7 +191,7 @@ public final class m {
       return this.g.d;
    }
 
-   public m.a g() {
+   public JobRequest.a g() {
       return this.g.f;
    }
 
@@ -235,7 +235,7 @@ public final class m {
       return this.g.m;
    }
 
-   public m.d q() {
+   public NetworkType q() {
       return this.g.o;
    }
 
@@ -243,7 +243,7 @@ public final class m {
       return this.m() || this.n() || this.o() || this.p() || this.q() != b;
    }
 
-   public com.evernote.android.job.a.a.b s() {
+   public com.evernote.android.job.util.a.b s() {
       if (this.g.p == null && !TextUtils.isEmpty(this.g.q)) {
          this.g.p = com.evernote.android.job.a.a.b.a(this.g.q);
       }
@@ -321,7 +321,7 @@ public final class m {
       private long c;
       private long d;
       private long e;
-      private m.a f;
+      private JobRequest.a f;
       private long g;
       private long h;
       private boolean i;
@@ -330,8 +330,8 @@ public final class m {
       private boolean l;
       private boolean m;
       private boolean n;
-      private m.d o;
-      private com.evernote.android.job.a.a.b p;
+      private NetworkType o;
+      private com.evernote.android.job.util.a.b p;
       private String q;
       private boolean r;
       private boolean s;
@@ -421,16 +421,16 @@ public final class m {
          this(var1);
       }
 
-      private b(m.b var1) {
+      private b(JobRequest.b var1) {
          this(var1, false);
       }
 
       // $FF: synthetic method
-      b(m.b var1, Object var2) {
+      b(JobRequest.b var1, Object var2) {
          this(var1);
       }
 
-      private b(m.b var1, boolean var2) {
+      private b(JobRequest.b var1, boolean var2) {
          this.t = Bundle.EMPTY;
          int var3;
          if (var2) {
@@ -462,7 +462,7 @@ public final class m {
       }
 
       // $FF: synthetic method
-      b(m.b var1, boolean var2, Object var3) {
+      b(JobRequest.b var1, boolean var2, Object var3) {
          this(var1, var2);
       }
 
@@ -511,7 +511,7 @@ public final class m {
          var1.put("transient", this.s);
       }
 
-      public m.b a(long var1) {
+      public JobRequest.b a(long var1) {
          this.n = true;
          long var3 = var1;
          if (var1 > 6148914691236517204L) {
@@ -522,7 +522,7 @@ public final class m {
          return this.a(var3, var3);
       }
 
-      public m.b a(long var1, long var3) {
+      public JobRequest.b a(long var1, long var3) {
          this.c = com.evernote.android.job.a.f.b(var1, "startInMs must be greater than 0");
          this.d = com.evernote.android.job.a.f.a(var3, var1, Long.MAX_VALUE, "endInMs");
          if (this.c > 6148914691236517204L) {
@@ -538,23 +538,23 @@ public final class m {
          return this;
       }
 
-      public m.b a(com.evernote.android.job.a.a.b var1) {
+      public JobRequest.b a(com.evernote.android.job.util.a.b var1) {
          if (var1 == null) {
             this.p = null;
             this.q = null;
             return this;
          } else {
-            this.p = new com.evernote.android.job.a.a.b(var1);
+            this.p = new com.evernote.android.job.util.a.b(var1);
             return this;
          }
       }
 
-      public m.b a(boolean var1) {
+      public JobRequest.b a(boolean var1) {
          this.i = var1;
          return this;
       }
 
-      public m a() {
+      public JobRequest a() {
          com.evernote.android.job.a.f.a((CharSequence)this.a);
          com.evernote.android.job.a.f.b(this.e, "backoffMs must be > 0");
          com.evernote.android.job.a.f.a((Object)this.f);
@@ -590,13 +590,13 @@ public final class m {
                      com.evernote.android.job.a.f.a(this.b, "id can't be negative");
                   }
 
-                  m.b var1 = new m.b(this);
+                  JobRequest.b var1 = new JobRequest.b(this);
                   if (this.b == -8765) {
                      var1.b = com.evernote.android.job.i.a().e().a();
                      com.evernote.android.job.a.f.a(var1.b, "id can't be negative");
                   }
 
-                  return new m(var1);
+                  return new JobRequest(var1);
                }
             } else {
                throw new IllegalArgumentException("You're trying to build a job with no constraints, this is not allowed.");
@@ -606,7 +606,7 @@ public final class m {
          }
       }
 
-      public m.b b(boolean var1) {
+      public JobRequest.b b(boolean var1) {
          this.r = var1;
          return this;
       }
@@ -618,7 +618,7 @@ public final class m {
             if (this.getClass() != var1.getClass()) {
                return false;
             } else {
-               m.b var2 = (m.b)var1;
+               JobRequest.b var2 = (JobRequest.b)var1;
                return this.b == var2.b;
             }
          } else {
@@ -634,7 +634,7 @@ public final class m {
    public interface c {
    }
 
-   public static enum d {
+   public static enum NetworkType {
       a,
       b,
       c,

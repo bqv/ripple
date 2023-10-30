@@ -1,4 +1,4 @@
-package com.evernote.android.job.a;
+package com.evernote.android.job.util;
 
 import android.content.Context;
 import java.text.SimpleDateFormat;
@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 public final class g {
    private static final ThreadLocal a = new ThreadLocal();
    private static final long b;
-   private static final d c;
+   private static final JobCat c;
 
    static {
       b = TimeUnit.DAYS.toMillis(1L);
-      c = new d("JobUtil");
+      c = new JobCat("JobUtil");
    }
 
    public static String a(long var0) {
@@ -61,7 +61,7 @@ public final class g {
       try {
          var5 = var0.getPackageManager().checkPermission(var1, var0.getPackageName());
       } catch (Exception var7) {
-         c.a((Throwable)var7);
+         c.e((Throwable)var7);
          var4 = var3;
          if (var2 < 1) {
             var4 = var3;

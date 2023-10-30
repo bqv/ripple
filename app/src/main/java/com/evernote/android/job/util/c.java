@@ -1,4 +1,4 @@
-package com.evernote.android.job.a;
+package com.evernote.android.job.util;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -9,7 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.PowerManager;
 import android.os.Build.VERSION;
-import com.evernote.android.job.m;
+import com.evernote.android.job.JobRequest;
 
 public final class c {
    @TargetApi(17)
@@ -62,24 +62,24 @@ public final class c {
       }
    }
 
-   public static m.d c(Context var0) {
+   public static JobRequest.NetworkType c(Context var0) {
       ConnectivityManager var3 = (ConnectivityManager)var0.getSystemService("connectivity");
 
       NetworkInfo var1;
       try {
          var1 = var3.getActiveNetworkInfo();
       } catch (Throwable var2) {
-         return m.d.a;
+         return JobRequest.d.a;
       }
 
       if (var1 != null && var1.isConnectedOrConnecting()) {
          if (!android.support.v4.b.a.a(var3)) {
-            return m.d.c;
+            return JobRequest.d.c;
          } else {
-            return var1.isRoaming() ? m.d.b : m.d.d;
+            return var1.isRoaming() ? JobRequest.d.b : JobRequest.d.d;
          }
       } else {
-         return m.d.a;
+         return JobRequest.d.a;
       }
    }
 }

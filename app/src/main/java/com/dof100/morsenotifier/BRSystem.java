@@ -15,7 +15,7 @@ public class BRSystem extends BroadcastReceiver {
    private int a(Context var1, NetworkInfo var2) {
       byte var3 = -2;
       if (var2 == null) {
-         i.a(var1, "BRSystem.wifiStateChanged netinfo=null");
+         MyLog.log(var1, "BRSystem.wifiStateChanged netinfo=null");
          return -2;
       } else {
          long var4 = System.currentTimeMillis();
@@ -25,7 +25,7 @@ public class BRSystem extends BroadcastReceiver {
          long var10 = var6.getLong("BRSystem_LastTimeWiFiDisconnected", 0L);
          long var12;
          if (var2.isConnected()) {
-            i.a(var1, "BRSystem.wifiStateChanged isConnected");
+            MyLog.log(var1, "BRSystem.wifiStateChanged isConnected");
             var12 = var4 - var8;
             var8 = var12;
             if (var12 < 0L) {
@@ -33,24 +33,24 @@ public class BRSystem extends BroadcastReceiver {
             }
 
             if (var7 == 1) {
-               i.a(var1, "BRSystem.wifiStateChanged already connected");
+               MyLog.log(var1, "BRSystem.wifiStateChanged already connected");
                var3 = -3;
             } else {
                if (var8 < 5000L) {
-                  i.a(var1, "BRSystem.wifiStateChanged dt since last connect < MINDT");
+                  MyLog.log(var1, "BRSystem.wifiStateChanged dt since last connect < MINDT");
                   var3 = -3;
                } else {
-                  i.a(var1, "BRSystem.wifiStateChanged connected");
+                  MyLog.log(var1, "BRSystem.wifiStateChanged connected");
                   var3 = 1;
                }
 
                var7 = 1;
             }
          } else if (var2.isConnectedOrConnecting()) {
-            i.a(var1, "BRSystem.onReceive wifiStateChanged isConnectedOrConnecting");
+            MyLog.log(var1, "BRSystem.onReceive wifiStateChanged isConnectedOrConnecting");
             var4 = var8;
          } else {
-            i.a(var1, "BRSystem.wifiStateChanged disConnected");
+            MyLog.log(var1, "BRSystem.wifiStateChanged disConnected");
             var12 = var4 - var10;
             var10 = var12;
             if (var12 < 0L) {
@@ -58,16 +58,16 @@ public class BRSystem extends BroadcastReceiver {
             }
 
             if (var7 == 0) {
-               i.a(var1, "BRSystem.wifiStateChanged already disconnected");
+               MyLog.log(var1, "BRSystem.wifiStateChanged already disconnected");
                var3 = -3;
                var10 = var4;
                var4 = var8;
             } else {
                if (var10 < 5000L) {
-                  i.a(var1, "BRSystem.wifiStateChanged dt since last disconnect < MINDT");
+                  MyLog.log(var1, "BRSystem.wifiStateChanged dt since last disconnect < MINDT");
                   var3 = -3;
                } else {
-                  i.a(var1, "BRSystem.onReceive wifiStateChanged disconnected");
+                  MyLog.log(var1, "BRSystem.onReceive wifiStateChanged disconnected");
                   var3 = 0;
                }
 
@@ -87,7 +87,7 @@ public class BRSystem extends BroadcastReceiver {
    }
 
    public void onReceive(Context var1, Intent var2) {
-      i.a(var1, "BRSystem.onReceive");
+      MyLog.log(var1, "BRSystem.onReceive");
       String var3 = "";
       String var4 = "";
       String var5 = var2.getAction();
@@ -185,13 +185,13 @@ public class BRSystem extends BroadcastReceiver {
             }
 
             if (!var8.isEmpty()) {
-               i.a(var1, String.format(Locale.US, "BRSystem.onReceive Sending intent to ServiceMain info=%s text2=%s", var8, var3));
+               MyLog.log(var1, String.format(Locale.US, "BRSystem.onReceive Sending intent to ServiceMain info=%s text2=%s", var8, var3));
                Intent var11 = new Intent(var1, ServiceMain.class);
                var11.putExtra(var1.getResources().getString(2131492900), var8);
                var11.putExtra(var1.getResources().getString(2131492876), var3);
                var1.startService(var11);
             } else {
-               i.a(var1, "BRSystem.onReceive Not sending intent");
+               MyLog.log(var1, "BRSystem.onReceive Not sending intent");
             }
          }
       }

@@ -17,7 +17,7 @@ class r extends ArrayAdapter implements OnClickListener {
 
    public r(Context var1, q var2, r.a var3) {
       super(var1, 2131296266, var2.a);
-      i.a("MyRemindersArrayAdapter.constructor");
+      MyLog.log("MyRemindersArrayAdapter.constructor");
       this.a = var1;
       this.b = var2;
       this.d = var3;
@@ -30,7 +30,7 @@ class r extends ArrayAdapter implements OnClickListener {
       var4.append(var1);
       var4.append("  v=");
       var4.append(var2);
-      i.a(var4.toString());
+      MyLog.log(var4.toString());
       p var5 = (p)this.b.a.get(var1);
       View var8 = var2;
       if (var2 == null) {
@@ -52,16 +52,16 @@ class r extends ArrayAdapter implements OnClickListener {
 
    public void onClick(View var1) {
       if (var1 != null) {
-         i.a("MyRemindersArrayAdapter.onClick");
+         MyLog.log("MyRemindersArrayAdapter.onClick");
          p var2 = (p)var1.getTag();
          if (var2 == null) {
-            i.a(this.a, "MyRemindersArrayAdapter.onClick ERROR f=null");
+            MyLog.log(this.a, "MyRemindersArrayAdapter.onClick ERROR f=null");
          } else {
             int var3 = this.b.a.indexOf(var2);
             StringBuilder var4 = new StringBuilder();
             var4.append("MyRemindersArrayAdapter.onClick index=");
             var4.append(var3);
-            i.a(var4.toString());
+            MyLog.log(var4.toString());
             String var5;
             if (var1.getId() == 2131165195) {
                var5 = "MyRemindersArrayAdapter.onClick b_delete";
@@ -73,7 +73,7 @@ class r extends ArrayAdapter implements OnClickListener {
                var5 = "MyRemindersArrayAdapter.onClick b_edit";
             }
 
-            i.a(var5);
+            MyLog.log(var5);
             this.d.a(var2, var3, var1);
          }
       }

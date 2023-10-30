@@ -23,7 +23,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
    private Spinner g = null;
 
    private void a() {
-      i.a("ActivityReminder.onActionTest");
+      MyLog.log("ActivityReminder.onActionTest");
       this.c();
       Intent var1 = new Intent(this, ServiceMain.class);
       var1.putExtra(this.getResources().getString(2131492900), this.getResources().getString(2131492886));
@@ -33,7 +33,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
    }
 
    private void b() {
-      i.a("ActivityReminder.object2view");
+      MyLog.log("ActivityReminder.object2view");
 
       for(int var1 = 0; var1 < 7; ++var1) {
          this.c[var1].setChecked(this.b.c[var1]);
@@ -53,7 +53,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
    }
 
    private void c() {
-      i.a("ActivityReminder.view2object");
+      MyLog.log("ActivityReminder.view2object");
 
       int var1;
       for(var1 = 0; var1 < 7; ++var1) {
@@ -80,7 +80,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
    }
 
    public void onClick(View var1) {
-      i.a("ActivityReminder.onClick");
+      MyLog.log("ActivityReminder.onClick");
       if (var1 != null) {
          if (var1.getId() == 2131165217) {
             this.a();
@@ -91,7 +91,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      i.a("ActivityReminder.onCreate");
+      MyLog.log("ActivityReminder.onCreate");
       this.setContentView(2131296264);
       ((Button)this.findViewById(2131165217)).setOnClickListener(this);
       this.a = new q(this);
@@ -104,7 +104,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
          var3 = new StringBuilder();
          var3.append("ActivityReminder.onCreate loaded entry at position = ");
          var3.append(var2);
-         i.a(var3.toString());
+         MyLog.log(var3.toString());
          var2 = 2131493317;
       } else {
          this.b = new p();
@@ -113,7 +113,7 @@ public class ActivityReminder extends Activity implements OnClickListener {
          var3 = new StringBuilder();
          var3.append("ActivityReminder.onCreate created new entry at position = ");
          var3.append(var2 - 1);
-         i.a(var3.toString());
+         MyLog.log(var3.toString());
          var2 = 2131493318;
       }
 
@@ -134,18 +134,18 @@ public class ActivityReminder extends Activity implements OnClickListener {
    }
 
    protected void onDestroy() {
-      i.a("ActivityReminder.onDestroy");
+      MyLog.log("ActivityReminder.onDestroy");
       super.onDestroy();
    }
 
    protected void onPause() {
-      i.a("ActivityReminder.onPause");
+      MyLog.log("ActivityReminder.onPause");
       this.c();
       super.onPause();
    }
 
    protected void onStop() {
-      i.a("ActivityReminder.onStop");
+      MyLog.log("ActivityReminder.onStop");
       super.onStop();
    }
 }

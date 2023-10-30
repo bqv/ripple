@@ -19,7 +19,7 @@ public class ActivityHTML extends Activity implements OnClickListener {
    private Button a;
 
    public void onClick(View var1) {
-      i.a("ActivityDisplayMessage.onClick");
+      MyLog.log("ActivityDisplayMessage.onClick");
       if (var1 != null) {
          if (var1.equals(this.a)) {
             this.finish();
@@ -158,9 +158,9 @@ public class ActivityHTML extends Activity implements OnClickListener {
 
          var15 = var18.toString().replace("[APPNAME]", App.e).replace("[APPVERSION]", App.f).replace("[VERTICALALIGN]", var3).replace("[APPPLAYSTORE]", App.l).replace("[APPPLAYSTOREPRO]", App.m);
          if (App.b) {
-            var15 = v.a(v.a(var15, "FREE", 1), "PRO", 2);
+            var15 = Utils.XMLDo(Utils.XMLDo(var15, "FREE", 1), "PRO", 2);
          } else {
-            var15 = v.a(v.a(var15, "FREE", 2), "PRO", 1);
+            var15 = Utils.XMLDo(Utils.XMLDo(var15, "FREE", 2), "PRO", 1);
          }
 
          var22.loadDataWithBaseURL("", var15, "text/html", "UTF-8", "");

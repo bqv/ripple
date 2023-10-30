@@ -1,4 +1,4 @@
-package com.evernote.android.job.a;
+package com.evernote.android.job.util;
 
 public final class a {
    public static final a a = new a(false, 1.0F);

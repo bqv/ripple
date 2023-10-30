@@ -32,7 +32,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append("MyEditTextPreference ");
       var2.append(this.getKey());
       var2.append(" Constructor(context) ");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       this.a(var1, (AttributeSet)null);
    }
 
@@ -42,7 +42,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var3.append("MyEditTextPreference ");
       var3.append(this.getKey());
       var3.append(" Constructor(context, attrs) ");
-      i.a(var3.toString());
+      MyLog.log(var3.toString());
       this.a(var1, var2);
    }
 
@@ -52,7 +52,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var4.append("MyEditTextPreference ");
       var4.append(this.getKey());
       var4.append(" Constructor(context, attrs, defStyleAttr) ");
-      i.a(var4.toString());
+      MyLog.log(var4.toString());
       this.a(var1, var2);
    }
 
@@ -64,7 +64,7 @@ public class MyPreferenceEditText extends EditTextPreference {
          var2.append("MyEditTextPreference ");
          var2.append(this.getKey());
          var2.append(" getValueStr ret = null");
-         i.a(var2.toString());
+         MyLog.log(var2.toString());
          return "";
       } else {
          String var4;
@@ -92,7 +92,7 @@ public class MyPreferenceEditText extends EditTextPreference {
          var3.append(this.getKey());
          var3.append(" getValueStr = ");
          var3.append(var4);
-         i.a(var3.toString());
+         MyLog.log(var3.toString());
          return var4;
       }
    }
@@ -102,14 +102,14 @@ public class MyPreferenceEditText extends EditTextPreference {
       var3.append("MyEditTextPreference ");
       var3.append(this.getKey());
       var3.append(" init");
-      i.a(var3.toString());
+      MyLog.log(var3.toString());
       if (var2 != null) {
-         boolean var4 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
+         boolean var4 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true").equalsIgnoreCase("true");
          if (App.a) {
             this.setEnabled(var4);
          }
 
-         var4 = v.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
+         var4 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true").equalsIgnoreCase("true");
          if (App.b) {
             this.setEnabled(var4);
          }
@@ -132,14 +132,14 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append("MyEditTextPreference ");
       var2.append(this.getKey());
       var2.append(" myCreateView");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       RelativeLayout var7 = (RelativeLayout)((TextView)var1.findViewById(16908304)).getParent();
       if (this.d != null) {
          StringBuilder var3 = new StringBuilder();
          var3.append("MyEditTextPreference ");
          var3.append(this.getKey());
          var3.append(" myCreateView mValueTV!=null");
-         i.a(var3.toString());
+         MyLog.log(var3.toString());
          var7.removeView(this.d);
          this.d = null;
       }
@@ -173,7 +173,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append("MyEditTextPreference ");
       var2.append(this.getKey());
       var2.append(" onBindView");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       RelativeLayout var3 = (RelativeLayout)((TextView)var1.findViewById(16908304)).getParent();
       this.d = null;
 
@@ -202,7 +202,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append("MyEditTextPreference ");
       var2.append(this.getKey());
       var2.append(" onCreateView");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       View var3 = super.onCreateView(var1);
       this.a(var3);
       return var3;
@@ -214,7 +214,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append("MyEditTextPreference ");
       var2.append(this.getKey());
       var2.append(" onDialogClosed");
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       if (this.d != null) {
          this.d.setText(this.a());
       }
@@ -228,7 +228,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       var2.append(this.getKey());
       var2.append(" setText ");
       var2.append(var1);
-      i.a(var2.toString());
+      MyLog.log(var2.toString());
       if (this.d != null) {
          this.d.setText(this.a());
       }

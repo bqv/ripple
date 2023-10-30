@@ -108,8 +108,8 @@ public class ServiceMain extends IntentService {
       this.aG = new BroadcastReceiver() {
          public void onReceive(Context var1, Intent var2) {
             if ("LBR_ACTION_SETTINGSCHANGED".equals(var2.getAction())) {
-               com.dof100.morsenotifier.i.a("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
-               com.dof100.morsenotifier.i.a("ServiceMain.BroadcastReceiver pref_init");
+               MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
+               MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
                com.dof100.morsenotifier.g.a();
                com.dof100.morsenotifier.g.a((Context)ServiceMain.this);
@@ -125,8 +125,8 @@ public class ServiceMain extends IntentService {
       this.aG = new BroadcastReceiver() {
          public void onReceive(Context var1, Intent var2) {
             if ("LBR_ACTION_SETTINGSCHANGED".equals(var2.getAction())) {
-               com.dof100.morsenotifier.i.a("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
-               com.dof100.morsenotifier.i.a("ServiceMain.BroadcastReceiver pref_init");
+               MyLog.log("ServiceMain.BroadcastReceiver got LBR_ACTION_SETTINGSCHANGED");
+               MyLog.log("ServiceMain.BroadcastReceiver pref_init");
                ServiceMain.this.c();
                com.dof100.morsenotifier.g.a();
                com.dof100.morsenotifier.g.a((Context)ServiceMain.this);
@@ -137,7 +137,7 @@ public class ServiceMain extends IntentService {
    }
 
    private void a() {
-      com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.alarm_init");
+      MyLog.log(this, (String)"ServiceMain.alarm_init");
       com.dof100.morsenotifier.g.b();
       com.dof100.morsenotifier.g.a();
       com.dof100.morsenotifier.g.a((Context)this);
@@ -149,7 +149,7 @@ public class ServiceMain extends IntentService {
 
    private void a(int var1, int var2, boolean var3) {
       if (this.ao) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleChime");
+         MyLog.log(this, (String)"ServiceMain.handleChime");
          Calendar var4 = Calendar.getInstance();
          int var5 = var4.get(11);
          int var6 = var4.get(12);
@@ -162,12 +162,12 @@ public class ServiceMain extends IntentService {
          }
 
          if (!var3 && !this.aq[var9]) {
-            com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) Chime disabled for \"%02d:00\"", var9));
+            MyLog.log(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) Chime disabled for \"%02d:00\"", var9));
          } else {
             if (!var3) {
-               int var10 = com.dof100.morsenotifier.v.a(var5, var6, var1, var2);
+               int var10 = Utils.a(var5, var6, var1, var2);
                if (var10 >= 2) {
-                  com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) ERROR now=%02d:%02d reminder=%02d:%02d  dif=%d", var5, var6, var1, var2, var10));
+                  MyLog.log(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) ERROR now=%02d:%02d reminder=%02d:%02d  dif=%d", var5, var6, var1, var2, var10));
                   return;
                }
             }
@@ -175,7 +175,7 @@ public class ServiceMain extends IntentService {
             if (!var3) {
                SharedPreferences var12 = PreferenceManager.getDefaultSharedPreferences(this);
                if (var7 - var12.getLong("chime_lasttime", 0L) < 300000L) {
-                  com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) ERROR Last time was less that 5 min ego. now=%02d:%02d reminder=%02d:%02d", var5, var6, var1, var2));
+                  MyLog.log(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_CHIME) ERROR Last time was less that 5 min ego. now=%02d:%02d reminder=%02d:%02d", var5, var6, var1, var2));
                   return;
                }
 
@@ -189,7 +189,7 @@ public class ServiceMain extends IntentService {
                var11 = String.format(Locale.US, "%02d00", var9);
                var13 = var11;
                if (App.d) {
-                  var13 = com.dof100.morsenotifier.v.a(var11, ' ');
+                  var13 = Utils.a(var11, ' ');
                }
                break;
             case 2:
@@ -231,7 +231,7 @@ public class ServiceMain extends IntentService {
             var15.append(this.at);
             var15.append(" message:");
             var15.append(var13);
-            com.dof100.morsenotifier.i.a(this, (String)var15.toString());
+            MyLog.log(this, (String)var15.toString());
             this.a(var13, a[this.ap], 1, var3);
          }
       }
@@ -286,7 +286,7 @@ public class ServiceMain extends IntentService {
             try {
                this.startActivity(var17);
             } catch (Exception var16) {
-               com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.play_message ERROR startActivity (ActivityDisplayMessage)");
+               MyLog.log(this, (String)"ServiceMain.play_message ERROR startActivity (ActivityDisplayMessage)");
             }
          }
       }
@@ -301,7 +301,7 @@ public class ServiceMain extends IntentService {
       var5.append(var1);
       var5.append(" instance=");
       var5.append(this.aF);
-      com.dof100.morsenotifier.i.a(this, (String)var5.toString());
+      MyLog.log(this, (String)var5.toString());
       String var17 = var1.toLowerCase();
       int var6;
       if (App.c) {
@@ -310,30 +310,30 @@ public class ServiceMain extends IntentService {
          var6 = this.n;
       }
 
-      int var7 = com.dof100.morsenotifier.v.a(var17, "s", var6, 1, 200);
+      int var7 = Utils.a(var17, "s", var6, 1, 200);
       if (App.c) {
          var6 = this.t;
       } else {
          var6 = this.p;
       }
 
-      var6 = com.dof100.morsenotifier.v.a(var17, "v", var6, 0, 100);
-      int var8 = com.dof100.morsenotifier.v.a(var17, "f", this.s, 10, 25000);
-      int var9 = com.dof100.morsenotifier.v.a(var17, "r", var3, 1, 10);
-      int var10 = com.dof100.morsenotifier.v.a(var17, "p", this.o, 30, 300);
-      boolean var11 = com.dof100.morsenotifier.v.a(var17, "a", this.q);
-      boolean var12 = com.dof100.morsenotifier.v.a(var17, "b", this.r);
-      boolean var13 = com.dof100.morsenotifier.v.a(var17, "d", this.v);
-      var1 = com.dof100.morsenotifier.v.a(var1);
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "ServiceMain.play_message message=%s stream=%d istest=%b ", var1, var2, var4));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "ServiceMain.play_message speed=%d vol=%d freq=%d repeat=%d pitch=%d", var7, var6, var8, var9, var10));
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "ServiceMain.play_message Audio=%b Vibration=%b Display=%b", var11, var12, var13));
+      var6 = Utils.a(var17, "v", var6, 0, 100);
+      int var8 = Utils.a(var17, "f", this.s, 10, 25000);
+      int var9 = Utils.a(var17, "r", var3, 1, 10);
+      int var10 = Utils.a(var17, "p", this.o, 30, 300);
+      boolean var11 = Utils.a(var17, "a", this.q);
+      boolean var12 = Utils.a(var17, "b", this.r);
+      boolean var13 = Utils.a(var17, "d", this.v);
+      var1 = Utils.a(var1);
+      MyLog.log(String.format(Locale.US, "ServiceMain.play_message message=%s stream=%d istest=%b ", var1, var2, var4));
+      MyLog.log(String.format(Locale.US, "ServiceMain.play_message speed=%d vol=%d freq=%d repeat=%d pitch=%d", var7, var6, var8, var9, var10));
+      MyLog.log(String.format(Locale.US, "ServiceMain.play_message Audio=%b Vibration=%b Display=%b", var11, var12, var13));
       if (var4) {
          var5 = new StringBuilder();
          var5.append(this.getString(2131493310));
          var5.append(" ");
          var5.append(var1);
-         com.dof100.morsenotifier.i.b(this, var5.toString());
+         MyLog.toast(this, var5.toString());
       }
 
       if (var11 || var12 || var13) {
@@ -346,17 +346,17 @@ public class ServiceMain extends IntentService {
          }
 
          if (App.c && this.c && !var4 && var16) {
-            com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.play_message: muted (in call)");
+            MyLog.log(this, (String)"ServiceMain.play_message: muted (in call)");
             var5 = new StringBuilder();
             var5.append("Morse Notifier: ");
             var5.append(var1);
-            com.dof100.morsenotifier.i.b(this, var5.toString());
+            MyLog.toast(this, var5.toString());
          } else if (App.d && this.g && !var4 && var16) {
-            com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.play_message: muted (in call)");
+            MyLog.log(this, (String)"ServiceMain.play_message: muted (in call)");
             var5 = new StringBuilder();
             var5.append("Voice Notifier: ");
             var5.append(var1);
-            com.dof100.morsenotifier.i.b(this, var5.toString());
+            MyLog.toast(this, var5.toString());
          } else {
             if (VERSION.SDK_INT >= 23) {
                NotificationManager var19 = (NotificationManager)this.getSystemService("notification");
@@ -365,13 +365,13 @@ public class ServiceMain extends IntentService {
                   var5 = new StringBuilder();
                   var5.append("ServiceMain.play_message dnd state = ");
                   var5.append(var3);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
                } else {
-                  com.dof100.morsenotifier.i.a("ServiceMain.play_message dnd state = (cannot get)");
+                  MyLog.log("ServiceMain.play_message dnd state = (cannot get)");
                   var3 = 1;
                }
             } else {
-               com.dof100.morsenotifier.i.a("ServiceMain.play_message dnd state = (cannot get) Android ver<6.0");
+               MyLog.log("ServiceMain.play_message dnd state = (cannot get) Android ver<6.0");
                var3 = 1;
             }
 
@@ -383,18 +383,18 @@ public class ServiceMain extends IntentService {
             var5 = new StringBuilder();
             var5.append("ServiceMain.play_message flagdnd = ");
             var5.append(var14);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
             StringBuilder var15;
             if (App.c && this.b && !var4 && var14) {
                var15 = new StringBuilder();
                var15.append("ServiceMain.play_message: muted (do not disturb) state=");
                var15.append(var3);
-               com.dof100.morsenotifier.i.a(this, (String)var15.toString());
+               MyLog.log(this, (String)var15.toString());
             } else if (App.d && this.f && !var4 && var14) {
                var15 = new StringBuilder();
                var15.append("ServiceMain.play_message: muted (do not disturb) state=");
                var15.append(var3);
-               com.dof100.morsenotifier.i.a(this, (String)var15.toString());
+               MyLog.log(this, (String)var15.toString());
             } else {
                if (App.c) {
                   this.a(var1, var2, var9, var7, var8, var6, var11, var12, var13, var4);
@@ -405,7 +405,7 @@ public class ServiceMain extends IntentService {
                var15 = new StringBuilder();
                var15.append("ServiceMain.play_message OUT instance=");
                var15.append(this.aF);
-               com.dof100.morsenotifier.i.a(this, (String)var15.toString());
+               MyLog.log(this, (String)var15.toString());
             }
          }
       }
@@ -413,15 +413,15 @@ public class ServiceMain extends IntentService {
 
    private void a(String var1, String var2, int var3, int var4, boolean var5) {
       if (this.au) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleReminders");
+         MyLog.log(this, (String)"ServiceMain.handleReminders");
          Calendar var6 = Calendar.getInstance();
          int var7 = var6.get(11);
          int var8 = var6.get(12);
          if (var1.equals(this.getResources().getString(2131492886))) {
-            com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTONE)");
+            MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTONE)");
             this.a(var2, a[this.av], 1, var5);
          } else if (var1.equals(this.getResources().getString(2131492884))) {
-            com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)");
+            MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)");
             p var10 = (new q(this)).a();
             if (var10 != null) {
                var1 = var10.a();
@@ -433,10 +433,10 @@ public class ServiceMain extends IntentService {
 
             this.a(var1, var3, 1, var5);
          } else {
-            com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_FIRE)");
-            int var9 = com.dof100.morsenotifier.v.a(var7, var8, var3, var4);
+            MyLog.log(this, (String)"ServiceMain.onHandleIntent (MSG_REMINDERS_FIRE)");
+            int var9 = Utils.a(var7, var8, var3, var4);
             if (var9 >= 2) {
-               com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_REMINDERS) ERROR now=%02d:%02d reminder=%02d:%02d  dif=%d", var7, var8, var3, var4, var9));
+               MyLog.log(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent (MSG_REMINDERS) ERROR now=%02d:%02d reminder=%02d:%02d  dif=%d", var7, var8, var3, var4, var9));
             } else {
                this.a(var2, a[this.av], 1, var5);
             }
@@ -446,7 +446,7 @@ public class ServiceMain extends IntentService {
 
    private void a(String var1, String var2, boolean var3) {
       if (this.R) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleSMS");
+         MyLog.log(this, (String)"ServiceMain.handleSMS");
          this.b();
          if (var1.length() > 0) {
             this.a(var1);
@@ -589,7 +589,7 @@ public class ServiceMain extends IntentService {
             if (var8.length() != 0) {
                var1 = var8;
                if (App.d) {
-                  var1 = com.dof100.morsenotifier.v.a(var8, ' ');
+                  var1 = Utils.a(var8, ' ');
                }
 
                var12 = new StringBuilder();
@@ -646,7 +646,7 @@ public class ServiceMain extends IntentService {
 
    private void a(String var1, boolean var2) {
       if (this.E) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleCall");
+         MyLog.log(this, (String)"ServiceMain.handleCall");
          this.b();
          if (var1.length() > 0) {
             this.a(var1);
@@ -789,7 +789,7 @@ public class ServiceMain extends IntentService {
             if (var5.length() != 0) {
                var1 = var5;
                if (App.d) {
-                  var1 = com.dof100.morsenotifier.v.a(var5, ' ');
+                  var1 = Utils.a(var5, ' ');
                }
 
                var8 = new StringBuilder();
@@ -831,7 +831,7 @@ public class ServiceMain extends IntentService {
          var9 = new StringBuilder();
          var9.append("ServiceMain.onHandleIntent (MSG_CALL_RINGING) curText = ");
          var9.append(var1);
-         com.dof100.morsenotifier.i.a(this, (String)var9.toString());
+         MyLog.log(this, (String)var9.toString());
          this.a(var1, a[this.F], this.Q, var2);
       }
    }
@@ -847,7 +847,7 @@ public class ServiceMain extends IntentService {
 
    private void b(String var1, String var2, boolean var3) {
       if (this.af) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleSystem");
+         MyLog.log(this, (String)"ServiceMain.handleSystem");
          String var4 = "";
          if (var1.equals(this.getResources().getString(2131492894))) {
             this.a();
@@ -891,7 +891,7 @@ public class ServiceMain extends IntentService {
 
    private void b(String var1, boolean var2) {
       if (this.aw) {
-         com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.handleApps");
+         MyLog.log(this, (String)"ServiceMain.handleApps");
          if (var2) {
             var1 = this.getString(2131493309);
          }
@@ -903,7 +903,7 @@ public class ServiceMain extends IntentService {
    }
 
    private void c() {
-      com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.pref_init");
+      MyLog.log(this, (String)"ServiceMain.pref_init");
       SharedPreferences var1 = PreferenceManager.getDefaultSharedPreferences(this);
       String var2;
       if (App.c) {
@@ -912,476 +912,476 @@ public class ServiceMain extends IntentService {
          var2 = "_voicedef";
       }
 
-      this.b = com.dof100.morsenotifier.v.d(this, var1, "pref_morse_general_dnd", (String)null, var2, "_def");
+      this.b = Utils.prefGetBoolean(this, var1, "pref_morse_general_dnd", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.c = com.dof100.morsenotifier.v.d(this, var1, "pref_morse_general_muteincalls", (String)null, var2, "_def");
+      this.c = Utils.prefGetBoolean(this, var1, "pref_morse_general_muteincalls", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.d = com.dof100.morsenotifier.v.c(this, var1, "pref_morse_general_initialdelay", (String)null, var2, "_def");
+      this.d = Utils.prefGetInt(this, var1, "pref_morse_general_initialdelay", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.e = com.dof100.morsenotifier.v.c(this, var1, "pref_morse_general_volumedownstop", (String)null, var2, "_def");
+      this.e = Utils.prefGetInt(this, var1, "pref_morse_general_volumedownstop", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.f = com.dof100.morsenotifier.v.d(this, var1, "pref_voice_general_dnd", (String)null, var2, "_def");
+      this.f = Utils.prefGetBoolean(this, var1, "pref_voice_general_dnd", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.g = com.dof100.morsenotifier.v.d(this, var1, "pref_voice_general_muteincalls", (String)null, var2, "_def");
+      this.g = Utils.prefGetBoolean(this, var1, "pref_voice_general_muteincalls", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.h = com.dof100.morsenotifier.v.c(this, var1, "pref_voice_general_initialdelay", (String)null, var2, "_def");
+      this.h = Utils.prefGetInt(this, var1, "pref_voice_general_initialdelay", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.i = com.dof100.morsenotifier.v.c(this, var1, "pref_morse_wpm", (String)null, var2, "_def");
+      this.i = Utils.prefGetInt(this, var1, "pref_morse_wpm", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.j = com.dof100.morsenotifier.v.d(this, var1, "pref_morse_farnsworth_enable", (String)null, var2, "_def");
+      this.j = Utils.prefGetBoolean(this, var1, "pref_morse_farnsworth_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.k = com.dof100.morsenotifier.v.c(this, var1, "pref_morse_farnsworth_wpm", (String)null, var2, "_def");
+      this.k = Utils.prefGetInt(this, var1, "pref_morse_farnsworth_wpm", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.l = com.dof100.morsenotifier.v.d(this, var1, "pref_morse_punctuation", (String)null, var2, "_def");
+      this.l = Utils.prefGetBoolean(this, var1, "pref_morse_punctuation", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.m = com.dof100.morsenotifier.v.b(this, var1, "pref_voice_locale", "pref_general_locale", var2, "_def");
+      this.m = Utils.prefGetString(this, var1, "pref_voice_locale", "pref_general_locale", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.n = com.dof100.morsenotifier.v.c(this, var1, "pref_voice_speed", "pref_general_speechrate", var2, "_def");
+      this.n = Utils.prefGetInt(this, var1, "pref_voice_speed", "pref_general_speechrate", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.o = com.dof100.morsenotifier.v.c(this, var1, "pref_voice_pitch", "pref_general_pitch", var2, "_def");
+      this.o = Utils.prefGetInt(this, var1, "pref_voice_pitch", "pref_general_pitch", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.p = com.dof100.morsenotifier.v.c(this, var1, "pref_voice_vol", "pref_general_volume", var2, "_def");
+      this.p = Utils.prefGetInt(this, var1, "pref_voice_vol", "pref_general_volume", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.q = com.dof100.morsenotifier.v.d(this, var1, "pref_audio_enable", (String)null, var2, "_def");
+      this.q = Utils.prefGetBoolean(this, var1, "pref_audio_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.r = com.dof100.morsenotifier.v.d(this, var1, "pref_audio_vibration_enable", (String)null, var2, "_def");
+      this.r = Utils.prefGetBoolean(this, var1, "pref_audio_vibration_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.s = com.dof100.morsenotifier.v.c(this, var1, "pref_audio_freq", (String)null, var2, "_def");
+      this.s = Utils.prefGetInt(this, var1, "pref_audio_freq", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.t = com.dof100.morsenotifier.v.c(this, var1, "pref_audio_vol", (String)null, var2, "_def");
+      this.t = Utils.prefGetInt(this, var1, "pref_audio_vol", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.u = com.dof100.morsenotifier.v.c(this, var1, "pref_audio_ramp", (String)null, var2, "_def");
+      this.u = Utils.prefGetInt(this, var1, "pref_audio_ramp", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.v = com.dof100.morsenotifier.v.d(this, var1, "pref_display_enable", (String)null, var2, "_def");
+      this.v = Utils.prefGetBoolean(this, var1, "pref_display_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.w = com.dof100.morsenotifier.v.c(this, var1, "pref_display_how", (String)null, var2, "_def");
+      this.w = Utils.prefGetInt(this, var1, "pref_display_how", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.x = com.dof100.morsenotifier.v.c(this, var1, "pref_display_pos", (String)null, var2, "_def");
+      this.x = Utils.prefGetInt(this, var1, "pref_display_pos", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.y = com.dof100.morsenotifier.v.d(this, var1, "pref_display_stayontop", (String)null, var2, "_def");
+      this.y = Utils.prefGetBoolean(this, var1, "pref_display_stayontop", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.z = com.dof100.morsenotifier.v.d(this, var1, "pref_display_text", (String)null, var2, "_def");
+      this.z = Utils.prefGetBoolean(this, var1, "pref_display_text", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.A = com.dof100.morsenotifier.v.d(this, var1, "pref_display_flash", (String)null, var2, "_def");
+      this.A = Utils.prefGetBoolean(this, var1, "pref_display_flash", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.B = com.dof100.morsenotifier.v.e(this, var1, "pref_display_color", (String)null, var2, "_def");
+      this.B = Utils.prefGetColor(this, var1, "pref_display_color", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.C = com.dof100.morsenotifier.v.e(this, var1, "pref_display_color_me_highlight", (String)null, var2, "_def");
+      this.C = Utils.prefGetColor(this, var1, "pref_display_color_me_highlight", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.D = com.dof100.morsenotifier.v.e(this, var1, "pref_display_color_text_highlight", (String)null, var2, "_def");
+      this.D = Utils.prefGetColor(this, var1, "pref_display_color_text_highlight", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.E = com.dof100.morsenotifier.v.d(this, var1, "pref_call_enable", (String)null, var2, "_def");
+      this.E = Utils.prefGetBoolean(this, var1, "pref_call_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.F = com.dof100.morsenotifier.v.c(this, var1, "pref_call_stream", "pref_call_e1pro_stream", var2, "_def");
+      this.F = Utils.prefGetInt(this, var1, "pref_call_stream", "pref_call_e1pro_stream", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.G = com.dof100.morsenotifier.v.b(this, var1, "pref_call_string1", "pref_call_e1pro_string1", var2, "_def");
+      this.G = Utils.prefGetString(this, var1, "pref_call_string1", "pref_call_e1pro_string1", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.H = com.dof100.morsenotifier.v.c(this, var1, "pref_call_num", "pref_call_e1pro_num", var2, "_def");
+      this.H = Utils.prefGetInt(this, var1, "pref_call_num", "pref_call_e1pro_num", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.I = com.dof100.morsenotifier.v.d(this, var1, "pref_call_contactdisplayname", "pref_call_e1pro_contactdisplayname", var2, "_def");
+      this.I = Utils.prefGetBoolean(this, var1, "pref_call_contactdisplayname", "pref_call_e1pro_contactdisplayname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.J = com.dof100.morsenotifier.v.d(this, var1, "pref_call_contactfirstname", "pref_call_e1pro_contactfirstname", var2, "_def");
+      this.J = Utils.prefGetBoolean(this, var1, "pref_call_contactfirstname", "pref_call_e1pro_contactfirstname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.K = com.dof100.morsenotifier.v.d(this, var1, "pref_call_contactlastname", "pref_call_e1pro_contactlastname", var2, "_def");
+      this.K = Utils.prefGetBoolean(this, var1, "pref_call_contactlastname", "pref_call_e1pro_contactlastname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.L = com.dof100.morsenotifier.v.d(this, var1, "pref_call_contactinitials", "pref_call_e1pro_contactinitials", var2, "_def");
+      this.L = Utils.prefGetBoolean(this, var1, "pref_call_contactinitials", "pref_call_e1pro_contactinitials", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.M = com.dof100.morsenotifier.v.d(this, var1, "pref_call_contactnickname", "pref_call_e1pro_contactnickname", var2, "_def");
+      this.M = Utils.prefGetBoolean(this, var1, "pref_call_contactnickname", "pref_call_e1pro_contactnickname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.N = com.dof100.morsenotifier.v.b(this, var1, "pref_call_string2", "pref_call_e1pro_string2", var2, "_def");
+      this.N = Utils.prefGetString(this, var1, "pref_call_string2", "pref_call_e1pro_string2", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.O = com.dof100.morsenotifier.v.b(this, var1, "pref_call_contactname_none", "pref_call_e1pro_contactname_none", var2, "_def");
+      this.O = Utils.prefGetString(this, var1, "pref_call_contactname_none", "pref_call_e1pro_contactname_none", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.P = com.dof100.morsenotifier.v.b(this, var1, "pref_call_num_none", "pref_call_e1pro_num_none", var2, "_def");
+      this.P = Utils.prefGetString(this, var1, "pref_call_num_none", "pref_call_e1pro_num_none", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.Q = com.dof100.morsenotifier.v.c(this, var1, "pref_call_repeat", "pref_call_e1pro_repeat", var2, "_def");
+      this.Q = Utils.prefGetInt(this, var1, "pref_call_repeat", "pref_call_e1pro_repeat", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.R = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_enable", (String)null, var2, "_def");
+      this.R = Utils.prefGetBoolean(this, var1, "pref_sms_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.S = com.dof100.morsenotifier.v.c(this, var1, "pref_sms_stream", "pref_sms_e1pro_stream", var2, "_def");
+      this.S = Utils.prefGetInt(this, var1, "pref_sms_stream", "pref_sms_e1pro_stream", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.T = com.dof100.morsenotifier.v.b(this, var1, "pref_sms_string1", "pref_sms_e1pro_string1", var2, "_def");
+      this.T = Utils.prefGetString(this, var1, "pref_sms_string1", "pref_sms_e1pro_string1", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.U = com.dof100.morsenotifier.v.c(this, var1, "pref_sms_num", "pref_sms_e1pro_num", var2, "_def");
+      this.U = Utils.prefGetInt(this, var1, "pref_sms_num", "pref_sms_e1pro_num", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.V = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_contactdisplayname", "pref_sms_e1pro_contactdisplayname", var2, "_def");
+      this.V = Utils.prefGetBoolean(this, var1, "pref_sms_contactdisplayname", "pref_sms_e1pro_contactdisplayname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.W = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_contactfirstname", "pref_sms_e1pro_contactfirstname", var2, "_def");
+      this.W = Utils.prefGetBoolean(this, var1, "pref_sms_contactfirstname", "pref_sms_e1pro_contactfirstname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.X = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_contactlastname", "pref_sms_e1pro_contactlastname", var2, "_def");
+      this.X = Utils.prefGetBoolean(this, var1, "pref_sms_contactlastname", "pref_sms_e1pro_contactlastname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.Y = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_contactinitials", "pref_sms_e1pro_contactinitials", var2, "_def");
+      this.Y = Utils.prefGetBoolean(this, var1, "pref_sms_contactinitials", "pref_sms_e1pro_contactinitials", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.Z = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_contactnickname", "pref_sms_e1pro_contactnickname", var2, "_def");
+      this.Z = Utils.prefGetBoolean(this, var1, "pref_sms_contactnickname", "pref_sms_e1pro_contactnickname", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.aa = com.dof100.morsenotifier.v.d(this, var1, "pref_sms_text", "pref_sms_e1pro_text", var2, "_def");
+      this.aa = Utils.prefGetBoolean(this, var1, "pref_sms_text", "pref_sms_e1pro_text", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ab = com.dof100.morsenotifier.v.b(this, var1, "pref_sms_string2", "pref_sms_e1pro_string2", var2, "_def");
+      this.ab = Utils.prefGetString(this, var1, "pref_sms_string2", "pref_sms_e1pro_string2", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ac = com.dof100.morsenotifier.v.b(this, var1, "pref_sms_contactname_none", "pref_sms_e1pro_contactname_none", var2, "_def");
+      this.ac = Utils.prefGetString(this, var1, "pref_sms_contactname_none", "pref_sms_e1pro_contactname_none", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ad = com.dof100.morsenotifier.v.b(this, var1, "pref_sms_num_none", "pref_sms_e1pro_num_none", var2, "_def");
+      this.ad = Utils.prefGetString(this, var1, "pref_sms_num_none", "pref_sms_e1pro_num_none", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ae = com.dof100.morsenotifier.v.c(this, var1, "pref_sms_repeat", "pref_sms_e1pro_repeat", var2, "_def");
+      this.ae = Utils.prefGetInt(this, var1, "pref_sms_repeat", "pref_sms_e1pro_repeat", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.af = com.dof100.morsenotifier.v.d(this, var1, "pref_system_enable", (String)null, var2, "_def");
+      this.af = Utils.prefGetBoolean(this, var1, "pref_system_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ag = com.dof100.morsenotifier.v.c(this, var1, "pref_system_stream", "pref_system_e1pro_stream", var2, "_def");
+      this.ag = Utils.prefGetInt(this, var1, "pref_system_stream", "pref_system_e1pro_stream", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ah = com.dof100.morsenotifier.v.b(this, var1, "pref_system_powerconectedstring", "pref_system_e1pro_powerconectedstring", var2, "_def");
+      this.ah = Utils.prefGetString(this, var1, "pref_system_powerconectedstring", "pref_system_e1pro_powerconectedstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ai = com.dof100.morsenotifier.v.b(this, var1, "pref_system_powerdisconectedstring", "pref_system_e1pro_powerdisconectedstring", var2, "_def");
+      this.ai = Utils.prefGetString(this, var1, "pref_system_powerdisconectedstring", "pref_system_e1pro_powerdisconectedstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.aj = com.dof100.morsenotifier.v.b(this, var1, "pref_system_batterylowstring", "pref_system_e1pro_batterylowstring", var2, "_def");
+      this.aj = Utils.prefGetString(this, var1, "pref_system_batterylowstring", "pref_system_e1pro_batterylowstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ak = com.dof100.morsenotifier.v.b(this, var1, "pref_system_batteryokstring", "pref_system_e1pro_batteryokstring", var2, "_def");
+      this.ak = Utils.prefGetString(this, var1, "pref_system_batteryokstring", "pref_system_e1pro_batteryokstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.al = com.dof100.morsenotifier.v.b(this, var1, "pref_system_wifi_disconnectedstring", "pref_system_e1pro_wifi_disconnectedstring", var2, "_def");
+      this.al = Utils.prefGetString(this, var1, "pref_system_wifi_disconnectedstring", "pref_system_e1pro_wifi_disconnectedstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.am = com.dof100.morsenotifier.v.b(this, var1, "pref_system_wifi_connectedstring", "pref_system_e1pro_wifi_connectedstring", var2, "_def");
+      this.am = Utils.prefGetString(this, var1, "pref_system_wifi_connectedstring", "pref_system_e1pro_wifi_connectedstring", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.an = com.dof100.morsenotifier.v.d(this, var1, "pref_system_wifi_connectedssid", "pref_system_e1pro_wifi_connectedssid", var2, "_def");
+      this.an = Utils.prefGetBoolean(this, var1, "pref_system_wifi_connectedssid", "pref_system_e1pro_wifi_connectedssid", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.aw = com.dof100.morsenotifier.v.d(this, var1, "pref_apps_enable", (String)null, var2, "_def");
+      this.aw = Utils.prefGetBoolean(this, var1, "pref_apps_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ax = com.dof100.morsenotifier.v.c(this, var1, "pref_apps_stream", (String)null, var2, "_def");
+      this.ax = Utils.prefGetInt(this, var1, "pref_apps_stream", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ao = com.dof100.morsenotifier.v.d(this, var1, "pref_chime_enable", (String)null, var2, "_def");
+      this.ao = Utils.prefGetBoolean(this, var1, "pref_chime_enable", (String)null, var2, "_def");
 
       for(int var3 = 0; var3 < 24; ++var3) {
          boolean[] var4 = this.aq;
@@ -1392,7 +1392,7 @@ public class ServiceMain extends IntentService {
             var2 = "_voicedef";
          }
 
-         var4[var3] = com.dof100.morsenotifier.v.d(this, var1, var5, (String)null, var2, "_def");
+         var4[var3] = Utils.prefGetBoolean(this, var1, var5, (String)null, var2, "_def");
       }
 
       if (App.c) {
@@ -1401,63 +1401,63 @@ public class ServiceMain extends IntentService {
          var2 = "_voicedef";
       }
 
-      this.ap = com.dof100.morsenotifier.v.c(this, var1, "pref_chime_stream", "pref_chime_e1pro_stream", var2, "_def");
+      this.ap = Utils.prefGetInt(this, var1, "pref_chime_stream", "pref_chime_e1pro_stream", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.ar = com.dof100.morsenotifier.v.b(this, var1, "pref_chime_string1", "pref_chime_e1pro_string1", var2, "_def");
+      this.ar = Utils.prefGetString(this, var1, "pref_chime_string1", "pref_chime_e1pro_string1", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.as = com.dof100.morsenotifier.v.b(this, var1, "pref_chime_string2", "pref_chime_e1pro_string2", var2, "_def");
+      this.as = Utils.prefGetString(this, var1, "pref_chime_string2", "pref_chime_e1pro_string2", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.at = com.dof100.morsenotifier.v.c(this, var1, "pref_chime_timehow", "pref_chime_e1pro_timehow", var2, "_def");
+      this.at = Utils.prefGetInt(this, var1, "pref_chime_timehow", "pref_chime_e1pro_timehow", var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.au = com.dof100.morsenotifier.v.d(this, var1, "pref_reminders_enable", (String)null, var2, "_def");
+      this.au = Utils.prefGetBoolean(this, var1, "pref_reminders_enable", (String)null, var2, "_def");
       if (App.c) {
          var2 = "_morsedef";
       } else {
          var2 = "_voicedef";
       }
 
-      this.av = com.dof100.morsenotifier.v.c(this, var1, "pref_reminders_stream", (String)null, var2, "_def");
+      this.av = Utils.prefGetInt(this, var1, "pref_reminders_stream", (String)null, var2, "_def");
    }
 
    public IBinder onBind(Intent var1) {
-      com.dof100.morsenotifier.i.a("ServiceMain.onBind");
+      MyLog.log("ServiceMain.onBind");
       return null;
    }
 
    public void onCreate() {
       super.onCreate();
-      com.dof100.morsenotifier.i.a("ServiceMain.OnCreate");
+      MyLog.log("ServiceMain.OnCreate");
    }
 
    public void onDestroy() {
-      com.dof100.morsenotifier.i.a("ServiceMain.OnDestroy");
+      MyLog.log("ServiceMain.OnDestroy");
       super.onDestroy();
    }
 
    protected void onHandleIntent(Intent var1) {
-      com.dof100.morsenotifier.i.a("-----------------------------------------------------------------------------------------");
-      com.dof100.morsenotifier.i.a("ServiceMain.onHandleIntent");
-      com.dof100.morsenotifier.i.a("ServiceMain.onCreate registering broadcast receiver");
+      MyLog.log("-----------------------------------------------------------------------------------------");
+      MyLog.log("ServiceMain.onHandleIntent");
+      MyLog.log("ServiceMain.onCreate registering broadcast receiver");
       android.support.v4.a.b var2 = android.support.v4.a.b.a((Context)this);
       IntentFilter var3 = new IntentFilter();
       var3.addAction("LBR_ACTION_SETTINGSCHANGED");
@@ -1508,10 +1508,10 @@ public class ServiceMain extends IntentService {
          var10 = "";
       }
 
-      com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent What=%s extraT1=%s extraT2=%s extraI1=%d extraI2=%d", var4, var8, var10, var5, var6));
+      MyLog.log(this, (String)String.format(Locale.US, "ServiceMain.onHandleIntent What=%s extraT1=%s extraT2=%s extraI1=%d extraI2=%d", var4, var8, var10, var5, var6));
       boolean var7 = var4.endsWith("_TEST");
       if (var7) {
-         com.dof100.morsenotifier.i.a("ServiceMain.onHandleIntent isTest=true");
+         MyLog.log("ServiceMain.onHandleIntent isTest=true");
       }
 
       if (var4.equals(this.getResources().getString(2131492882))) {
@@ -1519,7 +1519,7 @@ public class ServiceMain extends IntentService {
       } else if (var4.equals(this.getResources().getString(2131492878))) {
          this.a();
       } else if (var4.equals(this.getResources().getString(2131492881))) {
-         com.dof100.morsenotifier.i.a("ServiceMain.onHandleIntent MSG_MN_STOP");
+         MyLog.log("ServiceMain.onHandleIntent MSG_MN_STOP");
       } else if (var4.startsWith(this.getResources().getString(2131492867))) {
          this.a(var8, var7);
       } else if (var4.startsWith(this.getResources().getString(2131492887))) {
@@ -1534,9 +1534,9 @@ public class ServiceMain extends IntentService {
          this.b(var10, var7);
       }
 
-      com.dof100.morsenotifier.i.a("ServiceMain.onHandleIntent unregistering local BroadcastReceiver");
+      MyLog.log("ServiceMain.onHandleIntent unregistering local BroadcastReceiver");
       android.support.v4.a.b.a((Context)this).a(this.aG);
-      com.dof100.morsenotifier.i.a(this, (String)"ServiceMain.onHandleIntent OUT");
-      com.dof100.morsenotifier.i.a("-----------------------------------------------------------------------------------------");
+      MyLog.log(this, (String)"ServiceMain.onHandleIntent OUT");
+      MyLog.log("-----------------------------------------------------------------------------------------");
    }
 }

@@ -46,7 +46,7 @@ class j extends AsyncTask {
    private final BroadcastReceiver z = new BroadcastReceiver() {
       public void onReceive(Context var1, Intent var2) {
          if ("LBR_ACTION_FINISH".equals(var2.getAction())) {
-            com.dof100.morsenotifier.i.a(var1, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ");
+            MyLog.log(var1, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ");
             j.this.u = true;
             j.this.y.countDown();
          }
@@ -60,7 +60,7 @@ class j extends AsyncTask {
       StringBuilder var3 = new StringBuilder();
       var3.append("MyPlayerMorse constructor instance=");
       var3.append(var2);
-      com.dof100.morsenotifier.i.a(var1, var3.toString());
+      MyLog.log(var1, var3.toString());
    }
 
    private void a(char var1, boolean var2) {
@@ -919,10 +919,10 @@ class j extends AsyncTask {
    }
 
    private void c() {
-      com.dof100.morsenotifier.i.a("MyPlayerMorse.seqCreate ");
+      MyLog.log("MyPlayerMorse.seqCreate ");
       this.x.clear();
       this.a(-6, -3);
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", this.g, this.l));
+      MyLog.log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", this.g, this.l));
       boolean var1 = false;
       int var2 = 0;
 
@@ -946,7 +946,7 @@ class j extends AsyncTask {
          label42: {
             var4 = var2 + 1;
             var5 = this.o * this.x.size() / 2;
-            com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.seqCreate   iter=%d   mList.size=%d   Dur=%d msec", var4, this.x.size(), var5));
+            MyLog.log(String.format(Locale.US, "MyPlayerMorse.seqCreate   iter=%d   mList.size=%d   Dur=%d msec", var4, this.x.size(), var5));
             if (this.g > 0) {
                if (var4 < this.g) {
                   break label42;
@@ -960,7 +960,7 @@ class j extends AsyncTask {
 
          boolean var9 = var1;
          if (var4 > 100) {
-            com.dof100.morsenotifier.i.a("MyPlayerMorse.seqCreate  ERROR niters>100");
+            MyLog.log("MyPlayerMorse.seqCreate  ERROR niters>100");
             var9 = true;
          }
 
@@ -992,7 +992,7 @@ class j extends AsyncTask {
       var8.append(this.x.size());
       var8.append("   Nelements=");
       var8.append(this.q);
-      com.dof100.morsenotifier.i.a(var8.toString());
+      MyLog.log(var8.toString());
       this.a(-7, -3);
       this.a(-7, -3);
       this.a(-7, -3);
@@ -1002,7 +1002,7 @@ class j extends AsyncTask {
       var8 = new StringBuilder();
       var8.append("MyPlayerMorse.seqCreate after mDelayAfter mList.size=");
       var8.append(this.x.size());
-      com.dof100.morsenotifier.i.a(var8.toString());
+      MyLog.log(var8.toString());
    }
 
    protected Void a(Void... var1) {
@@ -1011,7 +1011,7 @@ class j extends AsyncTask {
          var27 = new StringBuilder();
          var27.append("MyMorsePlayer.doInBackground ERROR wr_context=null instance=");
          var27.append(this.b);
-         com.dof100.morsenotifier.i.a(var27.toString());
+         MyLog.log(var27.toString());
          this.y.countDown();
          return null;
       } else {
@@ -1020,21 +1020,21 @@ class j extends AsyncTask {
             var27 = new StringBuilder();
             var27.append("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=");
             var27.append(this.b);
-            com.dof100.morsenotifier.i.a(var27.toString());
+            MyLog.log(var27.toString());
             this.y.countDown();
             return null;
          } else if (this.q <= 0) {
             var27 = new StringBuilder();
             var27.append("MyMorsePlayer.doInBackground Exiting...  mNElements=");
             var27.append(this.q);
-            com.dof100.morsenotifier.i.a(var27.toString());
+            MyLog.log(var27.toString());
             this.y.countDown();
             return null;
          } else {
             var27 = new StringBuilder();
             var27.append("MyPlayerMorse.doInBackground. Creating tone instance=");
             var27.append(this.b);
-            com.dof100.morsenotifier.i.a(var27.toString());
+            MyLog.log(var27.toString());
 
             int var3;
             int var4;
@@ -1083,7 +1083,7 @@ class j extends AsyncTask {
                   }
                }
 
-               com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground ERROR Creating tone");
+               MyLog.log("MyPlayerMorse.doInBackground ERROR Creating tone");
                this.y.countDown();
                return null;
             }
@@ -1091,7 +1091,7 @@ class j extends AsyncTask {
             StringBuilder var5 = new StringBuilder();
             var5.append("MyPlayerMorse.doInBackground registering broadcast receiver instance=");
             var5.append(this.b);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
             android.support.v4.a.b var6 = android.support.v4.a.b.a(var2);
             IntentFilter var30 = new IntentFilter();
             var30.addAction("LBR_ACTION_FINISH");
@@ -1100,40 +1100,40 @@ class j extends AsyncTask {
             var5 = new StringBuilder();
             var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=");
             var5.append(this.q);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
             var5 = new StringBuilder();
             var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=");
             var5.append(var28.a);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
             var5 = new StringBuilder();
             var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=");
             var5.append(this.t);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
             StringBuilder var29;
             if (var28.a <= 0) {
                var29 = new StringBuilder();
                var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=");
                var29.append(var28.a);
-               com.dof100.morsenotifier.i.a(var29.toString());
+               MyLog.log(var29.toString());
                this.y.countDown();
                return null;
             } else if (var28.b.length <= 0) {
                var29 = new StringBuilder();
                var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=");
                var29.append(var28.b.length);
-               com.dof100.morsenotifier.i.a(var29.toString());
+               MyLog.log(var29.toString());
                this.y.countDown();
                return null;
             } else {
                var5 = new StringBuilder();
                var5.append("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=");
                var5.append(this.r);
-               com.dof100.morsenotifier.i.a(var5.toString());
+               MyLog.log(var5.toString());
 
                try {
                   var3 = AudioTrack.getMinBufferSize(this.p, 4, 2);
                } catch (Exception var18) {
-                  com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground. ERROR getMinBufferSize");
+                  MyLog.log("MyPlayerMorse.doInBackground. ERROR getMinBufferSize");
                   var3 = this.p * 4;
                }
 
@@ -1169,25 +1169,25 @@ class j extends AsyncTask {
                         }
                      }
 
-                     com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. Exception mstream=%d sr=%d channels=%d encoding=%d length=%d", this.h, this.p, 4, 2, var28.b.length));
+                     MyLog.log(String.format(Locale.US, "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. Exception mstream=%d sr=%d channels=%d encoding=%d length=%d", this.h, this.p, 4, 2, var28.b.length));
                      this.y.countDown();
                      return null;
                   }
 
-                  com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. IllegalArgumentException mstream=%d sr=%d channels=%d encoding=%d length=%d", this.h, this.p, 4, 2, var28.b.length));
+                  MyLog.log(String.format(Locale.US, "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. IllegalArgumentException mstream=%d sr=%d channels=%d encoding=%d length=%d", this.h, this.p, 4, 2, var28.b.length));
                   this.y.countDown();
                   return null;
                }
 
                if (!this.c) {
-                  com.dof100.morsenotifier.i.a("MyPlayerMorse doInBackground mEnableSound=false. Muting...");
+                  MyLog.log("MyPlayerMorse doInBackground mEnableSound=false. Muting...");
                   this.b();
                }
 
                var5 = new StringBuilder();
                var5.append("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =");
                var5.append(this.v.getState());
-               com.dof100.morsenotifier.i.a(var5.toString());
+               MyLog.log(var5.toString());
                var3 = 0;
 
                while(this.v.getState() != 1) {
@@ -1202,13 +1202,13 @@ class j extends AsyncTask {
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=");
                   var5.append(this.v.getState());
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
                   var3 = var4;
                   if (var4 >= 20) {
                      var27 = new StringBuilder();
                      var27.append("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=");
                      var27.append(this.b);
-                     com.dof100.morsenotifier.i.a(var27.toString());
+                     MyLog.log(var27.toString());
                      this.y.countDown();
                      return null;
                   }
@@ -1218,20 +1218,20 @@ class j extends AsyncTask {
                   var27 = new StringBuilder();
                   var27.append("MyPlayerMorse.doInBackground commandstop=true... instance=");
                   var27.append(this.b);
-                  com.dof100.morsenotifier.i.a(var27.toString());
+                  MyLog.log(var27.toString());
                   this.y.countDown();
                   return null;
                } else if (this.y.getCount() != 1L) {
                   var27 = new StringBuilder();
                   var27.append("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=");
                   var27.append(this.b);
-                  com.dof100.morsenotifier.i.a(var27.toString());
+                  MyLog.log(var27.toString());
                   return null;
                } else {
                   if (this.f > 0) {
                      long var7 = System.currentTimeMillis() - this.s;
                      long var9 = (long)this.f - var7;
-                     com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec", this.f, var7, var9));
+                     MyLog.log(String.format(Locale.US, "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec", this.f, var7, var9));
                      if (var9 > 0L && var9 < 10000L) {
                         try {
                            Thread.sleep(var9);
@@ -1239,41 +1239,41 @@ class j extends AsyncTask {
                            var5 = new StringBuilder();
                            var5.append("MyPlayerMorse.doInBackground ERROR sleep in delay before instance=");
                            var5.append(this.b);
-                           com.dof100.morsenotifier.i.a(var5.toString());
+                           MyLog.log(var5.toString());
                         }
                      }
 
                      var5 = new StringBuilder();
                      var5.append("MyPlayerMorse.doInBackground Waiting finished instance=");
                      var5.append(this.b);
-                     com.dof100.morsenotifier.i.a(var5.toString());
+                     MyLog.log(var5.toString());
                   }
 
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground Start Playing instance=");
                   var5.append(this.b);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=");
                   var5.append(this.q);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=");
                   var5.append(var28.a);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=");
                   var5.append(this.t);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
 
                   try {
                      this.v.play();
                   } catch (IllegalStateException var14) {
-                     com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground AudioTrack.Play->IllegalStateException");
+                     MyLog.log("MyPlayerMorse.doInBackground AudioTrack.Play->IllegalStateException");
                      this.y.countDown();
                      return null;
                   } catch (Exception var15) {
-                     com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground AudioTrack.Play->Exception");
+                     MyLog.log("MyPlayerMorse.doInBackground AudioTrack.Play->Exception");
                      this.y.countDown();
                      return null;
                   }
@@ -1281,7 +1281,7 @@ class j extends AsyncTask {
                   var5 = new StringBuilder();
                   var5.append("MyPlayerMorse.doInBackground Setting notifications instance=");
                   var5.append(this.b);
-                  com.dof100.morsenotifier.i.a(var5.toString());
+                  MyLog.log(var5.toString());
 
                   try {
                      this.v.setNotificationMarkerPosition(var28.a - 1);
@@ -1294,18 +1294,18 @@ class j extends AsyncTask {
                               var3 = new StringBuilder();
                               var3.append("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=");
                               var3.append(j.this.b);
-                              com.dof100.morsenotifier.i.a(var3.toString());
+                              MyLog.log(var3.toString());
                            } else {
                               try {
                                  var1.stop();
                               } catch (IllegalStateException var2x) {
-                                 com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground ERROR IllegalStateException");
+                                 MyLog.log("MyPlayerMorse.doInBackground ERROR IllegalStateException");
                               }
 
                               var3 = new StringBuilder();
                               var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=");
                               var3.append(j.this.b);
-                              com.dof100.morsenotifier.i.a(var3.toString());
+                              MyLog.log(var3.toString());
                               j.this.y.countDown();
                            }
                         }
@@ -1316,7 +1316,7 @@ class j extends AsyncTask {
                               var44 = new StringBuilder();
                               var44.append("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=");
                               var44.append(j.this.b);
-                              com.dof100.morsenotifier.i.a(var44.toString());
+                              MyLog.log(var44.toString());
                            } else {
                               String var43;
                               label224: {
@@ -1409,7 +1409,7 @@ class j extends AsyncTask {
                                              var44 = new StringBuilder();
                                              var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=");
                                              var44.append(j.this.b);
-                                             com.dof100.morsenotifier.i.a(var44.toString());
+                                             MyLog.log(var44.toString());
                                              j.this.y.countDown();
                                              return;
                                           } catch (IllegalStateException var27) {
@@ -1439,7 +1439,7 @@ class j extends AsyncTask {
                                                 var4.append(var2x);
                                                 var4.append("...  Muting... instance=");
                                                 var4.append(j.this.b);
-                                                com.dof100.morsenotifier.i.a(var4.toString());
+                                                MyLog.log(var4.toString());
                                                 if (VERSION.SDK_INT >= 21) {
                                                    var1.setVolume(0.0F);
                                                    break label239;
@@ -1590,29 +1590,29 @@ class j extends AsyncTask {
                                  var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException";
                               }
 
-                              com.dof100.morsenotifier.i.a(var43);
+                              MyLog.log(var43);
                               j.this.y.countDown();
                            }
                         }
                      };
                      var34.setPlaybackPositionUpdateListener(var37);
                   } catch (IllegalStateException var12) {
-                     com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException");
+                     MyLog.log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException");
                      this.y.countDown();
                      return null;
                   } catch (Exception var13) {
-                     com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception");
+                     MyLog.log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception");
                      this.y.countDown();
                      return null;
                   }
 
-                  com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground mAudioTrack.write");
+                  MyLog.log("MyPlayerMorse.doInBackground mAudioTrack.write");
 
                   try {
                      this.v.write(var28.b, 0, var28.b.length);
                      return null;
                   } catch (Exception var11) {
-                     com.dof100.morsenotifier.i.a("MyPlayerMorse.doInBackground ERROR mAudioTrack.write");
+                     MyLog.log("MyPlayerMorse.doInBackground ERROR mAudioTrack.write");
                      this.y.countDown();
                      return null;
                   }
@@ -1630,7 +1630,7 @@ class j extends AsyncTask {
       StringBuilder var2 = new StringBuilder();
       var2.append("MyPlayerMorse.playDone instance=");
       var2.append(this.b);
-      com.dof100.morsenotifier.i.a(var1, var2.toString());
+      MyLog.log(var1, var2.toString());
       String var15;
       if (!this.m) {
          var15 = "MyPlayerMorse.playDone ERROR mPlayInitOK = false";
@@ -1646,21 +1646,21 @@ class j extends AsyncTask {
             var3 = 120000L;
          }
 
-         com.dof100.morsenotifier.i.a(var1, String.format(Locale.US, "MyPlayerMorse.playDone Waiting to finish (max %d msec)", var3));
+         MyLog.log(var1, String.format(Locale.US, "MyPlayerMorse.playDone Waiting to finish (max %d msec)", var3));
 
          try {
             this.y.await(var3, TimeUnit.MILLISECONDS);
          } catch (InterruptedException var14) {
-            com.dof100.morsenotifier.i.a(var1, "MyPlayerMorse.playDone ERROR ");
+            MyLog.log(var1, "MyPlayerMorse.playDone ERROR ");
          }
 
-         com.dof100.morsenotifier.i.a(var1, "MyPlayerMorse.playDone Waiting OK");
+         MyLog.log(var1, "MyPlayerMorse.playDone Waiting OK");
 
          try {
             var2 = new StringBuilder();
             var2.append("MyPlayerMorse.playDone unregistering broadcast receiver  instance=");
             var2.append(this.b);
-            com.dof100.morsenotifier.i.a(var1, var2.toString());
+            MyLog.log(var1, var2.toString());
             android.support.v4.a.b.a(var1).a(this.z);
          } catch (Exception var13) {
             var13.printStackTrace();
@@ -1669,7 +1669,7 @@ class j extends AsyncTask {
          var2 = new StringBuilder();
          var2.append("MyPlayerMorse.playDone broadcasting finish  instance=");
          var2.append(this.b);
-         com.dof100.morsenotifier.i.a(var1, var2.toString());
+         MyLog.log(var1, var2.toString());
          if (!this.u) {
             App.b(var1);
          }
@@ -1677,7 +1677,7 @@ class j extends AsyncTask {
          var2 = new StringBuilder();
          var2.append("MyPlayerMorse.playDone deleting audiotrack  instance=");
          var2.append(this.b);
-         com.dof100.morsenotifier.i.a(var1, var2.toString());
+         MyLog.log(var1, var2.toString());
          if (this.v != null) {
             try {
                this.b();
@@ -1693,7 +1693,7 @@ class j extends AsyncTask {
          var2 = new StringBuilder();
          var2.append("MyPlayerMorse.playDone deleting context reference  instance=");
          var2.append(this.b);
-         com.dof100.morsenotifier.i.a(var1, var2.toString());
+         MyLog.log(var1, var2.toString());
          if (this.a != null) {
             this.a.clear();
             this.a = null;
@@ -1705,11 +1705,11 @@ class j extends AsyncTask {
          var15 = var2.toString();
       }
 
-      com.dof100.morsenotifier.i.a(var1, var15);
+      MyLog.log(var1, var15);
    }
 
    public void a(Context var1, boolean var2, boolean var3, boolean var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12, String var13) {
-      com.dof100.morsenotifier.i.a(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", this.b, var6));
+      MyLog.log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", this.b, var6));
       this.c = var2;
       this.d = var3;
       this.e = var4;
@@ -1779,33 +1779,33 @@ class j extends AsyncTask {
       StringBuilder var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit text=");
       var14.append(this.l);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit pref_call_freq=");
       var14.append(this.i);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit samplerate=");
       var14.append(this.p);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit mdur=");
       var14.append(this.o);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit mSpacesAfterChar=");
       var14.append(this.n);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
-      com.dof100.morsenotifier.i.a(var1, "MyPlayerMorse.playInit Creating sequence");
+      MyLog.log(var1, var14.toString());
+      MyLog.log(var1, "MyPlayerMorse.playInit Creating sequence");
       this.c();
       this.q = this.x.size() / 2;
       this.r = this.p * this.o * this.q / 1000;
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit nelements ");
       var14.append(this.q);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
       if (this.d) {
-         com.dof100.morsenotifier.i.a(var1, "MyPlayerMorse.playInit Initializing vibration");
+         MyLog.log(var1, "MyPlayerMorse.playInit Initializing vibration");
          this.w = (Vibrator)var1.getSystemService("vibrator");
       }
 
@@ -1813,7 +1813,7 @@ class j extends AsyncTask {
       var14 = new StringBuilder();
       var14.append("MyPlayerMorse.playInit OUT instance=");
       var14.append(this.b);
-      com.dof100.morsenotifier.i.a(var1, var14.toString());
+      MyLog.log(var1, var14.toString());
    }
 
    // $FF: synthetic method

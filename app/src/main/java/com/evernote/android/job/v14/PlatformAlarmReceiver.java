@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.evernote.android.job.k;
+import com.evernote.android.job.JobProxy;
 
 public class PlatformAlarmReceiver extends BroadcastReceiver {
    static Intent a(Context var0, int var1, boolean var2, Bundle var3) {
@@ -21,7 +21,7 @@ public class PlatformAlarmReceiver extends BroadcastReceiver {
          int var3 = var2.getIntExtra("EXTRA_JOB_ID", -1);
          Bundle var4 = var2.getBundleExtra("EXTRA_TRANSIENT_EXTRAS");
          if (var2.getBooleanExtra("EXTRA_JOB_EXACT", false)) {
-            k.a.a(var1, PlatformAlarmServiceExact.a(var1, var3, var4));
+            JobProxy.a.a(var1, PlatformAlarmServiceExact.a(var1, var3, var4));
             return;
          }
 

@@ -27,12 +27,12 @@ public class ActivityAppFilter extends Activity {
       StringBuilder var1 = new StringBuilder();
       var1.append("ActivityAppFilter.filter2view package=");
       var1.append(this.c.a);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       final int var2 = this.a.a(this.c.a);
       var1 = new StringBuilder();
       var1.append("ActivityAppFilter.filter2view package idx=");
       var1.append(var2);
-      com.dof100.morsenotifier.i.a(var1.toString());
+      MyLog.log(var1.toString());
       this.d.post(new Runnable() {
          public void run() {
             if (var2 >= 0) {
@@ -60,7 +60,7 @@ public class ActivityAppFilter extends Activity {
       var2.append(var1);
       var2.append(" package=");
       var2.append(this.c.a);
-      com.dof100.morsenotifier.i.a(var2.toString());
+      MyLog.log(var2.toString());
       this.c.b = this.e.getText().toString();
       this.c.c = this.f.getText().toString();
       this.c.d = this.g.getText().toString();
@@ -74,7 +74,7 @@ public class ActivityAppFilter extends Activity {
 
    protected void onCreate(Bundle var1) {
       super.onCreate(var1);
-      com.dof100.morsenotifier.i.a("ActivityAppFilter.onCreate");
+      MyLog.log("ActivityAppFilter.onCreate");
       this.setContentView(2131296257);
       this.c = null;
       this.b = new b(this);
@@ -89,12 +89,12 @@ public class ActivityAppFilter extends Activity {
             var5 = new StringBuilder();
             var5.append("ActivityAppFilter.onCreate loaded filter at position = ");
             var5.append(var2);
-            com.dof100.morsenotifier.i.a(var5.toString());
+            MyLog.log(var5.toString());
          } else {
             Locale var4 = Locale.US;
             int var3 = var2 + 1;
-            com.dof100.morsenotifier.i.b(this, String.format(var4, "Filter %d not found", var3));
-            com.dof100.morsenotifier.i.a(this, (String)String.format(Locale.US, "Filter %d not found", var3));
+            MyLog.toast(this, String.format(var4, "Filter %d not found", var3));
+            MyLog.log(this, (String)String.format(Locale.US, "Filter %d not found", var3));
             this.finish();
          }
       } else {
@@ -108,7 +108,7 @@ public class ActivityAppFilter extends Activity {
          var5 = new StringBuilder();
          var5.append("ActivityAppFilter.onCreate created new filter at position = ");
          var5.append(var2);
-         com.dof100.morsenotifier.i.a(var5.toString());
+         MyLog.log(var5.toString());
       }
 
       this.setTitle(String.format(Locale.US, "%s %d", this.getResources().getString(2131492925), var2 + 1));
@@ -129,19 +129,19 @@ public class ActivityAppFilter extends Activity {
    }
 
    protected void onDestroy() {
-      com.dof100.morsenotifier.i.a("ActivityAppFilter.onDestroy");
+      MyLog.log("ActivityAppFilter.onDestroy");
       super.onDestroy();
    }
 
    protected void onPause() {
-      com.dof100.morsenotifier.i.a("ActivityAppFilter.onPause");
+      MyLog.log("ActivityAppFilter.onPause");
       this.b();
       this.b.b(this);
       super.onPause();
    }
 
    protected void onStop() {
-      com.dof100.morsenotifier.i.a("ActivityAppFilter.onStop");
+      MyLog.log("ActivityAppFilter.onStop");
       super.onStop();
    }
 }

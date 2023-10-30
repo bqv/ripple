@@ -18,7 +18,7 @@ public class BRSMS extends BroadcastReceiver {
          String var6;
          Exception var20;
          label96: {
-            i.a(var1, "BRSMS.onReceive");
+            MyLog.log(var1, "BRSMS.onReceive");
             Bundle var3 = var2.getExtras();
             var4 = "";
             var19 = "";
@@ -74,7 +74,7 @@ public class BRSMS extends BroadcastReceiver {
                                     SmsMessage var22;
                                     label69: {
                                        try {
-                                          i.a(String.format(var21, "BRSMS.onReceive obj=%d of %d", var9, var7.length));
+                                          MyLog.log(String.format(var21, "BRSMS.onReceive obj=%d of %d", var9, var7.length));
                                           if (VERSION.SDK_INT >= 23) {
                                              var5 = var3.getString("format");
                                              var22 = SmsMessage.createFromPdu((byte[])var7[var8], var5);
@@ -125,7 +125,7 @@ public class BRSMS extends BroadcastReceiver {
                         }
 
                         try {
-                           i.a(var1, "BRSMS.onReceive pdusObj=null");
+                           MyLog.log(var1, "BRSMS.onReceive pdusObj=null");
                            break label87;
                         } catch (Exception var15) {
                            var10000 = var15;
@@ -145,7 +145,7 @@ public class BRSMS extends BroadcastReceiver {
                }
             } else {
                try {
-                  i.a(var1, "BRSMS.onReceive bundle=null");
+                  MyLog.log(var1, "BRSMS.onReceive bundle=null");
                   break label97;
                } catch (Exception var17) {
                   var10000 = var17;
@@ -167,7 +167,7 @@ public class BRSMS extends BroadcastReceiver {
          var19 = var6;
       }
 
-      i.a(var1, String.format(Locale.US, "BRSMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var5, var19, var4));
+      MyLog.log(var1, String.format(Locale.US, "BRSMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s", var5, var19, var4));
       Intent var23 = new Intent(var1, ServiceMain.class);
       var23.putExtra(var1.getResources().getString(2131492900), var5);
       var23.putExtra(var1.getResources().getString(2131492875), var19);

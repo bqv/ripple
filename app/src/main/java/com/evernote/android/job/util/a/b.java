@@ -1,6 +1,6 @@
-package com.evernote.android.job.a.a;
+package com.evernote.android.job.util.a;
 
-import com.evernote.android.job.a.d;
+import com.evernote.android.job.util.JobCat;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,7 +9,7 @@ import java.util.Map;
 import org.xmlpull.v1.XmlPullParserException;
 
 public final class b {
-   private static final d a = new d("PersistableBundleCompat");
+   private static final JobCat a = new JobCat("PersistableBundleCompat");
    private final Map b;
 
    public b() {

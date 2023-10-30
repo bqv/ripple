@@ -8,7 +8,7 @@ import android.os.Build.VERSION;
 import java.io.File;
 
 final class o implements DatabaseErrorHandler {
-   private static final com.evernote.android.job.a.d a = new com.evernote.android.job.a.d("DatabaseErrorHandler");
+   private static final com.evernote.android.job.util.d a = new com.evernote.android.job.util.d("DatabaseErrorHandler");
 
    void a(Context var1, File var2) {
       var1.deleteDatabase(var2.getName());
@@ -25,7 +25,7 @@ final class o implements DatabaseErrorHandler {
             return;
          }
 
-         com.evernote.android.job.a.d var2 = a;
+         com.evernote.android.job.util.d var2 = a;
          StringBuilder var3 = new StringBuilder();
          var3.append("deleting the database file: ");
          var3.append(var1);
@@ -41,7 +41,7 @@ final class o implements DatabaseErrorHandler {
             this.a(i.a().h(), var6);
             return;
          } catch (Exception var4) {
-            com.evernote.android.job.a.d var5 = a;
+            com.evernote.android.job.util.d var5 = a;
             var3 = new StringBuilder();
             var3.append("delete failed: ");
             var3.append(var4.getMessage());
