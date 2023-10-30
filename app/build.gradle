@@ -2,8 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    namespace "io.fron.morse"
+    namespace "com.dof100.morsenotifier"
     compileSdk = 34
+    buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId "io.fron.morse"
         minSdk = 28
@@ -19,8 +20,15 @@ android {
         }
     }
     compileOptions {
+        encoding "UTF-8"
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 

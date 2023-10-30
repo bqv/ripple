@@ -108,7 +108,7 @@ public class ActivityDisplayMessage extends Activity implements OnClickListener 
       MyLog.log(var1);
       App.b(this.getApplicationContext());
       this.startActivity(new Intent(this, ActivityMain.class));
-      this.l.setVisibility(4);
+      this.l.setVisibility(View.INVISIBLE);
       this.finish();
    }
 
