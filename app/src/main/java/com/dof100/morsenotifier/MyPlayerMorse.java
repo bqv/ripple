@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioFormat;
 import android.media.AudioTrack;
 import android.media.AudioTrack.Builder;
 import android.media.AudioTrack.OnPlaybackPositionUpdateListener;
@@ -1005,7 +1006,7 @@ class MyPlayerMorse extends AsyncTask {
       MyLog.log(var8.toString());
    }
 
-   protected Void a(Void... var1) {
+   protected Void doInBackground(Void... var1) {
       StringBuilder var27;
       if (this.a == null) {
          var27 = new StringBuilder();
@@ -1146,7 +1147,7 @@ class MyPlayerMorse extends AsyncTask {
                               android.media.AudioAttributes.Builder var31 = new android.media.AudioAttributes.Builder();
                               Builder var32 = var35.setAudioAttributes(var31.setLegacyStreamType(this.h).build());
                               android.media.AudioFormat.Builder var36 = new android.media.AudioFormat.Builder();
-                              this.v = var32.setAudioFormat(var36.setEncoding(2).setSampleRate(this.p).setChannelMask(4).build()).setBufferSizeInBytes(var3).setTransferMode(1).build();
+                              this.v = var32.setAudioFormat(var36.setEncoding(AudioFormat.ENCODING_PCM_16BIT).setSampleRate(this.p).setChannelMask(4).build()).setBufferSizeInBytes(var3).setTransferMode(1).build();
                               break label139;
                            }
                         } catch (IllegalArgumentException var21) {
@@ -1818,6 +1819,10 @@ class MyPlayerMorse extends AsyncTask {
 
    // $FF: synthetic method
    protected Object doInBackground(Object[] var1) {
-      return this.a((Void[])var1);
+      try {
+         return this.doInBackground((Void[]) var1);
+      } catch (Exception e) {
+         return null;
+      }
    }
 }

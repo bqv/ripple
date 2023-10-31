@@ -174,11 +174,11 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
 
     override fun onBindView(var1: View) {
         log("MyPreferenceText.onBindView")
-        val var2 = var1.findViewById<View>(16908310) as TextView
+        val var2 = var1.findViewById<TextView>(16908310)
         if (i && var2 != null) {
             var2.setTextColor(a)
         }
-        val var3 = var1.findViewById<View>(16908304) as TextView
+        val var3 = var1.findViewById<TextView>(16908304)
         if (var3 != null) {
             val var4 = var3.parent as RelativeLayout
             k = TextView(var1.context)

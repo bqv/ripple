@@ -2,6 +2,7 @@ package com.dof100.morsenotifier;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,31 +120,31 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
             var11.setTag(var12);
             switch(var12.h) {
             case -4:
-               var11.setTextColor(-256);
+               var11.setTextColor(Color.YELLOW);
                var15 = this.a;
                var1 = R.string.recentnotifications_announced_multiple;
                break;
             case -3:
-               var11.setTextColor(-256);
+               var11.setTextColor(Color.YELLOW);
                var15 = this.a;
                var1 = R.string.recentnotifications_announced_identical;
                break;
             case -2:
-               var11.setTextColor(-65536);
+               var11.setTextColor(Color.RED);
                var15 = this.a;
                var1 = R.string.recentnotifications_announced_filters;
                break;
             case -1:
-               var11.setTextColor(-65536);
+               var11.setTextColor(Color.RED);
                var10 = "Not announced (options)";
                break label73;
             case 0:
-               var11.setTextColor(-7829368);
+               var11.setTextColor(Color.GRAY);
                var15 = this.a;
                var1 = R.string.recentnotifications_announced_waiting;
                break;
             case 1:
-               var11.setTextColor(-16711936);
+               var11.setTextColor(Color.GREEN);
                var15 = this.a;
                var1 = R.string.recentnotifications_announced_announced;
                break;
@@ -160,11 +161,11 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_matchingfilter);
       var11.setTag(var12);
       if (var12.i < 0) {
-         var11.setTextColor(-16711681);
+         var11.setTextColor(Color.CYAN);
          var15 = this.a;
          var1 = R.string.recentnotifications_matchingfilter_nofilter;
       } else {
-         var11.setTextColor(-16711681);
+         var11.setTextColor(Color.CYAN);
          var15 = this.a;
          var1 = R.string.recentnotifications_matchingfilter_meets;
       }
@@ -176,7 +177,7 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
          var8.setText("");
          var8.setOnClickListener((OnClickListener)null);
       } else {
-         var8.setTextColor(-16711681);
+         var8.setTextColor(Color.CYAN);
          var8.setPaintFlags(var8.getPaintFlags() | 8);
          var8.setText(String.format(Locale.US, this.a.getString(R.string.recentnotifications_matchingfilter_filter), var12.i + 1));
          var8.setOnClickListener(this);
@@ -185,10 +186,10 @@ class MyRecentNotificationsArrayAdapter extends ArrayAdapter implements OnClickL
       var11 = (TextView)var14.findViewById(R.id.tv_recentnotification_announcement);
       var11.setTag(var12);
       if (var12.i < 0) {
-         var11.setTextColor(-65536);
+         var11.setTextColor(Color.RED);
          var10 = "";
       } else {
-         var11.setTextColor(-16711681);
+         var11.setTextColor(Color.CYAN);
          var10 = var12.j;
       }
 

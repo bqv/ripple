@@ -23,7 +23,7 @@ public class MyPreferenceEditText extends EditTextPreference {
       int[] var0 = new int[]{16842910};
       int[] var1 = new int[]{-16842910};
       int var2 = Color.rgb(11, 141, 189);
-      a = new ColorStateList(new int[][]{var0, var1}, new int[]{var2, -7829368});
+      a = new ColorStateList(new int[][]{var0, var1}, new int[]{var2, Color.GRAY});
    }
 
    public MyPreferenceEditText(Context var1) {

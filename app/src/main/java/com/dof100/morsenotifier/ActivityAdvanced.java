@@ -7,6 +7,7 @@ import android.app.ActivityManager.RunningServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,10 +49,10 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
    private void a() {
       if (ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE") == 0) {
          this.b.setText(R.string.string_advanced_permissions_readsms_granted);
-         this.b.setTextColor(-16711936);
+         this.b.setTextColor(Color.GREEN);
       } else {
          this.b.setText(R.string.string_advanced_permissions_readsms_denied);
-         this.b.setTextColor(-65536);
+         this.b.setTextColor(Color.RED);
       }
 
       if (VERSION.SDK_INT < 28) {
@@ -60,35 +61,35 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
          this.c.setVisibility(0);
          if (ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG") == 0) {
             this.c.setText(R.string.string_advanced_permissions_readcontacts_granted);
-            this.c.setTextColor(-16711936);
+            this.c.setTextColor(Color.GREEN);
          } else {
             this.c.setText(R.string.string_advanced_permissions_readcontacts_denied);
-            this.c.setTextColor(-65536);
+            this.c.setTextColor(Color.RED);
          }
       }
 
       if (ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS") == 0) {
          this.d.setText(R.string.string_advanced_permissions_text);
-         this.d.setTextColor(-16711936);
+         this.d.setTextColor(Color.GREEN);
       } else {
          this.d.setText(R.string.string_advanced_permissions_settings);
-         this.d.setTextColor(-65536);
+         this.d.setTextColor(Color.RED);
       }
 
       if (ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS") == 0) {
          this.e.setText(R.string.string_advanced_permissions_readphonestate_granted);
-         this.e.setTextColor(-16711936);
+         this.e.setTextColor(Color.GREEN);
       } else {
          this.e.setText(R.string.string_advanced_permissions_readphonestate_denied);
-         this.e.setTextColor(-65536);
+         this.e.setTextColor(Color.RED);
       }
 
       if (App.b) {
          if (a((Activity)this)) {
             this.f.setText(R.string.string_advanced_notificationlistener_running);
-            this.f.setTextColor(-16711936);
+            this.f.setTextColor(Color.GREEN);
          } else {
-            this.f.setTextColor(-65536);
+            this.f.setTextColor(Color.RED);
             TextView var1;
             int var2;
             if (d(this)) {
@@ -104,28 +105,28 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       } else {
          this.f.setText(R.string.string_advanced_notificationlistener_disabled);
          this.f.setEnabled(false);
-         this.f.setTextColor(-7829368);
+         this.f.setTextColor(Color.GRAY);
       }
 
       if (!App.h && !App.i && !App.j) {
-         this.g.setVisibility(8);
+         this.g.setVisibility(View.GONE);
       } else {
-         this.g.setVisibility(0);
+         this.g.setVisibility(View.VISIBLE);
          this.h.setText(this.getResources().getText(R.string.string_advanced_autostart_text).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       }
 
       if (!App.h && !App.i) {
-         this.i.setVisibility(8);
+         this.i.setVisibility(View.GONE);
       } else {
-         this.i.setVisibility(0);
+         this.i.setVisibility(View.VISIBLE);
          this.j.setText(this.getResources().getText(R.string.string_advanced_protectedapps).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       }
 
       if (App.k) {
-         this.k.setVisibility(0);
+         this.k.setVisibility(View.VISIBLE);
          this.l.setText(this.getResources().getText(R.string.string_advanced_service_command).toString().replace("$BRAND$", App.g).replace("$APPNAME$", App.e));
       } else {
-         this.k.setVisibility(8);
+         this.k.setVisibility(View.GONE);
       }
    }
 
@@ -224,7 +225,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       } else {
          ComponentName var3 = new ComponentName(var0, ServiceNotifications.class);
          int var4 = Process.myPid();
-         ActivityManager var7 = (ActivityManager)var0.getSystemService("activity");
+         ActivityManager var7 = (ActivityManager)var0.getSystemService(Context.ACTIVITY_SERVICE);
 
          List var8;
          try {
@@ -237,10 +238,9 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
             MyLog.log("ActivityMain.isCollectorRunning. getRunningServices returned NULL");
             return true;
          } else {
-            Iterator var5 = var8.iterator();
 
-            while(var5.hasNext()) {
-               RunningServiceInfo var9 = (RunningServiceInfo)var5.next();
+            for (Object o : var8) {
+               RunningServiceInfo var9 = (RunningServiceInfo) o;
                if (var9.service.equals(var3) && var9.pid == var4) {
                   var2 = true;
                }
@@ -517,7 +517,7 @@ public class ActivityAdvanced extends Activity implements OnClickListener {
       this.a = (EditText)this.findViewById(R.id.editText_command);
       this.b = (TextView)this.findViewById(R.id.tv_service_permissions_readsms);
       this.c = (TextView)this.findViewById(R.id.tv_service_permissions_readcontacts);
-      this.d = (TextView)this.findViewById(2131165315);
+      this.d = (TextView)this.findViewById(R.id.tv_service_permissions_readcalllog);
       this.e = (TextView)this.findViewById(R.id.tv_service_permissions_readphonestate);
       this.g = (LinearLayout)this.findViewById(R.id.ll_advanced_autostart);
       this.h = (TextView)this.findViewById(R.id.tv_advanced_autostart_text);

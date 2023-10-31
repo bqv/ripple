@@ -30,7 +30,7 @@ public class MyPreferenceNumber extends DialogPreference {
 
    static {
       int var0 = Color.rgb(11, 141, 189);
-      a = new ColorStateList(new int[][]{{16842910}, {-16842910}}, new int[]{var0, -7829368});
+      a = new ColorStateList(new int[][]{{16842910}, {-16842910}}, new int[]{var0, Color.GRAY});
    }
 
    public MyPreferenceNumber(Context var1, AttributeSet var2) {
