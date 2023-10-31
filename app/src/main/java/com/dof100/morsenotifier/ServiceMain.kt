@@ -316,7 +316,7 @@ class ServiceMain : IntentService {
     } else {
       var15 = var4
     }
-    var11.a(var12, var7, var8, var13, var14, var3, var4, var15, var2, var5, var6, u, var1)
+    var11.playInit(var12, var7, var8, var13, var14, var3, var4, var15, var2, var5, var6, u, var1)
     if (var9) {
       when (w) {
         1, 2, 3 -> {
@@ -324,7 +324,7 @@ class ServiceMain : IntentService {
           var17.addFlags(32768)
           var17.addFlags(268435456)
           var17.putExtra("PARAM_INSTANCE", aF)
-          var17.putExtra("PARAM_LIST", var11.a())
+          var17.putExtra("PARAM_LIST", var11.unknown4())
           var17.putExtra("PARAM_DISPLAY_HOW", w)
           var17.putExtra("PARAM_DISPLAY_POS", x)
           var17.putExtra("PARAM_DISPLAY_STAYONTOP", y)
@@ -348,7 +348,7 @@ class ServiceMain : IntentService {
       }
     }
     var11.execute()
-    var11.a(getApplicationContext())
+    var11.playDone(getApplicationContext())
   }
 
   private fun a(var1: String?, var2: Int, var3: Int, var4: Boolean) {

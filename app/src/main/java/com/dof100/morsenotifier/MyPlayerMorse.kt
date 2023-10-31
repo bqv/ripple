@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<Any?, Any?, Any?>() {
-  private var a: WeakReference<Context>?
+  private var weakContext: WeakReference<Context>?
   private var c = false
   private var d = false
   private var e = false
@@ -39,47 +39,45 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
   private var s = 0L
   private var t = 0
   private var u = false
-  private var v: AudioTrack? = null
-  private var w: Vibrator? = null
+  private var audioTrack: AudioTrack? = null
+  private var vibrator: Vibrator? = null
   private val x: ArrayList<Int> = ArrayList()
-  private val y = CountDownLatch(1)
-  private val z: BroadcastReceiver = object : BroadcastReceiver() {
-    override fun onReceive(var1: Context, var2: Intent) {
-      if ("LBR_ACTION_FINISH" == var2.action) {
-        log(var1, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ")
+  private val countDownLatch = CountDownLatch(1)
+
+  private val BroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if ("LBR_ACTION_FINISH" == intent.action) {
+        log(context, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ")
         u = true
-        y.countDown()
+        countDownLatch.countDown()
       }
     }
   }
 
   init {
-    a = WeakReference<Context>(context)
-    val var3 = StringBuilder()
-    var3.append("MyPlayerMorse constructor instance=")
-    var3.append(b)
-    log(context, var3.toString())
+    weakContext = WeakReference<Context>(context)
+    log(context, "MyPlayerMorse constructor instance=$b")
   }
 
-  private fun a(var1: Char, var2: Boolean) {
-    var var2 = var2
-    var var3 = var1
+  private fun unknown1(character: Char, flag: Boolean) {
+    var flag = flag
+    var character = character
     if (!e) {
       run label619@{
-        if (var1 < '!' || var1 > '/') {
-          var3 = var1
-          if (var1 < ':') {
+        if (character < '!' || character > '/') {
+          character = character
+          if (character < ':') {
             return@label619
           }
-          var3 = var1
-          if (var1 > '@') {
+          character = character
+          if (character > '@') {
             return@label619
           }
         }
-        var3 = ' '
+        character = ' '
       }
     }
-    var var4: Int
+    var number: Int
     run label598@{
       run label597@{
         run label654@{
@@ -153,393 +151,179 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                 run label500@{
                                                                                                                                                   run label499@{
                                                                                                                                                     run label670@{
-                                                                                                                                                      var4 =
-                                                                                                                                                        0
-                                                                                                                                                      when (var3) {
+                                                                                                                                                      number = 0
+                                                                                                                                                      when (character) {
                                                                                                                                                         '!' -> {
-                                                                                                                                                          this.a(
-                                                                                                                                                            2,
-                                                                                                                                                            var3.code
-                                                                                                                                                          )
-                                                                                                                                                          this.a(
-                                                                                                                                                            -1,
-                                                                                                                                                            -1
-                                                                                                                                                          )
-                                                                                                                                                          this.a(
-                                                                                                                                                            -1,
-                                                                                                                                                            -1
-                                                                                                                                                          )
-                                                                                                                                                          this.a(
-                                                                                                                                                            -2,
-                                                                                                                                                            -1
-                                                                                                                                                          )
-                                                                                                                                                          this.a(
-                                                                                                                                                            1,
-                                                                                                                                                            -1
-                                                                                                                                                          )
+                                                                                                                                                          this.unknown4(2, character.code)
+                                                                                                                                                          this.unknown4(-1, -1)
+                                                                                                                                                          this.unknown4(-1, -1)
+                                                                                                                                                          this.unknown4(-2, -1)
+                                                                                                                                                          this.unknown4(1, -1)
                                                                                                                                                           return@label661
                                                                                                                                                         }
 
-                                                                                                                                                        '"' -> this.a(
-                                                                                                                                                          1,
-                                                                                                                                                          var3.code
-                                                                                                                                                        )
+                                                                                                                                                        '"' -> this.unknown4(1, character.code)
 
                                                                                                                                                         else -> run label669@ {
                                                                                                                                                           run label665@{
                                                                                                                                                             run label490@{
-                                                                                                                                                              when (var3) {
+                                                                                                                                                              when (character) {
                                                                                                                                                                 '&' -> {
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    1,
-                                                                                                                                                                    var3.code
-                                                                                                                                                                  )
+                                                                                                                                                                  this.unknown4(1, character.code)
                                                                                                                                                                   return@label550
                                                                                                                                                                 }
 
                                                                                                                                                                 '\'' -> {
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    1,
-                                                                                                                                                                    var3.code
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -2,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    2,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
+                                                                                                                                                                  this.unknown4(1, character.code)
+                                                                                                                                                                  this.unknown4(-2, -1)
+                                                                                                                                                                  this.unknown4(2, -1)
                                                                                                                                                                   return@label665
                                                                                                                                                                 }
 
                                                                                                                                                                 '(' -> {
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    2,
-                                                                                                                                                                    var3.code
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -1,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -1,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
+                                                                                                                                                                  this.unknown4(2, character.code)
+                                                                                                                                                                  this.unknown4(-1, -1)
+                                                                                                                                                                  this.unknown4(-1, -1)
                                                                                                                                                                   return@label526
                                                                                                                                                                 }
 
                                                                                                                                                                 ')' -> {
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    2,
-                                                                                                                                                                    var3.code
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -1,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -1,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
+                                                                                                                                                                  this.unknown4(2, character.code)
+                                                                                                                                                                  this.unknown4(-1, -1)
+                                                                                                                                                                  this.unknown4(-1, -1)
                                                                                                                                                                 }
 
                                                                                                                                                                 else -> run label484@ {
-                                                                                                                                                                  when (var3) {
+                                                                                                                                                                  when (character) {
                                                                                                                                                                     '+' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
                                                                                                                                                                       return@label533
                                                                                                                                                                     }
 
                                                                                                                                                                     ',' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown4(2, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '-' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown4(1, -1)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '.' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown4(2, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown4(1, -1)
                                                                                                                                                                       return@label557
                                                                                                                                                                     }
 
                                                                                                                                                                     '/' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
                                                                                                                                                                       return@label521
                                                                                                                                                                     }
 
                                                                                                                                                                     '0' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
                                                                                                                                                                     }
 
-                                                                                                                                                                    '1' -> this.a(
-                                                                                                                                                                      1,
-                                                                                                                                                                      var3.code
-                                                                                                                                                                    )
+                                                                                                                                                                    '1' -> this.unknown4(1, character.code)
 
                                                                                                                                                                     '2' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown4(1, -1)
                                                                                                                                                                       return@label659
                                                                                                                                                                     }
 
                                                                                                                                                                     '3' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '4' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '5' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(1, character.code)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '6' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '7' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
 
                                                                                                                                                                     '8' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
                                                                                                                                                                       return@label657
                                                                                                                                                                     }
 
                                                                                                                                                                     '9' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
                                                                                                                                                                       return@label665
                                                                                                                                                                     }
 
                                                                                                                                                                     ':' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown2(2, -1)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
 
                                                                                                                                                                     ';' -> {
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        2,
-                                                                                                                                                                        var3.code
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        -2,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
-                                                                                                                                                                      this.a(
-                                                                                                                                                                        1,
-                                                                                                                                                                        -1
-                                                                                                                                                                      )
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(1, -1)
                                                                                                                                                                       return@label533
                                                                                                                                                                     }
 
-                                                                                                                                                                    else -> when (var3) {
+                                                                                                                                                                    else -> when (character) {
                                                                                                                                                                       '?' -> {
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          1,
-                                                                                                                                                                          var3.code
-                                                                                                                                                                        )
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          -2,
-                                                                                                                                                                          -1
-                                                                                                                                                                        )
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          1,
-                                                                                                                                                                          -1
-                                                                                                                                                                        )
+                                                                                                                                                                        this.unknown2(1, character.code)
+                                                                                                                                                                        this.unknown2(-2, -1)
+                                                                                                                                                                        this.unknown2(1, -1)
                                                                                                                                                                         return@label657
                                                                                                                                                                       }
 
                                                                                                                                                                       '@' -> {
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          1,
-                                                                                                                                                                          var3.code
-                                                                                                                                                                        )
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          -2,
-                                                                                                                                                                          -1
-                                                                                                                                                                        )
-                                                                                                                                                                        this.a(
-                                                                                                                                                                          2,
-                                                                                                                                                                          -1
-                                                                                                                                                                        )
+                                                                                                                                                                        this.unknown2(1, character.code)
+                                                                                                                                                                        this.unknown2(-2, -1)
+                                                                                                                                                                        this.unknown2(2, -1)
                                                                                                                                                                         return@label662
                                                                                                                                                                       }
 
-                                                                                                                                                                      else -> when (var3) {
+                                                                                                                                                                      else -> when (character) {
                                                                                                                                                                         'a' -> return@label584
                                                                                                                                                                         'b' -> return@label561
                                                                                                                                                                         'c' -> return@label547
@@ -550,10 +334,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                         'h' -> return@label580
                                                                                                                                                                         'i' -> return@label589
                                                                                                                                                                         'j' -> {
-                                                                                                                                                                          this.a(
-                                                                                                                                                                            1,
-                                                                                                                                                                            var3.code
-                                                                                                                                                                          )
+                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                           return@label659
                                                                                                                                                                         }
 
@@ -568,18 +349,12 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                         's' -> return@label586
                                                                                                                                                                         't' -> return@label592
                                                                                                                                                                         'u' -> {
-                                                                                                                                                                          this.a(
-                                                                                                                                                                            1,
-                                                                                                                                                                            var3.code
-                                                                                                                                                                          )
+                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                           return@label585
                                                                                                                                                                         }
 
                                                                                                                                                                         'v' -> {
-                                                                                                                                                                          this.a(
-                                                                                                                                                                            1,
-                                                                                                                                                                            var3.code
-                                                                                                                                                                          )
+                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                           return@label577
                                                                                                                                                                         }
 
@@ -587,36 +362,30 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                         'x' -> return@label527
                                                                                                                                                                         'y' -> return@label500
                                                                                                                                                                         'z' -> return@label528
-                                                                                                                                                                        else -> when (var3) {
+                                                                                                                                                                        else -> when (character) {
                                                                                                                                                                           'ä', 'æ' -> return@label530
                                                                                                                                                                           'ç' -> return@label531
                                                                                                                                                                           'è' -> return@label503
                                                                                                                                                                           'é' -> return@label532
                                                                                                                                                                           'å' -> {
-                                                                                                                                                                            this.a(
-                                                                                                                                                                              1,
-                                                                                                                                                                              var3.code
-                                                                                                                                                                            )
+                                                                                                                                                                            this.unknown2(1, character.code)
                                                                                                                                                                             return@label663
                                                                                                                                                                           }
 
                                                                                                                                                                           else -> {
-                                                                                                                                                                            when (var3) {
+                                                                                                                                                                            when (character) {
                                                                                                                                                                               'ð' -> {
-                                                                                                                                                                                this.a(
-                                                                                                                                                                                  1,
-                                                                                                                                                                                  var3.code
-                                                                                                                                                                                )
+                                                                                                                                                                                this.unknown2(1, character.code)
                                                                                                                                                                                 return@label526
                                                                                                                                                                               }
 
                                                                                                                                                                               'ñ' -> return@label490
-                                                                                                                                                                              else -> when (var3) {
+                                                                                                                                                                              else -> when (character) {
                                                                                                                                                                                 'ά' -> return@label584
                                                                                                                                                                                 'έ' -> return@label597
                                                                                                                                                                                 'ή' -> return@label580
                                                                                                                                                                                 'ί' -> return@label589
-                                                                                                                                                                                else -> when (var3) {
+                                                                                                                                                                                else -> when (character) {
                                                                                                                                                                                   'α' -> return@label584
                                                                                                                                                                                   'β' -> return@label561
                                                                                                                                                                                   'γ' -> return@label565
@@ -630,7 +399,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                                   'λ' -> return@label549
                                                                                                                                                                                   'μ' -> return@label568
                                                                                                                                                                                   'ν' -> return@label583
-                                                                                                                                                                                  else -> when (var3) {
+                                                                                                                                                                                  else -> when (character) {
                                                                                                                                                                                     'ο' -> return@label522
                                                                                                                                                                                     'π' -> return@label523
                                                                                                                                                                                     'ρ' -> return@label572
@@ -641,91 +410,52 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                                     'χ' -> return@label527
                                                                                                                                                                                     'ψ' -> return@label670
                                                                                                                                                                                     'ω' -> return@label552
-                                                                                                                                                                                    else -> when (var3) {
+                                                                                                                                                                                    else -> when (character) {
                                                                                                                                                                                       'ό' -> return@label522
                                                                                                                                                                                       'ύ' -> return@label500
                                                                                                                                                                                       'ώ' -> return@label552
-                                                                                                                                                                                      else -> when (var3) {
+                                                                                                                                                                                      else -> when (character) {
                                                                                                                                                                                         '$' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -2,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -2,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          this.unknown2(1, -1)
+                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          this.unknown2(1, -1)
                                                                                                                                                                                           return@label535
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '=' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.unknown2(-1, -1)
                                                                                                                                                                                           return@label562
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '_' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                                           return@label484
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '|' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -2,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          var2 =
+                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          flag =
                                                                                                                                                                                             false
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'à' -> {}
                                                                                                                                                                                         'ó', 'ö', 'ø' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
                                                                                                                                                                                           return@label660
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ü', 'ŭ' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                                           return@label560
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'þ' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                                           return@label657
                                                                                                                                                                                         }
 
@@ -733,100 +463,52 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                                         'ć', 'ĉ' -> return@label531
                                                                                                                                                                                         'đ', 'ę' -> return@label532
                                                                                                                                                                                         'ĝ' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
                                                                                                                                                                                           return@label662
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ĥ', 'š' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
                                                                                                                                                                                           return@label504
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ĵ' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                                           return@label499
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ł' -> return@label503
                                                                                                                                                                                         'ń' -> return@label490
                                                                                                                                                                                         'ś' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -2,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -2,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          this.unknown2(1, -1)
+                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          this.unknown2(1, -1)
                                                                                                                                                                                           return@label550
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ŝ' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            1,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(1, character.code)
                                                                                                                                                                                           return@label566
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ź' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.unknown2(-1, -1)
                                                                                                                                                                                           return@label669
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ż' -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            var3.code
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -1,
-                                                                                                                                                                                            -1
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.unknown2(-1, -1)
                                                                                                                                                                                           return@label535
                                                                                                                                                                                         }
 
                                                                                                                                                                                         else -> {
-                                                                                                                                                                                          this.a(
-                                                                                                                                                                                            -3,
-                                                                                                                                                                                            -3
-                                                                                                                                                                                          )
+                                                                                                                                                                                          this.unknown2(-3, -3)
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
                                                                                                                                                                                       }
@@ -835,633 +517,327 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                                                 }
                                                                                                                                                                               }
                                                                                                                                                                             }
-                                                                                                                                                                            this.a(
-                                                                                                                                                                              1,
-                                                                                                                                                                              var3.code
-                                                                                                                                                                            )
+                                                                                                                                                                            this.unknown2(1, character.code)
                                                                                                                                                                             return@label663
                                                                                                                                                                           }
                                                                                                                                                                         }
                                                                                                                                                                       }
                                                                                                                                                                     }
                                                                                                                                                                   }
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    -2,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
-                                                                                                                                                                  this.a(
-                                                                                                                                                                    2,
-                                                                                                                                                                    -1
-                                                                                                                                                                  )
+                                                                                                                                                                  this.unknown2(-2, -1)
+                                                                                                                                                                  this.unknown2(2, -1)
                                                                                                                                                                   return@label504
                                                                                                                                                                 }
                                                                                                                                                               }
-                                                                                                                                                              this.a(
-                                                                                                                                                                -2,
-                                                                                                                                                                -1
-                                                                                                                                                              )
-                                                                                                                                                              this.a(
-                                                                                                                                                                1,
-                                                                                                                                                                -1
-                                                                                                                                                              )
+                                                                                                                                                              this.unknown2(-2, -1)
+                                                                                                                                                              this.unknown2(1, -1)
                                                                                                                                                               return@label663
                                                                                                                                                             }
-                                                                                                                                                            this.a(
-                                                                                                                                                              2,
-                                                                                                                                                              var3.code
-                                                                                                                                                            )
-                                                                                                                                                            this.a(
-                                                                                                                                                              -1,
-                                                                                                                                                              -1
-                                                                                                                                                            )
-                                                                                                                                                            this.a(
-                                                                                                                                                              -1,
-                                                                                                                                                              -1
-                                                                                                                                                            )
+                                                                                                                                                            this.unknown2(2, character.code)
+                                                                                                                                                            this.unknown2(-1, -1)
+                                                                                                                                                            this.unknown2(-1, -1)
                                                                                                                                                             return@label661
                                                                                                                                                           }
-                                                                                                                                                          this.a(
-                                                                                                                                                            -1,
-                                                                                                                                                            -1
-                                                                                                                                                          )
-                                                                                                                                                          this.a(
-                                                                                                                                                            -1,
-                                                                                                                                                            -1
-                                                                                                                                                          )
+                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                          this.unknown2(-1, -1)
                                                                                                                                                           return@label499
                                                                                                                                                         }
                                                                                                                                                       }
-                                                                                                                                                      this.a(
-                                                                                                                                                        -2,
-                                                                                                                                                        -1
-                                                                                                                                                      )
-                                                                                                                                                      this.a(
-                                                                                                                                                        2,
-                                                                                                                                                        -1
-                                                                                                                                                      )
+                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                      this.unknown2(2, -1)
                                                                                                                                                       return@label521
                                                                                                                                                     }
-                                                                                                                                                    this.a(
-                                                                                                                                                      2,
-                                                                                                                                                      var3.code
-                                                                                                                                                    )
+                                                                                                                                                    this.unknown2(2, character.code)
                                                                                                                                                     return@label529
                                                                                                                                                   }
-                                                                                                                                                  this.a(
-                                                                                                                                                    -2,
-                                                                                                                                                    -1
-                                                                                                                                                  )
-                                                                                                                                                  this.a(
-                                                                                                                                                    2,
-                                                                                                                                                    -1
-                                                                                                                                                  )
+                                                                                                                                                  this.unknown2(-2, -1)
+                                                                                                                                                  this.unknown2(2, -1)
                                                                                                                                                   return@label660
                                                                                                                                                 }
-                                                                                                                                                this.a(
-                                                                                                                                                  2,
-                                                                                                                                                  var3.code
-                                                                                                                                                )
+                                                                                                                                                this.unknown2(2, character.code)
                                                                                                                                                 return@label546
                                                                                                                                               }
-                                                                                                                                              this.a(
-                                                                                                                                                -2,
-                                                                                                                                                -1
-                                                                                                                                              )
-                                                                                                                                              this.a(
-                                                                                                                                                2,
-                                                                                                                                                -1
-                                                                                                                                              )
+                                                                                                                                              this.unknown2(-2, -1)
+                                                                                                                                              this.unknown2(2, -1)
                                                                                                                                               return@label529
                                                                                                                                             }
-                                                                                                                                            this.a(
-                                                                                                                                              1,
-                                                                                                                                              var3.code
-                                                                                                                                            )
+                                                                                                                                            this.unknown2(1, character.code)
                                                                                                                                             return@label535
                                                                                                                                           }
-                                                                                                                                          this.a(
-                                                                                                                                            -1,
-                                                                                                                                            -1
-                                                                                                                                          )
-                                                                                                                                          this.a(
-                                                                                                                                            -1,
-                                                                                                                                            -1
-                                                                                                                                          )
+                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                          this.unknown2(-1, -1)
                                                                                                                                           return@label659
                                                                                                                                         }
-                                                                                                                                        this.a(
-                                                                                                                                          -1,
-                                                                                                                                          -1
-                                                                                                                                        )
-                                                                                                                                        this.a(
-                                                                                                                                          -1,
-                                                                                                                                          -1
-                                                                                                                                        )
+                                                                                                                                        this.unknown2(-1, -1)
+                                                                                                                                        this.unknown2(-1, -1)
                                                                                                                                         return@label533
                                                                                                                                       }
-                                                                                                                                      this.a(
-                                                                                                                                        -2,
-                                                                                                                                        -1
-                                                                                                                                      )
-                                                                                                                                      this.a(
-                                                                                                                                        2,
-                                                                                                                                        -1
-                                                                                                                                      )
+                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                      this.unknown2(2, -1)
                                                                                                                                       return@label546
                                                                                                                                     }
-                                                                                                                                    this.a(
-                                                                                                                                      -1,
-                                                                                                                                      -1
-                                                                                                                                    )
-                                                                                                                                    this.a(
-                                                                                                                                      -1,
-                                                                                                                                      -1
-                                                                                                                                    )
+                                                                                                                                    this.unknown2(-1, -1)
+                                                                                                                                    this.unknown2(-1, -1)
                                                                                                                                     return@label566
                                                                                                                                   }
-                                                                                                                                  this.a(
-                                                                                                                                    2,
-                                                                                                                                    var3.code
-                                                                                                                                  )
+                                                                                                                                  this.unknown2(2, character.code)
                                                                                                                                   return@label567
                                                                                                                                 }
-                                                                                                                                this.a(
-                                                                                                                                  1,
-                                                                                                                                  var3.code
-                                                                                                                                )
+                                                                                                                                this.unknown2(1, character.code)
                                                                                                                                 return@label551
                                                                                                                               }
-                                                                                                                              this.a(
-                                                                                                                                -1,
-                                                                                                                                -1
-                                                                                                                              )
-                                                                                                                              this.a(
-                                                                                                                                -1,
-                                                                                                                                -1
-                                                                                                                              )
+                                                                                                                              this.unknown2(-1, -1)
+                                                                                                                              this.unknown2(-1, -1)
                                                                                                                               return@label551
                                                                                                                             }
-                                                                                                                            this.a(
-                                                                                                                              -2,
-                                                                                                                              -1
-                                                                                                                            )
-                                                                                                                            this.a(
-                                                                                                                              1,
-                                                                                                                              -1
-                                                                                                                            )
+                                                                                                                            this.unknown2(-2, -1)
+                                                                                                                            this.unknown2(1, -1)
                                                                                                                             return@label551
                                                                                                                           }
-                                                                                                                          this.a(
-                                                                                                                            2,
-                                                                                                                            var3.code
-                                                                                                                          )
+                                                                                                                          this.unknown2(2, character.code)
                                                                                                                           return@label563
                                                                                                                         }
-                                                                                                                        this.a(
-                                                                                                                          2,
-                                                                                                                          var3.code
-                                                                                                                        )
+                                                                                                                        this.unknown2(2, character.code)
                                                                                                                         return@label656
                                                                                                                       }
-                                                                                                                      this.a(
-                                                                                                                        -1,
-                                                                                                                        -1
-                                                                                                                      )
-                                                                                                                      this.a(
-                                                                                                                        -1,
-                                                                                                                        -1
-                                                                                                                      )
+                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                      this.unknown2(-1, -1)
                                                                                                                       return@label557
                                                                                                                     }
-                                                                                                                    this.a(
-                                                                                                                      1,
-                                                                                                                      var3.code
-                                                                                                                    )
+                                                                                                                    this.unknown2(1, character.code)
                                                                                                                     return@label557
                                                                                                                   }
-                                                                                                                  this.a(
-                                                                                                                    2,
-                                                                                                                    var3.code
-                                                                                                                  )
-                                                                                                                  this.a(
-                                                                                                                    -1,
-                                                                                                                    -1
-                                                                                                                  )
-                                                                                                                  this.a(
-                                                                                                                    -1,
-                                                                                                                    -1
-                                                                                                                  )
+                                                                                                                  this.unknown2(2, character.code)
+                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                  this.unknown2(-1, -1)
                                                                                                                   return@label558
                                                                                                                 }
-                                                                                                                this.a(
-                                                                                                                  1,
-                                                                                                                  var3.code
-                                                                                                                )
+                                                                                                                this.unknown2(1, character.code)
                                                                                                                 return@label558
                                                                                                               }
-                                                                                                              this.a(
-                                                                                                                -2,
-                                                                                                                -1
-                                                                                                              )
-                                                                                                              this.a(
-                                                                                                                2,
-                                                                                                                -1
-                                                                                                              )
+                                                                                                              this.unknown2(-2, -1)
+                                                                                                              this.unknown2(2, -1)
                                                                                                               return@label559
                                                                                                             }
-                                                                                                            this.a(
-                                                                                                              -2,
-                                                                                                              -1
-                                                                                                            )
-                                                                                                            this.a(
-                                                                                                              1,
-                                                                                                              -1
-                                                                                                            )
+                                                                                                            this.unknown2(-2, -1)
+                                                                                                            this.unknown2(1, -1)
                                                                                                             return@label560
                                                                                                           }
-                                                                                                          this.a(
-                                                                                                            -2,
-                                                                                                            -1
-                                                                                                          )
-                                                                                                          this.a(
-                                                                                                            2,
-                                                                                                            -1
-                                                                                                          )
+                                                                                                          this.unknown2(-2, -1)
+                                                                                                          this.unknown2(2, -1)
                                                                                                           return@label563
                                                                                                         }
-                                                                                                        this.a(
-                                                                                                          -2,
-                                                                                                          -1
-                                                                                                        )
-                                                                                                        this.a(
-                                                                                                          2,
-                                                                                                          -1
-                                                                                                        )
+                                                                                                        this.unknown2(-2, -1)
+                                                                                                        this.unknown2(2, -1)
                                                                                                         return@label567
                                                                                                       }
-                                                                                                      this.a(
-                                                                                                        -1,
-                                                                                                        -1
-                                                                                                      )
-                                                                                                      this.a(
-                                                                                                        -1,
-                                                                                                        -1
-                                                                                                      )
+                                                                                                      this.unknown2(-1, -1)
+                                                                                                      this.unknown2(-1, -1)
                                                                                                       return@label550
                                                                                                     }
-                                                                                                    this.a(
-                                                                                                      -2,
-                                                                                                      -1
-                                                                                                    )
-                                                                                                    this.a(
-                                                                                                      2,
-                                                                                                      -1
-                                                                                                    )
+                                                                                                    this.unknown2(-2, -1)
+                                                                                                    this.unknown2(2, -1)
                                                                                                     return@label656
                                                                                                   }
-                                                                                                  this.a(
-                                                                                                    -1,
-                                                                                                    -1
-                                                                                                  )
-                                                                                                  this.a(
-                                                                                                    -1,
-                                                                                                    -1
-                                                                                                  )
+                                                                                                  this.unknown2(-1, -1)
+                                                                                                  this.unknown2(-1, -1)
                                                                                                   return@label560
                                                                                                 }
-                                                                                                this.a(
-                                                                                                  2,
-                                                                                                  var3.code
-                                                                                                )
+                                                                                                this.unknown2(2, character.code)
                                                                                                 return@label559
                                                                                               }
-                                                                                              this.a(
-                                                                                                2,
-                                                                                                var3.code
-                                                                                              )
+                                                                                              this.unknown2(2, character.code)
                                                                                               return@label655
                                                                                             }
-                                                                                            this.a(
-                                                                                              1,
-                                                                                              var3.code
-                                                                                            )
+                                                                                            this.unknown2(1, character.code)
                                                                                             return@label573
                                                                                           }
-                                                                                          this.a(
-                                                                                            -2,
-                                                                                            -1
-                                                                                          )
-                                                                                          this.a(
-                                                                                            2,
-                                                                                            -1
-                                                                                          )
+                                                                                          this.unknown2(-2, -1)
+                                                                                          this.unknown2(2, -1)
                                                                                           return@label569
                                                                                         }
-                                                                                        this.a(
-                                                                                          -2,
-                                                                                          -1
-                                                                                        )
-                                                                                        this.a(
-                                                                                          2,
-                                                                                          -1
-                                                                                        )
+                                                                                        this.unknown2(-2, -1)
+                                                                                        this.unknown2(2, -1)
                                                                                         return@label570
                                                                                       }
-                                                                                      this.a(
-                                                                                        1,
-                                                                                        var3.code
-                                                                                      )
+                                                                                      this.unknown2(1, character.code)
                                                                                       return@label576
                                                                                     }
-                                                                                    this.a(
-                                                                                      -1,
-                                                                                      -1
-                                                                                    )
-                                                                                    this.a(
-                                                                                      -1,
-                                                                                      -1
-                                                                                    )
+                                                                                    this.unknown2(-1, -1)
+                                                                                    this.unknown2(-1, -1)
                                                                                     return@label573
                                                                                   }
-                                                                                  this.a(
-                                                                                    -2,
-                                                                                    -1
-                                                                                  )
-                                                                                  this.a(
-                                                                                    2,
-                                                                                    -1
-                                                                                  )
+                                                                                  this.unknown2(-2, -1)
+                                                                                  this.unknown2(2, -1)
                                                                                   return@label655
                                                                                 }
-                                                                                this.a(
-                                                                                  -2,
-                                                                                  -1
-                                                                                )
-                                                                                this.a(
-                                                                                  1,
-                                                                                  -1
-                                                                                )
+                                                                                this.unknown2(-2, -1)
+                                                                                this.unknown2(1, -1)
                                                                                 return@label573
                                                                               }
-                                                                              this.a(
-                                                                                -1,
-                                                                                -1
-                                                                              )
-                                                                              this.a(
-                                                                                -1,
-                                                                                -1
-                                                                              )
+                                                                              this.unknown2(-1, -1)
+                                                                              this.unknown2(-1, -1)
                                                                               return@label579
                                                                             }
-                                                                            this.a(
-                                                                              -2,
-                                                                              -1
-                                                                            )
-                                                                            this.a(
-                                                                              1,
-                                                                              -1
-                                                                            )
+                                                                            this.unknown2(-2, -1)
+                                                                            this.unknown2(1, -1)
                                                                             return@label576
                                                                           }
-                                                                          this.a(
-                                                                            2,
-                                                                            var3.code
-                                                                          )
+                                                                          this.unknown2(2, character.code)
                                                                           return@label569
                                                                         }
-                                                                        this.a(
-                                                                          -2,
-                                                                          -1
-                                                                        )
-                                                                        this.a(
-                                                                          1,
-                                                                          -1
-                                                                        )
+                                                                        this.unknown2(-2, -1)
+                                                                        this.unknown2(1, -1)
                                                                         return@label577
                                                                       }
-                                                                      this.a(
-                                                                        -1,
-                                                                        -1
-                                                                      )
-                                                                      this.a(
-                                                                        -1,
-                                                                        -1
-                                                                      )
+                                                                      this.unknown2(-1, -1)
+                                                                      this.unknown2(-1, -1)
                                                                       return@label577
                                                                     }
-                                                                    this.a(
-                                                                      1,
-                                                                      var3.code
-                                                                    )
+                                                                    this.unknown2(1, character.code)
                                                                     return@label579
                                                                   }
-                                                                  this.a(
-                                                                    2,
-                                                                    var3.code
-                                                                  )
+                                                                  this.unknown2(2, character.code)
                                                                   return@label570
                                                                 }
-                                                                this.a(
-                                                                  -2,
-                                                                  -1
-                                                                )
-                                                                this.a(
-                                                                  1,
-                                                                  -1
-                                                                )
+                                                                this.unknown2(-2, -1)
+                                                                this.unknown2(1, -1)
                                                                 return@label579
                                                               }
-                                                              this.a(
-                                                                -1,
-                                                                -1
-                                                              )
-                                                              this.a(
-                                                                -1,
-                                                                -1
-                                                              )
+                                                              this.unknown2(-1, -1)
+                                                              this.unknown2(-1, -1)
                                                               return@label576
                                                             }
-                                                            this.a(
-                                                              2,
-                                                              var3.code
-                                                            )
+                                                            this.unknown2(2, character.code)
                                                             return@label582
                                                           }
-                                                          this.a(
-                                                            -1,
-                                                            -1
-                                                          )
-                                                          this.a(
-                                                            -1,
-                                                            -1
-                                                          )
+                                                          this.unknown2(-1, -1)
+                                                          this.unknown2(-1, -1)
                                                           return@label581
                                                         }
-                                                        this.a(
-                                                          -1,
-                                                          -1
-                                                        )
-                                                        this.a(
-                                                          -1,
-                                                          -1
-                                                        )
+                                                        this.unknown2(-1, -1)
+                                                        this.unknown2(-1, -1)
                                                         return@label587
                                                       }
-                                                      this.a(
-                                                        -2,
-                                                        -1
-                                                      )
-                                                      this.a(
-                                                        1,
-                                                        -1
-                                                      )
+                                                      this.unknown2(-2, -1)
+                                                      this.unknown2(1, -1)
                                                       return@label581
                                                     }
-                                                    this.a(
-                                                      1,
-                                                      var3.code
-                                                    )
+                                                    this.unknown2(1, character.code)
                                                     return@label587
                                                   }
-                                                  this.a(
-                                                    -2,
-                                                    -1
-                                                  )
-                                                  this.a(
-                                                    2,
-                                                    -1
-                                                  )
+                                                  this.unknown2(-2, -1)
+                                                  this.unknown2(2, -1)
                                                   return@label588
                                                 }
-                                                this.a(
-                                                  -1,
-                                                  -1
-                                                )
-                                                this.a(
-                                                  -1,
-                                                  -1
-                                                )
+                                                this.unknown2(-1, -1)
+                                                this.unknown2(-1, -1)
                                                 return@label585
                                               }
-                                              this.a(
-                                                -2,
-                                                -1
-                                              )
-                                              this.a(
-                                                2,
-                                                -1
-                                              )
+                                              this.unknown2(-2, -1)
+                                              this.unknown2(2, -1)
                                               return@label582
                                             }
-                                            this.a(
-                                              -2,
-                                              -1
-                                            )
-                                            this.a(
-                                              1,
-                                              -1
-                                            )
+                                            this.unknown2(-2, -1)
+                                            this.unknown2(1, -1)
                                             return@label585
                                           }
-                                          this.a(
-                                            2,
-                                            var3.code
-                                          )
+                                          this.unknown2(2, character.code)
                                           return@label588
                                         }
-                                        this.a(-2, -1)
-                                        this.a(1, -1)
+                                        this.unknown2(-2, -1)
+                                        this.unknown2(1, -1)
                                         return@label587
                                       }
-                                      this.a(1, var3.code)
+                                      this.unknown2(1, character.code)
                                     }
-                                    this.a(-2, -1)
-                                    this.a(1, -1)
+                                    this.unknown2(-2, -1)
+                                    this.unknown2(1, -1)
                                     return@label590
                                   }
-                                  this.a(-1, -1)
-                                  this.a(-1, -1)
+                                  this.unknown2(-1, -1)
+                                  this.unknown2(-1, -1)
                                   return@label591
                                 }
-                                this.a(2, var3.code)
+                                this.unknown2(2, character.code)
                                 return@label593
                               }
-                              this.a(1, var3.code)
+                              this.unknown2(1, character.code)
                               return@label591
                             }
-                            this.a(-2, -1)
-                            this.a(1, -1)
+                            this.unknown2(-2, -1)
+                            this.unknown2(1, -1)
                             return@label591
                           }
-                          this.a(1, var3.code)
+                          this.unknown2(1, character.code)
                           return@label590
                         }
-                        this.a(-2, -1)
-                        this.a(2, -1)
+                        this.unknown2(-2, -1)
+                        this.unknown2(2, -1)
                         return@label593
                       }
-                      this.a(-1, -1)
-                      this.a(-1, -1)
+                      this.unknown2(-1, -1)
+                      this.unknown2(-1, -1)
                       return@label590
                     }
-                    this.a(1, var3.code)
+                    this.unknown2(1, character.code)
                     return@label654
                   }
-                  this.a(-2, -1)
-                  this.a(1, -1)
+                  this.unknown2(-2, -1)
+                  this.unknown2(1, -1)
                   return@label654
                 }
-                this.a(-2, -1)
-                this.a(2, -1)
+                this.unknown2(-2, -1)
+                this.unknown2(2, -1)
                 return@label594
               }
-              this.a(2, var3.code)
+              this.unknown2(2, character.code)
               return@label594
             }
-            this.a(-1, -1)
-            this.a(-1, -1)
+            this.unknown2(-1, -1)
+            this.unknown2(-1, -1)
             return@label654
           }
-          this.a(-1, -1)
-          this.a(-1, -1)
+          this.unknown2(-1, -1)
+          this.unknown2(-1, -1)
           return@label598
         }
-        this.a(-2, -1)
-        this.a(1, -1)
+        this.unknown2(-2, -1)
+        this.unknown2(1, -1)
         return@label598
       }
-      this.a(1, var3.code)
+      this.unknown2(1, character.code)
     }
-    if (var2) {
-      while (var4 < n) {
-        this.a(-3, -3)
-        ++var4
+    if (flag) {
+      while (number < n) {
+        this.unknown2(-3, -3)
+        ++number
       }
     }
   }
 
-  private fun a(var1: Int, var2: Int) {
+  private fun unknown2(var1: Int, var2: Int) {
     x.add(var1)
     x.add(var2)
   }
 
-  private fun b() {
-    if (v != null) {
+  private fun unknown3() {
+    if (audioTrack != null) {
       try {
         if (VERSION.SDK_INT >= 21) {
-          v!!.setVolume(0.0f)
+          audioTrack!!.setVolume(0.0f)
           return
         }
-        v!!.setStereoVolume(0.0f, 0.0f)
+        audioTrack!!.setStereoVolume(0.0f, 0.0f)
       } catch (var2: Exception) {
       }
     }
   }
 
-  private fun c() {
+  private fun seqCreate() {
     log("MyPlayerMorse.seqCreate ")
     x.clear()
-    this.a(-6, -3)
+    this.unknown2(-6, -3)
     log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", g, l))
     var var1 = false
     var var2 = 0
@@ -1475,12 +851,8 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
       while (var5 < var4) {
         var6 = var3[var5]
         ++var5
-        var7 = if (var5 < var4 && var3[var5] == '|') {
-          false
-        } else {
-          true
-        }
-        this.a(var6, var7)
+        var7 = !(var5 >= var4 || var3[var5] != '|')
+        this.unknown1(var6, var7)
       }
       run label42@{
         var4 = var2 + 1
@@ -1511,21 +883,21 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
       var1 = var9
       var2 = var4
       if (!var9) {
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
-        this.a(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
+        this.unknown2(-3, -3)
         var1 = var9
         var2 = var4
       }
@@ -1536,42 +908,42 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     var8.append(" Nelements=")
     var8.append(q)
     log(var8.toString())
-    this.a(-7, -3)
-    this.a(-7, -3)
-    this.a(-7, -3)
-    this.a(-7, -3)
-    this.a(-7, -3)
-    this.a(-8, -3)
+    this.unknown2(-7, -3)
+    this.unknown2(-7, -3)
+    this.unknown2(-7, -3)
+    this.unknown2(-7, -3)
+    this.unknown2(-7, -3)
+    this.unknown2(-8, -3)
     var8 = StringBuilder()
     var8.append("MyPlayerMorse.seqCreate after mDelayAfter mList.size=")
     var8.append(x.size)
     log(var8.toString())
   }
 
-  protected fun doInBackground(vararg var1: Void?): Void? {
+  protected fun doInBackground(vararg var1: Void): Void {
     var var27: StringBuilder
-    return if (a == null) {
+    return if (weakContext == null) {
       var27 = StringBuilder()
       var27.append("MyMorsePlayer.doInBackground ERROR wr_context=null instance=")
       var27.append(b)
       log(var27.toString())
-      y.countDown()
+      countDownLatch.countDown()
       null
     } else {
-      val var2 = a?.get()
+      val var2 = weakContext?.get()
       if (var2 == null) {
         var27 = StringBuilder()
         var27.append("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=")
         var27.append(b)
         log(var27.toString())
-        y.countDown()
+        countDownLatch.countDown()
         null
       } else if (q <= 0) {
         var27 = StringBuilder()
         var27.append("MyMorsePlayer.doInBackground Exiting...  mNElements=")
         var27.append(q)
         log(var27.toString())
-        y.countDown()
+        countDownLatch.countDown()
         null
       } else {
         var27 = StringBuilder()
@@ -1632,7 +1004,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
             }
           }
           log("MyPlayerMorse.doInBackground ERROR Creating tone")
-          y.countDown()
+          countDownLatch.countDown()
           return null
         }
         var var5 = StringBuilder()
@@ -1642,7 +1014,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         val var6 = LocalBroadcastManager.getInstance(var2)
         val var30 = IntentFilter()
         var30.addAction("LBR_ACTION_FINISH")
-        var6.registerReceiver(z, var30)
+        var6.registerReceiver(BroadcastReceiver, var30)
         t = var28.a / q
         var5 = StringBuilder()
         var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
@@ -1662,14 +1034,14 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
           var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=")
           var29.append(var28.a)
           log(var29.toString())
-          y.countDown()
+          countDownLatch.countDown()
           null
         } else if (var28.b.size <= 0) {
           var29 = StringBuilder()
           var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=")
           var29.append(var28.b.size)
           log(var29.toString())
-          y.countDown()
+          countDownLatch.countDown()
           null
         } else {
           var5 = StringBuilder()
@@ -1695,7 +1067,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                       ).build()
                     )
                     val var36 = AudioFormat.Builder()
-                    v = var32.setAudioFormat(
+                    audioTrack = var32.setAudioFormat(
                       var36.setEncoding(AudioFormat.ENCODING_PCM_16BIT)
                         .setSampleRate(
                           p
@@ -1712,7 +1084,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                 }
                 try {
                   val var33 = AudioTrack(h, p, 4, 2, var3, 1)
-                  v = var33
+                  audioTrack = var33
                   return@label139
                 } catch (var19: IllegalArgumentException) {
                   var10001 = false
@@ -1732,7 +1104,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                   var28.b.size
                 )
               )
-              y.countDown()
+              countDownLatch.countDown()
               return null
             }
             log(
@@ -1746,19 +1118,19 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                 var28.b.size
               )
             )
-            y.countDown()
+            countDownLatch.countDown()
             return null
           }
           if (!c) {
             log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
-            b()
+            unknown3()
           }
           var5 = StringBuilder()
           var5.append("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =")
-          var5.append(v!!.state)
+          var5.append(audioTrack!!.state)
           log(var5.toString())
           var3 = 0
-          while (v!!.state != 1) {
+          while (audioTrack!!.state != 1) {
             var4 = var3 + 1
             try {
               Thread.sleep(100L)
@@ -1767,7 +1139,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
             }
             var5 = StringBuilder()
             var5.append("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=")
-            var5.append(v!!.state)
+            var5.append(audioTrack!!.state)
             log(var5.toString())
             var3 = var4
             if (var4 >= 20) {
@@ -1775,7 +1147,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
               var27.append("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=")
               var27.append(b)
               log(var27.toString())
-              y.countDown()
+              countDownLatch.countDown()
               return null
             }
           }
@@ -1784,9 +1156,9 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
             var27.append("MyPlayerMorse.doInBackground commandstop=true... instance=")
             var27.append(b)
             log(var27.toString())
-            y.countDown()
+            countDownLatch.countDown()
             null
-          } else if (y.count != 1L) {
+          } else if (countDownLatch.count != 1L) {
             var27 = StringBuilder()
             var27.append("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=")
             var27.append(b)
@@ -1837,14 +1209,14 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
             var5.append(t)
             log(var5.toString())
             try {
-              v!!.play()
+              audioTrack!!.play()
             } catch (var14: IllegalStateException) {
               log("MyPlayerMorse.doInBackground AudioTrack.Play->IllegalStateException")
-              y.countDown()
+              countDownLatch.countDown()
               return null
             } catch (var15: Exception) {
               log("MyPlayerMorse.doInBackground AudioTrack.Play->Exception")
-              y.countDown()
+              countDownLatch.countDown()
               return null
             }
             var5 = StringBuilder()
@@ -1852,9 +1224,9 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
             var5.append(b)
             log(var5.toString())
             try {
-              v!!.notificationMarkerPosition = var28.a - 1
-              v!!.positionNotificationPeriod = t
-              val var34 = v
+              audioTrack!!.notificationMarkerPosition = var28.a - 1
+              audioTrack!!.positionNotificationPeriod = t
+              val var34 = audioTrack
               val var37: AudioTrack.OnPlaybackPositionUpdateListener =
                 object : AudioTrack.OnPlaybackPositionUpdateListener {
                   override fun onMarkerReached(var1: AudioTrack) {
@@ -1874,7 +1246,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                       var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=")
                       var3.append(b)
                       log(var3.toString())
-                      y.countDown()
+                      countDownLatch.countDown()
                     }
                   }
 
@@ -1972,7 +1344,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                 var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=")
                                 var44.append(b)
                                 log(var44.toString())
-                                y.countDown()
+                                countDownLatch.countDown()
                                 return@doInBackground
                               } catch (var27: IllegalStateException) {
                                 var10001 = false
@@ -2025,7 +1397,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                             val var45: LongArray
                             try {
                               App.a(var2, var2x)
-                              if (!d || w == null) {
+                              if (!d || vibrator == null) {
                                 return@doInBackground
                               }
                               var45 = longArrayOf(0L, 0L, 0L)
@@ -2049,7 +1421,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                     var45[1] = o.toLong()
                                     var45[2] = o.toLong()
                                     if (VERSION.SDK_INT >= 26) {
-                                      var42 = w
+                                      var42 = vibrator
                                       return@label172
                                     }
                                   } catch (var17: IllegalStateException) {
@@ -2074,7 +1446,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                     var45[1] = (o * 3).toLong()
                                     var45[2] = o.toLong()
                                     if (VERSION.SDK_INT >= 26) {
-                                      var42 = w
+                                      var42 = vibrator
                                       return@label172
                                     }
                                   } catch (var15: IllegalStateException) {
@@ -2114,7 +1486,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                     var45[1] = (o * 3).toLong()
                                     var45[2] = o.toLong()
                                     if (VERSION.SDK_INT >= 26) {
-                                      var42 = w
+                                      var42 = vibrator
                                       return@label172
                                     }
                                   } catch (var15: IllegalStateException) {
@@ -2164,7 +1536,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                 }
                               }
                               try {
-                                var41.w!!.vibrate(var45, -1)
+                                var41.vibrator!!.vibrate(var45, -1)
                                 return@doInBackground
                               } catch (var7: IllegalStateException) {
                                 var10001 = false
@@ -2197,27 +1569,27 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                           "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
                       }
                       log(var43)
-                      y.countDown()
+                      countDownLatch.countDown()
                     }
                   }
                 }
               var34!!.setPlaybackPositionUpdateListener(var37)
             } catch (var12: IllegalStateException) {
               log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException")
-              y.countDown()
+              countDownLatch.countDown()
               return null
             } catch (var13: Exception) {
               log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception")
-              y.countDown()
+              countDownLatch.countDown()
               return null
             }
             log("MyPlayerMorse.doInBackground mAudioTrack.write")
             try {
-              v!!.write(var28.b, 0, var28.b.size)
+              audioTrack!!.write(var28.b, 0, var28.b.size)
               null
             } catch (var11: Exception) {
               log("MyPlayerMorse.doInBackground ERROR mAudioTrack.write")
-              y.countDown()
+              countDownLatch.countDown()
               null
             }
           }
@@ -2226,11 +1598,11 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     }
   }
 
-  fun a(): ArrayList<Int> {
+  fun unknown4(): ArrayList<Int> {
     return x
   }
 
-  fun a(var1: Context?) {
+  fun playDone(var1: Context?) {
     var var2 = StringBuilder()
     var2.append("MyPlayerMorse.playDone instance=")
     var2.append(b)
@@ -2257,7 +1629,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         )
       )
       try {
-        y.await(var3, TimeUnit.MILLISECONDS)
+        countDownLatch.await(var3, TimeUnit.MILLISECONDS)
       } catch (var14: InterruptedException) {
         log(var1, "MyPlayerMorse.playDone ERROR ")
       }
@@ -2268,7 +1640,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         var2.append(b)
         log(var1, var2.toString())
         LocalBroadcastManager.getInstance(var1!!).unregisterReceiver(
-          z
+          BroadcastReceiver
         )
       } catch (var13: Exception) {
         var13.printStackTrace()
@@ -2284,24 +1656,24 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
       var2.append("MyPlayerMorse.playDone deleting audiotrack  instance=")
       var2.append(b)
       log(var1, var2.toString())
-      if (v != null) {
+      if (audioTrack != null) {
         try {
-          b()
-          v!!.stop()
-          v!!.release()
-          v = null
+          unknown3()
+          audioTrack!!.stop()
+          audioTrack!!.release()
+          audioTrack = null
         } catch (var11: IllegalStateException) {
         } finally {
-          v = null
+          audioTrack = null
         }
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone deleting context reference  instance=")
       var2.append(b)
       log(var1, var2.toString())
-      if (a != null) {
-        a?.clear()
-        a = null
+      if (weakContext != null) {
+        weakContext?.clear()
+        weakContext = null
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone OUT instance=")
@@ -2311,7 +1683,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     log(var1, var15)
   }
 
-  fun a(
+  fun playInit(
     var1: Context,
     var2: Boolean,
     var3: Boolean,
@@ -2404,7 +1776,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     var14.append(n)
     log(var1, var14.toString())
     log(var1, "MyPlayerMorse.playInit Creating sequence")
-    c()
+    seqCreate()
     q = x.size / 2
     r = p * o * q / 1000
     var14 = StringBuilder()
@@ -2413,7 +1785,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     log(var1, var14.toString())
     if (d) {
       log(var1, "MyPlayerMorse.playInit Initializing vibration")
-      w = var1.getSystemService("vibrator") as Vibrator
+      vibrator = var1.getSystemService("vibrator") as Vibrator
     }
     m = true
     var14 = StringBuilder()
@@ -2425,7 +1797,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
   // $FF: synthetic method
   override fun doInBackground(var1: Array<Any?>): Any? {
     return try {
-      this.doInBackground(*var1 as Array<Void?>)
+      this.doInBackground(*var1 as Array<Void>)
     } catch (e: Exception) {
       null
     }
