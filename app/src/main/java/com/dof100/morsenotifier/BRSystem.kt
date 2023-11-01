@@ -8,6 +8,7 @@ import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.os.Parcelable
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
@@ -72,11 +73,11 @@ class BRSystem : BroadcastReceiver() {
           var4 = var8
         }
       }
-      val var14 = var6.edit()
-      var14.putInt("BRSystem_LastWiFiStatus", var7)
-      var14.putLong("BRSystem_LastTimeWiFiConnected", var4)
-      var14.putLong("BRSystem_LastTimeWiFiDisconnected", var10)
-      var14.apply()
+      var6.edit {
+        putInt("BRSystem_LastWiFiStatus", var7)
+        putLong("BRSystem_LastTimeWiFiConnected", var4)
+        putLong("BRSystem_LastTimeWiFiDisconnected", var10)
+      }
       var3.toInt()
     }
   }

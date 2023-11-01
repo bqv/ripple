@@ -63,7 +63,7 @@ internal class MyRecentNotificationsArrayAdapter constructor(
     var6.setText(var9.format(var7.getTime()))
     var var8: TextView = var14.findViewById<View>(R.id.tv_recentnotification_app) as TextView
     var8.setTag(var12)
-    var8.setText(Utils.a(context, var12.b))
+    var8.setText(Utils.unknown2(context, var12.b))
     var8 = var14.findViewById<View>(R.id.tv_recentnotification_package) as TextView
     var8.setTag(var12)
     var8.setText(String.format("(%s)", var12.b))

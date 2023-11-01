@@ -65,13 +65,13 @@ class MyPreferenceEditText : EditTextPreference {
     log("MyEditTextPreference ${getKey()} init")
     if (var2 != null) {
       var var4: Boolean =
-        Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
+        Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
           .equals("true", ignoreCase = true)
       if (App.Companion.a) {
         this.setEnabled(var4)
       }
       var4 =
-        Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
+        Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
           .equals("true", ignoreCase = true)
       if (App.Companion.b) {
         this.setEnabled(var4)

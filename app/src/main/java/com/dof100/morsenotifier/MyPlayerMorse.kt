@@ -8,6 +8,7 @@ import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Build.VERSION
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -20,28 +21,28 @@ import java.util.concurrent.TimeUnit
 
 internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTask<Void?, Void?, Void?>() {
   private var wr_context: WeakReference<Context>?
-  private var c = false
+  private var mEnableSound = false
   private var vibrate = false
-  private var e = false
-  private var f = 0
-  private var repeat = 1
+  private var playPunctuation = false
+  private var mRepeat1 = 0
+  private var mRepeat2 = 1
   private var mStream = 0
   private var pref_call_freq = 0
   private var j = 0
   private var k = 0
   private var text = ""
-  private var m = false
+  private var mPlayInitOK = false
   private var mSpacesAfterChar = 3
   private var mdur = 100
   private var samplerate = 0
   private var nelements = 0
   private var bufferSize = 0
-  private var s = 0L
+  private var initTimestamp = 0L
   private var nSamplesDur = 0
   private var commandStop = false
   private var audioTrack: AudioTrack? = null
   private var vibrator: Vibrator? = null
-  private val mList = ArrayList<Int>()
+  private val mList = mutableListOf<Int>()
   private val mDoneLatch = CountDownLatch(1)
 
   private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -62,10 +63,8 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   private fun boop(character: Char, flag: Boolean) {
     var flag = flag // farnsworth?
     var character = character
-    if (!e) { // play punctuation
-      if ((character >= '!' && character <= '/')
-        || (character >= ':' && character <= '@'))
-        character = ' '
+    if (!playPunctuation && ((character in '!'..'/') || (character in ':'..'@'))) {
+      character = ' '
     }
     var number: Int
     // its a switch statement
@@ -827,7 +826,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     log("MyPlayerMorse.seqCreate ")
     mList.clear()
     this.beep(-6, -3)
-    log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", repeat, text))
+    log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", mRepeat2, text))
     var var1 = false
     var var2 = 0
     while (!var1) {
@@ -850,13 +849,13 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
           "MyPlayerMorse.seqCreate   iter=%d   mList.size=%d   Dur=%d msec",
           iter, mList.size, Dur
         ))
-        if (repeat > 0) {
-          if (iter < repeat) {
+        if (mRepeat2 > 0) {
+          if (iter < mRepeat2) {
             //pass
           } else {
             var1 = true
           }
-        } else if (Dur <= -repeat * 1000) {
+        } else if (Dur <= -mRepeat2 * 1000) {
           //pass
         } else {
           var1 = true
@@ -1058,7 +1057,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               mDoneLatch.countDown()
               return null
             }
-            if (!c) {
+            if (!mEnableSound) {
               log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
               mute()
             }
@@ -1087,17 +1086,17 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               log("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=$inst")
               null
             } else {
-              if (f > 0) {
-                val var7 = System.currentTimeMillis() - s
-                val var9 = f.toLong() - var7
+              if (mRepeat1 > 0) {
+                val var7 = System.currentTimeMillis() - initTimestamp
+                val var9 = mRepeat1.toLong() - var7
                 log(
                   String.format(
                     Locale.US,
                     "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec",
-                    f, var7, var9
+                    mRepeat1, var7, var9
                   )
                 )
-                if (var9 > 0L && var9 < 10000L) {
+                if (var9 in 1..9999) {
                   try {
                     Thread.sleep(var9)
                   } catch (e: InterruptedException) {
@@ -1128,7 +1127,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 val var34 = audioTrack
                 val var37: AudioTrack.OnPlaybackPositionUpdateListener =
                   object : AudioTrack.OnPlaybackPositionUpdateListener {
-                    override fun onMarkerReached(audioTrack: AudioTrack) {
+                    override fun onMarkerReached(audioTrack: AudioTrack?) {
                       if (audioTrack == null) {
                         log("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=$inst")
                       } else {
@@ -1142,7 +1141,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                       }
                     }
 
-                    override fun onPeriodicNotification(audioTrack: AudioTrack) {
+                    override fun onPeriodicNotification(audioTrack: AudioTrack?) {
                       if (audioTrack == null) {
                         log("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=$inst")
                       } else {
@@ -1427,6 +1426,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                 }
                               }
                               try {
+                                if (VERSION.SDK_INT < Build.VERSION_CODES.O) TODO()
                                 vibrator1!!.vibrate(
                                   VibrationEffect.createWaveform(
                                     var45,
@@ -1480,14 +1480,14 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   }
 
   fun getList(): ArrayList<Int> {
-    return mList
+    return ArrayList(mList)
   }
 
   fun playDone(context: Context?) {
     log(context, "MyPlayerMorse.playDone instance=$inst")
-    val var15: String
-    if (!m) {
-      var15 = "MyPlayerMorse.playDone ERROR mPlayInitOK = false"
+    val messageToLog: String
+    if (!mPlayInitOK) {
+      messageToLog = "MyPlayerMorse.playDone ERROR mPlayInitOK = false"
     } else {
       var var3 = (mdur * nelements + 5000).toLong()
       var var5 = var3
@@ -1532,6 +1532,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
           audioTrack!!.release()
           audioTrack = null
         } catch (var11: IllegalStateException) {
+          // empty
         } finally {
           audioTrack = null
         }
@@ -1541,73 +1542,41 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         wr_context?.clear()
         wr_context = null
       }
-      var15 = "MyPlayerMorse.playDone OUT instance=$inst"
+      messageToLog = "MyPlayerMorse.playDone OUT instance=$inst"
     }
-    log(context, var15)
+    log(context, messageToLog)
   }
 
   fun playInit(context: Context,
-    var2: Boolean, var3: Boolean, var4: Boolean,
-    var5: Int, var6: Int, var7: Int, var8: Int, var9: Int,
-    var10: Int, var11: Int, var12: Int, var13: String
+               pEnableSound: Boolean, pVibrate: Boolean, pPlayPunctuation: Boolean,
+               pArepeat1: Int, pArepeat2: Int, var7: Int, var8: Int, pStream: Int,
+               pCallFreq: Int, var11: Int, var12: Int, pText: String
   ) {
-    var var5 = var5
-    var arepeat = var6
-    log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", inst, arepeat))
-    c = var2
-    vibrate = var3
-    e = var4
-    f = var5
-    repeat = arepeat
-    mStream = var9
-    if (mStream != 4 && mStream != 3 && mStream != 5 && mStream != 2 && mStream != 1) {
-      mStream = 3
-    }
-    pref_call_freq = var10
-    if (pref_call_freq < 100) {
-      pref_call_freq = 100
-    }
-    if (pref_call_freq > 20000) {
-      pref_call_freq = 20000
-    }
-    j = var11
-    if (j < 1) {
-      j = 1
-    }
-    if (j > 100) {
-      j = 100
-    }
-    k = var12
-    if (k > 49) {
-      k = 49
-    }
-    if (k < 0) {
-      k = 0
-    }
-    text = var13
-    m = false
-    mdur = '\uea60'.code / (var7 * 50)
-    if (mdur < 30) {
-      mdur = 30
-    }
-    if (mdur > 1200) {
-      mdur = 1200
-    }
+    var arepeat1 = pArepeat1
+    var arepeat2 = pArepeat2
+    log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", inst, arepeat2))
+    mEnableSound = pEnableSound
+    vibrate = pVibrate
+    playPunctuation = pPlayPunctuation
+    mRepeat1 = arepeat1
+    mRepeat2 = arepeat2
+    mStream = pStream
+    if (mStream !in 1..5) mStream = 3
+    pref_call_freq = pCallFreq.coerceIn(100, 20000)
+    j = var11.coerceIn(1, 100) // wpm
+    k = var12.coerceIn(0, 49) // fwpm
+    text = pText
+    mPlayInitOK = false
+    mdur = (60000 / (var7 * 50)).coerceIn(30, 1200)
     samplerate = AudioTrack.getNativeOutputSampleRate(mStream)
-    if (samplerate <= 0) {
-      samplerate = 8000
-    }
-    arepeat = '\uea60'.code / (var8 * 50)
-    var5 = arepeat
-    if (arepeat < 30) {
-      var5 = 30
-    }
-    arepeat = var5
-    if (var5 > 1200) {
-      arepeat = 1200
-    }
-    mSpacesAfterChar = arepeat * 3 / mdur
-    s = System.currentTimeMillis()
+    if (samplerate <= 0) samplerate = 8000
+    arepeat2 = 60000 / (var8 * 50)
+    arepeat1 = arepeat2
+    if (arepeat2 < 30) arepeat1 = 30
+    arepeat2 = arepeat1
+    if (arepeat1 > 1200) arepeat2 = 1200
+    mSpacesAfterChar = arepeat2 * 3 / mdur
+    initTimestamp = System.currentTimeMillis()
     log(context, "MyPlayerMorse.playInit text=$text")
     log(context, "MyPlayerMorse.playInit pref_call_freq=$pref_call_freq")
     log(context, "MyPlayerMorse.playInit samplerate=$samplerate")
@@ -1622,7 +1591,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
       log(context, "MyPlayerMorse.playInit Initializing vibration")
       vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
-    m = true
+    mPlayInitOK = true
     log(context, "MyPlayerMorse.playInit OUT instance=$inst")
   }
 }

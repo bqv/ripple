@@ -6,21 +6,24 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.util.AttributeSet
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
+import kotlin.math.abs
+import kotlin.math.min
 
 internal object Utils {
-  fun a(var0: Int, var1: Int, var2: Int, var3: Int): Int {
+  fun unknown5(var0: Int, var1: Int, var2: Int, var3: Int): Int {
     var var0 = var0
     var var2 = var2
     val var4 = var2 * 60
-    var2 = Math.abs(var0 * 60 + var1 - var4 - var3)
-    val var5 = Math.abs((var0 - 24) * 60 + var1 - var4 - var3)
-    var0 = Math.abs((var0 + 24) * 60 + var1 - var4 - var3)
-    return Math.min(Math.min(var2, var5), var0)
+    var2 = abs(var0 * 60 + var1 - var4 - var3)
+    val var5 = abs((var0 - 24) * 60 + var1 - var4 - var3)
+    var0 = abs((var0 + 24) * 60 + var1 - var4 - var3)
+    return min(min(var2, var5), var0)
   }
 
-  fun a(var0: String, var1: String?, var2: Int, var3: Int, var4: Int): Int {
+  fun getTagValue(var0: String, var1: String?, var2: Int, var3: Int, var4: Int): Int {
     var var0 = var0
     var var2 = var2
     val var5 = StringBuilder()
@@ -44,7 +47,7 @@ internal object Utils {
           log(
             String.format(
               Locale.US,
-              "getTagValue ERROR could not convers %s to int",
+              "getTagValue ERROR could not convert %s to int",
               var0
             )
           )
@@ -59,35 +62,30 @@ internal object Utils {
     }
   }
 
-  fun a(
-    var0: Context,
-    var1: SharedPreferences,
-    var2: String?,
-    var3: String?,
-    var4: String?,
-    var5: String?
+  fun prefGetDefaultValue(context: Context, sharedPreferences: SharedPreferences,
+                          var2: String?, var3: String?, var4: String?, var5: String?
   ): String {
-    val var6 = var0.resources
+    val var6 = context.resources
     val var7 = StringBuilder()
     var7.append(var2)
     var7.append(var4)
-    var var8 = var6.getIdentifier(var7.toString(), "string", var0.packageName)
+    var var8 = var6.getIdentifier(var7.toString(), "string", context.packageName)
     return if (var8 != 0) {
       var6.getString(var8)
     } else {
       val var9 = StringBuilder()
       var9.append(var2)
       var9.append(var5)
-      var8 = var6.getIdentifier(var9.toString(), "string", var0.packageName)
+      var8 = var6.getIdentifier(var9.toString(), "string", context.packageName)
       if (var8 != 0) {
         var6.getString(var8)
-      } else if (var3 != null && !var3.isEmpty()) {
-        if (var1.all[var3] is Boolean) java.lang.Boolean.toString(
-          var1.getBoolean(
+      } else if (!var3.isNullOrEmpty()) {
+        if (sharedPreferences.all[var3] is Boolean) java.lang.Boolean.toString(
+          sharedPreferences.getBoolean(
             var3,
-            java.lang.Boolean.parseBoolean("0")
+            false
           )
-        ) else var1.getString(var3, "0")!!
+        ) else sharedPreferences.getString(var3, "0")!!
       } else {
         log(
           String.format(
@@ -101,14 +99,13 @@ internal object Utils {
     }
   }
 
-  fun a(var0: Context, var1: AttributeSet, var2: String?, var3: String?, var4: String): String {
-    val var5 = var0.resources
+  fun unknown1(context: Context, var1: AttributeSet, var2: String?, var3: String?, var4: String): String {
+    val var5 = context.resources
     val var7 = var1.getAttributeValue(var2, var3)
     return if (var7 == null) {
       var4
     } else {
-      val var6: Byte
-      var6 = if (var7.startsWith("@string/")) {
+      val var6: Byte = if (var7.startsWith("@string/")) {
         8
       } else {
         if (!var7.startsWith("@")) {
@@ -120,40 +117,39 @@ internal object Utils {
         var5.getIdentifier(
           var7.substring(var6.toInt()),
           "string",
-          var0.packageName
+          context.packageName
         )
       )
     }
   }
 
-  fun a(var0: Context, var1: String?): String? {
-    val var2 = var0.packageManager
-    return if (var2 == null) {
+  fun unknown2(context: Context, var1: String?): String? {
+    val packageManager = context.packageManager
+    return if (packageManager == null) {
       var1
     } else {
-      val var4: ApplicationInfo?
-      var4 = try {
-        var2.getApplicationInfo(var1!!, 0)
-      } catch (var3: PackageManager.NameNotFoundException) {
-        var3.printStackTrace()
+      val var4: ApplicationInfo? = try {
+        packageManager.getApplicationInfo(var1!!, 0)
+      } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
         null
       }
       if (var4 == null) {
         var1
       } else {
-        val var5 = var2.getApplicationLabel(var4) as String
+        val var5 = packageManager.getApplicationLabel(var4) as String?
         var5 ?: var1
       }
     }
   }
 
-  fun a(var0: String?): String? {
+  fun unknown3(var0: String?): String? {
     var var0 = var0
     var var1 = var0!!.indexOf("<")
     var var2 = var0.indexOf(">")
     var var5: Int
     var var11: Boolean
-    if (var1 >= 0 && var2 > var1) {
+    if (var1 in 0..<var2) {
       val var3: Byte = 0
       var11 = false
       var5 = var1
@@ -192,7 +188,7 @@ internal object Utils {
     return var0
   }
 
-  fun a(var0: String?, var1: Char): String {
+  fun unknown4(var0: String?, var1: Char): String {
     return if (var0 == null) {
       ""
     } else if (var0.isEmpty()) {
@@ -274,115 +270,71 @@ internal object Utils {
     }
   }
 
-  fun a(var0: String, var1: String?, var2: Boolean): Boolean {
-    return a(var0, var1, if (var2) 1 else 0, 0, 1) > 0
+  fun getTagValue(var0: String, var1: String?, var2: Boolean): Boolean {
+    return getTagValue(var0, var1, if (var2) 1 else 0, 0, 1) > 0
   }
 
-  fun prefGetString(
-    var0: Context,
-    var1: SharedPreferences,
-    var2: String?,
-    var3: String?,
-    var4: String?,
-    var5: String?
+  fun prefGetString(context: Context, sharedPreferences: SharedPreferences, key: String?,
+    var3: String?, var4: String?, var5: String?
   ): String? {
     val var7: String
-    if (var1.getString(var2, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
-      log(
-        String.format(
-          Locale.US,
+    if (sharedPreferences.getString(key, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
+      log(String.format(Locale.US,
           "prefGetString     key %s not initialized. Initializing now...",
-          var2
-        )
-      )
-      val var6 = var1.edit()
-      var7 = a(var0, var1, var2, var3, var4, var5)
-      var6.putString(var2, var7)
-      var6.apply()
+          key))
+        var7 = prefGetDefaultValue(context, sharedPreferences, key, var3, var4, var5)
+      sharedPreferences.edit { putString(key, var7) }
     } else {
       var7 = "0"
     }
-    return var1.getString(var2, var7)
+    return sharedPreferences.getString(key, var7)
   }
 
-  fun prefGetInt(
-    var0: Context,
-    var1: SharedPreferences,
-    var2: String?,
-    var3: String?,
-    var4: String?,
-    var5: String?
+  fun prefGetInt(context: Context, sharedPreferences: SharedPreferences, key: String?,
+    var3: String?, var4: String?, var5: String?
   ): Int {
     val var7: String
-    if (var1.getString(var2, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
-      log(
-        String.format(
-          Locale.US,
+    if (sharedPreferences.getString(key, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
+      log(String.format(Locale.US,
           "prefGetInt      key %s not initialized. Initializing now...",
-          var2
-        )
-      )
-      val var6 = var1.edit()
-      var7 = a(var0, var1, var2, var3, var4, var5)
-      var6.putString(var2, var7)
-      var6.apply()
+          key))
+      var7 = prefGetDefaultValue(context, sharedPreferences, key, var3, var4, var5)
+      sharedPreferences.edit { putString(key, var7) }
     } else {
       var7 = "0"
     }
-    return var1.getString(var2, var7)!!.toInt()
+    return sharedPreferences.getString(key, var7)!!.toInt()
   }
 
-  fun prefGetBoolean(
-    var0: Context,
-    var1: SharedPreferences,
-    var2: String?,
-    var3: String?,
-    var4: String?,
-    var5: String?
+  fun prefGetBoolean(context: Context, sharedPreferences: SharedPreferences, key: String?,
+    var3: String?, var4: String?, var5: String?
   ): Boolean {
     val var7: Boolean
-    if (!var1.getBoolean(var2, false) && var1.getBoolean(var2, true)) {
-      log(
-        String.format(
-          Locale.US,
+    if (!sharedPreferences.getBoolean(key, false) && sharedPreferences.getBoolean(key, true)) {
+      log(String.format(Locale.US,
           "prefGetBoolean    key %s not initialized. Initializing now...",
-          var2
-        )
-      )
-      val var6 = var1.edit()
-      var7 = java.lang.Boolean.parseBoolean(a(var0, var1, var2, var3, var4, var5))
-      var6.putBoolean(var2, var7)
-      var6.apply()
+          key))
+      var7 = java.lang.Boolean.parseBoolean(prefGetDefaultValue(context, sharedPreferences, key, var3, var4, var5))
+      sharedPreferences.edit { putBoolean(key, var7) }
     } else {
       var7 = false
     }
-    return var1.getBoolean(var2, var7)
+    return sharedPreferences.getBoolean(key, var7)
   }
 
-  fun prefGetColor(
-    var0: Context,
-    var1: SharedPreferences,
-    var2: String?,
-    var3: String?,
-    var4: String?,
-    var5: String?
+  fun prefGetColor(context: Context, sharedPreferences: SharedPreferences, key: String?,
+    var3: String?, var4: String?, var5: String?
   ): Int {
     val var7: String
-    if (var1.getString(var2, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
-      log(
-        String.format(
-          Locale.US,
+    if (sharedPreferences.getString(key, "IMPOSSIBLE!STRING") == "IMPOSSIBLE!STRING") {
+      log(String.format(Locale.US,
           "prefGetColor    key %s not initialized. Initializing now...",
-          var2
-        )
-      )
-      val var6 = var1.edit()
-      var7 = a(var0, var1, var2, var3, var4, var5)
-      var6.putString(var2, var7)
-      var6.apply()
+          key))
+      var7 = prefGetDefaultValue(context, sharedPreferences, key, var3, var4, var5)
+      sharedPreferences.edit { putString(key, var7) }
     } else {
       var7 = "0xFF000000"
     }
-    return Color.parseColor(var1.getString(var2, var7))
+    return Color.parseColor(sharedPreferences.getString(key, var7))
   }
 }

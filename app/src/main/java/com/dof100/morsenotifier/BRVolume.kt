@@ -5,14 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
 class BRVolume : BroadcastReceiver() {
   override fun onReceive(var1: Context, var2: Intent) {
     var var3 = var2.action
-    val var4: Boolean
-    var4 = try {
+    val var4: Boolean = try {
       var3 == "android.media.VOLUME_CHANGED_ACTION"
     } catch (var21: Exception) {
       return
@@ -24,21 +24,10 @@ class BRVolume : BroadcastReceiver() {
       if (var5 == 2) {
         var22 = "BRVolume.onReceive ring volume (maybe samsung, ignoring)"
       } else {
-        if (var5 >= 0 && var5 <= 9 && var6 != -1) {
+        if (var5 in 0..9 && var6 != -1) {
           val var23 = PreferenceManager.getDefaultSharedPreferences(var1)
-          var22 = if (App.Companion.c) {
-            "_morsedef"
-          } else {
-            "_voicedef"
-          }
-          val var7 = Utils.prefGetInt(
-            var1,
-            var23,
-            "pref_morse_volumedownstop",
-            null as String?,
-            var22,
-            "_def"
-          )
+          var22 = if (App.c) { "_morsedef" } else { "_voicedef" }
+          val var7 = Utils.prefGetInt(var1, var23, "pref_morse_volumedownstop", null as String?, var22, "_def")
           val var8 = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
           for (var9 in 0..9) {
             var8[var9] = var23.getInt("BRVolume_LastVol$var9", -1)
@@ -119,37 +108,18 @@ class BRVolume : BroadcastReceiver() {
             var26 = false
           }
           var16.apply()
-          log(
-            var1,
-            String.format(
-              Locale.US,
+          log(var1, String.format( Locale.US,
               "BRVolume.onReceive StreamType=%02d Vol:%02d old = %02d %02d %02d %02d %02d %02d %02d %02d %02d %02d (pref=%d) %s",
-              var5,
-              var6,
-              var8[0],
-              var8[1],
-              var8[2],
-              var8[3],
-              var8[4],
-              var8[5],
-              var8[6],
-              var8[7],
-              var8[8],
-              var8[9],
-              var7,
-              var3
-            )
-          )
+              var5, var6,
+              var8[0], var8[1], var8[2], var8[3], var8[4], var8[5], var8[6], var8[7], var8[8], var8[9],
+              var7, var3))
           if (var26) {
-            App.Companion.b(var1)
+            App.b(var1)
           }
           return@onReceive
         }
-        var22 = String.format(
-          Locale.US,
-          "BRVolume.onReceive ERROR Stream type =%d  Volume: %d",
-          var5,
-          var6
+        var22 = String.format(Locale.US, "BRVolume.onReceive ERROR Stream type =%d  Volume: %d",
+          var5, var6
         )
       }
       log(var1, var22)

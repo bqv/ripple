@@ -80,12 +80,12 @@ class MyPreferenceNumber constructor(var1: Context, var2: AttributeSet) :
       ++var3
     }
     var var6: Boolean =
-      Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
+      Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
         .equals("true", ignoreCase = true)
     if (App.Companion.a) {
       this.setEnabled(var6)
     }
-    var6 = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
+    var6 = Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
       .equals("true", ignoreCase = true)
     if (App.Companion.b) {
       this.setEnabled(var6)

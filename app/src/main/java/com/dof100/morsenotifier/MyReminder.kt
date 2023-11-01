@@ -16,10 +16,10 @@ class MyReminder {
   var g: Long = 0
 
   init {
-    d()
+    init()
   }
 
-  private fun d() {
+  private fun init() {
     a = 7
     var var1 = 0
     b = 0
@@ -32,13 +32,13 @@ class MyReminder {
     f = ""
   }
 
-  fun a(): String? {
-    var var1: String? = ""
+  fun a(): String {
+    var var1 = ""
     var var2 = var1
     if (e != null) {
       var2 = var1
-      if (!e!!.isEmpty()) {
-        var2 = e
+      if (e!!.isNotEmpty()) {
+        var2 = e!!
       }
     }
     var1 = var2
@@ -49,11 +49,10 @@ class MyReminder {
         val var4: Locale
         val var5: String
         val var6: Array<Any>
-        if (App.Companion.d) {
+        if (App.voiceMode) {
           if (b == 0) {
             val var8 = StringBuilder()
-            var8.append(var2)
-            var8.append(" ")
+            var8.append("$var2 ")
             var1 = String.format(Locale.US, "%02d hundred", a)
             var7 = var8
             return@label28
@@ -82,7 +81,7 @@ class MyReminder {
     var2 = var1
     if (f != null) {
       var2 = var1
-      if (!f!!.isEmpty()) {
+      if (f!!.isNotEmpty()) {
         var7 = StringBuilder()
         var7.append(var1)
         var7.append(" ")
@@ -93,7 +92,7 @@ class MyReminder {
     return var2
   }
 
-  fun a(var1: Context): String {
+  fun a(context: Context): String {
     var var2 = 0
     var var3: Int
     var var4: Int
@@ -115,60 +114,31 @@ class MyReminder {
     } else if (var3 == 2 && c[0] && c[6]) {
       var7 = "weekends"
     } else {
-      var var8: StringBuilder
       if (c[0]) {
-        var8 = StringBuilder()
-        var8.append("")
-        var8.append(var1.resources.getString(R.string.activity_reminder_dow0))
-        var8.append(", ")
-        var5 = var8.toString()
+        var5 = "${context.resources.getString(R.string.activity_reminder_dow0)}, "
       }
       var var6 = var5
-      var var9: StringBuilder
       if (c[1]) {
-        var9 = StringBuilder()
-        var9.append(var5)
-        var9.append(var1.resources.getString(R.string.activity_reminder_dow1))
-        var9.append(", ")
-        var6 = var9.toString()
+        var6 = "${var5}${context.resources.getString(R.string.activity_reminder_dow1)}, "
       }
       var5 = var6
       if (c[2]) {
-        var8 = StringBuilder()
-        var8.append(var6)
-        var8.append(var1.resources.getString(R.string.activity_reminder_dow2))
-        var8.append(", ")
-        var5 = var8.toString()
+        var5 = "${var6}${context.resources.getString(R.string.activity_reminder_dow2)}, "
       }
       var6 = var5
       if (c[3]) {
-        var9 = StringBuilder()
-        var9.append(var5)
-        var9.append(var1.resources.getString(R.string.activity_reminder_dow3))
-        var9.append(", ")
-        var6 = var9.toString()
+        var6 = "${var5}${context.resources.getString(R.string.activity_reminder_dow3)}, "
       }
       var5 = var6
       if (c[4]) {
-        var8 = StringBuilder()
-        var8.append(var6)
-        var8.append(var1.resources.getString(R.string.activity_reminder_dow4))
-        var8.append(", ")
-        var5 = var8.toString()
+        var5 = "${var6}${context.resources.getString(R.string.activity_reminder_dow4)}, "
       }
       var6 = var5
       if (c[5]) {
-        var9 = StringBuilder()
-        var9.append(var5)
-        var9.append(var1.resources.getString(R.string.activity_reminder_dow5))
-        var9.append(", ")
-        var6 = var9.toString()
+        var6 = "${var5}${context.resources.getString(R.string.activity_reminder_dow5)}, "
       }
       if (c[6]) {
-        var8 = StringBuilder()
-        var8.append(var6)
-        var8.append(var1.resources.getString(R.string.activity_reminder_dow6))
-        var7 = var8.toString()
+        var7 = "$var6${context.resources.getString(R.string.activity_reminder_dow6)}"
       } else {
         var7 = var6
       }
@@ -183,82 +153,31 @@ class MyReminder {
     return String.format(Locale.US, "%02d:%02d, %s. %s", a, b, var5, c())
   }
 
-  fun a(var1: SharedPreferences.Editor, var2: Int) {
-    val var3 = Locale.US
+  fun save(sharedPreferences: SharedPreferences.Editor, var2: Int) {
     var var4 = 0
-    log(String.format(var3, "MyReminder.save - no %d", var2))
-    var var5 = StringBuilder()
-    var5.append("reminder_")
-    var5.append(var2)
-    var5.append("_TimeHour")
-    var1.putInt(var5.toString(), a)
-    var5 = StringBuilder()
-    var5.append("reminder_")
-    var5.append(var2)
-    var5.append("_TimeMin")
-    var1.putInt(var5.toString(), b)
+    log(String.format(Locale.US, "MyReminder.save - no %d", var2))
+    sharedPreferences.putInt("${"reminder_"}${var2}${"_TimeHour"}", a)
+    sharedPreferences.putInt("${"reminder_"}${var2}${"_TimeMin"}", b)
     while (var4 < 7) {
-      var5 = StringBuilder()
-      var5.append("reminder_")
-      var5.append(var2)
-      var5.append("_DoW")
-      var5.append(var4)
-      var1.putBoolean(var5.toString(), c[var4])
+      sharedPreferences.putBoolean("${"reminder_"}${var2}${"_DoW"}$var4", c[var4])
       ++var4
     }
-    var5 = StringBuilder()
-    var5.append("reminder_")
-    var5.append(var2)
-    var5.append("_SayTime")
-    var1.putInt(var5.toString(), d)
-    var5 = StringBuilder()
-    var5.append("reminder_")
-    var5.append(var2)
-    var5.append("_SayBefore")
-    var1.putString(var5.toString(), e)
-    var5 = StringBuilder()
-    var5.append("reminder_")
-    var5.append(var2)
-    var5.append("_SayAfter")
-    var1.putString(var5.toString(), f)
+    sharedPreferences.putInt("${"reminder_"}${var2}${"_SayTime"}", d)
+    sharedPreferences.putString("${"reminder_"}${var2}${"_SayBefore"}", e)
+    sharedPreferences.putString("${"reminder_"}${var2}${"_SayAfter"}", f)
   }
 
-  fun a(var1: SharedPreferences, var2: Int) {
-    d()
-    var var3 = StringBuilder()
-    var3.append("reminder_")
-    var3.append(var2)
-    var3.append("_TimeHour")
-    a = var1.getInt(var3.toString(), a)
-    var3 = StringBuilder()
-    var3.append("reminder_")
-    var3.append(var2)
-    var3.append("_TimeMin")
-    b = var1.getInt(var3.toString(), b)
+  fun a(sharedPreferences: SharedPreferences, var2: Int) {
+    init()
+    a = sharedPreferences.getInt("${"reminder_"}${var2}${"_TimeHour"}", a)
+    b = sharedPreferences.getInt("${"reminder_"}${var2}${"_TimeMin"}", b)
     for (var4 in 0..6) {
       val var5 = c
-      var3 = StringBuilder()
-      var3.append("reminder_")
-      var3.append(var2)
-      var3.append("_DoW")
-      var3.append(var4)
-      var5[var4] = var1.getBoolean(var3.toString(), c[var4])
+      var5[var4] = sharedPreferences.getBoolean("${"reminder_"}${var2}${"_DoW"}$var4", c[var4])
     }
-    var3 = StringBuilder()
-    var3.append("reminder_")
-    var3.append(var2)
-    var3.append("_SayTime")
-    d = var1.getInt(var3.toString(), d)
-    var3 = StringBuilder()
-    var3.append("reminder_")
-    var3.append(var2)
-    var3.append("_SayBefore")
-    e = var1.getString(var3.toString(), e)
-    var3 = StringBuilder()
-    var3.append("reminder_")
-    var3.append(var2)
-    var3.append("_SayAfter")
-    f = var1.getString(var3.toString(), f)
+    d = sharedPreferences.getInt("${"reminder_"}${var2}${"_SayTime"}", d)
+    e = sharedPreferences.getString("${"reminder_"}${var2}${"_SayBefore"}", e)
+    f = sharedPreferences.getString("${"reminder_"}${var2}${"_SayAfter"}", f)
   }
 
   fun b() {
@@ -322,12 +241,8 @@ class MyReminder {
       var7 =
         ((g.toDouble() + 60000.0 - var5 - var1.toDouble() * 1000.0 * 60.0 * 60.0) / 60000.0).toInt()
       var var8 = ""
-      var var13: StringBuilder
       if (var2 > 0) {
-        var13 = StringBuilder()
-        var13.append("")
-        var13.append(String.format(Locale.US, "%d days", var2))
-        var8 = var13.toString()
+        var8 = String.format(Locale.US, "%d days", var2)
       }
       var var9: String
       var var14: StringBuilder
@@ -338,11 +253,8 @@ class MyReminder {
         val var15: Array<Any>
         if (var1 > 1) {
           var9 = var8
-          if (!var8.isEmpty()) {
-            var14 = StringBuilder()
-            var14.append(var8)
-            var14.append(", ")
-            var9 = var14.toString()
+          if (var8.isNotEmpty()) {
+            var9 = "$var8, "
           }
           var10 = StringBuilder()
           var10.append(var9)
@@ -356,11 +268,8 @@ class MyReminder {
             return@label42
           }
           var9 = var8
-          if (!var8.isEmpty()) {
-            var14 = StringBuilder()
-            var14.append(var8)
-            var14.append(", ")
-            var9 = var14.toString()
+          if (var8.isNotEmpty()) {
+            var9 = "$var8, "
           }
           var10 = StringBuilder()
           var10.append(var9)
@@ -375,22 +284,12 @@ class MyReminder {
       var8 = var9
       if (var7 > 0) {
         var8 = var9
-        if (!var9.isEmpty()) {
-          var13 = StringBuilder()
-          var13.append(var9)
-          var13.append(" and ")
-          var8 = var13.toString()
+        if (var9.isNotEmpty()) {
+          var8 = "$var9 and "
         }
-        var14 = StringBuilder()
-        var14.append(var8)
-        var14.append(String.format(Locale.US, "%d min", var7))
-        var8 = var14.toString()
+        var8 = String.format(Locale.US, "$var8%d min", var7)
       }
-      var14 = StringBuilder()
-      var14.append("Due ")
-      var14.append(var8)
-      var14.append(" from now.")
-      var14.toString()
+      "Due $var8 from now."
     }
   }
 }

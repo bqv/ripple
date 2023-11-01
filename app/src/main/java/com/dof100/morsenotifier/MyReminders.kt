@@ -3,6 +3,7 @@ package com.dof100.morsenotifier
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
@@ -55,17 +56,16 @@ internal class MyReminders constructor(var1: Context?) {
   }
 
   fun b(var1: Context?) {
-    val var2: SharedPreferences.Editor =
-      PreferenceManager.getDefaultSharedPreferences(var1).edit()
-    val var3: Int = a.size
-    val var5: Locale = Locale.US
-    var var4: Int = 0
-    log(String.format(var5, "MyReminders.save - saving %d entries", var3))
-    var2.putInt("reminders_n", var3)
-    while (var4 < var3) {
-      (a.get(var4) as MyReminder).a(var2, var4)
-      ++var4
+    val var2 = PreferenceManager.getDefaultSharedPreferences(var1).edit {
+      val var3: Int = a.size
+      val var5: Locale = Locale.US
+      var var4 = 0
+      log(String.format(var5, "MyReminders.save - saving %d entries", var3))
+      putInt("reminders_n", var3)
+      while (var4 < var3) {
+        a[var4].save(this, var4)
+        ++var4
+      }
     }
-    var2.apply()
   }
 }

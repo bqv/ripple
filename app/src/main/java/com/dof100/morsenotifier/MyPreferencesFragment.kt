@@ -17,12 +17,12 @@ import java.util.Locale
 
 class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPreferenceChangeListener {
   private fun a() {
-    if (App.Companion.d) {
+    if (App.Companion.voiceMode) {
       val var1: MyPreferenceList? = findPreference("pref_voice_locale") as MyPreferenceList?
       if (var1 == null) {
         log("MyPreferencesFragment.init_pref_voice_locale ERROR pref_voice_locale=null")
       } else {
-        val var2: MyPlayerTTS? = App.Companion.a(getActivity().getApplicationContext())
+        val var2: MyPlayerTTS? = App.Companion.getTTS(getActivity().getApplicationContext())
         if (var2 == null) {
           log("MyPreferencesFragment.init_pref_voice_locale ERROR mPlayerTTS=null")
         } else if (var2.mTTS == null) {
@@ -109,7 +109,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
               }
               var4 = "MyPreferencesFragment.checkPreference: remove voice key = "
             } else {
-              if (!App.Companion.d) {
+              if (!App.Companion.voiceMode) {
                 return
               }
               var4 = "MyPreferencesFragment.checkPreference: remove morse key = "
@@ -270,7 +270,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
       val var7: String = var5.getPackageName()
       addPreferencesFromResource(var5.getResources().getIdentifier(var3, "xml", var7))
     }
-    if (App.Companion.d) {
+    if (App.Companion.voiceMode) {
       try {
         val var6: Intent = Intent("android.speech.tts.engine.CHECK_TTS_DATA")
         this.startActivityForResult(var6, 203)

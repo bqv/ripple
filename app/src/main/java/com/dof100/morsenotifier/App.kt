@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dof100.morsenotifier.MyLog.log
 import com.dof100.morsenotifier.MyLog.logClear
@@ -25,7 +26,7 @@ class App : Application() {
     a = "MorseNotifierPro".contains("Free")
     b = "MorseNotifierPro".contains("Pro")
     c = "MorseNotifierPro".contains("Morse")
-    d = "MorseNotifierPro".contains("Voice")
+    voiceMode = "MorseNotifierPro".contains("Voice")
     run label68@{
       run label72@{
         var var10001: Boolean
@@ -58,7 +59,7 @@ class App : Application() {
     if (c) {
       log("App.onCreate flavor=MorseNotifier")
     }
-    if (d) {
+    if (voiceMode) {
       log("App.onCreate flavor=VoiceNotifier")
     }
     if (a) {
@@ -88,7 +89,7 @@ class App : Application() {
     }
     l = "market://details?id=${this.packageName}"
     m = l!!.replace(".free", "")
-    q = null
+    playerTTS = null
     log("App.onCreate Initializing job manager...")
     JobManager.create((this as Context)).addJobCreator(MyChimeJobCreator() as JobCreator)
   }
@@ -97,7 +98,7 @@ class App : Application() {
     var a = false
     var b = false
     var c = false
-    var d = false
+    var voiceMode = false
     var e: String? = null
     var f: String? = null
     var g: String? = null
@@ -110,19 +111,19 @@ class App : Application() {
     private var n = false
     private var o = false
     private var p = false
-    private var q: MyPlayerTTS? = null
-    fun a(var0: Context?): MyPlayerTTS? {
-      if (q == null) {
-        q = MyPlayerTTS(var0, 0)
+    private var playerTTS: MyPlayerTTS? = null
+    fun getTTS(context: Context?): MyPlayerTTS? {
+      if (playerTTS == null) {
+        playerTTS = MyPlayerTTS(context, 0)
       }
-      return q
+      return playerTTS
     }
 
-    fun a(context: Context?, var1: Int) {
-      val intent = Intent()
-      intent.action = "LBR_ACTION_SETPOS"
-      intent.putExtra("LBR_ACTION_DATA_POS", var1)
-      LocalBroadcastManager.getInstance(context!!).sendBroadcast(intent)
+    fun a(context: Context?, pos: Int) {
+      LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent().apply {
+        action = "LBR_ACTION_SETPOS"
+        putExtra("LBR_ACTION_DATA_POS", pos)
+      })
     }
 
     fun a(var0: Activity?, var1: String): Boolean {
@@ -131,31 +132,26 @@ class App : Application() {
       return var3.getBoolean(var2, false)
     }
 
-    fun b(var0: Activity?, var1: String) {
-      val var2 = PreferenceManager.getDefaultSharedPreferences(var0).edit()
-      val var3 = "question_asked_$var1"
-      var2.putBoolean(var3, true).apply()
+    fun b(context: Activity?, var1: String) {
+      PreferenceManager.getDefaultSharedPreferences(context).edit {
+        val var3 = "question_asked_$var1"
+        putBoolean(var3, true).apply()
+      }
     }
 
-    fun b(var0: Context?) {
-      log(var0, "App.broadcastFinish sending LBR_ACTION_FINISH")
-      val var1 = Intent()
-      var1.action = "LBR_ACTION_FINISH"
-      LocalBroadcastManager.getInstance(var0!!).sendBroadcast(var1)
+    fun b(context: Context?) {
+      log(context, "App.broadcastFinish sending LBR_ACTION_FINISH")
+      LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent().apply { action = "LBR_ACTION_FINISH" })
     }
 
     fun c(var0: Context) {
       log("App.broadcastSettingsChanged sending LBR_ACTION_SETTINGSCHANGED")
-      val var1 = Intent()
-      var1.action = "LBR_ACTION_SETTINGSCHANGED"
-      LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(var1)
+      LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(Intent().apply { action = "LBR_ACTION_SETTINGSCHANGED" })
     }
 
     fun d(var0: Context) {
       log("App.broadcastSettingsChanged sending LBR_ACTION_RECENTNOTIFICATIONSCHANGED")
-      val var1 = Intent()
-      var1.action = "LBR_ACTION_RECENTNOTIFICATIONSCHANGED"
-      LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(var1)
+      LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(Intent().apply { action = "LBR_ACTION_RECENTNOTIFICATIONSCHANGED" })
     }
   }
 }

@@ -36,16 +36,16 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
     l = ""
     c = var1
     this.isSelectable = false
-    e = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "")
-    f = Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0")
-    g = Utils.a(
+    e = Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonIntentClass", "")
+    f = Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "buttonMsgWhat", "0")
+    g = Utils.unknown1(
       var1,
       var2,
       "http://mypreferencenamespace.100dof.com",
       "buttonMsgExtraText1",
       "0"
     )
-    h = Utils.a(
+    h = Utils.unknown1(
       var1,
       var2,
       "http://mypreferencenamespace.100dof.com",
@@ -63,16 +63,16 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
       ++var3
     }
     val var6 =
-      Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
+      Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
         .equals("true", ignoreCase = true)
     val var7 =
-      Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
+      Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
         .equals("true", ignoreCase = true)
     val var8 =
-      Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visibleFree", "true")
+      Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "visibleFree", "true")
         .equals("true", ignoreCase = true)
     val var9 =
-      Utils.a(var1, var2, "http://mypreferencenamespace.100dof.com", "visiblePro", "true")
+      Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "visiblePro", "true")
         .equals("true", ignoreCase = true)
     if (App.a) {
       this.isEnabled = var6

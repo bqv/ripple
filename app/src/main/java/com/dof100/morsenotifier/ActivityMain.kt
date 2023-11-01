@@ -322,7 +322,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
         }
       }
       var2 = var3
-      if (App.Companion.d) {
+      if (App.Companion.voiceMode) {
         var2 = var3
         if (this.a("com.dof100.voicenotifier.free")) {
           var2 = true

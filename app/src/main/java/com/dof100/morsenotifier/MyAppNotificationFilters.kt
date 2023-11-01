@@ -3,6 +3,7 @@ package com.dof100.morsenotifier
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
@@ -30,19 +31,18 @@ internal class MyAppNotificationFilters constructor(var1: Context?) {
     }
   }
 
-  fun b(var1: Context?) {
-    val var5: SharedPreferences.Editor =
-      PreferenceManager.getDefaultSharedPreferences(var1).edit()
-    val var2: Int = list.size
-    var5.putInt("app_filters_n", var2)
-    val var3: Locale = Locale.US
-    var var4: Int = 0
-    log(String.format(var3, "MyAppFilters.save - saving %d entries", var2))
-    while (var4 < var2) {
-      list.get(var4)!!.a(var5, var4)
-      ++var4
+  fun b(context: Context?) {
+    PreferenceManager.getDefaultSharedPreferences(context).edit {
+      val var2: Int = list.size
+      putInt("app_filters_n", var2)
+      val var3: Locale = Locale.US
+      var var4: Int = 0
+      log(String.format(var3, "MyAppFilters.save - saving %d entries", var2))
+      while (var4 < var2) {
+        list.get(var4)!!.a(this, var4)
+        ++var4
+      }
     }
-    var5.apply()
   }
 
   companion object {

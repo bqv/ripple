@@ -3,6 +3,7 @@ package com.dof100.morsenotifier
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Objects
 
@@ -40,21 +41,17 @@ internal class MyRecentAppNotifications constructor(var1: Context?) {
         ") entries")
     log(var2)
     arrange()
-    val var4: SharedPreferences.Editor =
-      PreferenceManager.getDefaultSharedPreferences(var1).edit()
-    var4.putInt("MyRecentAppNotifications_enable", if (enabled) 1 else 0)
-    var4.putInt("MyRecentAppNotifications_n", notifications.size)
-    var var3: Int = 0
-    val var6: Iterator<MyRecentAppNotification?> = notifications.iterator()
-    while (var6.hasNext()) {
-      (var6.next())!!.save(var4, var3)
-      ++var3
+    PreferenceManager.getDefaultSharedPreferences(var1).edit {
+      putInt("MyRecentAppNotifications_enable", if (enabled) 1 else 0)
+      putInt("MyRecentAppNotifications_n", notifications.size)
+      var var3 = 0
+      val var6: Iterator<MyRecentAppNotification?> = notifications.iterator()
+      while (var6.hasNext()) {
+        (var6.next())!!.save(this, var3)
+        ++var3
+      }
     }
-    var4.apply()
-    val var5: String = ("MyRecentAppNotifications.save saved " +
-        notifications.size +
-        " entries")
-    log(var5)
+    log("MyRecentAppNotifications.save saved ${notifications.size} entries")
   }
 
   fun addNotification(
