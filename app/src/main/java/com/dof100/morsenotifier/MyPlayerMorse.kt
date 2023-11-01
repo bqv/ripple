@@ -41,7 +41,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   private var commandStop = false
   private var audioTrack: AudioTrack? = null
   private var vibrator: Vibrator? = null
-  private val mList: ArrayList<Int> = ArrayList()
+  private val mList = ArrayList<Int>()
   private val mDoneLatch = CountDownLatch(1)
 
   private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -59,26 +59,16 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     log(context, "MyPlayerMorse constructor instance=$inst")
   }
 
-  private fun unknown1(character: Char, flag: Boolean) {
-    var flag = flag
+  private fun beep(character: Char, flag: Boolean) {
+    var flag = flag // farnsworth?
     var character = character
-    if (!e) {
-      run label619@{
-        if (character < '!' || character > '/') {
-          character = character
-          if (character < ':') {
-            return@label619
-          }
-          character = character
-          if (character > '@') {
-            return@label619
-          }
-        }
+    if (!e) { // play punctuation
+      if ((character >= '!' && character <= '/')
+        || (character >= ':' && character <= '@'))
         character = ' '
-      }
     }
     var number: Int
-    run label598@{
+    run label598@{ // its a switch statement
       run label597@{
         run label654@{
           run label594@{
@@ -154,172 +144,172 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                       number = 0
                                                                                                                                                       when (character) {
                                                                                                                                                         '!' -> {
-                                                                                                                                                          this.unknown2(2, character.code)
-                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                          this.unknown2(-2, -1)
-                                                                                                                                                          this.unknown2(1, -1)
+                                                                                                                                                          this.beep(2, character.code)
+                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                          this.beep(-2, -1)
+                                                                                                                                                          this.beep(1, -1)
                                                                                                                                                           return@label661
                                                                                                                                                         }
 
-                                                                                                                                                        '"' -> this.unknown2(1, character.code)
+                                                                                                                                                        '"' -> this.beep(1, character.code)
 
                                                                                                                                                         else -> run label669@ {
                                                                                                                                                           run label665@{
                                                                                                                                                             run label490@{
                                                                                                                                                               when (character) {
                                                                                                                                                                 '&' -> {
-                                                                                                                                                                  this.unknown2(1, character.code)
+                                                                                                                                                                  this.beep(1, character.code)
                                                                                                                                                                   return@label550
                                                                                                                                                                 }
 
                                                                                                                                                                 '\'' -> {
-                                                                                                                                                                  this.unknown2(1, character.code)
-                                                                                                                                                                  this.unknown2(-2, -1)
-                                                                                                                                                                  this.unknown2(2, -1)
+                                                                                                                                                                  this.beep(1, character.code)
+                                                                                                                                                                  this.beep(-2, -1)
+                                                                                                                                                                  this.beep(2, -1)
                                                                                                                                                                   return@label665
                                                                                                                                                                 }
 
                                                                                                                                                                 '(' -> {
-                                                                                                                                                                  this.unknown2(2, character.code)
-                                                                                                                                                                  this.unknown2(-1, -1)
-                                                                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                                                                  this.beep(2, character.code)
+                                                                                                                                                                  this.beep(-1, -1)
+                                                                                                                                                                  this.beep(-1, -1)
                                                                                                                                                                   return@label526
                                                                                                                                                                 }
 
                                                                                                                                                                 ')' -> {
-                                                                                                                                                                  this.unknown2(2, character.code)
-                                                                                                                                                                  this.unknown2(-1, -1)
-                                                                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                                                                  this.beep(2, character.code)
+                                                                                                                                                                  this.beep(-1, -1)
+                                                                                                                                                                  this.beep(-1, -1)
                                                                                                                                                                 }
 
                                                                                                                                                                 else -> run label484@ {
                                                                                                                                                                   when (character) {
                                                                                                                                                                     '+' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.beep(1, character.code)
                                                                                                                                                                       return@label533
                                                                                                                                                                     }
 
                                                                                                                                                                     ',' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(2, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(2, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '-' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(1, -1)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '.' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(2, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(1, -1)
+                                                                                                                                                                      this.beep(1, character.code)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(2, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(1, -1)
                                                                                                                                                                       return@label557
                                                                                                                                                                     }
 
                                                                                                                                                                     '/' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.beep(2, character.code)
                                                                                                                                                                       return@label521
                                                                                                                                                                     }
 
                                                                                                                                                                     '0' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
                                                                                                                                                                     }
 
-                                                                                                                                                                    '1' -> this.unknown2(1, character.code)
+                                                                                                                                                                    '1' -> this.beep(1, character.code)
 
                                                                                                                                                                     '2' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(1, -1)
+                                                                                                                                                                      this.beep(1, character.code)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(1, -1)
                                                                                                                                                                       return@label659
                                                                                                                                                                     }
 
                                                                                                                                                                     '3' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.beep(1, character.code)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '4' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.beep(1, character.code)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '5' -> {
-                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.beep(1, character.code)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '6' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '7' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.beep(2, character.code)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
 
                                                                                                                                                                     '8' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
                                                                                                                                                                       return@label657
                                                                                                                                                                     }
 
                                                                                                                                                                     '9' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.beep(2, character.code)
                                                                                                                                                                       return@label665
                                                                                                                                                                     }
 
                                                                                                                                                                     ':' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(2, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(2, -1)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
 
                                                                                                                                                                     ';' -> {
-                                                                                                                                                                      this.unknown2(2, character.code)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                                      this.unknown2(1, -1)
+                                                                                                                                                                      this.beep(2, character.code)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-1, -1)
+                                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                                      this.beep(1, -1)
                                                                                                                                                                       return@label533
                                                                                                                                                                     }
 
                                                                                                                                                                     else -> when (character) {
                                                                                                                                                                       '?' -> {
-                                                                                                                                                                        this.unknown2(1, character.code)
-                                                                                                                                                                        this.unknown2(-2, -1)
-                                                                                                                                                                        this.unknown2(1, -1)
+                                                                                                                                                                        this.beep(1, character.code)
+                                                                                                                                                                        this.beep(-2, -1)
+                                                                                                                                                                        this.beep(1, -1)
                                                                                                                                                                         return@label657
                                                                                                                                                                       }
 
                                                                                                                                                                       '@' -> {
-                                                                                                                                                                        this.unknown2(1, character.code)
-                                                                                                                                                                        this.unknown2(-2, -1)
-                                                                                                                                                                        this.unknown2(2, -1)
+                                                                                                                                                                        this.beep(1, character.code)
+                                                                                                                                                                        this.beep(-2, -1)
+                                                                                                                                                                        this.beep(2, -1)
                                                                                                                                                                         return@label662
                                                                                                                                                                       }
 
@@ -334,7 +324,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                         'h' -> return@label580
                                                                                                                                                                         'i' -> return@label589
                                                                                                                                                                         'j' -> {
-                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                           return@label659
                                                                                                                                                                         }
 
@@ -349,12 +339,12 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                         's' -> return@label586
                                                                                                                                                                         't' -> return@label592
                                                                                                                                                                         'u' -> {
-                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                           return@label585
                                                                                                                                                                         }
 
                                                                                                                                                                         'v' -> {
-                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                           return@label577
                                                                                                                                                                         }
 
@@ -368,14 +358,14 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                           'è' -> return@label503
                                                                                                                                                                           'é' -> return@label532
                                                                                                                                                                           'å' -> {
-                                                                                                                                                                            this.unknown2(1, character.code)
+                                                                                                                                                                            this.beep(1, character.code)
                                                                                                                                                                             return@label663
                                                                                                                                                                           }
 
                                                                                                                                                                           else -> {
                                                                                                                                                                             when (character) {
                                                                                                                                                                               'ð' -> {
-                                                                                                                                                                                this.unknown2(1, character.code)
+                                                                                                                                                                                this.beep(1, character.code)
                                                                                                                                                                                 return@label526
                                                                                                                                                                               }
 
@@ -416,45 +406,45 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                                       'ώ' -> return@label552
                                                                                                                                                                                       else -> when (character) {
                                                                                                                                                                                         '$' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
-                                                                                                                                                                                          this.unknown2(-2, -1)
-                                                                                                                                                                                          this.unknown2(1, -1)
-                                                                                                                                                                                          this.unknown2(-2, -1)
-                                                                                                                                                                                          this.unknown2(1, -1)
+                                                                                                                                                                                          this.beep(1, character.code)
+                                                                                                                                                                                          this.beep(-2, -1)
+                                                                                                                                                                                          this.beep(1, -1)
+                                                                                                                                                                                          this.beep(-2, -1)
+                                                                                                                                                                                          this.beep(1, -1)
                                                                                                                                                                                           return@label535
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '=' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
-                                                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.beep(2, character.code)
+                                                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                                                          this.beep(-1, -1)
                                                                                                                                                                                           return@label562
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '_' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                                           return@label484
                                                                                                                                                                                         }
 
                                                                                                                                                                                         '|' -> {
-                                                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                                                          this.beep(-2, -1)
                                                                                                                                                                                           flag = false
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'à' -> {}
                                                                                                                                                                                         'ó', 'ö', 'ø' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.beep(2, character.code)
                                                                                                                                                                                           return@label660
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ü', 'ŭ' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                                           return@label560
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'þ' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                                           return@label657
                                                                                                                                                                                         }
 
@@ -462,52 +452,52 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                                         'ć', 'ĉ' -> return@label531
                                                                                                                                                                                         'đ', 'ę' -> return@label532
                                                                                                                                                                                         'ĝ' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.beep(2, character.code)
                                                                                                                                                                                           return@label662
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ĥ', 'š' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                                                          this.beep(2, character.code)
                                                                                                                                                                                           return@label504
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ĵ' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                                           return@label499
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ł' -> return@label503
                                                                                                                                                                                         'ń' -> return@label490
                                                                                                                                                                                         'ś' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
-                                                                                                                                                                                          this.unknown2(-2, -1)
-                                                                                                                                                                                          this.unknown2(1, -1)
-                                                                                                                                                                                          this.unknown2(-2, -1)
-                                                                                                                                                                                          this.unknown2(1, -1)
+                                                                                                                                                                                          this.beep(1, character.code)
+                                                                                                                                                                                          this.beep(-2, -1)
+                                                                                                                                                                                          this.beep(1, -1)
+                                                                                                                                                                                          this.beep(-2, -1)
+                                                                                                                                                                                          this.beep(1, -1)
                                                                                                                                                                                           return@label550
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ŝ' -> {
-                                                                                                                                                                                          this.unknown2(1, character.code)
+                                                                                                                                                                                          this.beep(1, character.code)
                                                                                                                                                                                           return@label566
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ź' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
-                                                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.beep(2, character.code)
+                                                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                                                          this.beep(-1, -1)
                                                                                                                                                                                           return@label669
                                                                                                                                                                                         }
 
                                                                                                                                                                                         'ż' -> {
-                                                                                                                                                                                          this.unknown2(2, character.code)
-                                                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                                                          this.beep(2, character.code)
+                                                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                                                          this.beep(-1, -1)
                                                                                                                                                                                           return@label535
                                                                                                                                                                                         }
 
                                                                                                                                                                                         else -> {
-                                                                                                                                                                                          this.unknown2(-3, -3)
+                                                                                                                                                                                          this.beep(-3, -3)
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
                                                                                                                                                                                       }
@@ -516,306 +506,305 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                                 }
                                                                                                                                                                               }
                                                                                                                                                                             }
-                                                                                                                                                                            this.unknown2(1, character.code)
+                                                                                                                                                                            this.beep(1, character.code)
                                                                                                                                                                             return@label663
                                                                                                                                                                           }
                                                                                                                                                                         }
                                                                                                                                                                       }
                                                                                                                                                                     }
                                                                                                                                                                   }
-                                                                                                                                                                  this.unknown2(-2, -1)
-                                                                                                                                                                  this.unknown2(2, -1)
+                                                                                                                                                                  this.beep(-2, -1)
+                                                                                                                                                                  this.beep(2, -1)
                                                                                                                                                                   return@label504
                                                                                                                                                                 }
                                                                                                                                                               }
-                                                                                                                                                              this.unknown2(-2, -1)
-                                                                                                                                                              this.unknown2(1, -1)
+                                                                                                                                                              this.beep(-2, -1)
+                                                                                                                                                              this.beep(1, -1)
                                                                                                                                                               return@label663
                                                                                                                                                             }
-                                                                                                                                                            this.unknown2(2, character.code)
-                                                                                                                                                            this.unknown2(-1, -1)
-                                                                                                                                                            this.unknown2(-1, -1)
+                                                                                                                                                            this.beep(2, character.code)
+                                                                                                                                                            this.beep(-1, -1)
+                                                                                                                                                            this.beep(-1, -1)
                                                                                                                                                             return@label661
                                                                                                                                                           }
-                                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                                          this.beep(-1, -1)
                                                                                                                                                           return@label499
                                                                                                                                                         }
                                                                                                                                                       }
-                                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                                      this.unknown2(2, -1)
+                                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                                      this.beep(2, -1)
                                                                                                                                                       return@label521
                                                                                                                                                     }
-                                                                                                                                                    this.unknown2(2, character.code)
+                                                                                                                                                    this.beep(2, character.code)
                                                                                                                                                     return@label529
                                                                                                                                                   }
-                                                                                                                                                  this.unknown2(-2, -1)
-                                                                                                                                                  this.unknown2(2, -1)
+                                                                                                                                                  this.beep(-2, -1)
+                                                                                                                                                  this.beep(2, -1)
                                                                                                                                                   return@label660
                                                                                                                                                 }
-                                                                                                                                                this.unknown2(2, character.code)
+                                                                                                                                                this.beep(2, character.code)
                                                                                                                                                 return@label546
                                                                                                                                               }
-                                                                                                                                              this.unknown2(-2, -1)
-                                                                                                                                              this.unknown2(2, -1)
+                                                                                                                                              this.beep(-2, -1)
+                                                                                                                                              this.beep(2, -1)
                                                                                                                                               return@label529
                                                                                                                                             }
-                                                                                                                                            this.unknown2(1, character.code)
+                                                                                                                                            this.beep(1, character.code)
                                                                                                                                             return@label535
                                                                                                                                           }
-                                                                                                                                          this.unknown2(-1, -1)
-                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                          this.beep(-1, -1)
+                                                                                                                                          this.beep(-1, -1)
                                                                                                                                           return@label659
                                                                                                                                         }
-                                                                                                                                        this.unknown2(-1, -1)
-                                                                                                                                        this.unknown2(-1, -1)
+                                                                                                                                        this.beep(-1, -1)
+                                                                                                                                        this.beep(-1, -1)
                                                                                                                                         return@label533
                                                                                                                                       }
-                                                                                                                                      this.unknown2(-2, -1)
-                                                                                                                                      this.unknown2(2, -1)
+                                                                                                                                      this.beep(-2, -1)
+                                                                                                                                      this.beep(2, -1)
                                                                                                                                       return@label546
                                                                                                                                     }
-                                                                                                                                    this.unknown2(-1, -1)
-                                                                                                                                    this.unknown2(-1, -1)
+                                                                                                                                    this.beep(-1, -1)
+                                                                                                                                    this.beep(-1, -1)
                                                                                                                                     return@label566
                                                                                                                                   }
-                                                                                                                                  this.unknown2(2, character.code)
+                                                                                                                                  this.beep(2, character.code)
                                                                                                                                   return@label567
                                                                                                                                 }
-                                                                                                                                this.unknown2(1, character.code)
+                                                                                                                                this.beep(1, character.code)
                                                                                                                                 return@label551
                                                                                                                               }
-                                                                                                                              this.unknown2(-1, -1)
-                                                                                                                              this.unknown2(-1, -1)
+                                                                                                                              this.beep(-1, -1)
+                                                                                                                              this.beep(-1, -1)
                                                                                                                               return@label551
                                                                                                                             }
-                                                                                                                            this.unknown2(-2, -1)
-                                                                                                                            this.unknown2(1, -1)
+                                                                                                                            this.beep(-2, -1)
+                                                                                                                            this.beep(1, -1)
                                                                                                                             return@label551
                                                                                                                           }
-                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                          this.beep(2, character.code)
                                                                                                                           return@label563
                                                                                                                         }
-                                                                                                                        this.unknown2(2, character.code)
+                                                                                                                        this.beep(2, character.code)
                                                                                                                         return@label656
                                                                                                                       }
-                                                                                                                      this.unknown2(-1, -1)
-                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                      this.beep(-1, -1)
+                                                                                                                      this.beep(-1, -1)
                                                                                                                       return@label557
                                                                                                                     }
-                                                                                                                    this.unknown2(1, character.code)
+                                                                                                                    this.beep(1, character.code)
                                                                                                                     return@label557
                                                                                                                   }
-                                                                                                                  this.unknown2(2, character.code)
-                                                                                                                  this.unknown2(-1, -1)
-                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                  this.beep(2, character.code)
+                                                                                                                  this.beep(-1, -1)
+                                                                                                                  this.beep(-1, -1)
                                                                                                                   return@label558
                                                                                                                 }
-                                                                                                                this.unknown2(1, character.code)
+                                                                                                                this.beep(1, character.code)
                                                                                                                 return@label558
                                                                                                               }
-                                                                                                              this.unknown2(-2, -1)
-                                                                                                              this.unknown2(2, -1)
+                                                                                                              this.beep(-2, -1)
+                                                                                                              this.beep(2, -1)
                                                                                                               return@label559
                                                                                                             }
-                                                                                                            this.unknown2(-2, -1)
-                                                                                                            this.unknown2(1, -1)
+                                                                                                            this.beep(-2, -1)
+                                                                                                            this.beep(1, -1)
                                                                                                             return@label560
                                                                                                           }
-                                                                                                          this.unknown2(-2, -1)
-                                                                                                          this.unknown2(2, -1)
+                                                                                                          this.beep(-2, -1)
+                                                                                                          this.beep(2, -1)
                                                                                                           return@label563
                                                                                                         }
-                                                                                                        this.unknown2(-2, -1)
-                                                                                                        this.unknown2(2, -1)
+                                                                                                        this.beep(-2, -1)
+                                                                                                        this.beep(2, -1)
                                                                                                         return@label567
                                                                                                       }
-                                                                                                      this.unknown2(-1, -1)
-                                                                                                      this.unknown2(-1, -1)
+                                                                                                      this.beep(-1, -1)
+                                                                                                      this.beep(-1, -1)
                                                                                                       return@label550
                                                                                                     }
-                                                                                                    this.unknown2(-2, -1)
-                                                                                                    this.unknown2(2, -1)
+                                                                                                    this.beep(-2, -1)
+                                                                                                    this.beep(2, -1)
                                                                                                     return@label656
                                                                                                   }
-                                                                                                  this.unknown2(-1, -1)
-                                                                                                  this.unknown2(-1, -1)
+                                                                                                  this.beep(-1, -1)
+                                                                                                  this.beep(-1, -1)
                                                                                                   return@label560
                                                                                                 }
-                                                                                                this.unknown2(2, character.code)
+                                                                                                this.beep(2, character.code)
                                                                                                 return@label559
                                                                                               }
-                                                                                              this.unknown2(2, character.code)
+                                                                                              this.beep(2, character.code)
                                                                                               return@label655
                                                                                             }
-                                                                                            this.unknown2(1, character.code)
+                                                                                            this.beep(1, character.code)
                                                                                             return@label573
                                                                                           }
-                                                                                          this.unknown2(-2, -1)
-                                                                                          this.unknown2(2, -1)
+                                                                                          this.beep(-2, -1)
+                                                                                          this.beep(2, -1)
                                                                                           return@label569
                                                                                         }
-                                                                                        this.unknown2(-2, -1)
-                                                                                        this.unknown2(2, -1)
+                                                                                        this.beep(-2, -1)
+                                                                                        this.beep(2, -1)
                                                                                         return@label570
                                                                                       }
-                                                                                      this.unknown2(1, character.code)
+                                                                                      this.beep(1, character.code)
                                                                                       return@label576
                                                                                     }
-                                                                                    this.unknown2(-1, -1)
-                                                                                    this.unknown2(-1, -1)
+                                                                                    this.beep(-1, -1)
+                                                                                    this.beep(-1, -1)
                                                                                     return@label573
                                                                                   }
-                                                                                  this.unknown2(-2, -1)
-                                                                                  this.unknown2(2, -1)
+                                                                                  this.beep(-2, -1)
+                                                                                  this.beep(2, -1)
                                                                                   return@label655
                                                                                 }
-                                                                                this.unknown2(-2, -1)
-                                                                                this.unknown2(1, -1)
+                                                                                this.beep(-2, -1)
+                                                                                this.beep(1, -1)
                                                                                 return@label573
                                                                               }
-                                                                              this.unknown2(-1, -1)
-                                                                              this.unknown2(-1, -1)
+                                                                              this.beep(-1, -1)
+                                                                              this.beep(-1, -1)
                                                                               return@label579
                                                                             }
-                                                                            this.unknown2(-2, -1)
-                                                                            this.unknown2(1, -1)
+                                                                            this.beep(-2, -1)
+                                                                            this.beep(1, -1)
                                                                             return@label576
                                                                           }
-                                                                          this.unknown2(2, character.code)
+                                                                          this.beep(2, character.code)
                                                                           return@label569
                                                                         }
-                                                                        this.unknown2(-2, -1)
-                                                                        this.unknown2(1, -1)
+                                                                        this.beep(-2, -1)
+                                                                        this.beep(1, -1)
                                                                         return@label577
                                                                       }
-                                                                      this.unknown2(-1, -1)
-                                                                      this.unknown2(-1, -1)
+                                                                      this.beep(-1, -1)
+                                                                      this.beep(-1, -1)
                                                                       return@label577
                                                                     }
-                                                                    this.unknown2(1, character.code)
+                                                                    this.beep(1, character.code)
                                                                     return@label579
                                                                   }
-                                                                  this.unknown2(2, character.code)
+                                                                  this.beep(2, character.code)
                                                                   return@label570
                                                                 }
-                                                                this.unknown2(-2, -1)
-                                                                this.unknown2(1, -1)
+                                                                this.beep(-2, -1)
+                                                                this.beep(1, -1)
                                                                 return@label579
                                                               }
-                                                              this.unknown2(-1, -1)
-                                                              this.unknown2(-1, -1)
+                                                              this.beep(-1, -1)
+                                                              this.beep(-1, -1)
                                                               return@label576
                                                             }
-                                                            this.unknown2(2, character.code)
+                                                            this.beep(2, character.code)
                                                             return@label582
                                                           }
-                                                          this.unknown2(-1, -1)
-                                                          this.unknown2(-1, -1)
+                                                          this.beep(-1, -1)
+                                                          this.beep(-1, -1)
                                                           return@label581
                                                         }
-                                                        this.unknown2(-1, -1)
-                                                        this.unknown2(-1, -1)
+                                                        this.beep(-1, -1)
+                                                        this.beep(-1, -1)
                                                         return@label587
                                                       }
-                                                      this.unknown2(-2, -1)
-                                                      this.unknown2(1, -1)
+                                                      this.beep(-2, -1)
+                                                      this.beep(1, -1)
                                                       return@label581
                                                     }
-                                                    this.unknown2(1, character.code)
+                                                    this.beep(1, character.code)
                                                     return@label587
                                                   }
-                                                  this.unknown2(-2, -1)
-                                                  this.unknown2(2, -1)
+                                                  this.beep(-2, -1)
+                                                  this.beep(2, -1)
                                                   return@label588
                                                 }
-                                                this.unknown2(-1, -1)
-                                                this.unknown2(-1, -1)
+                                                this.beep(-1, -1)
+                                                this.beep(-1, -1)
                                                 return@label585
                                               }
-                                              this.unknown2(-2, -1)
-                                              this.unknown2(2, -1)
+                                              this.beep(-2, -1)
+                                              this.beep(2, -1)
                                               return@label582
                                             }
-                                            this.unknown2(-2, -1)
-                                            this.unknown2(1, -1)
+                                            this.beep(-2, -1)
+                                            this.beep(1, -1)
                                             return@label585
                                           }
-                                          this.unknown2(2, character.code)
+                                          this.beep(2, character.code)
                                           return@label588
                                         }
-                                        this.unknown2(-2, -1)
-                                        this.unknown2(1, -1)
+                                        this.beep(-2, -1)
+                                        this.beep(1, -1)
                                         return@label587
                                       }
-                                      this.unknown2(1, character.code)
+                                      this.beep(1, character.code)
                                     }
-                                    this.unknown2(-2, -1)
-                                    this.unknown2(1, -1)
+                                    this.beep(-2, -1)
+                                    this.beep(1, -1)
                                     return@label590
                                   }
-                                  this.unknown2(-1, -1)
-                                  this.unknown2(-1, -1)
+                                  this.beep(-1, -1)
+                                  this.beep(-1, -1)
                                   return@label591
                                 }
-                                this.unknown2(2, character.code)
+                                this.beep(2, character.code)
                                 return@label593
                               }
-                              this.unknown2(1, character.code)
+                              this.beep(1, character.code)
                               return@label591
                             }
-                            this.unknown2(-2, -1)
-                            this.unknown2(1, -1)
+                            this.beep(-2, -1)
+                            this.beep(1, -1)
                             return@label591
                           }
-                          this.unknown2(1, character.code)
+                          this.beep(1, character.code)
                           return@label590
                         }
-                        this.unknown2(-2, -1)
-                        this.unknown2(2, -1)
+                        this.beep(-2, -1)
+                        this.beep(2, -1)
                         return@label593
                       }
-                      this.unknown2(-1, -1)
-                      this.unknown2(-1, -1)
+                      this.beep(-1, -1)
+                      this.beep(-1, -1)
                       return@label590
                     }
-                    this.unknown2(1, character.code)
+                    this.beep(1, character.code)
                     return@label654
                   }
-                  this.unknown2(-2, -1)
-                  this.unknown2(1, -1)
+                  this.beep(-2, -1)
+                  this.beep(1, -1)
                   return@label654
                 }
-                this.unknown2(-2, -1)
-                this.unknown2(2, -1)
+                this.beep(-2, -1)
+                this.beep(2, -1)
                 return@label594
               }
-              this.unknown2(2, character.code)
+              this.beep(2, character.code)
               return@label594
             }
-            this.unknown2(-1, -1)
-            this.unknown2(-1, -1)
+            this.beep(-1, -1)
+            this.beep(-1, -1)
             return@label654
           }
-          this.unknown2(-1, -1)
-          this.unknown2(-1, -1)
+          this.beep(-1, -1)
+          this.beep(-1, -1)
           return@label598
         }
-        this.unknown2(-2, -1)
-        this.unknown2(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
         return@label598
       }
-      this.unknown2(1, character.code)
+      this.beep(1, character.code)
     }
     if (flag) {
-      while (number < mSpacesAfterChar) {
-        this.unknown2(-3, -3)
-        ++number
+      while (number++ < mSpacesAfterChar) {
+        this.beep(-3, -3)
       }
     }
   }
 
-  private fun unknown2(int1: Int, int2: Int) {
+  private fun beep(int1: Int, int2: Int) {
     mList.add(int1)
     mList.add(int2)
   }
@@ -836,7 +825,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   private fun seqCreate() {
     log("MyPlayerMorse.seqCreate ")
     mList.clear()
-    this.unknown2(-6, -3)
+    this.beep(-6, -3)
     log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", repeat, text))
     var var1 = false
     var var2 = 0
@@ -851,9 +840,9 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         var6 = var3[Dur]
         ++Dur
         var7 = !(Dur >= iter || var3[Dur] != '|')
-        this.unknown1(var6, var7)
+        this.beep(var6, var7)
       }
-      run label42@{
+      run {
         iter = var2 + 1
         Dur = mdur * mList.size / 2
         log(String.format(Locale.US,
@@ -862,12 +851,15 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         ))
         if (repeat > 0) {
           if (iter < repeat) {
-            return@label42
+            //pass
+          } else {
+            var1 = true
           }
         } else if (Dur <= -repeat * 1000) {
-          return@label42
+          //pass
+        } else {
+          var1 = true
         }
-        var1 = true
       }
       var var9 = var1
       if (iter > 100) {
@@ -877,32 +869,32 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
       var1 = var9
       var2 = iter
       if (!var9) {
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
-        this.unknown2(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
+        this.beep(-3, -3)
         var1 = var9
         var2 = iter
       }
     }
     log("MyPlayerMorse.seqCreate after message mList.size=${mList.size} Nelements=$nelements")
-    this.unknown2(-7, -3)
-    this.unknown2(-7, -3)
-    this.unknown2(-7, -3)
-    this.unknown2(-7, -3)
-    this.unknown2(-7, -3)
-    this.unknown2(-8, -3)
+    this.beep(-7, -3)
+    this.beep(-7, -3)
+    this.beep(-7, -3)
+    this.beep(-7, -3)
+    this.beep(-7, -3)
+    this.beep(-8, -3)
     log("MyPlayerMorse.seqCreate after mDelayAfter mList.size=${mList.size}")
   }
 
