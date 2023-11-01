@@ -120,10 +120,9 @@ class ActivityAppFilter constructor() : Activity() {
       )
     )
     d = findViewById<View>(R.id.sp_AppName) as Spinner?
-    val var6: ArrayAdapter<String?> =
-      ArrayAdapter<String?>(this, 17367048, a!!.a().toTypedArray() as Array<String?>?)
-    var6.setDropDownViewResource(17367049)
-    d!!.setAdapter(var6)
+    d!!.adapter = ArrayAdapter<String?>(this, 17367048, a!!.a().toTypedArray() as Array<String?>).apply {
+      setDropDownViewResource(17367049)
+    }
     e = findViewById<View>(R.id.et_criteria_Contains) as EditText?
     f = findViewById<View>(R.id.et_criteria_ContainsNot) as EditText?
     g = findViewById<View>(R.id.et_criteria_category) as EditText?

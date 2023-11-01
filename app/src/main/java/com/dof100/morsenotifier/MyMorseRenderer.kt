@@ -22,7 +22,7 @@ internal class MyMorseRenderer constructor(
   private val b: Boolean
   private val c: Boolean
   private var d: t? = null
-  private val e: ArrayList<*> = ArrayList<Any?>()
+  private val e: ArrayList<k> = ArrayList()
   private var f: Int = -1
   private var g: Int = -1
   private var h: Int = -1

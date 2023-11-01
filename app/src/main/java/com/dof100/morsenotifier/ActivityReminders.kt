@@ -14,11 +14,11 @@ import android.widget.ListView
 import com.dof100.morsenotifier.MyLog.log
 
 class ActivityReminders constructor() : Activity(), View.OnClickListener,
-  MyRemindersArrayAdapter.a {
+  MyRemindersArrayAdapter.Handler {
   private var a: MyReminders? = null
   private var b: MyRemindersArrayAdapter? = null
   private var c: ListView? = null
-  public override fun a(var1: MyReminder, var2: Int, var3: View) {
+  public override fun onRowButtonClick(var1: MyReminder, var2: Int, var3: View) {
     log("ActivityReminders.onRowButtonClick")
     if (var3.getId() == R.id.b_delete) {
       log("ActivityReminders.onRowButtonClick b_delete")

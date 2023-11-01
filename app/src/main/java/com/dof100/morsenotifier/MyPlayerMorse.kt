@@ -18,45 +18,45 @@ import java.util.Locale
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<Any?, Any?, Any?>() {
-  private var weakContext: WeakReference<Context>?
+internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTask<Void?, Void?, Void?>() {
+  private var wr_context: WeakReference<Context>?
   private var c = false
   private var d = false
   private var e = false
   private var f = 0
-  private var g = 1
-  private var h = 0
-  private var i = 0
+  private var repeat = 1
+  private var mStream = 0
+  private var pref_call_freq = 0
   private var j = 0
   private var k = 0
-  private var l = ""
+  private var text = ""
   private var m = false
-  private var n = 3
-  private var o = 100
-  private var p = 0
-  private var q = 0
-  private var r = 0
+  private var mSpacesAfterChar = 3
+  private var mdur = 100
+  private var samplerate = 0
+  private var nelements = 0
+  private var bufferSize = 0
   private var s = 0L
-  private var t = 0
-  private var u = false
+  private var nSamplesDur = 0
+  private var commandStop = false
   private var audioTrack: AudioTrack? = null
   private var vibrator: Vibrator? = null
-  private val x: ArrayList<Int> = ArrayList()
-  private val countDownLatch = CountDownLatch(1)
+  private val mList: ArrayList<Int> = ArrayList()
+  private val mDoneLatch = CountDownLatch(1)
 
-  private val BroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+  private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       if ("LBR_ACTION_FINISH" == intent.action) {
         log(context, "MyPlayerMorse.BroadcastReceiver  got ACTION_FINISH ")
-        u = true
-        countDownLatch.countDown()
+        commandStop = true
+        mDoneLatch.countDown()
       }
     }
   }
 
   init {
-    weakContext = WeakReference<Context>(context)
-    log(context, "MyPlayerMorse constructor instance=$b")
+    wr_context = WeakReference<Context>(context)
+    log(context, "MyPlayerMorse constructor instance=$inst")
   }
 
   private fun unknown1(character: Char, flag: Boolean) {
@@ -154,147 +154,147 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
                                                                                                                                                       number = 0
                                                                                                                                                       when (character) {
                                                                                                                                                         '!' -> {
-                                                                                                                                                          this.unknown4(2, character.code)
-                                                                                                                                                          this.unknown4(-1, -1)
-                                                                                                                                                          this.unknown4(-1, -1)
-                                                                                                                                                          this.unknown4(-2, -1)
-                                                                                                                                                          this.unknown4(1, -1)
+                                                                                                                                                          this.unknown2(2, character.code)
+                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                          this.unknown2(-1, -1)
+                                                                                                                                                          this.unknown2(-2, -1)
+                                                                                                                                                          this.unknown2(1, -1)
                                                                                                                                                           return@label661
                                                                                                                                                         }
 
-                                                                                                                                                        '"' -> this.unknown4(1, character.code)
+                                                                                                                                                        '"' -> this.unknown2(1, character.code)
 
                                                                                                                                                         else -> run label669@ {
                                                                                                                                                           run label665@{
                                                                                                                                                             run label490@{
                                                                                                                                                               when (character) {
                                                                                                                                                                 '&' -> {
-                                                                                                                                                                  this.unknown4(1, character.code)
+                                                                                                                                                                  this.unknown2(1, character.code)
                                                                                                                                                                   return@label550
                                                                                                                                                                 }
 
                                                                                                                                                                 '\'' -> {
-                                                                                                                                                                  this.unknown4(1, character.code)
-                                                                                                                                                                  this.unknown4(-2, -1)
-                                                                                                                                                                  this.unknown4(2, -1)
+                                                                                                                                                                  this.unknown2(1, character.code)
+                                                                                                                                                                  this.unknown2(-2, -1)
+                                                                                                                                                                  this.unknown2(2, -1)
                                                                                                                                                                   return@label665
                                                                                                                                                                 }
 
                                                                                                                                                                 '(' -> {
-                                                                                                                                                                  this.unknown4(2, character.code)
-                                                                                                                                                                  this.unknown4(-1, -1)
-                                                                                                                                                                  this.unknown4(-1, -1)
+                                                                                                                                                                  this.unknown2(2, character.code)
+                                                                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                                                                  this.unknown2(-1, -1)
                                                                                                                                                                   return@label526
                                                                                                                                                                 }
 
                                                                                                                                                                 ')' -> {
-                                                                                                                                                                  this.unknown4(2, character.code)
-                                                                                                                                                                  this.unknown4(-1, -1)
-                                                                                                                                                                  this.unknown4(-1, -1)
+                                                                                                                                                                  this.unknown2(2, character.code)
+                                                                                                                                                                  this.unknown2(-1, -1)
+                                                                                                                                                                  this.unknown2(-1, -1)
                                                                                                                                                                 }
 
                                                                                                                                                                 else -> run label484@ {
                                                                                                                                                                   when (character) {
                                                                                                                                                                     '+' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown2(1, character.code)
                                                                                                                                                                       return@label533
                                                                                                                                                                     }
 
                                                                                                                                                                     ',' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-2, -1)
-                                                                                                                                                                      this.unknown4(2, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(2, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '-' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-2, -1)
-                                                                                                                                                                      this.unknown4(1, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(1, -1)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '.' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
-                                                                                                                                                                      this.unknown4(-2, -1)
-                                                                                                                                                                      this.unknown4(2, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-2, -1)
-                                                                                                                                                                      this.unknown4(1, -1)
+                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(2, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(1, -1)
                                                                                                                                                                       return@label557
                                                                                                                                                                     }
 
                                                                                                                                                                     '/' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown2(2, character.code)
                                                                                                                                                                       return@label521
                                                                                                                                                                     }
 
                                                                                                                                                                     '0' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
                                                                                                                                                                     }
 
-                                                                                                                                                                    '1' -> this.unknown4(1, character.code)
+                                                                                                                                                                    '1' -> this.unknown2(1, character.code)
 
                                                                                                                                                                     '2' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
-                                                                                                                                                                      this.unknown4(-2, -1)
-                                                                                                                                                                      this.unknown4(1, -1)
+                                                                                                                                                                      this.unknown2(1, character.code)
+                                                                                                                                                                      this.unknown2(-2, -1)
+                                                                                                                                                                      this.unknown2(1, -1)
                                                                                                                                                                       return@label659
                                                                                                                                                                     }
 
                                                                                                                                                                     '3' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown2(1, character.code)
                                                                                                                                                                       return@label534
                                                                                                                                                                     }
 
                                                                                                                                                                     '4' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown2(1, character.code)
                                                                                                                                                                       return@label562
                                                                                                                                                                     }
 
                                                                                                                                                                     '5' -> {
-                                                                                                                                                                      this.unknown4(1, character.code)
+                                                                                                                                                                      this.unknown2(1, character.code)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '6' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
                                                                                                                                                                       return@label571
                                                                                                                                                                     }
 
                                                                                                                                                                     '7' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown2(2, character.code)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
 
                                                                                                                                                                     '8' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
                                                                                                                                                                       return@label657
                                                                                                                                                                     }
 
                                                                                                                                                                     '9' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
+                                                                                                                                                                      this.unknown2(2, character.code)
                                                                                                                                                                       return@label665
                                                                                                                                                                     }
 
                                                                                                                                                                     ':' -> {
-                                                                                                                                                                      this.unknown4(2, character.code)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-1, -1)
-                                                                                                                                                                      this.unknown4(-2, -1)
+                                                                                                                                                                      this.unknown2(2, character.code)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-1, -1)
+                                                                                                                                                                      this.unknown2(-2, -1)
                                                                                                                                                                       this.unknown2(2, -1)
                                                                                                                                                                       return@label658
                                                                                                                                                                     }
@@ -809,16 +809,16 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
       this.unknown2(1, character.code)
     }
     if (flag) {
-      while (number < n) {
+      while (number < mSpacesAfterChar) {
         this.unknown2(-3, -3)
         ++number
       }
     }
   }
 
-  private fun unknown2(var1: Int, var2: Int) {
-    x.add(var1)
-    x.add(var2)
+  private fun unknown2(int1: Int, int2: Int) {
+    mList.add(int1)
+    mList.add(int2)
   }
 
   private fun unknown3() {
@@ -836,52 +836,47 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
 
   private fun seqCreate() {
     log("MyPlayerMorse.seqCreate ")
-    x.clear()
+    mList.clear()
     this.unknown2(-6, -3)
-    log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", g, l))
+    log(String.format(Locale.US, "MyPlayerMorse.seqCreate repeat=%d text=%s", repeat, text))
     var var1 = false
     var var2 = 0
     while (!var1) {
-      val var3 = l.lowercase()
-      var var4 = var3.length
-      var var5: Int
+      val var3 = text.lowercase()
+      var iter = var3.length
+      var Dur: Int
       var var6: Char
       var var7: Boolean
-      var5 = 0
-      while (var5 < var4) {
-        var6 = var3[var5]
-        ++var5
-        var7 = !(var5 >= var4 || var3[var5] != '|')
+      Dur = 0
+      while (Dur < iter) {
+        var6 = var3[Dur]
+        ++Dur
+        var7 = !(Dur >= iter || var3[Dur] != '|')
         this.unknown1(var6, var7)
       }
       run label42@{
-        var4 = var2 + 1
-        var5 = o * x.size / 2
-        log(
-          String.format(
-            Locale.US,
-            "MyPlayerMorse.seqCreate   iter=%d   mList.size=%d   Dur=%d msec",
-            var4,
-            x.size,
-            var5
-          )
-        )
-        if (g > 0) {
-          if (var4 < g) {
+        iter = var2 + 1
+        Dur = mdur * mList.size / 2
+        log(String.format(Locale.US,
+          "MyPlayerMorse.seqCreate   iter=%d   mList.size=%d   Dur=%d msec",
+          iter, mList.size, Dur
+        ))
+        if (repeat > 0) {
+          if (iter < repeat) {
             return@label42
           }
-        } else if (var5 <= -g * 1000) {
+        } else if (Dur <= -repeat * 1000) {
           return@label42
         }
         var1 = true
       }
       var var9 = var1
-      if (var4 > 100) {
+      if (iter > 100) {
         log("MyPlayerMorse.seqCreate  ERROR niters>100")
         var9 = true
       }
       var1 = var9
-      var2 = var4
+      var2 = iter
       if (!var9) {
         this.unknown2(-3, -3)
         this.unknown2(-3, -3)
@@ -899,14 +894,14 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         this.unknown2(-3, -3)
         this.unknown2(-3, -3)
         var1 = var9
-        var2 = var4
+        var2 = iter
       }
     }
     var var8 = StringBuilder()
     var8.append("MyPlayerMorse.seqCreate after message mList.size=")
-    var8.append(x.size)
+    var8.append(mList.size)
     var8.append(" Nelements=")
-    var8.append(q)
+    var8.append(nelements)
     log(var8.toString())
     this.unknown2(-7, -3)
     this.unknown2(-7, -3)
@@ -916,702 +911,694 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     this.unknown2(-8, -3)
     var8 = StringBuilder()
     var8.append("MyPlayerMorse.seqCreate after mDelayAfter mList.size=")
-    var8.append(x.size)
+    var8.append(mList.size)
     log(var8.toString())
   }
 
-  protected fun doInBackground(vararg var1: Void): Void {
-    var var27: StringBuilder
-    return if (weakContext == null) {
-      var27 = StringBuilder()
-      var27.append("MyMorsePlayer.doInBackground ERROR wr_context=null instance=")
-      var27.append(b)
-      log(var27.toString())
-      countDownLatch.countDown()
-      null
-    } else {
-      val var2 = weakContext?.get()
-      if (var2 == null) {
+  override fun doInBackground(vararg args: Void?): Void? {
+    return try {
+      var var27: StringBuilder
+      return if (wr_context == null) {
         var27 = StringBuilder()
-        var27.append("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=")
-        var27.append(b)
+        var27.append("MyMorsePlayer.doInBackground ERROR wr_context=null instance=")
+        var27.append(inst)
         log(var27.toString())
-        countDownLatch.countDown()
-        null
-      } else if (q <= 0) {
-        var27 = StringBuilder()
-        var27.append("MyMorsePlayer.doInBackground Exiting...  mNElements=")
-        var27.append(q)
-        log(var27.toString())
-        countDownLatch.countDown()
+        mDoneLatch.countDown()
         null
       } else {
-        var27 = StringBuilder()
-        var27.append("MyPlayerMorse.doInBackground. Creating tone instance=")
-        var27.append(b)
-        log(var27.toString())
-        var var3: Int
-        var var4: Int
-        var var10001: Boolean
-        var var28: MyTone
-        run label161@{
-          run label170@{
-            try {
-              var28 = MyTone(q * o, p)
-            } catch (var26: Exception) {
-              var10001 = false
-              return@label170
-            }
-            var3 = 0
-            while (true) {
-              try {
-                if (var3 >= q) {
-                  return@label161
-                }
-                var4 = x[var3 * 2]
-              } catch (var25: Exception) {
-                var10001 = false
-                break
-              }
-              if (var4 == 1) {
-                try {
-                  var28.a(
-                    var3 * o,
-                    o,
-                    i.toFloat(),
-                    j.toFloat(),
-                    (k * o).toFloat() / 100.0f
-                  )
-                } catch (var24: Exception) {
-                  var10001 = false
-                  break
-                }
-              } else if (var4 == 2) {
-                try {
-                  var28.a(
-                    var3 * o,
-                    o * 3,
-                    i.toFloat(),
-                    j.toFloat(),
-                    (k * o).toFloat() / 100.0f
-                  )
-                } catch (var23: Exception) {
-                  var10001 = false
-                  break
-                }
-              }
-              ++var3
-            }
-          }
-          log("MyPlayerMorse.doInBackground ERROR Creating tone")
-          countDownLatch.countDown()
-          return null
-        }
-        var var5 = StringBuilder()
-        var5.append("MyPlayerMorse.doInBackground registering broadcast receiver instance=")
-        var5.append(b)
-        log(var5.toString())
-        val var6 = LocalBroadcastManager.getInstance(var2)
-        val var30 = IntentFilter()
-        var30.addAction("LBR_ACTION_FINISH")
-        var6.registerReceiver(BroadcastReceiver, var30)
-        t = var28.a / q
-        var5 = StringBuilder()
-        var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
-        var5.append(q)
-        log(var5.toString())
-        var5 = StringBuilder()
-        var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
-        var5.append(var28.a)
-        log(var5.toString())
-        var5 = StringBuilder()
-        var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
-        var5.append(t)
-        log(var5.toString())
-        val var29: StringBuilder
-        if (var28.a <= 0) {
-          var29 = StringBuilder()
-          var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=")
-          var29.append(var28.a)
-          log(var29.toString())
-          countDownLatch.countDown()
+        val tmpContext = wr_context?.get()
+        if (tmpContext == null) {
+          var27 = StringBuilder()
+          var27.append("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=")
+          var27.append(inst)
+          log(var27.toString())
+          mDoneLatch.countDown()
           null
-        } else if (var28.b.size <= 0) {
-          var29 = StringBuilder()
-          var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=")
-          var29.append(var28.b.size)
-          log(var29.toString())
-          countDownLatch.countDown()
+        } else if (nelements <= 0) {
+          var27 = StringBuilder()
+          var27.append("MyMorsePlayer.doInBackground Exiting...  mNElements=")
+          var27.append(nelements)
+          log(var27.toString())
+          mDoneLatch.countDown()
           null
         } else {
-          var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=")
-          var5.append(r)
-          log(var5.toString())
-          var3 = try {
-            AudioTrack.getMinBufferSize(p, 4, 2)
-          } catch (var18: Exception) {
-            log("MyPlayerMorse.doInBackground. ERROR getMinBufferSize")
-            p * 4
-          }
-          run label139@{
-            run label138@{
-              run label137@{
-                try {
-                  if (VERSION.SDK_INT >= 26) {
-                    val var35 = AudioTrack.Builder()
-                    val var31 = AudioAttributes.Builder()
-                    val var32 = var35.setAudioAttributes(
-                      var31.setLegacyStreamType(
-                        h
-                      ).build()
-                    )
-                    val var36 = AudioFormat.Builder()
-                    audioTrack = var32.setAudioFormat(
-                      var36.setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                        .setSampleRate(
-                          p
-                        ).setChannelMask(4).build()
-                    ).setBufferSizeInBytes(var3).setTransferMode(1).build()
-                    return@label139
-                  }
-                } catch (var21: IllegalArgumentException) {
-                  var10001 = false
-                  return@label138
-                } catch (var22: Exception) {
-                  var10001 = false
-                  return@label137
-                }
-                try {
-                  val var33 = AudioTrack(h, p, 4, 2, var3, 1)
-                  audioTrack = var33
-                  return@label139
-                } catch (var19: IllegalArgumentException) {
-                  var10001 = false
-                  return@label138
-                } catch (var20: Exception) {
-                  var10001 = false
-                }
+          var27 = StringBuilder()
+          var27.append("MyPlayerMorse.doInBackground. Creating tone instance=")
+          var27.append(inst)
+          log(var27.toString())
+          var bufferSizeInBytes: Int
+          var nTries: Int
+          var var10001: Boolean
+          var tmpTone: MyTone
+          run label161@{
+            run label170@{
+              try {
+                tmpTone = MyTone(nelements * mdur, samplerate)
+              } catch (var26: Exception) {
+                var10001 = false
+                return@label170
               }
-              log(
-                String.format(
-                  Locale.US,
-                  "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. Exception mstream=%d sr=%d channels=%d encoding=%d length=%d",
-                  h,
-                  p,
-                  4,
-                  2,
-                  var28.b.size
-                )
-              )
-              countDownLatch.countDown()
-              return null
+              bufferSizeInBytes = 0
+              while (true) {
+                try {
+                  if (bufferSizeInBytes >= nelements) {
+                    return@label161
+                  }
+                  nTries = mList[bufferSizeInBytes * 2]
+                } catch (var25: Exception) {
+                  var10001 = false
+                  break
+                }
+                if (nTries == 1) {
+                  try {
+                    tmpTone.a(
+                      bufferSizeInBytes * mdur,
+                      mdur,
+                      pref_call_freq.toFloat(),
+                      j.toFloat(),
+                      (k * mdur).toFloat() / 100.0f
+                    )
+                  } catch (var24: Exception) {
+                    var10001 = false
+                    break
+                  }
+                } else if (nTries == 2) {
+                  try {
+                    tmpTone.a(
+                      bufferSizeInBytes * mdur,
+                      mdur * 3,
+                      pref_call_freq.toFloat(),
+                      j.toFloat(),
+                      (k * mdur).toFloat() / 100.0f
+                    )
+                  } catch (var23: Exception) {
+                    var10001 = false
+                    break
+                  }
+                }
+                ++bufferSizeInBytes
+              }
             }
-            log(
-              String.format(
-                Locale.US,
-                "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. IllegalArgumentException mstream=%d sr=%d channels=%d encoding=%d length=%d",
-                h,
-                p,
-                4,
-                2,
-                var28.b.size
-              )
-            )
-            countDownLatch.countDown()
+            log("MyPlayerMorse.doInBackground ERROR Creating tone")
+            mDoneLatch.countDown()
             return null
           }
-          if (!c) {
-            log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
-            unknown3()
-          }
-          var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =")
-          var5.append(audioTrack!!.state)
+          var var5 = StringBuilder()
+          var5.append("MyPlayerMorse.doInBackground registering broadcast receiver instance=")
+          var5.append(inst)
           log(var5.toString())
-          var3 = 0
-          while (audioTrack!!.state != 1) {
-            var4 = var3 + 1
-            try {
-              Thread.sleep(100L)
-            } catch (var17: InterruptedException) {
-              var17.printStackTrace()
-            }
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=")
-            var5.append(audioTrack!!.state)
-            log(var5.toString())
-            var3 = var4
-            if (var4 >= 20) {
-              var27 = StringBuilder()
-              var27.append("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=")
-              var27.append(b)
-              log(var27.toString())
-              countDownLatch.countDown()
-              return null
-            }
-          }
-          if (u) {
-            var27 = StringBuilder()
-            var27.append("MyPlayerMorse.doInBackground commandstop=true... instance=")
-            var27.append(b)
-            log(var27.toString())
-            countDownLatch.countDown()
+          val var6 = LocalBroadcastManager.getInstance(tmpContext)
+          val var30 = IntentFilter()
+          var30.addAction("LBR_ACTION_FINISH")
+          var6.registerReceiver(broadcastReceiver, var30)
+          nSamplesDur = tmpTone.nSamples / nelements
+          var5 = StringBuilder()
+          var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
+          var5.append(nelements)
+          log(var5.toString())
+          var5 = StringBuilder()
+          var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
+          var5.append(tmpTone.nSamples)
+          log(var5.toString())
+          var5 = StringBuilder()
+          var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
+          var5.append(nSamplesDur)
+          log(var5.toString())
+          val var29: StringBuilder
+          if (tmpTone.nSamples <= 0) {
+            var29 = StringBuilder()
+            var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=")
+            var29.append(tmpTone.nSamples)
+            log(var29.toString())
+            mDoneLatch.countDown()
             null
-          } else if (countDownLatch.count != 1L) {
-            var27 = StringBuilder()
-            var27.append("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=")
-            var27.append(b)
-            log(var27.toString())
+          } else if (tmpTone.mGeneratedSnd.size <= 0) {
+            var29 = StringBuilder()
+            var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=")
+            var29.append(tmpTone.mGeneratedSnd.size)
+            log(var29.toString())
+            mDoneLatch.countDown()
             null
           } else {
-            if (f > 0) {
-              val var7 = System.currentTimeMillis() - s
-              val var9 = f.toLong() - var7
+            var5 = StringBuilder()
+            var5.append("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=")
+            var5.append(bufferSize)
+            log(var5.toString())
+            bufferSizeInBytes = try {
+              AudioTrack.getMinBufferSize(samplerate, 4, 2)
+            } catch (var18: Exception) {
+              log("MyPlayerMorse.doInBackground. ERROR getMinBufferSize")
+              samplerate * 4
+            }
+            run label139@{
+              run label138@{
+                run label137@{
+                  try {
+                    if (VERSION.SDK_INT >= 26) {
+                      val var35 = AudioTrack.Builder()
+                      val var31 = AudioAttributes.Builder()
+                      val var32 = var35.setAudioAttributes(
+                        var31.setLegacyStreamType(
+                          mStream
+                        ).build()
+                      )
+                      val var36 = AudioFormat.Builder()
+                      audioTrack = var32.setAudioFormat(
+                        var36.setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                          .setSampleRate(
+                            samplerate
+                          ).setChannelMask(4).build()
+                      ).setBufferSizeInBytes(bufferSizeInBytes).setTransferMode(AudioTrack.MODE_STREAM).build()
+                      return@label139
+                    }
+                  } catch (var21: IllegalArgumentException) {
+                    var10001 = false
+                    return@label138
+                  } catch (var22: Exception) {
+                    var10001 = false
+                    return@label137
+                  }
+                  try {
+                    val var33 = AudioTrack(mStream, samplerate, 4, 2, bufferSizeInBytes, 1)
+                    audioTrack = var33
+                    return@label139
+                  } catch (var19: IllegalArgumentException) {
+                    var10001 = false
+                    return@label138
+                  } catch (var20: Exception) {
+                    var10001 = false
+                  }
+                }
+                log(
+                  String.format(
+                    Locale.US,
+                    "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. Exception mstream=%d sr=%d channels=%d encoding=%d length=%d",
+                    mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size
+                  )
+                )
+                mDoneLatch.countDown()
+                return null
+              }
               log(
                 String.format(
                   Locale.US,
-                  "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec",
-                  f,
-                  var7,
-                  var9
+                  "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. IllegalArgumentException mstream=%d sr=%d channels=%d encoding=%d length=%d",
+                  mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size
                 )
               )
-              if (var9 > 0L && var9 < 10000L) {
-                try {
-                  Thread.sleep(var9)
-                } catch (var16: InterruptedException) {
-                  var5 = StringBuilder()
-                  var5.append("MyPlayerMorse.doInBackground ERROR sleep in delay before instance=")
-                  var5.append(b)
-                  log(var5.toString())
-                }
+              mDoneLatch.countDown()
+              return null
+            }
+            if (!c) {
+              log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
+              unknown3()
+            }
+            var5 = StringBuilder()
+            var5.append("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =")
+            var5.append(audioTrack!!.state)
+            log(var5.toString())
+            bufferSizeInBytes = 0
+            while (audioTrack!!.state != 1) {
+              nTries = bufferSizeInBytes + 1
+              try {
+                Thread.sleep(100L)
+              } catch (var17: InterruptedException) {
+                var17.printStackTrace()
               }
               var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground Waiting finished instance=")
-              var5.append(b)
+              var5.append("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=")
+              var5.append(audioTrack!!.state)
               log(var5.toString())
+              bufferSizeInBytes = nTries
+              if (nTries >= 20) {
+                var27 = StringBuilder()
+                var27.append("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=")
+                var27.append(inst)
+                log(var27.toString())
+                mDoneLatch.countDown()
+                return null
+              }
             }
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground Start Playing instance=")
-            var5.append(b)
-            log(var5.toString())
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
-            var5.append(q)
-            log(var5.toString())
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
-            var5.append(var28.a)
-            log(var5.toString())
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
-            var5.append(t)
-            log(var5.toString())
-            try {
-              audioTrack!!.play()
-            } catch (var14: IllegalStateException) {
-              log("MyPlayerMorse.doInBackground AudioTrack.Play->IllegalStateException")
-              countDownLatch.countDown()
-              return null
-            } catch (var15: Exception) {
-              log("MyPlayerMorse.doInBackground AudioTrack.Play->Exception")
-              countDownLatch.countDown()
-              return null
-            }
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground Setting notifications instance=")
-            var5.append(b)
-            log(var5.toString())
-            try {
-              audioTrack!!.notificationMarkerPosition = var28.a - 1
-              audioTrack!!.positionNotificationPeriod = t
-              val var34 = audioTrack
-              val var37: AudioTrack.OnPlaybackPositionUpdateListener =
-                object : AudioTrack.OnPlaybackPositionUpdateListener {
-                  override fun onMarkerReached(var1: AudioTrack) {
-                    val var3: StringBuilder
-                    if (var1 == null) {
-                      var3 = StringBuilder()
-                      var3.append("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=")
-                      var3.append(b)
-                      log(var3.toString())
-                    } else {
-                      try {
-                        var1.stop()
-                      } catch (var2x: IllegalStateException) {
-                        log("MyPlayerMorse.doInBackground ERROR IllegalStateException")
-                      }
-                      var3 = StringBuilder()
-                      var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=")
-                      var3.append(b)
-                      log(var3.toString())
-                      countDownLatch.countDown()
-                    }
-                  }
-
-                  override fun onPeriodicNotification(var1: AudioTrack) {
-                    var var44: StringBuilder
-                    if (var1 == null) {
-                      var44 = StringBuilder()
-                      var44.append("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=")
-                      var44.append(b)
-                      log(var44.toString())
-                    } else {
-                      var var43: String
-                      run label224@{
-                        run label223@{
-                          run label241@{
-                            var var10001: Boolean
-                            try {
-                              if (var1.state != 1) {
-                                return@doInBackground
-                              }
-                            } catch (var39: IllegalStateException) {
-                              var10001 = false
-                              return@label223
-                            } catch (var40: Exception) {
-                              var10001 = false
-                              return@label241
-                            }
-                            try {
-                              if (var1.playState != 3) {
-                                return@doInBackground
-                              }
-                            } catch (var37: IllegalStateException) {
-                              var10001 = false
-                              return@label223
-                            } catch (var38: Exception) {
-                              var10001 = false
-                              return@label241
-                            }
-                            var var2x: Int
-                            var var3: Int
-                            run label230@{
-                              run label231@{
-                                try {
-                                  var2x =
-                                    var1.playbackHeadPosition / t
-                                  if (var2x >= q) {
-                                    return@label231
-                                  }
-                                } catch (var35: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var36: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                                var3 = var2x * 2
-                                try {
-                                  if (var3 < x.size) {
-                                    return@label230
-                                  }
-                                } catch (var33: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var34: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                              }
-                              run label238@{
-                                try {
-                                  if (VERSION.SDK_INT >= 21) {
-                                    var1.setVolume(0.0f)
-                                    return@label238
-                                  }
-                                } catch (var31: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var32: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                                try {
-                                  var1.setStereoVolume(0.0f, 0.0f)
-                                } catch (var29: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var30: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                              }
-                              try {
-                                var1.stop()
-                                var44 = StringBuilder()
-                                var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=")
-                                var44.append(b)
-                                log(var44.toString())
-                                countDownLatch.countDown()
-                                return@doInBackground
-                              } catch (var27: IllegalStateException) {
-                                var10001 = false
-                                return@label223
-                              } catch (var28: Exception) {
-                                var10001 = false
-                                return@label241
-                              }
-                            }
-                            try {
-                              var3 = x[var3]
-                            } catch (var25: IllegalStateException) {
-                              var10001 = false
-                              return@label223
-                            } catch (var26: Exception) {
-                              var10001 = false
-                              return@label241
-                            }
-                            if (var3 == -7) {
-                              run label239@{
-                                try {
-                                  val var4 = StringBuilder()
-                                  var4.append("MyPlayerMorse.doInBackground onPeriodicNotification STOP detected at ")
-                                  var4.append(var2x)
-                                  var4.append("...  Muting... instance=")
-                                  var4.append(b)
-                                  log(var4.toString())
-                                  if (VERSION.SDK_INT >= 21) {
-                                    var1.setVolume(0.0f)
-                                    return@label239
-                                  }
-                                } catch (var23: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var24: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                                try {
-                                  var1.setStereoVolume(0.0f, 0.0f)
-                                } catch (var21: IllegalStateException) {
-                                  var10001 = false
-                                  return@label223
-                                } catch (var22: Exception) {
-                                  var10001 = false
-                                  return@label241
-                                }
-                              }
-                            }
-                            val var45: LongArray
-                            try {
-                              App.a(var2, var2x)
-                              if (!d || vibrator == null) {
-                                return@doInBackground
-                              }
-                              var45 = longArrayOf(0L, 0L, 0L)
-                            } catch (var19: IllegalStateException) {
-                              var10001 = false
-                              return@label223
-                            } catch (var20: Exception) {
-                              var10001 = false
-                              return@label241
-                            }
-                            if (var3 == -1) {
-                              return@doInBackground
-                            }
-                            var var42: Vibrator?
-                            run label172@{
-                              var var41: MyPlayerMorse
-                              when (var3) {
-                                1 -> {
-                                  var45[0] = 0L
-                                  try {
-                                    var45[1] = o.toLong()
-                                    var45[2] = o.toLong()
-                                    if (VERSION.SDK_INT >= 26) {
-                                      var42 = vibrator
-                                      return@label172
-                                    }
-                                  } catch (var17: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var18: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  try {
-                                    var41 = this@MyPlayerMorse
-                                    break
-                                  } catch (var11: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var12: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  var45[0] = 0L
-                                  try {
-                                    var45[1] = (o * 3).toLong()
-                                    var45[2] = o.toLong()
-                                    if (VERSION.SDK_INT >= 26) {
-                                      var42 = vibrator
-                                      return@label172
-                                    }
-                                  } catch (var15: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var16: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  try {
-                                    var41 = this@MyPlayerMorse
-                                    break
-                                  } catch (var13: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var14: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  var45[0] = 0L
-                                  var45[1] = 0L
-                                  try {
-                                    var45[2] = o.toLong()
-                                    return@doInBackground
-                                  } catch (var9: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var10: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                }
-
-                                2 -> {
-                                  var45[0] = 0L
-                                  try {
-                                    var45[1] = (o * 3).toLong()
-                                    var45[2] = o.toLong()
-                                    if (VERSION.SDK_INT >= 26) {
-                                      var42 = vibrator
-                                      return@label172
-                                    }
-                                  } catch (var15: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var16: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  try {
-                                    var41 = this@MyPlayerMorse
-                                    break
-                                  } catch (var13: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var14: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                  var45[0] = 0L
-                                  var45[1] = 0L
-                                  try {
-                                    var45[2] = o.toLong()
-                                    return@doInBackground
-                                  } catch (var9: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var10: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                }
-
-                                else -> {
-                                  var45[0] = 0L
-                                  var45[1] = 0L
-                                  try {
-                                    var45[2] = o.toLong()
-                                    return@doInBackground
-                                  } catch (var9: IllegalStateException) {
-                                    var10001 = false
-                                    return@label223
-                                  } catch (var10: Exception) {
-                                    var10001 = false
-                                    return@label241
-                                  }
-                                }
-                              }
-                              try {
-                                var41.vibrator!!.vibrate(var45, -1)
-                                return@doInBackground
-                              } catch (var7: IllegalStateException) {
-                                var10001 = false
-                                return@label223
-                              } catch (var8: Exception) {
-                                var10001 = false
-                                return@label241
-                              }
-                            }
-                            try {
-                              var42!!.vibrate(
-                                VibrationEffect.createWaveform(
-                                  var45,
-                                  -1
-                                )
-                              )
-                              return@doInBackground
-                            } catch (var5: IllegalStateException) {
-                              var10001 = false
-                              return@label223
-                            } catch (var6: Exception) {
-                              var10001 = false
-                            }
-                          }
-                          var43 =
-                            "MyPlayerMorse.doInBackground onPeriodicNotification->Exception"
-                          return@label224
-                        }
-                        var43 =
-                          "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
-                      }
-                      log(var43)
-                      countDownLatch.countDown()
-                    }
+            if (commandStop) {
+              var27 = StringBuilder()
+              var27.append("MyPlayerMorse.doInBackground commandstop=true... instance=")
+              var27.append(inst)
+              log(var27.toString())
+              mDoneLatch.countDown()
+              null
+            } else if (mDoneLatch.count != 1L) {
+              var27 = StringBuilder()
+              var27.append("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=")
+              var27.append(inst)
+              log(var27.toString())
+              null
+            } else {
+              if (f > 0) {
+                val var7 = System.currentTimeMillis() - s
+                val var9 = f.toLong() - var7
+                log(
+                  String.format(
+                    Locale.US,
+                    "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec",
+                    f, var7, var9
+                  )
+                )
+                if (var9 > 0L && var9 < 10000L) {
+                  try {
+                    Thread.sleep(var9)
+                  } catch (e: InterruptedException) {
+                    var5 = StringBuilder()
+                    var5.append("MyPlayerMorse.doInBackground ERROR sleep in delay before instance=")
+                    var5.append(inst)
+                    log(var5.toString())
                   }
                 }
-              var34!!.setPlaybackPositionUpdateListener(var37)
-            } catch (var12: IllegalStateException) {
-              log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException")
-              countDownLatch.countDown()
-              return null
-            } catch (var13: Exception) {
-              log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception")
-              countDownLatch.countDown()
-              return null
-            }
-            log("MyPlayerMorse.doInBackground mAudioTrack.write")
-            try {
-              audioTrack!!.write(var28.b, 0, var28.b.size)
-              null
-            } catch (var11: Exception) {
-              log("MyPlayerMorse.doInBackground ERROR mAudioTrack.write")
-              countDownLatch.countDown()
-              null
+                var5 = StringBuilder()
+                var5.append("MyPlayerMorse.doInBackground Waiting finished instance=")
+                var5.append(inst)
+                log(var5.toString())
+              }
+              var5 = StringBuilder()
+              var5.append("MyPlayerMorse.doInBackground Start Playing instance=")
+              var5.append(inst)
+              log(var5.toString())
+              var5 = StringBuilder()
+              var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
+              var5.append(nelements)
+              log(var5.toString())
+              var5 = StringBuilder()
+              var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
+              var5.append(tmpTone.nSamples)
+              log(var5.toString())
+              var5 = StringBuilder()
+              var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
+              var5.append(nSamplesDur)
+              log(var5.toString())
+              try {
+                audioTrack!!.play()
+              } catch (var14: IllegalStateException) {
+                log("MyPlayerMorse.doInBackground AudioTrack.Play->IllegalStateException")
+                mDoneLatch.countDown()
+                return null
+              } catch (var15: Exception) {
+                log("MyPlayerMorse.doInBackground AudioTrack.Play->Exception")
+                mDoneLatch.countDown()
+                return null
+              }
+              var5 = StringBuilder()
+              var5.append("MyPlayerMorse.doInBackground Setting notifications instance=")
+              var5.append(inst)
+              log(var5.toString())
+              try {
+                audioTrack!!.notificationMarkerPosition = tmpTone.nSamples - 1
+                audioTrack!!.positionNotificationPeriod = nSamplesDur
+                val var34 = audioTrack
+                val var37: AudioTrack.OnPlaybackPositionUpdateListener =
+                  object : AudioTrack.OnPlaybackPositionUpdateListener {
+                    override fun onMarkerReached(audioTrack: AudioTrack) {
+                      val var3: StringBuilder
+                      if (audioTrack == null) {
+                        var3 = StringBuilder()
+                        var3.append("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=")
+                        var3.append(inst)
+                        log(var3.toString())
+                      } else {
+                        try {
+                          audioTrack.stop()
+                        } catch (var2x: IllegalStateException) {
+                          log("MyPlayerMorse.doInBackground ERROR IllegalStateException")
+                        }
+                        var3 = StringBuilder()
+                        var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=")
+                        var3.append(inst)
+                        log(var3.toString())
+                        mDoneLatch.countDown()
+                      }
+                    }
+
+                    override fun onPeriodicNotification(audioTrack: AudioTrack) {
+                      var var44: StringBuilder
+                      if (audioTrack == null) {
+                        var44 = StringBuilder()
+                        var44.append("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=")
+                        var44.append(inst)
+                        log(var44.toString())
+                      } else {
+                        var var43: String
+                        run label224@{
+                          run label223@{
+                            run label241@{
+                              var var10001: Boolean
+                              try {
+                                if (audioTrack.state != 1) {
+                                  return@onPeriodicNotification
+                                }
+                              } catch (var39: IllegalStateException) {
+                                var10001 = false
+                                return@label223
+                              } catch (var40: Exception) {
+                                var10001 = false
+                                return@label241
+                              }
+                              try {
+                                if (audioTrack.playState != 3) {
+                                  return@onPeriodicNotification
+                                }
+                              } catch (var37: IllegalStateException) {
+                                var10001 = false
+                                return@label223
+                              } catch (var38: Exception) {
+                                var10001 = false
+                                return@label241
+                              }
+                              var var2x: Int
+                              var var3: Int
+                              run label230@{
+                                run label231@{
+                                  try {
+                                    var2x =
+                                      audioTrack.playbackHeadPosition / nSamplesDur
+                                    if (var2x >= nelements) {
+                                      return@label231
+                                    }
+                                  } catch (var35: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var36: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                  var3 = var2x * 2
+                                  try {
+                                    if (var3 < mList.size) {
+                                      return@label230
+                                    }
+                                  } catch (var33: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var34: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                }
+                                run label238@{
+                                  try {
+                                    if (VERSION.SDK_INT >= 21) {
+                                      audioTrack.setVolume(0.0f)
+                                      return@label238
+                                    }
+                                  } catch (var31: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var32: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                  try {
+                                    audioTrack.setStereoVolume(0.0f, 0.0f)
+                                  } catch (var29: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var30: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                }
+                                try {
+                                  audioTrack.stop()
+                                  var44 = StringBuilder()
+                                  var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=")
+                                  var44.append(inst)
+                                  log(var44.toString())
+                                  mDoneLatch.countDown()
+                                  return@onPeriodicNotification
+                                } catch (var27: IllegalStateException) {
+                                  var10001 = false
+                                  return@label223
+                                } catch (var28: Exception) {
+                                  var10001 = false
+                                  return@label241
+                                }
+                              }
+                              try {
+                                var3 = mList[var3]
+                              } catch (var25: IllegalStateException) {
+                                var10001 = false
+                                return@label223
+                              } catch (var26: Exception) {
+                                var10001 = false
+                                return@label241
+                              }
+                              if (var3 == -7) {
+                                run label239@{
+                                  try {
+                                    val var4 = StringBuilder()
+                                    var4.append("MyPlayerMorse.doInBackground onPeriodicNotification STOP detected at ")
+                                    var4.append(var2x)
+                                    var4.append("...  Muting... instance=")
+                                    var4.append(inst)
+                                    log(var4.toString())
+                                    if (VERSION.SDK_INT >= 21) {
+                                      audioTrack.setVolume(0.0f)
+                                      return@label239
+                                    }
+                                  } catch (var23: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var24: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                  try {
+                                    audioTrack.setStereoVolume(0.0f, 0.0f)
+                                  } catch (var21: IllegalStateException) {
+                                    var10001 = false
+                                    return@label223
+                                  } catch (var22: Exception) {
+                                    var10001 = false
+                                    return@label241
+                                  }
+                                }
+                              }
+                              val var45: LongArray
+                              try {
+                                App.a(tmpContext, var2x)
+                                if (!d || vibrator == null) {
+                                  return@onPeriodicNotification
+                                }
+                                var45 = longArrayOf(0L, 0L, 0L)
+                              } catch (var19: IllegalStateException) {
+                                var10001 = false
+                                return@label223
+                              } catch (var20: Exception) {
+                                var10001 = false
+                                return@label241
+                              }
+                              if (var3 == -1) {
+                                return@onPeriodicNotification
+                              }
+                              var vibrator1: Vibrator?
+                              run label172@{
+                                var myPlayerMorse: MyPlayerMorse
+                                when (var3) {
+                                  1 -> run lwhen@{
+                                    var45[0] = 0L
+                                    try {
+                                      var45[1] = mdur.toLong()
+                                      var45[2] = mdur.toLong()
+                                      if (VERSION.SDK_INT >= 26) {
+                                        vibrator1 = vibrator
+                                        return@label172
+                                      }
+                                    } catch (var17: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var18: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    try {
+                                      myPlayerMorse = this@MyPlayerMorse
+                                      return@lwhen
+                                    } catch (var11: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var12: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    var45[0] = 0L
+                                    try {
+                                      var45[1] = (mdur * 3).toLong()
+                                      var45[2] = mdur.toLong()
+                                      if (VERSION.SDK_INT >= 26) {
+                                        vibrator1 = vibrator
+                                        return@label172
+                                      }
+                                    } catch (var15: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var16: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    try {
+                                      myPlayerMorse = this@MyPlayerMorse
+                                      return@lwhen
+                                    } catch (var13: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var14: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    var45[0] = 0L
+                                    var45[1] = 0L
+                                    try {
+                                      var45[2] = mdur.toLong()
+                                      return@onPeriodicNotification
+                                    } catch (var9: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var10: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                  }
+
+                                  2 -> run lwhen@{
+                                    var45[0] = 0L
+                                    try {
+                                      var45[1] = (mdur * 3).toLong()
+                                      var45[2] = mdur.toLong()
+                                      if (VERSION.SDK_INT >= 26) {
+                                        vibrator1 = vibrator
+                                        return@label172
+                                      }
+                                    } catch (var15: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var16: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    try {
+                                      myPlayerMorse = this@MyPlayerMorse
+                                      return@lwhen
+                                    } catch (var13: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var14: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                    var45[0] = 0L
+                                    var45[1] = 0L
+                                    try {
+                                      var45[2] = mdur.toLong()
+                                      return@onPeriodicNotification
+                                    } catch (var9: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var10: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                  }
+
+                                  else -> {
+                                    var45[0] = 0L
+                                    var45[1] = 0L
+                                    try {
+                                      var45[2] = mdur.toLong()
+                                      return@onPeriodicNotification
+                                    } catch (var9: IllegalStateException) {
+                                      var10001 = false
+                                      return@label223
+                                    } catch (var10: Exception) {
+                                      var10001 = false
+                                      return@label241
+                                    }
+                                  }
+                                }
+                                try {
+                                  myPlayerMorse.vibrator!!.vibrate(var45, -1)
+                                  return@onPeriodicNotification
+                                } catch (var7: IllegalStateException) {
+                                  var10001 = false
+                                  return@label223
+                                } catch (var8: Exception) {
+                                  var10001 = false
+                                  return@label241
+                                }
+                              }
+                              try {
+                                vibrator1!!.vibrate(
+                                  VibrationEffect.createWaveform(
+                                    var45,
+                                    -1
+                                  )
+                                )
+                                return@onPeriodicNotification
+                              } catch (var5: IllegalStateException) {
+                                var10001 = false
+                                return@label223
+                              } catch (var6: Exception) {
+                                var10001 = false
+                              }
+                            }
+                            var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->Exception"
+                            return@label224
+                          }
+                          var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
+                        }
+                        log(var43)
+                        mDoneLatch.countDown()
+                      }
+                    }
+                  }
+                var34!!.setPlaybackPositionUpdateListener(var37)
+              } catch (var12: IllegalStateException) {
+                log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException")
+                mDoneLatch.countDown()
+                return null
+              } catch (var13: Exception) {
+                log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception")
+                mDoneLatch.countDown()
+                return null
+              }
+              log("MyPlayerMorse.doInBackground mAudioTrack.write")
+              try {
+                audioTrack!!.write(tmpTone.mGeneratedSnd, 0, tmpTone.mGeneratedSnd.size)
+                null
+              } catch (var11: Exception) {
+                log("MyPlayerMorse.doInBackground ERROR mAudioTrack.write")
+                mDoneLatch.countDown()
+                null
+              }
             }
           }
         }
       }
+    } catch (e: Exception) {
+      null
     }
   }
 
-  fun unknown4(): ArrayList<Int> {
-    return x
+  fun getList(): ArrayList<Int> {
+    return mList
   }
 
-  fun playDone(var1: Context?) {
+  fun playDone(context: Context?) {
     var var2 = StringBuilder()
     var2.append("MyPlayerMorse.playDone instance=")
-    var2.append(b)
-    log(var1, var2.toString())
+    var2.append(inst)
+    log(context, var2.toString())
     val var15: String
     if (!m) {
       var15 = "MyPlayerMorse.playDone ERROR mPlayInitOK = false"
     } else {
-      var var3 = (o * q + 5000).toLong()
+      var var3 = (mdur * nelements + 5000).toLong()
       var var5 = var3
       if (var3 < 1000L) {
         var5 = 1000L
@@ -1621,7 +1608,7 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         var3 = 120000L
       }
       log(
-        var1,
+        context,
         String.format(
           Locale.US,
           "MyPlayerMorse.playDone Waiting to finish (max %d msec)",
@@ -1629,33 +1616,33 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
         )
       )
       try {
-        countDownLatch.await(var3, TimeUnit.MILLISECONDS)
+        mDoneLatch.await(var3, TimeUnit.MILLISECONDS)
       } catch (var14: InterruptedException) {
-        log(var1, "MyPlayerMorse.playDone ERROR ")
+        log(context, "MyPlayerMorse.playDone ERROR ")
       }
-      log(var1, "MyPlayerMorse.playDone Waiting OK")
+      log(context, "MyPlayerMorse.playDone Waiting OK")
       try {
         var2 = StringBuilder()
         var2.append("MyPlayerMorse.playDone unregistering broadcast receiver  instance=")
-        var2.append(b)
-        log(var1, var2.toString())
-        LocalBroadcastManager.getInstance(var1!!).unregisterReceiver(
-          BroadcastReceiver
+        var2.append(inst)
+        log(context, var2.toString())
+        LocalBroadcastManager.getInstance(context!!).unregisterReceiver(
+          broadcastReceiver
         )
       } catch (var13: Exception) {
         var13.printStackTrace()
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone broadcasting finish  instance=")
-      var2.append(b)
-      log(var1, var2.toString())
-      if (!u) {
-        App.b(var1)
+      var2.append(inst)
+      log(context, var2.toString())
+      if (!commandStop) {
+        App.b(context)
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone deleting audiotrack  instance=")
-      var2.append(b)
-      log(var1, var2.toString())
+      var2.append(inst)
+      log(context, var2.toString())
       if (audioTrack != null) {
         try {
           unknown3()
@@ -1669,22 +1656,22 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone deleting context reference  instance=")
-      var2.append(b)
-      log(var1, var2.toString())
-      if (weakContext != null) {
-        weakContext?.clear()
-        weakContext = null
+      var2.append(inst)
+      log(context, var2.toString())
+      if (wr_context != null) {
+        wr_context?.clear()
+        wr_context = null
       }
       var2 = StringBuilder()
       var2.append("MyPlayerMorse.playDone OUT instance=")
-      var2.append(b)
+      var2.append(inst)
       var15 = var2.toString()
     }
-    log(var1, var15)
+    log(context, var15)
   }
 
   fun playInit(
-    var1: Context,
+    context: Context,
     var2: Boolean,
     var3: Boolean,
     var4: Boolean,
@@ -1699,23 +1686,23 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     var13: String
   ) {
     var var5 = var5
-    var var6 = var6
-    log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", b, var6))
+    var arepeat = var6
+    log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", inst, arepeat))
     c = var2
     d = var3
     e = var4
     f = var5
-    g = var6
-    h = var9
-    if (h != 4 && h != 3 && h != 5 && h != 2 && h != 1) {
-      h = 3
+    repeat = arepeat
+    mStream = var9
+    if (mStream != 4 && mStream != 3 && mStream != 5 && mStream != 2 && mStream != 1) {
+      mStream = 3
     }
-    i = var10
-    if (i < 100) {
-      i = 100
+    pref_call_freq = var10
+    if (pref_call_freq < 100) {
+      pref_call_freq = 100
     }
-    if (i > 20000) {
-      i = 20000
+    if (pref_call_freq > 20000) {
+      pref_call_freq = 20000
     }
     j = var11
     if (j < 1) {
@@ -1731,75 +1718,66 @@ internal class MyPlayerMorse(context: Context, private val b: Int) : AsyncTask<A
     if (k < 0) {
       k = 0
     }
-    l = var13
+    text = var13
     m = false
-    o = '\uea60'.code / (var7 * 50)
-    if (o < 30) {
-      o = 30
+    mdur = '\uea60'.code / (var7 * 50)
+    if (mdur < 30) {
+      mdur = 30
     }
-    if (o > 1200) {
-      o = 1200
+    if (mdur > 1200) {
+      mdur = 1200
     }
-    p = AudioTrack.getNativeOutputSampleRate(h)
-    if (p <= 0) {
-      p = 8000
+    samplerate = AudioTrack.getNativeOutputSampleRate(mStream)
+    if (samplerate <= 0) {
+      samplerate = 8000
     }
-    var6 = '\uea60'.code / (var8 * 50)
-    var5 = var6
-    if (var6 < 30) {
+    arepeat = '\uea60'.code / (var8 * 50)
+    var5 = arepeat
+    if (arepeat < 30) {
       var5 = 30
     }
-    var6 = var5
+    arepeat = var5
     if (var5 > 1200) {
-      var6 = 1200
+      arepeat = 1200
     }
-    n = var6 * 3 / o
+    mSpacesAfterChar = arepeat * 3 / mdur
     s = System.currentTimeMillis()
     var var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit text=")
-    var14.append(l)
-    log(var1, var14.toString())
+    var14.append(text)
+    log(context, var14.toString())
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit pref_call_freq=")
-    var14.append(i)
-    log(var1, var14.toString())
+    var14.append(pref_call_freq)
+    log(context, var14.toString())
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit samplerate=")
-    var14.append(p)
-    log(var1, var14.toString())
+    var14.append(samplerate)
+    log(context, var14.toString())
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit mdur=")
-    var14.append(o)
-    log(var1, var14.toString())
+    var14.append(mdur)
+    log(context, var14.toString())
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit mSpacesAfterChar=")
-    var14.append(n)
-    log(var1, var14.toString())
-    log(var1, "MyPlayerMorse.playInit Creating sequence")
+    var14.append(mSpacesAfterChar)
+    log(context, var14.toString())
+    log(context, "MyPlayerMorse.playInit Creating sequence")
     seqCreate()
-    q = x.size / 2
-    r = p * o * q / 1000
+    nelements = mList.size / 2
+    bufferSize = samplerate * mdur * nelements / 1000
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit nelements ")
-    var14.append(q)
-    log(var1, var14.toString())
+    var14.append(nelements)
+    log(context, var14.toString())
     if (d) {
-      log(var1, "MyPlayerMorse.playInit Initializing vibration")
-      vibrator = var1.getSystemService("vibrator") as Vibrator
+      log(context, "MyPlayerMorse.playInit Initializing vibration")
+      vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
     m = true
     var14 = StringBuilder()
     var14.append("MyPlayerMorse.playInit OUT instance=")
-    var14.append(b)
-    log(var1, var14.toString())
-  }
-
-  // $FF: synthetic method
-  override fun doInBackground(var1: Array<Any?>): Any? {
-    return try {
-      this.doInBackground(*var1 as Array<Void>)
-    } catch (e: Exception) {
-      null
-    }
+    var14.append(inst)
+    log(context, var14.toString())
   }
 }

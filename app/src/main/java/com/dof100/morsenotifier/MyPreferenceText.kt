@@ -194,13 +194,7 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
       var5.addRule(3, var3.id)
       k!!.layoutParams = var5
       val var7 = k
-      val var6: Byte
-      var6 = if (j) {
-        0
-      } else {
-        8
-      }
-      var7!!.visibility = var6.toInt()
+      var7!!.visibility = if (j) View.VISIBLE else View.GONE
       var4.addView(k)
     } else {
       k = null

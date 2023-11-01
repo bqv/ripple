@@ -7,11 +7,11 @@ import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
 internal class MyReminders constructor(var1: Context?) {
-  var a: ArrayList<*>
+  var a: ArrayList<MyReminder>
 
   init {
     log("MyReminders.constructor")
-    a = ArrayList<Any?>()
+    a = ArrayList()
     this.a(var1)
   }
 

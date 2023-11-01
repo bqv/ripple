@@ -8,21 +8,20 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.TextView
 import com.dof100.morsenotifier.MyLog.log
-import com.dof100.morsenotifier.MyPreferenceText.a
 
-internal class MyRemindersArrayAdapter constructor(var1: Context, var2: MyReminders?, var3: a) :
-  ArrayAdapter<Any?>(var1, R.layout.activity_reminders_listitem, var2!!.a), View.OnClickListener {
+internal class MyRemindersArrayAdapter constructor(var1: Context, var2: MyReminders?, var3: Handler) :
+  ArrayAdapter<MyReminder>(var1, R.layout.activity_reminders_listitem, var2!!.a), View.OnClickListener {
   private val context: Context
   private val b: MyReminders?
   private val c: LayoutInflater
-  private val d: a
+  private val d: Handler
 
   init {
     log("MyRemindersArrayAdapter.constructor")
     context = var1
     b = var2
     d = var3
-    c = context.getSystemService("layout_inflater") as LayoutInflater
+    c = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
   }
 
   public override fun getView(var1: Int, var2: View?, var3: ViewGroup): View {
@@ -72,12 +71,12 @@ internal class MyRemindersArrayAdapter constructor(var1: Context, var2: MyRemind
           var5 = "MyRemindersArrayAdapter.onClick b_edit"
         }
         log(var5)
-        d.a(var2, var3, var1)
+        d.onRowButtonClick(var2, var3, var1)
       }
     }
   }
 
-  open abstract class a {
-    constructor(var1: MyReminder?, var2: Int, var3: View?)
+  open interface Handler {
+    fun onRowButtonClick(var1: MyReminder, var2: Int, var3: View)
   }
 }

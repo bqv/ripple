@@ -7,14 +7,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.ListView
 import com.dof100.morsenotifier.MyLog.log
-import com.dof100.morsenotifier.d
 
-class ActivityRecentAppNotifications constructor() : Activity(), View.OnClickListener,
-  MyRecentNotificationsArrayAdapter.a {
+class ActivityRecentAppNotifications : Activity(), View.OnClickListener,
+  MyRecentNotificationsArrayAdapter.Handler {
   private var a: MyRecentAppNotifications? = null
   private var b: MyAppNotificationFilters? = null
   private var c: MyRecentNotificationsArrayAdapter? = null
-  public override fun a(var1: Int, var2: View) {
+  public override fun onRowButtonClick(var1: Int, var2: View) {
     log("ActivityRecentAppNotifications.onRowButtonClick")
     if (var2.getId() == R.id.tv_recentnotification_matchingfilternum) {
       log("ActivityAppFilters.onRowButtonClick tv_recentnotification_announcedcriteria")

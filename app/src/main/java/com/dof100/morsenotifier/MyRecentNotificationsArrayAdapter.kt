@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import com.dof100.morsenotifier.MyLog.log
-import com.dof100.morsenotifier.MyPreferenceText.a
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -19,16 +18,16 @@ internal class MyRecentNotificationsArrayAdapter constructor(
   var1: Context,
   var2: ArrayList<*>?,
   private val b: MyAppNotificationFilters?,
-  private val d: a
+  private val handler: Handler
 ) : ArrayAdapter<Any?>(var1, R.layout.activity_recent_notifications_listitem, (var2)!!),
   View.OnClickListener {
-  private val a: Context
+  private val context: Context
   private val c: LayoutInflater
 
   init {
     log("MyRecentNotificationsArrayAdapter.constructor")
-    a = var1
-    c = a.getSystemService("layout_inflater") as LayoutInflater
+    context = var1
+    c = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
   }
 
   public override fun getView(var1: Int, var2: View?, var3: ViewGroup): View {
@@ -69,7 +68,7 @@ internal class MyRecentNotificationsArrayAdapter constructor(
     var6.setText(var9.format(var7.getTime()))
     var var8: TextView = var14.findViewById<View>(R.id.tv_recentnotification_app) as TextView
     var8.setTag(var12)
-    var8.setText(Utils.a(a, var12.b))
+    var8.setText(Utils.a(context, var12.b))
     var8 = var14.findViewById<View>(R.id.tv_recentnotification_package) as TextView
     var8.setTag(var12)
     var8.setText(String.format("(%s)", var12.b))
@@ -117,19 +116,19 @@ internal class MyRecentNotificationsArrayAdapter constructor(
         when (var12.h) {
           -4 -> {
             var11.setTextColor(Color.YELLOW)
-            var15 = a
+            var15 = context
             var1 = R.string.recentnotifications_announced_multiple
           }
 
           -3 -> {
             var11.setTextColor(Color.YELLOW)
-            var15 = a
+            var15 = context
             var1 = R.string.recentnotifications_announced_identical
           }
 
           -2 -> {
             var11.setTextColor(Color.RED)
-            var15 = a
+            var15 = context
             var1 = R.string.recentnotifications_announced_filters
           }
 
@@ -141,13 +140,13 @@ internal class MyRecentNotificationsArrayAdapter constructor(
 
           0 -> {
             var11.setTextColor(Color.GRAY)
-            var15 = a
+            var15 = context
             var1 = R.string.recentnotifications_announced_waiting
           }
 
           1 -> {
             var11.setTextColor(Color.GREEN)
-            var15 = a
+            var15 = context
             var1 = R.string.recentnotifications_announced_announced
           }
 
@@ -161,11 +160,11 @@ internal class MyRecentNotificationsArrayAdapter constructor(
     var11.setTag(var12)
     if (var12.i < 0) {
       var11.setTextColor(Color.CYAN)
-      var15 = a
+      var15 = context
       var1 = R.string.recentnotifications_matchingfilter_nofilter
     } else {
       var11.setTextColor(Color.CYAN)
-      var15 = a
+      var15 = context
       var1 = R.string.recentnotifications_matchingfilter_meets
     }
     var11.setText(var15.getString(var1))
@@ -180,7 +179,7 @@ internal class MyRecentNotificationsArrayAdapter constructor(
       var8.setText(
         String.format(
           Locale.US,
-          a.getString(R.string.recentnotifications_matchingfilter_filter),
+          context.getString(R.string.recentnotifications_matchingfilter_filter),
           var12.i + 1
         )
       )
@@ -222,19 +221,19 @@ internal class MyRecentNotificationsArrayAdapter constructor(
         if (var1.getId() != R.id.b_test) {
           if (var1.getId() == R.id.tv_recentnotification_matchingfilternum) {
             log("MyAppFiltersArrayAdapter.onClick tv_recentnotification_announcedcriteria")
-            d.a(var2.i, var1)
+            handler.onRowButtonClick(var2.i, var1)
           }
           return
         }
         log("MyRecentNotificationsArrayAdapter.onClick b_test")
         if (!var2.j!!.isEmpty()) {
-          val var4: Intent = Intent(a, ServiceMain::class.java)
+          val var4: Intent = Intent(context, ServiceMain::class.java)
           var4.putExtra(
-            a.getResources().getString(R.string.MSG_WHAT),
-            a.getResources().getString(R.string.MSG_APPS_NOTIFY)
+            context.getResources().getString(R.string.MSG_WHAT),
+            context.getResources().getString(R.string.MSG_APPS_NOTIFY)
           )
-          var4.putExtra(a.getResources().getString(R.string.MSG_EXTRATEXT2), var2.j)
-          a.startService(var4)
+          var4.putExtra(context.getResources().getString(R.string.MSG_EXTRATEXT2), var2.j)
+          context.startService(var4)
           return
         }
         var3 = "MyRecentNotificationsArrayAdapter.onClick tmpAnnouncement.isEmpty"
@@ -243,7 +242,7 @@ internal class MyRecentNotificationsArrayAdapter constructor(
     }
   }
 
-  open interface a {
-    constructor(var1: Int, var2: View?)
+  open interface Handler {
+    fun onRowButtonClick(var1: Int, var2: View)
   }
 }

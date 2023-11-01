@@ -56,7 +56,7 @@ class ActivityReminder constructor() : Activity(), View.OnClickListener {
     var var1: Int
     var1 = 0
     while (var1 < 7) {
-      b!!.c.get(var1) = c.get(var1)!!.isChecked()
+      b!!.c[var1] = c.get(var1)!!.isChecked()
       ++var1
     }
     val var2: MyReminder?
@@ -105,8 +105,9 @@ class ActivityReminder constructor() : Activity(), View.OnClickListener {
       log(var3.toString())
       var2 = R.string.title_activity_reminders
     } else {
-      b = MyReminder()
-      a!!.a.add(b)
+      b = MyReminder().also {
+        a!!.a.add(it)
+      }
       var2 = a!!.a.size
       var3 = StringBuilder()
       var3.append("ActivityReminder.onCreate created new entry at position = ")

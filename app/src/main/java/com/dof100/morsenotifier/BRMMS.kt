@@ -56,7 +56,7 @@ class BRMMS : BroadcastReceiver() {
                   }
                   var50 = var3
                   try {
-                    var8 = var52
+                    var8 = var52.toString()
                   } catch (var45: Exception) {
                     var10001 = false
                     return@label319
@@ -249,7 +249,7 @@ class BRMMS : BroadcastReceiver() {
                   }
                   var50 = var4
                   try {
-                    var3 = var55
+                    var3 = var55?.toString()
                   } catch (var16: Exception) {
                     var10001 = false
                     return@label319
