@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTask<Void?, Void?, Void?>() {
   private var wr_context: WeakReference<Context>?
   private var c = false
-  private var d = false
+  private var vibrate = false
   private var e = false
   private var f = 0
   private var repeat = 1
@@ -55,11 +55,11 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   }
 
   init {
-    wr_context = WeakReference<Context>(context)
+    wr_context = WeakReference(context)
     log(context, "MyPlayerMorse constructor instance=$inst")
   }
 
-  private fun beep(character: Char, flag: Boolean) {
+  private fun boop(character: Char, flag: Boolean) {
     var flag = flag // farnsworth?
     var character = character
     if (!e) { // play punctuation
@@ -68,7 +68,8 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         character = ' '
     }
     var number: Int
-    run label598@{ // its a switch statement
+    // its a switch statement
+    run label598@{
       run label597@{
         run label654@{
           run label594@{
@@ -840,7 +841,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         var6 = var3[Dur]
         ++Dur
         var7 = !(Dur >= iter || var3[Dur] != '|')
-        this.beep(var6, var7)
+        this.boop(var6, var7)
       }
       run {
         iter = var2 + 1
@@ -1276,7 +1277,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                               val var45: LongArray
                               try {
                                 App.a(tmpContext, var2x)
-                                if (!d || vibrator == null) {
+                                if (!vibrate || vibrator == null) {
                                   return@onPeriodicNotification
                                 }
                                 var45 = longArrayOf(0L, 0L, 0L)
@@ -1545,26 +1546,16 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     log(context, var15)
   }
 
-  fun playInit(
-    context: Context,
-    var2: Boolean,
-    var3: Boolean,
-    var4: Boolean,
-    var5: Int,
-    var6: Int,
-    var7: Int,
-    var8: Int,
-    var9: Int,
-    var10: Int,
-    var11: Int,
-    var12: Int,
-    var13: String
+  fun playInit(context: Context,
+    var2: Boolean, var3: Boolean, var4: Boolean,
+    var5: Int, var6: Int, var7: Int, var8: Int, var9: Int,
+    var10: Int, var11: Int, var12: Int, var13: String
   ) {
     var var5 = var5
     var arepeat = var6
     log(String.format(Locale.US, "MyPlayerMorse.playInit inst=%d arepeat=%d", inst, arepeat))
     c = var2
-    d = var3
+    vibrate = var3
     e = var4
     f = var5
     repeat = arepeat
@@ -1627,7 +1618,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     nelements = mList.size / 2
     bufferSize = samplerate * mdur * nelements / 1000
     log(context, "MyPlayerMorse.playInit nelements $nelements")
-    if (d) {
+    if (vibrate) {
       log(context, "MyPlayerMorse.playInit Initializing vibration")
       vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
