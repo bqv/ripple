@@ -21,8 +21,8 @@ internal class MyMorseRenderer constructor(
   private val a: Int
   private val b: Boolean
   private val c: Boolean
-  private var d: t? = null
-  private val e: ArrayList<k> = ArrayList()
+  private var d: UnknownGL3? = null
+  private val e: ArrayList<UnknownGl2> = ArrayList()
   private var f: Int = -1
   private var g: Int = -1
   private var h: Int = -1
@@ -69,7 +69,7 @@ internal class MyMorseRenderer constructor(
     while (var2 < var1!!.size) {
       var5 = var1.get(var2) as Int
       var6 = var1.get(var2 + 1) as Int
-      e.add(k(var5, var6))
+      e.add(UnknownGl2(var5, var6))
       var2 += 2
     }
   }
@@ -77,7 +77,7 @@ internal class MyMorseRenderer constructor(
   fun a(var1: Int) {
     f = var1
     if (f >= 0 && f < e.size) {
-      val var2: k = e.get(var1) as k
+      val var2: UnknownGl2 = e.get(var1) as UnknownGl2
       if (var2.a >= 0) {
         g = f
       } else if (var2.a != -1) {
@@ -98,10 +98,10 @@ internal class MyMorseRenderer constructor(
 
   public override fun onDrawFrame(var1: GL10) {
     val var2: Boolean = b
-    var var3: k? = null
+    var var3: UnknownGl2? = null
     if (var2) {
       if (d == null) {
-        d = t(var1, 48, 1.0f)
+        d = UnknownGL3(var1, 48, 1.0f)
       }
     } else {
       d = null
@@ -110,7 +110,7 @@ internal class MyMorseRenderer constructor(
     var var5: Boolean = var4
     if (c) {
       if (f >= 0) {
-        var3 = e.get(f) as k?
+        var3 = e.get(f) as UnknownGl2?
       }
       var5 = var4
       if (var3 != null) {
@@ -196,7 +196,7 @@ internal class MyMorseRenderer constructor(
     var var23: Int = -1
     for (var24 in e.indices) {
       var1.glColor4f(1.0f, 0.0f, 0.0f, 1.0f)
-      val var25: k = e.get(var24) as k
+      val var25: UnknownGl2 = e.get(var24) as UnknownGl2
       if (var25.a >= 0) {
         var23 = var24
       } else if (var25.a != -1) {

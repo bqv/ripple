@@ -10,7 +10,7 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import javax.microedition.khronos.opengles.GL10
 
-internal class t(var1: GL10, var2: Int, var3: Float) {
+internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
   var a: Float
   private val b: GL10
   private val c: Array<String?>

@@ -4,7 +4,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import java.util.Locale
 
-internal class e {
+internal class UnknownPkgMan {
   var a: String = ""
   var b: String? = null
 

@@ -6,7 +6,7 @@ import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 import javax.microedition.khronos.opengles.GL10
 
-internal class d(var1: Float, var2: Float, var3: Float, var4: Float) {
+internal class UnknownGL1(var1: Float, var2: Float, var3: Float, var4: Float) {
   private val a = shortArrayOf(0, 1, 2, 0, 2, 3)
   private val b = FloatArray(12)
   private var c: FloatBuffer? = null

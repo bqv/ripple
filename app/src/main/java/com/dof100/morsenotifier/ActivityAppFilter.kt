@@ -55,7 +55,7 @@ class ActivityAppFilter constructor() : Activity() {
 
   private fun b() {
     val var1: Int = d!!.getSelectedItemPosition()
-    c!!.a = (a!!.a.get(var1) as e).a
+    c!!.a = (a!!.a.get(var1) as UnknownPkgMan).a
     val var2: StringBuilder = StringBuilder()
     var2.append("ActivityAppFilter.view2filter idx=")
     var2.append(var1)

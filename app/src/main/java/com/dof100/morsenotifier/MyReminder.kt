@@ -3,7 +3,6 @@ package com.dof100.morsenotifier
 import android.content.Context
 import android.content.SharedPreferences
 import com.dof100.morsenotifier.MyLog.log
-import com.dof100.morsenotifier.d
 import java.util.Calendar
 import java.util.Locale
 
