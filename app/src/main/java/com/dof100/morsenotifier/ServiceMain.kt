@@ -520,11 +520,7 @@ class ServiceMain : IntentService {
             String.format(
               Locale.US,
               "ServiceMain.onHandleIntent (MSG_REMINDERS) ERROR now=%02d:%02d reminder=%02d:%02d  dif=%d",
-              var7,
-              var8,
-              var3,
-              var4,
-              var9
+              var7, var8, var3, var4, var9
             ) as String?
           )
         } else {
@@ -901,7 +897,7 @@ class ServiceMain : IntentService {
         this.a()
         var2 = var4
       } else if ((var1 == getResources().getString(R.string.MSG_SYSTEM_TEST))) {
-        var2 = getResources().getString(R.string.text_confirm)
+        var2 = getResources().getString(R.string.test_message)
       } else if ((var1 == getResources().getString(R.string.MSG_SYSTEM_POWER_CONNECTED))) {
         var2 = ah
       } else if ((var1 == getResources().getString(R.string.MSG_SYSTEM_POWER_DISCONNECTED))) {
@@ -1805,7 +1801,7 @@ class ServiceMain : IntentService {
       log("ServiceMain.onHandleIntent isTest=true")
     }
     if ((var4 == getResources().getString(R.string.MSG_MN_TEST))) {
-      this.a(this.getString(R.string.text_confirm), 5, 1, true)
+      this.a(this.getString(R.string.test_message), 5, 1, true)
     } else if ((var4 == getResources().getString(R.string.MSG_MN_ACTIVITYMAIN))) {
       this.a()
     } else if ((var4 == getResources().getString(R.string.MSG_MN_STOP))) {

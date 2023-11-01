@@ -238,7 +238,7 @@ class MyPreferenceNumber constructor(var1: Context, var2: AttributeSet) :
     return (var1.getString(var2))!!
   }
 
-  override fun onSetInitialValue(var1: Boolean, var2: Any) {
+  override fun onSetInitialValue(var1: Boolean, var2: Any?) {
     val var3: Int
     if (var1) {
       var3 = getPersistedString("0").toInt()
