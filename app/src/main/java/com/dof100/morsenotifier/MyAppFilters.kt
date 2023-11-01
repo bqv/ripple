@@ -18,22 +18,22 @@ internal class MyAppFilters constructor(var1: Context) {
     }
     val var5: Iterator<Any?> = (var4 as List<Any?>).iterator()
     while (var5.hasNext()) {
-      val var6: UnknownPkgMan = UnknownPkgMan(var3, var5.next() as ApplicationInfo?)
+      val var6: PackagesRepository = PackagesRepository(var3, var5.next() as ApplicationInfo?)
       a.add(var6)
     }
     Collections.sort(a, object : Comparator<Any?> {
-      fun a(var1: UnknownPkgMan?, var2: UnknownPkgMan?): Int {
+      fun a(var1: PackagesRepository?, var2: PackagesRepository?): Int {
         return var1!!.b!!.compareTo((var2!!.b)!!)
       }
 
       // $FF: synthetic method
       public override fun compare(var1: Any?, var2: Any?): Int {
-        return this.a(var1 as UnknownPkgMan?, var2 as UnknownPkgMan?)
+        return this.a(var1 as PackagesRepository?, var2 as PackagesRepository?)
       }
     })
-    a.add(0, UnknownPkgMan("All apps", "All apps"))
-    a.add(1, UnknownPkgMan("All system apps", "All system apps"))
-    a.add(2, UnknownPkgMan("All non-system apps", "All non-system apps"))
+    a.add(0, PackagesRepository("All apps", "All apps"))
+    a.add(1, PackagesRepository("All system apps", "All system apps"))
+    a.add(2, PackagesRepository("All non-system apps", "All non-system apps"))
   }
 
   fun a(var1: String?): Int {
@@ -65,7 +65,7 @@ internal class MyAppFilters constructor(var1: Context) {
         log("MyAppFilters.getApplicationInfoIndex")
         var2 = 3
         while (var2 < a.size) {
-          val var3: UnknownPkgMan? = a.get(var2) as UnknownPkgMan?
+          val var3: PackagesRepository? = a.get(var2) as PackagesRepository?
           if (var3 != null && (var3.a == var1)) {
             return var2
           }
@@ -80,7 +80,7 @@ internal class MyAppFilters constructor(var1: Context) {
     val var1: ArrayList<Any?> = ArrayList<Any?>()
     val var2: Iterator<Any?> = a.iterator()
     while (var2.hasNext()) {
-      var1.add((var2.next() as UnknownPkgMan).b)
+      var1.add((var2.next() as PackagesRepository).b)
     }
     return var1
   }

@@ -32,7 +32,7 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
     }
     var2 = 32
     while (var2 <= 126) {
-      c[var2] = Character.toString(var2.toChar())
+      c[var2] = var2.toChar().toString()
       ++var2
     }
     this.a()
@@ -101,22 +101,12 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
     var var19 = ByteBuffer.allocateDirect(48)
     var19.order(ByteOrder.nativeOrder())
     f = var19.asFloatBuffer().apply {
-      put(
-      floatArrayOf(
-        var14,
-        var13,
-        0.0f,
-        var15,
-        var16,
-        0.0f,
-        var17,
-        var12,
-        0.0f,
-        var6,
-        var18,
-        0.0f
-      )
-      )
+      put(floatArrayOf(
+        var14, var13, 0.0f,
+        var15, var16, 0.0f,
+        var17, var12, 0.0f,
+        var6, var18, 0.0f
+      ))
       position(0)
     }
     val var21 = FloatArray(c.size * 8)
@@ -163,14 +153,8 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
   }
 
   fun a(
-    var1: GL10,
-    var2: String,
-    var3: Float,
-    var4: Float,
-    var5: Float,
-    var6: Float,
-    var7: Float,
-    var8: Float
+    var1: GL10, var2: String, var3: Float, var4: Float,
+    var5: Float, var6: Float, var7: Float, var8: Float
   ) {
     val var9 = var2.length
     val var10 = a * 2.0f / 3.0f
@@ -187,7 +171,7 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
       var1.glColor4f(var6, var7, var8, 1.0f)
     }
     for (var12 in 0 until var9) {
-      var var14: Char = 0.toChar()
+      var var14: Char
       run label23@{
         val var13 = var2[var12]
         if (var13.code >= 0) {
@@ -212,25 +196,13 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
   }
 
   fun b(
-    var1: GL10,
-    var2: String,
-    var3: Float,
-    var4: Float,
-    var5: Float,
-    var6: Float,
-    var7: Float,
-    var8: Float
+    var1: GL10, var2: String, var3: Float, var4: Float,
+    var5: Float, var6: Float, var7: Float, var8: Float
   ) {
     val var9 = var2.length
     this.a(
-      var1,
-      var2,
-      var3 - a * 2.0f / 3.0f * (var9.toFloat() / 2.0f),
-      var4,
-      var5,
-      var6,
-      var7,
-      var8
+      var1, var2, var3 - a * 2.0f / 3.0f * (var9.toFloat() / 2.0f), var4,
+      var5, var6, var7, var8
     )
   }
 }

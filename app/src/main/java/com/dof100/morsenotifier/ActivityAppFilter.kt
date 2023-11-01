@@ -49,7 +49,7 @@ class ActivityAppFilter constructor() : Activity() {
 
   private fun b() {
     val var1: Int = d!!.getSelectedItemPosition()
-    c!!.a = (a!!.a.get(var1) as UnknownPkgMan).a
+    c!!.a = (a!!.a.get(var1) as PackagesRepository).a
     log("ActivityAppFilter.view2filter idx=$var1 package=${c!!.a}")
     c!!.b = e!!.getText().toString()
     c!!.c = f!!.getText().toString()
