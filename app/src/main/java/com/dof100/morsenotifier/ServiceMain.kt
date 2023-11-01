@@ -24,28 +24,28 @@ class ServiceMain : IntentService {
   private var mDisplayColor: Int = 16777215
   private var mDisplayColorMeHilight: Int = 16776960
   private var mDisplayColorTextHilight: Int = 16776960
-  private var E: Boolean = true
-  private var F: Int = 4
-  private var G: String? = ""
-  private var H: Int = 0
-  private var I: Boolean = false
-  private var J: Boolean = false
-  private var K: Boolean = false
-  private var L: Boolean = false
-  private var M: Boolean = false
-  private var N: String? = ""
-  private var O: String? = ""
-  private var P: String? = ""
-  private var Q: Int = 1
-  private var R2: Boolean = true
-  private var S: Int = 3
-  private var T: String? = ""
-  private var U: Int = 0
-  private var V: Boolean = false
-  private var W: Boolean = false
-  private var X: Boolean = false
-  private var Y: Boolean = false
-  private var Z: Boolean = false
+  private var mCallEnable: Boolean = true
+  private var mCallStream: Int = 4
+  private var mCallString1: String? = ""
+  private var mCallNum: Int = 0
+  private var mCallContactDisplayName: Boolean = false
+  private var mCallContactFirstName: Boolean = false
+  private var mCallContactLastName: Boolean = false
+  private var mCallContactInitials: Boolean = false
+  private var mCallContactNickname: Boolean = false
+  private var mCallString2: String? = ""
+  private var mCallContactNameNone: String? = ""
+  private var mCallNumNone: String? = ""
+  private var mCallRepeat: Int = 1
+  private var mSmsEnable: Boolean = true
+  private var mSmsStream: Int = 3
+  private var mSmsString1: String? = ""
+  private var mSmsNum: Int = 0
+  private var mSmsContactDisplayName: Boolean = false
+  private var mSmsContactFirstName: Boolean = false
+  private var mSmsContactLastName: Boolean = false
+  private var mSmsContactInitials: Boolean = false
+  private var mSmsContactNickname: Boolean = false
   private var aA: String = ""
   private var aB: String = ""
   private var aC: String = ""
@@ -63,56 +63,56 @@ class ServiceMain : IntentService {
       }
     }
   }
-  private var aa: Boolean = false
-  private var ab: String? = ""
-  private var ac: String? = ""
-  private var ad: String? = ""
-  private var ae: Int = 1
-  private var af: Boolean = true
-  private var ag: Int = 3
-  private var ah: String? = ""
-  private var ai: String? = ""
-  private var aj: String? = ""
-  private var ak: String? = ""
-  private var al: String? = ""
-  private var am: String? = ""
-  private var an: Boolean = false
-  private var ao: Boolean = false
-  private var ap: Int = 3
-  private val aq: BooleanArray = booleanArrayOf(
+  private var mSmsText: Boolean = false
+  private var mSmsString2: String? = ""
+  private var mSmsContactNameNone: String? = ""
+  private var mSmsNumNone: String? = ""
+  private var mSmsRepeat: Int = 1
+  private var mSystemEnable: Boolean = true
+  private var mSystemStream: Int = 3
+  private var mSystemPowerConnectedString: String? = ""
+  private var mSystemPowerDisconnectedString: String? = ""
+  private var mSystemBatteryLowString: String? = ""
+  private var mSystemBatteryOkString: String? = ""
+  private var mSystemWifiDisconnectedString: String? = ""
+  private var mSystemWifiConnectedString: String? = ""
+  private var mSystemWifiConnectedSsid: Boolean = false
+  private var mChimeEnable: Boolean = false
+  private var mChimeStream: Int = 3
+  private val mChimeHourEnable: BooleanArray = booleanArrayOf(
     true, true, true, true, true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true, true, true, true, true, true
   )
-  private var ar: String? = ""
-  private var d: String? = ""
-  private var format: Int = 1
-  private var au: Boolean = false
-  private var av: Int = 1
-  private var aw: Boolean = true
-  private var ax: Int = 3
+  private var mChimeString1: String? = ""
+  private var mChimeString2: String? = ""
+  private var mChimeTimeHow: Int = 1
+  private var mRemindersEnable: Boolean = false
+  private var mRemindersStream: Int = 1
+  private var mAppsEnable: Boolean = true
+  private var mAppsStream: Int = 3
   private var ay: String = ""
   private var az: String = ""
-  private var b: Boolean = true
-  private var c: Boolean = true
-  private var mDisplayInitialDelay: Int = 0
+  private var mMorseGeneralDnD: Boolean = true
+  private var mMorseGeneralMuteInCalls: Boolean = true
+  private var mMorseGeneralInitialDelay: Int = 0
   private var mStopMethod: Int = 1
-  private var f: Boolean = true
-  private var g: Boolean = true
-  private var h: Int = 0
-  private var i: Int = 0
-  private var j: Boolean = false
-  private var k: Int = 0
-  private var l: Boolean = false
+  private var mVoiceGeneralDnD: Boolean = true
+  private var mVoiceGeneralMuteInCalls: Boolean = true
+  private var mVoiceGeneralInitialDelay: Int = 0
+  private var mMorseWpm: Int = 0
+  private var mMorseFarnsworthEnable: Boolean = false
+  private var mMorseFarnsworthWpm: Int = 0
+  private var mMorsePunctuation: Boolean = false
   private var mLocale: String? = "en_US"
-  private var n: Int = 100
-  private var o: Int = 100
-  private var p: Int = 100
-  private var q: Boolean = false
-  private var r: Boolean = false
-  private var s: Int = 800
-  private var t: Int = 100
-  private var u: Int = 10
-  private var v: Boolean = false
+  private var mVoiceSpeed: Int = 100
+  private var mVoicePitch: Int = 100
+  private var mVoiceVolume: Int = 100
+  private var mAudioEnable: Boolean = false
+  private var mAudioVibrationEnable: Boolean = false
+  private var mAudioFrequency: Int = 800
+  private var mAudioVolume: Int = 100
+  private var mAudioRamp: Int = 10
+  private var mDisplayEnable: Boolean = false
   private var mDisplayHow: Int = 1
   private var mDisplayPos: Int = 0
   private var mStayOnTop: Boolean = false
@@ -134,14 +134,14 @@ class ServiceMain : IntentService {
   private fun handleChime(pHour: Int, pMinute: Int, isTest: Boolean) {
     var reminderHour: Int = pHour
     var reminderMinute: Int = pMinute
-    if (ao) {
+    if (mChimeEnable) {
       log(this, "ServiceMain.handleChime")
       val calendar: Calendar = Calendar.getInstance()
       val nowHour: Int = calendar.get(11)
       val nowMinute: Int = calendar.get(12)
       val time: Long = calendar.timeInMillis
       val hour: Int = if (reminderHour <= 0) { calendar.get(11) % 24 } else reminderHour
-      if (!isTest && !aq[hour]) {
+      if (!isTest && !mChimeHourEnable[hour]) {
         log(this, String.format(Locale.US,
             "ServiceMain.onHandleIntent (MSG_CHIME) Chime disabled for \"%02d:00\"",
             hour))
@@ -168,7 +168,7 @@ class ServiceMain : IntentService {
         }
         var message: String? = ""
         var var11: String?
-        when (format) {
+        when (mChimeTimeHow) {
           1 -> {
             var11 = String.format(Locale.US, "%02d00", hour)
             message = var11
@@ -189,15 +189,15 @@ class ServiceMain : IntentService {
           3 -> message = String.format(Locale.US, "%d", hour)
         }
         var11 = message
-        if (ar!!.isNotEmpty()) {
-          var11 = "$ar $message"
+        if (mChimeString1!!.isNotEmpty()) {
+          var11 = "$mChimeString1 $message"
         }
         message = var11
-        if (d!!.isNotEmpty()) {
-          message = "$var11 ${d}"
+        if (mChimeString2!!.isNotEmpty()) {
+          message = "$var11 ${mChimeString2}"
         }
-        log(this, "ServiceMain.onHandleIntent (MSG_CHIME) hour=$hour  format=$format message:$message")
-        this.play_message(message!!, a[ap], 1, isTest)
+        log(this, "ServiceMain.onHandleIntent (MSG_CHIME) hour=$hour  format=$mChimeTimeHow message:$message")
+        this.play_message(message!!, a[mChimeStream], 1, isTest)
       }
     }
   }
@@ -208,21 +208,21 @@ class ServiceMain : IntentService {
 
   private fun play_voice(message: String, var2: Int, var3: Int, var4: Int, var5: Int, var6: Int) {
     val playerTTS: MyPlayerTTS? = App.getTTS(applicationContext)
-    playerTTS!!.playInit(applicationContext, h, var3, mLocale, var4, var5, var6, var2, message)
+    playerTTS!!.playInit(applicationContext, mVoiceGeneralInitialDelay, var3, mLocale, var4, var5, var6, var2, message)
     playerTTS.play(applicationContext)
     playerTTS.playDone(applicationContext)
   }
 
-  private fun play_message(text: String,
-    stream: Int, arepeat2: Int, var4: Int, frequency: Int, var6: Int,
-    enableSound: Boolean, enableVibrate: Boolean, var9: Boolean, var10: Boolean
+  private fun play_message(message: String, stream: Int, arepeat2: Int, var4: Int, frequency: Int, var6: Int,
+                           enableSound: Boolean, enableVibrate: Boolean, var9: Boolean, var10: Boolean
   ) {
     val playerMorse = MyPlayerMorse(applicationContext, instance)
     val context: Context = applicationContext
-    val playPunctuation: Boolean = l
-    val arepeat1: Int = mDisplayInitialDelay
-    val var15: Int = if (j) k else var4
-    playerMorse.playInit(context, enableSound, enableVibrate, playPunctuation, arepeat1, arepeat2, var4, var15, stream, frequency, var6, u, text)
+    val playPunctuation: Boolean = mMorsePunctuation
+    val arepeat1: Int = mMorseGeneralInitialDelay
+    playerMorse.playInit(context, enableSound, enableVibrate, playPunctuation, arepeat1, arepeat2,
+      var4, if (mMorseFarnsworthEnable) mMorseFarnsworthWpm else var4,
+      stream, frequency, var6, mAudioRamp, message)
     if (var9) {
       when (mDisplayHow) {
         1, 2, 3 -> {
@@ -239,7 +239,7 @@ class ServiceMain : IntentService {
             putExtra("PARAM_DISPLAY_COLOR", mDisplayColor)
             putExtra("PARAM_DISPLAY_COLOR_ME_HILIGHT", mDisplayColorMeHilight)
             putExtra("PARAM_DISPLAY_COLOR_TEXT_HILIGHT", mDisplayColorTextHilight)
-            putExtra("PARAM_DISPLAY_INITIALDELAY", mDisplayInitialDelay)
+            putExtra("PARAM_DISPLAY_INITIALDELAY", mMorseGeneralInitialDelay)
             putExtra("PARAM_ENABLEDIALOGSETTINGS", var10 xor true)
             putExtra("PARAM_STOPMETHOD", mStopMethod)
           }
@@ -248,7 +248,7 @@ class ServiceMain : IntentService {
           } catch (var16: Exception) {
             log(
               this,
-              "ServiceMain.play_message ERROR startActivity (ActivityDisplayMessage)" as String?
+              "ServiceMain.play_message ERROR startActivity (ActivityDisplayMessage)"
             )
           }
         }
@@ -263,14 +263,14 @@ class ServiceMain : IntentService {
     var state: Int = state
     log(this, "ServiceMain.play_message: $message instance=$instance")
     val messageLowercased: String = message.lowercase(Locale.getDefault())
-    val speed: Int = Utils.getTagValue(messageLowercased, "s", if (App.c) i else n, 1, 200)
-    val volume: Int = Utils.getTagValue(messageLowercased, "v", if (App.c) t else p, 0, 100)
-    val frequency: Int = Utils.getTagValue(messageLowercased, "f", s, 10, 25000)
+    val speed: Int = Utils.getTagValue(messageLowercased, "s", if (App.c) mMorseWpm else mVoiceSpeed, 1, 200)
+    val volume: Int = Utils.getTagValue(messageLowercased, "v", if (App.c) mAudioVolume else mVoiceVolume, 0, 100)
+    val frequency: Int = Utils.getTagValue(messageLowercased, "f", mAudioFrequency, 10, 25000)
     val repeat: Int = Utils.getTagValue(messageLowercased, "r", state, 1, 10)
-    val pitch: Int = Utils.getTagValue(messageLowercased, "p", o, 30, 300)
-    val enableAudio: Boolean = Utils.getTagValue(messageLowercased, "a", q)
-    val enableVibration: Boolean = Utils.getTagValue(messageLowercased, "b", r)
-    val enableDisplay: Boolean = Utils.getTagValue(messageLowercased, "d", v)
+    val pitch: Int = Utils.getTagValue(messageLowercased, "p", mVoicePitch, 30, 300)
+    val enableAudio: Boolean = Utils.getTagValue(messageLowercased, "a", mAudioEnable)
+    val enableVibration: Boolean = Utils.getTagValue(messageLowercased, "b", mAudioVibrationEnable)
+    val enableDisplay: Boolean = Utils.getTagValue(messageLowercased, "d", mDisplayEnable)
     message = Utils.unknown3(message)!!
     log(String.format(Locale.US,
         "ServiceMain.play_message message=%s stream=%d istest=%b ",
@@ -287,11 +287,11 @@ class ServiceMain : IntentService {
     if (enableAudio || enableVibration || enableDisplay) {
       val telephonyManager = this.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
       val var16: Boolean = telephonyManager != null && telephonyManager.callState == 2
-      if (App.c && c && !isTest && var16) {
-        log(this, "ServiceMain.play_message: muted (in call)" as String?)
+      if (App.c && mMorseGeneralMuteInCalls && !isTest && var16) {
+        log(this, "ServiceMain.play_message: muted (in call)")
         toast(this, "Morse Notifier: $message")
-      } else if (App.voiceMode && g && !isTest && var16) {
-        log(this, "ServiceMain.play_message: muted (in call)" as String?)
+      } else if (App.voiceMode && mVoiceGeneralMuteInCalls && !isTest && var16) {
+        log(this, "ServiceMain.play_message: muted (in call)")
         toast(this, "Voice Notifier: $message")
       } else {
         if (VERSION.SDK_INT >= 23) {
@@ -310,9 +310,9 @@ class ServiceMain : IntentService {
         var flagDnD = true
         if (state == 1) flagDnD = false
         log("ServiceMain.play_message flagdnd = $flagDnD")
-        if (App.c && b && !isTest && flagDnD) {
+        if (App.c && mMorseGeneralDnD && !isTest && flagDnD) {
           log(this, "ServiceMain.play_message: muted (do not disturb) state=$state")
-        } else if (App.voiceMode && f && !isTest && flagDnD) {
+        } else if (App.voiceMode && mVoiceGeneralDnD && !isTest && flagDnD) {
           log(this, "ServiceMain.play_message: muted (do not disturb) state=$state")
         } else {
           if (App.c) {
@@ -329,27 +329,27 @@ class ServiceMain : IntentService {
   private fun handleReminders(var1: String, message: String, var3: Int, reminderMinute: Int, isTest: Boolean) {
     var var1: String = var1
     var reminderHour: Int = var3
-    if (au) {
-      log(this, "ServiceMain.handleReminders" as String?)
+    if (mRemindersEnable) {
+      log(this, "ServiceMain.handleReminders")
       val var6: Calendar = Calendar.getInstance()
       val nowHour: Int = var6.get(11)
       val nowMinute: Int = var6.get(12)
       if ((var1 == resources.getString(R.string.MSG_REMINDERS_ONE_TEST))) {
-        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_TESTONE)" as String?)
-        this.play_message(message, a[av], 1, isTest)
+        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_TESTONE)")
+        this.play_message(message, a[mRemindersStream], 1, isTest)
       } else if ((var1 == resources.getString(R.string.MSG_REMINDERS_ALL_TEST))) {
-        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)" as String?)
+        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_TESTALL)")
         val reminder: MyReminder? = (MyReminders(this)).a()
         if (reminder != null) {
           var1 = reminder.a()
-          reminderHour = a[av]
+          reminderHour = a[mRemindersStream]
         } else {
           var1 = resources.getString(R.string.text_confirm)
-          reminderHour = a[av]
+          reminderHour = a[mRemindersStream]
         }
         this.play_message(var1, reminderHour, 1, isTest)
       } else {
-        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_FIRE)" as String?)
+        log(this, "ServiceMain.onHandleIntent (MSG_REMINDERS_FIRE)")
         val dif: Int = Utils.unknown5(nowHour, nowMinute, reminderHour, reminderMinute)
         if (dif >= 2) {
           log(
@@ -361,7 +361,7 @@ class ServiceMain : IntentService {
             ) as String?
           )
         } else {
-          this.play_message(message, a[av], 1, isTest)
+          this.play_message(message, a[mRemindersStream], 1, isTest)
         }
       }
     }
@@ -370,8 +370,8 @@ class ServiceMain : IntentService {
   private fun handleSMS(var1: String?, var2: String?, isTest: Boolean) {
     var var1: String? = var1
     var var2: String? = var2
-    if (R2) {
-      log(this, "ServiceMain.handleSMS" as String?)
+    if (mSmsEnable) {
+      log(this, "ServiceMain.handleSMS")
       this.b()
       if (var1!!.isNotEmpty()) {
         this.unknown2(var1)
@@ -382,44 +382,44 @@ class ServiceMain : IntentService {
       var var11: StringBuilder
       var var12: StringBuilder
       run label124@{
-        val var5: String? = T
+        val var5: String? = mSmsString1
         val var6 = ""
-        if (!V && !W && !X && !Y) {
+        if (!mSmsContactDisplayName && !mSmsContactFirstName && !mSmsContactLastName && !mSmsContactInitials) {
           var7 = var5
-          if (!Z) {
+          if (!mSmsContactNickname) {
             return@label124
           }
         }
         var8 = var6
-        if (V) {
+        if (mSmsContactDisplayName) {
           var8 = var6
           if (az.isNotEmpty()) {
             var8 = "${"".trim { it <= ' ' }} $az"
           }
         }
         var7 = var8
-        if (W) {
+        if (mSmsContactFirstName) {
           var7 = var8
           if (aA.isNotEmpty()) {
             var7 = "${var8!!.trim { it <= ' ' }} $aA"
           }
         }
         var8 = var7
-        if (X) {
+        if (mSmsContactLastName) {
           var8 = var7
           if (aB.isNotEmpty()) {
             var8 = "${var7!!.trim { it <= ' ' }} $aB"
           }
         }
         var7 = var8
-        if (Y) {
+        if (mSmsContactInitials) {
           var7 = var8
           if (aC.isNotEmpty()) {
             var7 = "${var8!!.trim { it <= ' ' }} $aC"
           }
         }
         var8 = var7
-        if (Z) {
+        if (mSmsContactNickname) {
           var8 = var7
           if (aD.isNotEmpty()) {
             var8 = "${var7!!.trim { it <= ' ' }} $aD"
@@ -429,13 +429,13 @@ class ServiceMain : IntentService {
         if (var4) {
           var7 = "${var5!!.trim { it <= ' ' }} $var8"
         } else {
-          var7 = "${var5!!.trim { it <= ' ' }} $ac"
+          var7 = "${var5!!.trim { it <= ' ' }} $mSmsContactNameNone"
         }
       }
       run label109@{
         run label108@{
           run label107@{
-            when (U) {
+            when (mSmsNum) {
               1 -> if (var1!!.length >= 0) {
                 return@label107
               }
@@ -476,36 +476,36 @@ class ServiceMain : IntentService {
           }
           var12 = StringBuilder()
           var12.append("${var7!!.trim { it <= ' ' }} ")
-          var1 = ad
+          var1 = mSmsNumNone
           var11 = var12
         }
         var11.append(var1)
         var8 = var11.toString()
       }
       var1 = var8
-      if (aa) {
+      if (mSmsText) {
         var1 = var8
         if (var2!!.isNotEmpty()) {
           var1 = "${var8!!.trim { it <= ' ' }} $var2"
         }
       }
       var2 = var1
-      if (ab!!.isNotEmpty()) {
-        var2 = "${var1!!.trim { it <= ' ' }} $ab"
+      if (mSmsString2!!.isNotEmpty()) {
+        var2 = "${var1!!.trim { it <= ' ' }} $mSmsString2"
       }
       var2 = var2!!.trim { it <= ' ' }
       var1 = var2
       if (var2.isEmpty()) {
         var1 = "sms"
       }
-      this.play_message(var1!!, a[S], ae, isTest)
+      this.play_message(var1!!, a[mSmsStream], mSmsRepeat, isTest)
     }
   }
 
   private fun handleCall(var1: String?, isTest: Boolean) {
     var curText: String? = var1
-    if (E) {
-      log(this, "ServiceMain.handleCall" as String?)
+    if (mCallEnable) {
+      log(this, "ServiceMain.handleCall")
       this.b()
       if (curText!!.isNotEmpty()) {
         this.unknown2(curText)
@@ -516,44 +516,44 @@ class ServiceMain : IntentService {
       var var8: StringBuilder
       var var9: StringBuilder
       run label118@{
-        val var4: String? = G
+        val var4: String? = mCallString1
         var5 = ""
-        if (!I && !J && !K && !L) {
+        if (!mCallContactDisplayName && !mCallContactFirstName && !mCallContactLastName && !mCallContactInitials) {
           var6 = (var4)!!
-          if (!M) {
+          if (!mCallContactNickname) {
             return@label118
           }
         }
         var6 = var5!!
-        if (I) {
+        if (mCallContactDisplayName) {
           var6 = var5!!
           if (az.isNotEmpty()) {
             var6 = "${"".trim { it <= ' ' }} $az"
           }
         }
         var5 = var6
-        if (J) {
+        if (mCallContactFirstName) {
           var5 = var6
           if (aA.isNotEmpty()) {
             var5 = "${var6.trim { it <= ' ' }} $aA"
           }
         }
         var6 = var5!!
-        if (K) {
+        if (mCallContactLastName) {
           var6 = var5!!
           if (aB.isNotEmpty()) {
             var6 = "${var5!!.trim { it <= ' ' }} $aB"
           }
         }
         var5 = var6
-        if (L) {
+        if (mCallContactInitials) {
           var5 = var6
           if (aC.isNotEmpty()) {
             var5 = "${var6.trim { it <= ' ' }} $aC"
           }
         }
         var6 = var5!!
-        if (M) {
+        if (mCallContactNickname) {
           var6 = var5!!
           if (aD.isNotEmpty()) {
             var6 = "${var5!!.trim { it <= ' ' }} $aD"
@@ -563,13 +563,13 @@ class ServiceMain : IntentService {
         if (var3) {
           var6 = "${var4!!.trim { it <= ' ' }} $var5"
         } else {
-          var6 = "${var4!!.trim { it <= ' ' }} $O"
+          var6 = "${var4!!.trim { it <= ' ' }} $mCallContactNameNone"
         }
       }
       run label103@{
         run label102@{
           run label101@{
-            when (H) {
+            when (mCallNum) {
               1 -> if (curText!!.length >= 0) {
                 return@label101
               }
@@ -612,15 +612,15 @@ class ServiceMain : IntentService {
           var8 = StringBuilder()
           var8.append(var6.trim { it <= ' ' })
           var8.append(" ")
-          curText = P
+          curText = mCallNumNone
           var9 = var8
         }
         var9.append(curText)
         var5 = var9.toString()
       }
       curText = var5
-      if (N!!.isNotEmpty()) {
-        curText = "${var5!!.trim { it <= ' ' }} $N"
+      if (mCallString2!!.isNotEmpty()) {
+        curText = "${var5!!.trim { it <= ' ' }} $mCallString2"
       }
       var6 = curText!!.trim { it <= ' ' }
       curText = var6
@@ -628,7 +628,7 @@ class ServiceMain : IntentService {
         curText = "Call"
       }
       log(this, "ServiceMain.onHandleIntent (MSG_CALL_RINGING) curText = $curText")
-      this.play_message(curText!!, a[F], Q, isTest)
+      this.play_message(curText!!, a[mCallStream], mCallRepeat, isTest)
     }
   }
 
@@ -644,8 +644,8 @@ class ServiceMain : IntentService {
   private fun handleSystem(var1: String?, var2: String?, isTest: Boolean) {
     var var1: String? = var1
     var var2: String? = var2
-    if (af) {
-      log(this, "ServiceMain.handleSystem" as String?)
+    if (mSystemEnable) {
+      log(this, "ServiceMain.handleSystem")
       val var4: String = ""
       if ((var1 == resources.getString(R.string.MSG_SYSTEM_BOOT))) {
         this.alarm_init()
@@ -653,75 +653,65 @@ class ServiceMain : IntentService {
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_TEST))) {
         var2 = resources.getString(R.string.test_message)
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_POWER_CONNECTED))) {
-        var2 = ah
+        var2 = mSystemPowerConnectedString
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_POWER_DISCONNECTED))) {
-        var2 = ai
+        var2 = mSystemPowerDisconnectedString
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_BATTERY_LOW))) {
-        var2 = aj
+        var2 = mSystemBatteryLowString
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_BATTERY_OK))) {
-        var2 = ak
+        var2 = mSystemBatteryOkString
       } else if ((var1 == resources.getString(R.string.MSG_SYSTEM_WF_CONNECTED))) {
-        val var6: StringBuilder = StringBuilder()
-        var6.append(am)
-        var1 = if (an) {
-          val var5: StringBuilder = StringBuilder()
-          var5.append(" ")
-          var5.append(var2)
-          var5.toString()
-        } else {
-          ""
-        }
-        var6.append(var1)
-        var2 = var6.toString()
+        var1 = if (mSystemWifiConnectedSsid) { " $var2" } else { "" }
+        var2 = "$mSystemWifiConnectedString$var1"
       } else {
         var2 = var4
         if ((var1 == resources.getString(R.string.MSG_SYSTEM_WF_DISCONNECTED))) {
-          var2 = al
+          var2 = mSystemWifiDisconnectedString
         }
       }
       if (var2!!.isNotEmpty()) {
-        this.play_message(var2, a[ag], 1, isTest)
+        this.play_message(var2, a[mSystemStream], 1, isTest)
       }
     }
   }
 
   private fun handleApps(var1: String?, isTest: Boolean) {
     var var1: String? = var1
-    if (aw) {
-      log(this, "ServiceMain.handleApps" as String?)
+    if (mAppsEnable) {
+      log(this, "ServiceMain.handleApps")
       if (isTest) {
         var1 = this.getString(R.string.text_confirm)
       }
       if (var1!!.isNotEmpty()) {
-        this.play_message(var1, a[ax], 1, false)
+        this.play_message(var1, a[mAppsStream], 1, false)
       }
     }
   }
 
   private fun pref_init() {
-    log(this, "ServiceMain.pref_init" as String?)
+    log(this, "ServiceMain.pref_init")
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-    b = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_general_dnd", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    c = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_general_muteincalls", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    mDisplayInitialDelay = Utils.prefGetInt(this, sharedPreferences, "pref_morse_general_initialdelay", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseGeneralDnD = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_general_dnd", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseGeneralMuteInCalls = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_general_muteincalls", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseGeneralInitialDelay = Utils.prefGetInt(this, sharedPreferences, "pref_morse_general_initialdelay", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mStopMethod = Utils.prefGetInt(this, sharedPreferences, "pref_morse_general_volumedownstop", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    f = Utils.prefGetBoolean(this, sharedPreferences, "pref_voice_general_dnd", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    g = Utils.prefGetBoolean(this, sharedPreferences, "pref_voice_general_muteincalls", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    h = Utils.prefGetInt(this, sharedPreferences, "pref_voice_general_initialdelay", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    i = Utils.prefGetInt(this, sharedPreferences, "pref_morse_wpm", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    j = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_farnsworth_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    k = Utils.prefGetInt(this, sharedPreferences, "pref_morse_farnsworth_wpm", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    l = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_punctuation", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoiceGeneralDnD = Utils.prefGetBoolean(this, sharedPreferences, "pref_voice_general_dnd", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoiceGeneralMuteInCalls = Utils.prefGetBoolean(this, sharedPreferences, "pref_voice_general_muteincalls", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoiceGeneralInitialDelay = Utils.prefGetInt(this, sharedPreferences, "pref_voice_general_initialdelay", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseWpm = Utils.prefGetInt(this, sharedPreferences, "pref_morse_wpm", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseFarnsworthEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_farnsworth_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorseFarnsworthWpm = Utils.prefGetInt(this, sharedPreferences, "pref_morse_farnsworth_wpm", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mMorsePunctuation = Utils.prefGetBoolean(this, sharedPreferences, "pref_morse_punctuation", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mLocale = Utils.prefGetString(this, sharedPreferences, "pref_voice_locale", "pref_general_locale", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    n = Utils.prefGetInt(this, sharedPreferences, "pref_voice_speed", "pref_general_speechrate", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    o = Utils.prefGetInt(this, sharedPreferences, "pref_voice_pitch", "pref_general_pitch", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    p = Utils.prefGetInt(this, sharedPreferences, "pref_voice_vol", "pref_general_volume", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    q = Utils.prefGetBoolean(this, sharedPreferences, "pref_audio_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    r = Utils.prefGetBoolean(this, sharedPreferences, "pref_audio_vibration_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    s = Utils.prefGetInt(this, sharedPreferences, "pref_audio_freq", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    t = Utils.prefGetInt(this, sharedPreferences, "pref_audio_vol", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    u = Utils.prefGetInt(this, sharedPreferences, "pref_audio_ramp", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    v = Utils.prefGetBoolean(this, sharedPreferences, "pref_display_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoiceSpeed = Utils.prefGetInt(this, sharedPreferences, "pref_voice_speed", "pref_general_speechrate", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoicePitch = Utils.prefGetInt(this, sharedPreferences, "pref_voice_pitch", "pref_general_pitch", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mVoiceVolume = Utils.prefGetInt(this, sharedPreferences, "pref_voice_vol", "pref_general_volume", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAudioEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_audio_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAudioVibrationEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_audio_vibration_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAudioFrequency = Utils.prefGetInt(this, sharedPreferences, "pref_audio_freq", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAudioVolume = Utils.prefGetInt(this, sharedPreferences, "pref_audio_vol", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAudioRamp = Utils.prefGetInt(this, sharedPreferences, "pref_audio_ramp", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mDisplayEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_display_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mDisplayHow = Utils.prefGetInt(this, sharedPreferences, "pref_display_how", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mDisplayPos = Utils.prefGetInt(this, sharedPreferences, "pref_display_pos", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mStayOnTop = Utils.prefGetBoolean(this, sharedPreferences, "pref_display_stayontop", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
@@ -730,56 +720,56 @@ class ServiceMain : IntentService {
     mDisplayColor = Utils.prefGetColor(this, sharedPreferences, "pref_display_color", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mDisplayColorMeHilight = Utils.prefGetColor(this, sharedPreferences, "pref_display_color_me_highlight", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     mDisplayColorTextHilight = Utils.prefGetColor(this, sharedPreferences, "pref_display_color_text_highlight", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    E = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    F = Utils.prefGetInt(this, sharedPreferences, "pref_call_stream", "pref_call_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    G = Utils.prefGetString(this, sharedPreferences, "pref_call_string1", "pref_call_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    H = Utils.prefGetInt(this, sharedPreferences, "pref_call_num", "pref_call_e1pro_num", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    I = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactdisplayname", "pref_call_e1pro_contactdisplayname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    J = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactfirstname", "pref_call_e1pro_contactfirstname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    K = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactlastname", "pref_call_e1pro_contactlastname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    L = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactinitials", "pref_call_e1pro_contactinitials", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    M = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactnickname", "pref_call_e1pro_contactnickname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    N = Utils.prefGetString(this, sharedPreferences, "pref_call_string2", "pref_call_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    O = Utils.prefGetString(this, sharedPreferences, "pref_call_contactname_none", "pref_call_e1pro_contactname_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    P = Utils.prefGetString(this, sharedPreferences, "pref_call_num_none", "pref_call_e1pro_num_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    Q = Utils.prefGetInt(this, sharedPreferences, "pref_call_repeat", "pref_call_e1pro_repeat", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    R2 = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    S = Utils.prefGetInt(this, sharedPreferences, "pref_sms_stream", "pref_sms_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    T = Utils.prefGetString(this, sharedPreferences, "pref_sms_string1", "pref_sms_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    U = Utils.prefGetInt(this, sharedPreferences, "pref_sms_num", "pref_sms_e1pro_num", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    V = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactdisplayname", "pref_sms_e1pro_contactdisplayname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    W = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactfirstname", "pref_sms_e1pro_contactfirstname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    X = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactlastname", "pref_sms_e1pro_contactlastname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    Y = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactinitials", "pref_sms_e1pro_contactinitials", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    Z = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactnickname", "pref_sms_e1pro_contactnickname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    aa = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_text", "pref_sms_e1pro_text", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ab = Utils.prefGetString(this, sharedPreferences, "pref_sms_string2", "pref_sms_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ac = Utils.prefGetString(this, sharedPreferences, "pref_sms_contactname_none", "pref_sms_e1pro_contactname_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ad = Utils.prefGetString(this, sharedPreferences, "pref_sms_num_none", "pref_sms_e1pro_num_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ae = Utils.prefGetInt(this, sharedPreferences, "pref_sms_repeat", "pref_sms_e1pro_repeat", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    af = Utils.prefGetBoolean(this, sharedPreferences, "pref_system_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ag = Utils.prefGetInt(this, sharedPreferences, "pref_system_stream", "pref_system_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ah = Utils.prefGetString(this, sharedPreferences, "pref_system_powerconectedstring", "pref_system_e1pro_powerconectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ai = Utils.prefGetString(this, sharedPreferences, "pref_system_powerdisconectedstring", "pref_system_e1pro_powerdisconectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    aj = Utils.prefGetString(this, sharedPreferences, "pref_system_batterylowstring", "pref_system_e1pro_batterylowstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ak = Utils.prefGetString(this, sharedPreferences, "pref_system_batteryokstring", "pref_system_e1pro_batteryokstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    al = Utils.prefGetString(this, sharedPreferences, "pref_system_wifi_disconnectedstring", "pref_system_e1pro_wifi_disconnectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    am = Utils.prefGetString(this, sharedPreferences, "pref_system_wifi_connectedstring", "pref_system_e1pro_wifi_connectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    an = Utils.prefGetBoolean(this, sharedPreferences, "pref_system_wifi_connectedssid", "pref_system_e1pro_wifi_connectedssid", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    aw = Utils.prefGetBoolean(this, sharedPreferences, "pref_apps_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ax = Utils.prefGetInt(this, sharedPreferences, "pref_apps_stream", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ao = Utils.prefGetBoolean(this, sharedPreferences, "pref_chime_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    for (var3 in 0..23) {
-      val var4: BooleanArray = aq
-      val var5: String = String.format(Locale.US, "pref_chime_hourenable_%02d", var3)
-      var4[var3] = Utils.prefGetBoolean(this, sharedPreferences, var5, null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallStream = Utils.prefGetInt(this, sharedPreferences, "pref_call_stream", "pref_call_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallString1 = Utils.prefGetString(this, sharedPreferences, "pref_call_string1", "pref_call_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallNum = Utils.prefGetInt(this, sharedPreferences, "pref_call_num", "pref_call_e1pro_num", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactDisplayName = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactdisplayname", "pref_call_e1pro_contactdisplayname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactFirstName = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactfirstname", "pref_call_e1pro_contactfirstname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactLastName = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactlastname", "pref_call_e1pro_contactlastname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactInitials = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactinitials", "pref_call_e1pro_contactinitials", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactNickname = Utils.prefGetBoolean(this, sharedPreferences, "pref_call_contactnickname", "pref_call_e1pro_contactnickname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallString2 = Utils.prefGetString(this, sharedPreferences, "pref_call_string2", "pref_call_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallContactNameNone = Utils.prefGetString(this, sharedPreferences, "pref_call_contactname_none", "pref_call_e1pro_contactname_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallNumNone = Utils.prefGetString(this, sharedPreferences, "pref_call_num_none", "pref_call_e1pro_num_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mCallRepeat = Utils.prefGetInt(this, sharedPreferences, "pref_call_repeat", "pref_call_e1pro_repeat", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsStream = Utils.prefGetInt(this, sharedPreferences, "pref_sms_stream", "pref_sms_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsString1 = Utils.prefGetString(this, sharedPreferences, "pref_sms_string1", "pref_sms_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsNum = Utils.prefGetInt(this, sharedPreferences, "pref_sms_num", "pref_sms_e1pro_num", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactDisplayName = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactdisplayname", "pref_sms_e1pro_contactdisplayname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactFirstName = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactfirstname", "pref_sms_e1pro_contactfirstname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactLastName = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactlastname", "pref_sms_e1pro_contactlastname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactInitials = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactinitials", "pref_sms_e1pro_contactinitials", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactNickname = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_contactnickname", "pref_sms_e1pro_contactnickname", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsText = Utils.prefGetBoolean(this, sharedPreferences, "pref_sms_text", "pref_sms_e1pro_text", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsString2 = Utils.prefGetString(this, sharedPreferences, "pref_sms_string2", "pref_sms_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsContactNameNone = Utils.prefGetString(this, sharedPreferences, "pref_sms_contactname_none", "pref_sms_e1pro_contactname_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsNumNone = Utils.prefGetString(this, sharedPreferences, "pref_sms_num_none", "pref_sms_e1pro_num_none", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSmsRepeat = Utils.prefGetInt(this, sharedPreferences, "pref_sms_repeat", "pref_sms_e1pro_repeat", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_system_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemStream = Utils.prefGetInt(this, sharedPreferences, "pref_system_stream", "pref_system_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemPowerConnectedString = Utils.prefGetString(this, sharedPreferences, "pref_system_powerconectedstring", "pref_system_e1pro_powerconectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemPowerDisconnectedString = Utils.prefGetString(this, sharedPreferences, "pref_system_powerdisconectedstring", "pref_system_e1pro_powerdisconectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemBatteryLowString = Utils.prefGetString(this, sharedPreferences, "pref_system_batterylowstring", "pref_system_e1pro_batterylowstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemBatteryOkString = Utils.prefGetString(this, sharedPreferences, "pref_system_batteryokstring", "pref_system_e1pro_batteryokstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemWifiDisconnectedString = Utils.prefGetString(this, sharedPreferences, "pref_system_wifi_disconnectedstring", "pref_system_e1pro_wifi_disconnectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemWifiConnectedString = Utils.prefGetString(this, sharedPreferences, "pref_system_wifi_connectedstring", "pref_system_e1pro_wifi_connectedstring", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mSystemWifiConnectedSsid = Utils.prefGetBoolean(this, sharedPreferences, "pref_system_wifi_connectedssid", "pref_system_e1pro_wifi_connectedssid", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAppsEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_apps_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mAppsStream = Utils.prefGetInt(this, sharedPreferences, "pref_apps_stream", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mChimeEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_chime_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    for (hour in 0..23) {
+      mChimeHourEnable[hour] = Utils.prefGetBoolean(this, sharedPreferences,
+        String.format(Locale.US, "pref_chime_hourenable_%02d", hour), null,
+        if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
     }
-    ap = Utils.prefGetInt(this, sharedPreferences, "pref_chime_stream", "pref_chime_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    ar = Utils.prefGetString(this, sharedPreferences, "pref_chime_string1", "pref_chime_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    d = Utils.prefGetString(this, sharedPreferences, "pref_chime_string2", "pref_chime_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    format = Utils.prefGetInt(this, sharedPreferences, "pref_chime_timehow", "pref_chime_e1pro_timehow", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    au = Utils.prefGetBoolean(this, sharedPreferences, "pref_reminders_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
-    av = Utils.prefGetInt(this, sharedPreferences, "pref_reminders_stream", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mChimeStream = Utils.prefGetInt(this, sharedPreferences, "pref_chime_stream", "pref_chime_e1pro_stream", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mChimeString1 = Utils.prefGetString(this, sharedPreferences, "pref_chime_string1", "pref_chime_e1pro_string1", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mChimeString2 = Utils.prefGetString(this, sharedPreferences, "pref_chime_string2", "pref_chime_e1pro_string2", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mChimeTimeHow = Utils.prefGetInt(this, sharedPreferences, "pref_chime_timehow", "pref_chime_e1pro_timehow", if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mRemindersEnable = Utils.prefGetBoolean(this, sharedPreferences, "pref_reminders_enable", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
+    mRemindersStream = Utils.prefGetInt(this, sharedPreferences, "pref_reminders_stream", null as String?, if (App.c) { "_morsedef" } else { "_voicedef" }, "_def")
   }
 
   override fun onBind(intent: Intent): IBinder? {

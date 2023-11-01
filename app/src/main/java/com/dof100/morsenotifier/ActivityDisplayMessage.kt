@@ -258,14 +258,14 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
           }
         } else {
           try {
-            log(this, "ActivityDisplayMessage.onCreate ERROR getWindow=null" as String?)
+            log(this, "ActivityDisplayMessage.onCreate ERROR getWindow=null")
             return@label151
           } catch (var17: Exception) {
             var10001 = false
           }
         }
       }
-      log(this, "ActivityDisplayMessage.onCreate ERROR try getwindow" as String?)
+      log(this, "ActivityDisplayMessage.onCreate ERROR try getwindow")
     }
     setFinishOnTouchOutside(false)
     this.setContentView(R.layout.activity_info)
@@ -319,7 +319,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
       }
       log(
         this,
-        "ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener" as String?
+        "ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener"
       )
     }
     try {
@@ -330,7 +330,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
       l!!.getHolder().setFormat(1)
       l!!.setRenderer(m)
     } catch (var5: Exception) {
-      log(this, "ActivityDisplayMessage.onCreate ERROR try setRenderer" as String?)
+      log(this, "ActivityDisplayMessage.onCreate ERROR try setRenderer")
     }
     o = System.currentTimeMillis()
     log("ActivityDisplayMessage.onCreate OUT instance=$a")

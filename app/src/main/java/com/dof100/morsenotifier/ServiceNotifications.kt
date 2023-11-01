@@ -48,7 +48,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   private fun a() {
-    log(this, "ServiceNotifications.load_params" as String?)
+    log(this, "ServiceNotifications.load_params")
     val var1: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
     var var2: String?
     if (App.Companion.c) {
@@ -92,7 +92,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   private fun a(var1: MyRecentAppNotification) {
-    log(this, "ServiceNotifications.notificationAnnounceNow Starting service" as String?)
+    log(this, "ServiceNotifications.notificationAnnounceNow Starting service")
     var1.h = 1
     val var2: Intent = Intent(this, ServiceMain::class.java)
     var2.putExtra(
@@ -227,7 +227,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
                     var14.next() as MyRecentAppNotification
                   log(
                     this,
-                    "ServiceNotifications.notificationAnnounceCheckCandidates for" as String?
+                    "ServiceNotifications.notificationAnnounceCheckCandidates for"
                   )
                   val var16: Int = var13 + 1
                   if (var15.h != 0) {
@@ -306,13 +306,13 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   public override fun onBind(var1: Intent): IBinder? {
-    log(this, "ServiceNotifications.onBind" as String?)
+    log(this, "ServiceNotifications.onBind")
     return super.onBind(var1)
   }
 
   public override fun onCreate() {
     super.onCreate()
-    log(this, "ServiceNotifications.OnCreate" as String?)
+    log(this, "ServiceNotifications.OnCreate")
     f = MyRecentAppNotifications(this)
     g = MyAppNotificationFilters(this)
     this.a()
@@ -324,7 +324,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   public override fun onDestroy() {
-    log(this, "ServiceNotifications.OnDestroy" as String?)
+    log(this, "ServiceNotifications.OnDestroy")
     log("ServiceMain.OnDestroy unregistering local BroadcastReceiver")
     LocalBroadcastManager.getInstance((this as Context?)!!).unregisterReceiver(
       h
@@ -333,24 +333,24 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   public override fun onInterruptionFilterChanged(var1: Int) {
-    log(this, "ServiceNotifications.onInterruptionFilterChanged" as String?)
+    log(this, "ServiceNotifications.onInterruptionFilterChanged")
   }
 
   public override fun onListenerConnected() {
-    log(this, "ServiceNotifications.onListenerConnected" as String?)
+    log(this, "ServiceNotifications.onListenerConnected")
   }
 
   public override fun onListenerDisconnected() {
-    log(this, "ServiceNotifications.onListenerDisconnected" as String?)
+    log(this, "ServiceNotifications.onListenerDisconnected")
   }
 
   public override fun onListenerHintsChanged(var1: Int) {
-    log(this, "ServiceNotifications.onListenerHintsChanged" as String?)
+    log(this, "ServiceNotifications.onListenerHintsChanged")
   }
 
   @TargetApi(19)
   public override fun onNotificationPosted(var1: StatusBarNotification) {
-    log(this, "ServiceNotifications.onNotificationPosted" as String?)
+    log(this, "ServiceNotifications.onNotificationPosted")
     var var2: String? = var1.getPackageName()
     val var3: Notification = var1.getNotification()
     val var4: CharSequence? = var3.tickerText
@@ -373,7 +373,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
           }
           return@label81
         }
-        log(this, "ServiceNotifications.onNotificationPosted Extras=null" as String?)
+        log(this, "ServiceNotifications.onNotificationPosted Extras=null")
       }
       var6 = null
     }
@@ -489,7 +489,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
     if (var13 == null) {
       log(
         this,
-        "ServiceNotifications.onNotificationPosted duplicate notification found" as String?
+        "ServiceNotifications.onNotificationPosted duplicate notification found"
       )
     } else {
       this.a()
@@ -537,10 +537,10 @@ class ServiceNotifications constructor() : NotificationListenerService() {
   }
 
   public override fun onNotificationRankingUpdate(var1: RankingMap) {
-    log(this, "ServiceNotifications.onNotificationRankingUpdate" as String?)
+    log(this, "ServiceNotifications.onNotificationRankingUpdate")
   }
 
   public override fun onNotificationRemoved(var1: StatusBarNotification) {
-    log(this, "ServiceNotifications.onNotificationRemoved" as String?)
+    log(this, "ServiceNotifications.onNotificationRemoved")
   }
 }
