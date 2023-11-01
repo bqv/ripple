@@ -61,7 +61,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   }
 
   private fun boop(character: Char, flag: Boolean) {
-    var flag = flag // farnsworth?
+    var pipe = flag
     var character = character
     if (!playPunctuation && ((character in '!'..'/') || (character in ':'..'@'))) {
       character = ' '
@@ -428,7 +428,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
 
                                                                                                                                                                                         '|' -> {
                                                                                                                                                                                           this.beep(-2, -1)
-                                                                                                                                                                                          flag = false
+                                                                                                                                                                                          pipe = false
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
 
@@ -516,288 +516,288 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                                                                                                                                                   this.beep(-2, -1)
                                                                                                                                                                   this.beep(2, -1)
                                                                                                                                                                   return@label504
-                                                                                                                                                                }
+                                                                                                                                                                } // goto@label484
                                                                                                                                                               }
                                                                                                                                                               this.beep(-2, -1)
                                                                                                                                                               this.beep(1, -1)
                                                                                                                                                               return@label663
-                                                                                                                                                            }
+                                                                                                                                                            } // goto@label490
                                                                                                                                                             this.beep(2, character.code)
                                                                                                                                                             this.beep(-1, -1)
                                                                                                                                                             this.beep(-1, -1)
                                                                                                                                                             return@label661
-                                                                                                                                                          }
+                                                                                                                                                          } // goto@label665
                                                                                                                                                           this.beep(-1, -1)
                                                                                                                                                           this.beep(-1, -1)
                                                                                                                                                           return@label499
-                                                                                                                                                        }
+                                                                                                                                                        } // goto@label669
                                                                                                                                                       }
                                                                                                                                                       this.beep(-2, -1)
                                                                                                                                                       this.beep(2, -1)
                                                                                                                                                       return@label521
-                                                                                                                                                    }
+                                                                                                                                                    } // goto@label670
                                                                                                                                                     this.beep(2, character.code)
                                                                                                                                                     return@label529
-                                                                                                                                                  }
+                                                                                                                                                  } // goto@label499
                                                                                                                                                   this.beep(-2, -1)
                                                                                                                                                   this.beep(2, -1)
                                                                                                                                                   return@label660
-                                                                                                                                                }
+                                                                                                                                                } // goto@label500
                                                                                                                                                 this.beep(2, character.code)
                                                                                                                                                 return@label546
-                                                                                                                                              }
+                                                                                                                                              } // goto@label663
                                                                                                                                               this.beep(-2, -1)
                                                                                                                                               this.beep(2, -1)
                                                                                                                                               return@label529
-                                                                                                                                            }
+                                                                                                                                            } // goto@label503
                                                                                                                                             this.beep(1, character.code)
                                                                                                                                             return@label535
-                                                                                                                                          }
+                                                                                                                                          } // goto@label504
                                                                                                                                           this.beep(-1, -1)
                                                                                                                                           this.beep(-1, -1)
                                                                                                                                           return@label659
-                                                                                                                                        }
+                                                                                                                                        } // goto@label662
                                                                                                                                         this.beep(-1, -1)
                                                                                                                                         this.beep(-1, -1)
                                                                                                                                         return@label533
-                                                                                                                                      }
+                                                                                                                                      } // goto@label661
                                                                                                                                       this.beep(-2, -1)
                                                                                                                                       this.beep(2, -1)
                                                                                                                                       return@label546
-                                                                                                                                    }
+                                                                                                                                    } // goto@label521
                                                                                                                                     this.beep(-1, -1)
                                                                                                                                     this.beep(-1, -1)
                                                                                                                                     return@label566
-                                                                                                                                  }
+                                                                                                                                  } // goto@label522
                                                                                                                                   this.beep(2, character.code)
                                                                                                                                   return@label567
-                                                                                                                                }
+                                                                                                                                } // goto@label523
                                                                                                                                 this.beep(1, character.code)
                                                                                                                                 return@label551
-                                                                                                                              }
+                                                                                                                              } // goto@label660
                                                                                                                               this.beep(-1, -1)
                                                                                                                               this.beep(-1, -1)
                                                                                                                               return@label551
-                                                                                                                            }
+                                                                                                                            } // goto@label526
                                                                                                                             this.beep(-2, -1)
                                                                                                                             this.beep(1, -1)
                                                                                                                             return@label551
-                                                                                                                          }
+                                                                                                                          } // goto@label527
                                                                                                                           this.beep(2, character.code)
                                                                                                                           return@label563
-                                                                                                                        }
+                                                                                                                        } // goto@label528
                                                                                                                         this.beep(2, character.code)
                                                                                                                         return@label656
-                                                                                                                      }
+                                                                                                                      } // goto@label529
                                                                                                                       this.beep(-1, -1)
                                                                                                                       this.beep(-1, -1)
                                                                                                                       return@label557
-                                                                                                                    }
+                                                                                                                    } // goto@label530
                                                                                                                     this.beep(1, character.code)
                                                                                                                     return@label557
-                                                                                                                  }
+                                                                                                                  } // goto@label531
                                                                                                                   this.beep(2, character.code)
                                                                                                                   this.beep(-1, -1)
                                                                                                                   this.beep(-1, -1)
                                                                                                                   return@label558
-                                                                                                                }
+                                                                                                                } // goto@label532
                                                                                                                 this.beep(1, character.code)
                                                                                                                 return@label558
-                                                                                                              }
+                                                                                                              } // goto@label533
                                                                                                               this.beep(-2, -1)
                                                                                                               this.beep(2, -1)
                                                                                                               return@label559
-                                                                                                            }
+                                                                                                            } // goto@label534
                                                                                                             this.beep(-2, -1)
                                                                                                             this.beep(1, -1)
                                                                                                             return@label560
-                                                                                                          }
+                                                                                                          } // goto@label535
                                                                                                           this.beep(-2, -1)
                                                                                                           this.beep(2, -1)
                                                                                                           return@label563
-                                                                                                        }
+                                                                                                        } // goto@label659
                                                                                                         this.beep(-2, -1)
                                                                                                         this.beep(2, -1)
                                                                                                         return@label567
-                                                                                                      }
+                                                                                                      } // goto@label658
                                                                                                       this.beep(-1, -1)
                                                                                                       this.beep(-1, -1)
                                                                                                       return@label550
-                                                                                                    }
+                                                                                                    } // goto@label657
                                                                                                     this.beep(-2, -1)
                                                                                                     this.beep(2, -1)
                                                                                                     return@label656
-                                                                                                  }
+                                                                                                  } // goto@label546
                                                                                                   this.beep(-1, -1)
                                                                                                   this.beep(-1, -1)
                                                                                                   return@label560
-                                                                                                }
+                                                                                                } // goto@label547
                                                                                                 this.beep(2, character.code)
                                                                                                 return@label559
-                                                                                              }
+                                                                                              } // goto@label548
                                                                                               this.beep(2, character.code)
                                                                                               return@label655
-                                                                                            }
+                                                                                            } // goto@label549
                                                                                             this.beep(1, character.code)
                                                                                             return@label573
-                                                                                          }
+                                                                                          } // goto@label550
                                                                                           this.beep(-2, -1)
                                                                                           this.beep(2, -1)
                                                                                           return@label569
-                                                                                        }
+                                                                                        } // goto@label551
                                                                                         this.beep(-2, -1)
                                                                                         this.beep(2, -1)
                                                                                         return@label570
-                                                                                      }
+                                                                                      } // goto@label552
                                                                                       this.beep(1, character.code)
                                                                                       return@label576
-                                                                                    }
+                                                                                    } // goto@label656
                                                                                     this.beep(-1, -1)
                                                                                     this.beep(-1, -1)
                                                                                     return@label573
-                                                                                  }
+                                                                                  } // goto@label557
                                                                                   this.beep(-2, -1)
                                                                                   this.beep(2, -1)
                                                                                   return@label655
-                                                                                }
+                                                                                } // goto@label558
                                                                                 this.beep(-2, -1)
                                                                                 this.beep(1, -1)
                                                                                 return@label573
-                                                                              }
+                                                                              } // goto@label559
                                                                               this.beep(-1, -1)
                                                                               this.beep(-1, -1)
                                                                               return@label579
-                                                                            }
+                                                                            } // goto@label560
                                                                             this.beep(-2, -1)
                                                                             this.beep(1, -1)
                                                                             return@label576
-                                                                          }
+                                                                          } // goto@label561
                                                                           this.beep(2, character.code)
                                                                           return@label569
-                                                                        }
+                                                                        } // goto@label562
                                                                         this.beep(-2, -1)
                                                                         this.beep(1, -1)
                                                                         return@label577
-                                                                      }
+                                                                      } // goto@label563
                                                                       this.beep(-1, -1)
                                                                       this.beep(-1, -1)
                                                                       return@label577
-                                                                    }
+                                                                    } // goto@label564
                                                                     this.beep(1, character.code)
                                                                     return@label579
-                                                                  }
+                                                                  } // goto@label565
                                                                   this.beep(2, character.code)
                                                                   return@label570
-                                                                }
+                                                                } // goto@label566
                                                                 this.beep(-2, -1)
                                                                 this.beep(1, -1)
                                                                 return@label579
-                                                              }
+                                                              } // goto@label567
                                                               this.beep(-1, -1)
                                                               this.beep(-1, -1)
                                                               return@label576
-                                                            }
+                                                            } // goto@label568
                                                             this.beep(2, character.code)
                                                             return@label582
-                                                          }
+                                                          } // goto@label569
                                                           this.beep(-1, -1)
                                                           this.beep(-1, -1)
                                                           return@label581
-                                                        }
+                                                        } // goto@label570
                                                         this.beep(-1, -1)
                                                         this.beep(-1, -1)
                                                         return@label587
-                                                      }
+                                                      } // goto@label571
                                                       this.beep(-2, -1)
                                                       this.beep(1, -1)
                                                       return@label581
-                                                    }
+                                                    } // goto@label572
                                                     this.beep(1, character.code)
                                                     return@label587
-                                                  }
+                                                  } // goto@label573
                                                   this.beep(-2, -1)
                                                   this.beep(2, -1)
                                                   return@label588
-                                                }
+                                                } // goto@label655
                                                 this.beep(-1, -1)
                                                 this.beep(-1, -1)
                                                 return@label585
-                                              }
+                                              } // goto@label576
                                               this.beep(-2, -1)
                                               this.beep(2, -1)
                                               return@label582
-                                            }
+                                            } // goto@label577
                                             this.beep(-2, -1)
                                             this.beep(1, -1)
                                             return@label585
-                                          }
+                                          } // goto@label578
                                           this.beep(2, character.code)
                                           return@label588
-                                        }
+                                        } // goto@label579
                                         this.beep(-2, -1)
                                         this.beep(1, -1)
                                         return@label587
-                                      }
+                                      } // goto@label580
                                       this.beep(1, character.code)
-                                    }
+                                    } // goto@label581
                                     this.beep(-2, -1)
                                     this.beep(1, -1)
                                     return@label590
-                                  }
+                                  } // goto@label582
                                   this.beep(-1, -1)
                                   this.beep(-1, -1)
                                   return@label591
-                                }
+                                } // goto@label583
                                 this.beep(2, character.code)
                                 return@label593
-                              }
+                              } // goto@label584
                               this.beep(1, character.code)
                               return@label591
-                            }
+                            } // goto@label585
                             this.beep(-2, -1)
                             this.beep(1, -1)
                             return@label591
-                          }
+                          } // goto@label586
                           this.beep(1, character.code)
                           return@label590
-                        }
+                        } // goto@label587
                         this.beep(-2, -1)
                         this.beep(2, -1)
                         return@label593
-                      }
+                      } // goto@label588
                       this.beep(-1, -1)
                       this.beep(-1, -1)
                       return@label590
-                    }
+                    } // goto@label589
                     this.beep(1, character.code)
                     return@label654
-                  }
+                  } // goto@label590
                   this.beep(-2, -1)
                   this.beep(1, -1)
                   return@label654
-                }
+                } // goto@label591
                 this.beep(-2, -1)
                 this.beep(2, -1)
                 return@label594
-              }
+              } // goto@label592
               this.beep(2, character.code)
               return@label594
-            }
+            } // goto@label593
             this.beep(-1, -1)
             this.beep(-1, -1)
             return@label654
-          }
+          } // goto@label594
           this.beep(-1, -1)
           this.beep(-1, -1)
           return@label598
-        }
+        } // goto@label654
         this.beep(-2, -1)
         this.beep(1, -1)
         return@label598
-      }
+      } // goto@label597
       this.beep(1, character.code)
-    }
-    if (flag) {
+    } // goto@label598
+    if (pipe) {
       while (number++ < mSpacesAfterChar) {
         this.beep(-3, -3)
       }
@@ -968,11 +968,11 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 }
                 ++bufferSizeInBytes
               }
-            }
+            } // goto@label170
             log("MyPlayerMorse.doInBackground ERROR Creating tone")
             mDoneLatch.countDown()
             return null
-          }
+          } // goto@label161
           log("MyPlayerMorse.doInBackground registering broadcast receiver instance=$inst")
           val var6 = LocalBroadcastManager.getInstance(tmpContext)
           val var30 = IntentFilter()
@@ -1036,7 +1036,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                   } catch (var20: Exception) {
                     var10001 = false
                   }
-                }
+                } // goto@label137
                 log(
                   String.format(
                     Locale.US,
@@ -1046,7 +1046,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 )
                 mDoneLatch.countDown()
                 return null
-              }
+              } // goto@label138
               log(
                 String.format(
                   Locale.US,
@@ -1056,7 +1056,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               )
               mDoneLatch.countDown()
               return null
-            }
+            } // goto@label139
             if (!mEnableSound) {
               log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
               mute()
@@ -1201,7 +1201,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                     var10001 = false
                                     return@label241
                                   }
-                                }
+                                } // goto@label231
                                 run label238@{
                                   try {
                                     if (VERSION.SDK_INT >= 21) {
@@ -1224,7 +1224,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                     var10001 = false
                                     return@label241
                                   }
-                                }
+                                } // goto@label238
                                 try {
                                   audioTrack.stop()
                                   log("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=$inst")
@@ -1237,7 +1237,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                   var10001 = false
                                   return@label241
                                 }
-                              }
+                              } // goto@label230
                               try {
                                 var3 = mList[var3]
                               } catch (var25: IllegalStateException) {
@@ -1271,7 +1271,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                     var10001 = false
                                     return@label241
                                   }
-                                }
+                                } // goto@label239
                               }
                               val var45: LongArray
                               try {
@@ -1424,7 +1424,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                   var10001 = false
                                   return@label241
                                 }
-                              }
+                              } // goto@label172
                               try {
                                 if (VERSION.SDK_INT < Build.VERSION_CODES.O) TODO()
                                 vibrator1!!.vibrate(
@@ -1440,12 +1440,12 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                               } catch (var6: Exception) {
                                 var10001 = false
                               }
-                            }
+                            } // goto@label241
                             var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->Exception"
                             return@label224
-                          }
+                          } // goto@label223
                           var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
-                        }
+                        } // goto@label224
                         log(var43)
                         mDoneLatch.countDown()
                       }
