@@ -51,7 +51,7 @@ class ActivityReminders constructor() : Activity(), View.OnClickListener,
     }
   }
 
-  override fun onActivityResult(var1: Int, var2: Int, var3: Intent) {
+  override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
     log("ActivityReminders.onActivityResult")
     if (var1 == 1) {
       if (var2 == -1) {

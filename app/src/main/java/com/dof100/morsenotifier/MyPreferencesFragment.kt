@@ -237,8 +237,8 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
     super.onActivityCreated(var1)
   }
 
-  public override fun onActivityResult(var1: Int, var2: Int, var3: Intent) {
-    var var3: Intent = var3
+  public override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
+    var var3: Intent? = var3
     if (var1 == 203) {
       if (var2 == 1) {
         log("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS")
@@ -247,7 +247,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
       log("MyPreferencesFragment.onActivityResult CHECK_VOICE_DATA_PASS failed! No voice data!")
       try {
         var3 = Intent()
-        var3.setAction("android.speech.tts.engine.INSTALL_TTS_DATA")
+        var3!!.setAction("android.speech.tts.engine.INSTALL_TTS_DATA")
         this.startActivity(var3)
         return
       } catch (var4: Exception) {

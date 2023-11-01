@@ -62,8 +62,8 @@ class ActivityAppFilter constructor() : Activity() {
     c!!.j = m!!.getText().toString()
   }
 
-  override fun onCreate(var1: Bundle?) {
-    var var1: Bundle? = var1
+  override fun onCreate(bundle: Bundle?) {
+    var var1: Bundle? = bundle
     super.onCreate(var1)
     log("ActivityAppFilter.onCreate")
     this.setContentView(R.layout.activity_appfilter)
@@ -102,7 +102,7 @@ class ActivityAppFilter constructor() : Activity() {
       )
     )
     d = findViewById<View>(R.id.sp_AppName) as Spinner?
-    d!!.adapter = ArrayAdapter<String?>(this, 17367048, a!!.a().toTypedArray() as Array<String?>).apply {
+    d!!.adapter = ArrayAdapter<String?>(this, 17367048, a!!.a().map { it as String? }.toTypedArray()).apply {
       setDropDownViewResource(17367049)
     }
     e = findViewById<View>(R.id.et_criteria_Contains) as EditText?

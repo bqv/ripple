@@ -438,8 +438,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
 
                                                                                                                                                                                         '|' -> {
                                                                                                                                                                                           this.unknown2(-2, -1)
-                                                                                                                                                                                          flag =
-                                                                                                                                                                                            false
+                                                                                                                                                                                          flag = false
                                                                                                                                                                                           return@label598
                                                                                                                                                                                         }
 
@@ -821,7 +820,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     mList.add(int2)
   }
 
-  private fun unknown3() {
+  private fun mute() {
     if (audioTrack != null) {
       try {
         if (VERSION.SDK_INT >= 21) {
@@ -829,7 +828,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
           return
         }
         audioTrack!!.setStereoVolume(0.0f, 0.0f)
-      } catch (var2: Exception) {
+      } catch (e: Exception) {
       }
     }
   }
@@ -897,55 +896,34 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
         var2 = iter
       }
     }
-    var var8 = StringBuilder()
-    var8.append("MyPlayerMorse.seqCreate after message mList.size=")
-    var8.append(mList.size)
-    var8.append(" Nelements=")
-    var8.append(nelements)
-    log(var8.toString())
+    log("MyPlayerMorse.seqCreate after message mList.size=${mList.size} Nelements=$nelements")
     this.unknown2(-7, -3)
     this.unknown2(-7, -3)
     this.unknown2(-7, -3)
     this.unknown2(-7, -3)
     this.unknown2(-7, -3)
     this.unknown2(-8, -3)
-    var8 = StringBuilder()
-    var8.append("MyPlayerMorse.seqCreate after mDelayAfter mList.size=")
-    var8.append(mList.size)
-    log(var8.toString())
+    log("MyPlayerMorse.seqCreate after mDelayAfter mList.size=${mList.size}")
   }
 
   override fun doInBackground(vararg args: Void?): Void? {
     return try {
-      var var27: StringBuilder
       return if (wr_context == null) {
-        var27 = StringBuilder()
-        var27.append("MyMorsePlayer.doInBackground ERROR wr_context=null instance=")
-        var27.append(inst)
-        log(var27.toString())
+        log("MyMorsePlayer.doInBackground ERROR wr_context=null instance=$inst")
         mDoneLatch.countDown()
         null
       } else {
         val tmpContext = wr_context?.get()
         if (tmpContext == null) {
-          var27 = StringBuilder()
-          var27.append("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=")
-          var27.append(inst)
-          log(var27.toString())
+          log("MyMorsePlayer.doInBackground ERROR tmpContext=null instance=$inst")
           mDoneLatch.countDown()
           null
         } else if (nelements <= 0) {
-          var27 = StringBuilder()
-          var27.append("MyMorsePlayer.doInBackground Exiting...  mNElements=")
-          var27.append(nelements)
-          log(var27.toString())
+          log("MyMorsePlayer.doInBackground Exiting...  mNElements=$nelements")
           mDoneLatch.countDown()
           null
         } else {
-          var27 = StringBuilder()
-          var27.append("MyPlayerMorse.doInBackground. Creating tone instance=")
-          var27.append(inst)
-          log(var27.toString())
+          log("MyPlayerMorse.doInBackground. Creating tone instance=$inst")
           var bufferSizeInBytes: Int
           var nTries: Int
           var var10001: Boolean
@@ -1003,47 +981,25 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
             mDoneLatch.countDown()
             return null
           }
-          var var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground registering broadcast receiver instance=")
-          var5.append(inst)
-          log(var5.toString())
+          log("MyPlayerMorse.doInBackground registering broadcast receiver instance=$inst")
           val var6 = LocalBroadcastManager.getInstance(tmpContext)
           val var30 = IntentFilter()
           var30.addAction("LBR_ACTION_FINISH")
           var6.registerReceiver(broadcastReceiver, var30)
           nSamplesDur = tmpTone.nSamples / nelements
-          var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
-          var5.append(nelements)
-          log(var5.toString())
-          var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
-          var5.append(tmpTone.nSamples)
-          log(var5.toString())
-          var5 = StringBuilder()
-          var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
-          var5.append(nSamplesDur)
-          log(var5.toString())
-          val var29: StringBuilder
+          log("MyPlayerMorse.doInBackground AudioTrack play nElements=$nelements")
+          log("MyPlayerMorse.doInBackground AudioTrack play nSamples=${tmpTone.nSamples}")
+          log("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=$nSamplesDur")
           if (tmpTone.nSamples <= 0) {
-            var29 = StringBuilder()
-            var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=")
-            var29.append(tmpTone.nSamples)
-            log(var29.toString())
+            log("MyMorsePlayer.doInBackground Exiting...  tmpTone.mNSamples=${tmpTone.nSamples}")
             mDoneLatch.countDown()
             null
           } else if (tmpTone.mGeneratedSnd.size <= 0) {
-            var29 = StringBuilder()
-            var29.append("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=")
-            var29.append(tmpTone.mGeneratedSnd.size)
-            log(var29.toString())
+            log("MyMorsePlayer.doInBackground Exiting...  tmpTone.mGeneratedSnd.length=${tmpTone.mGeneratedSnd.size}")
             mDoneLatch.countDown()
             null
           } else {
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=")
-            var5.append(bufferSize)
-            log(var5.toString())
+            log("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=$bufferSize")
             bufferSizeInBytes = try {
               AudioTrack.getMinBufferSize(samplerate, 4, 2)
             } catch (var18: Exception) {
@@ -1111,12 +1067,9 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
             }
             if (!c) {
               log("MyPlayerMorse doInBackground mEnableSound=false. Muting...")
-              unknown3()
+              mute()
             }
-            var5 = StringBuilder()
-            var5.append("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =")
-            var5.append(audioTrack!!.state)
-            log(var5.toString())
+            log("MyPlayerMorse.doInBackground. Audiotrack created. checking mAudioTrack state =${audioTrack!!.state}")
             bufferSizeInBytes = 0
             while (audioTrack!!.state != 1) {
               nTries = bufferSizeInBytes + 1
@@ -1125,32 +1078,20 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               } catch (var17: InterruptedException) {
                 var17.printStackTrace()
               }
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=")
-              var5.append(audioTrack!!.state)
-              log(var5.toString())
+              log("MyPlayerMorse.doInBackground. Audiotrack created. mAudioTrack.getstate=${audioTrack!!.state}")
               bufferSizeInBytes = nTries
               if (nTries >= 20) {
-                var27 = StringBuilder()
-                var27.append("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=")
-                var27.append(inst)
-                log(var27.toString())
+                log("MyPlayerMorse.doInBackground ERROR mAudioTrack.state!=STATE_INITIALIZED after 20 tries. Stopping... instance=$inst")
                 mDoneLatch.countDown()
                 return null
               }
             }
             if (commandStop) {
-              var27 = StringBuilder()
-              var27.append("MyPlayerMorse.doInBackground commandstop=true... instance=")
-              var27.append(inst)
-              log(var27.toString())
+              log("MyPlayerMorse.doInBackground commandstop=true... instance=$inst")
               mDoneLatch.countDown()
               null
             } else if (mDoneLatch.count != 1L) {
-              var27 = StringBuilder()
-              var27.append("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=")
-              var27.append(inst)
-              log(var27.toString())
+              log("MyPlayerMorse.doInBackground mDoneLatch.getCount() != 1 instance=$inst")
               null
             } else {
               if (f > 0) {
@@ -1167,33 +1108,15 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                   try {
                     Thread.sleep(var9)
                   } catch (e: InterruptedException) {
-                    var5 = StringBuilder()
-                    var5.append("MyPlayerMorse.doInBackground ERROR sleep in delay before instance=")
-                    var5.append(inst)
-                    log(var5.toString())
+                    log("MyPlayerMorse.doInBackground ERROR sleep in delay before instance=$inst")
                   }
                 }
-                var5 = StringBuilder()
-                var5.append("MyPlayerMorse.doInBackground Waiting finished instance=")
-                var5.append(inst)
-                log(var5.toString())
+                log("MyPlayerMorse.doInBackground Waiting finished instance=$inst")
               }
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground Start Playing instance=")
-              var5.append(inst)
-              log(var5.toString())
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground AudioTrack play nElements=")
-              var5.append(nelements)
-              log(var5.toString())
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamples=")
-              var5.append(tmpTone.nSamples)
-              log(var5.toString())
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=")
-              var5.append(nSamplesDur)
-              log(var5.toString())
+              log("MyPlayerMorse.doInBackground Start Playing instance=$inst")
+              log("MyPlayerMorse.doInBackground AudioTrack play nElements=$nelements")
+              log("MyPlayerMorse.doInBackground AudioTrack play nSamples=${tmpTone.nSamples}")
+              log("MyPlayerMorse.doInBackground AudioTrack play nSamplesDur=$nSamplesDur")
               try {
                 audioTrack!!.play()
               } catch (var14: IllegalStateException) {
@@ -1205,10 +1128,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 mDoneLatch.countDown()
                 return null
               }
-              var5 = StringBuilder()
-              var5.append("MyPlayerMorse.doInBackground Setting notifications instance=")
-              var5.append(inst)
-              log(var5.toString())
+              log("MyPlayerMorse.doInBackground Setting notifications instance=$inst")
               try {
                 audioTrack!!.notificationMarkerPosition = tmpTone.nSamples - 1
                 audioTrack!!.positionNotificationPeriod = nSamplesDur
@@ -1216,33 +1136,22 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 val var37: AudioTrack.OnPlaybackPositionUpdateListener =
                   object : AudioTrack.OnPlaybackPositionUpdateListener {
                     override fun onMarkerReached(audioTrack: AudioTrack) {
-                      val var3: StringBuilder
                       if (audioTrack == null) {
-                        var3 = StringBuilder()
-                        var3.append("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=")
-                        var3.append(inst)
-                        log(var3.toString())
+                        log("MyPlayerMorse.doInBackground onMarkerReached audiotrack=null instance=$inst")
                       } else {
                         try {
                           audioTrack.stop()
                         } catch (var2x: IllegalStateException) {
                           log("MyPlayerMorse.doInBackground ERROR IllegalStateException")
                         }
-                        var3 = StringBuilder()
-                        var3.append("MyPlayerMorse.doInBackground onMarkerReached instance=")
-                        var3.append(inst)
-                        log(var3.toString())
+                        log("MyPlayerMorse.doInBackground onMarkerReached instance=$inst")
                         mDoneLatch.countDown()
                       }
                     }
 
                     override fun onPeriodicNotification(audioTrack: AudioTrack) {
-                      var var44: StringBuilder
                       if (audioTrack == null) {
-                        var44 = StringBuilder()
-                        var44.append("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=")
-                        var44.append(inst)
-                        log(var44.toString())
+                        log("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=$inst")
                       } else {
                         var var43: String
                         run label224@{
@@ -1326,10 +1235,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                 }
                                 try {
                                   audioTrack.stop()
-                                  var44 = StringBuilder()
-                                  var44.append("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=")
-                                  var44.append(inst)
-                                  log(var44.toString())
+                                  log("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=$inst")
                                   mDoneLatch.countDown()
                                   return@onPeriodicNotification
                                 } catch (var27: IllegalStateException) {
@@ -1352,12 +1258,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                               if (var3 == -7) {
                                 run label239@{
                                   try {
-                                    val var4 = StringBuilder()
-                                    var4.append("MyPlayerMorse.doInBackground onPeriodicNotification STOP detected at ")
-                                    var4.append(var2x)
-                                    var4.append("...  Muting... instance=")
-                                    var4.append(inst)
-                                    log(var4.toString())
+                                    log("MyPlayerMorse.doInBackground onPeriodicNotification STOP detected at $var2x...  Muting... instance=$inst")
                                     if (VERSION.SDK_INT >= 21) {
                                       audioTrack.setVolume(0.0f)
                                       return@label239
@@ -1590,10 +1491,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
   }
 
   fun playDone(context: Context?) {
-    var var2 = StringBuilder()
-    var2.append("MyPlayerMorse.playDone instance=")
-    var2.append(inst)
-    log(context, var2.toString())
+    log(context, "MyPlayerMorse.playDone instance=$inst")
     val var15: String
     if (!m) {
       var15 = "MyPlayerMorse.playDone ERROR mPlayInitOK = false"
@@ -1622,30 +1520,21 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
       }
       log(context, "MyPlayerMorse.playDone Waiting OK")
       try {
-        var2 = StringBuilder()
-        var2.append("MyPlayerMorse.playDone unregistering broadcast receiver  instance=")
-        var2.append(inst)
-        log(context, var2.toString())
+        log(context,"MyPlayerMorse.playDone unregistering broadcast receiver  instance=$inst")
         LocalBroadcastManager.getInstance(context!!).unregisterReceiver(
           broadcastReceiver
         )
       } catch (var13: Exception) {
         var13.printStackTrace()
       }
-      var2 = StringBuilder()
-      var2.append("MyPlayerMorse.playDone broadcasting finish  instance=")
-      var2.append(inst)
-      log(context, var2.toString())
+      log(context,"MyPlayerMorse.playDone broadcasting finish  instance=$inst")
       if (!commandStop) {
         App.b(context)
       }
-      var2 = StringBuilder()
-      var2.append("MyPlayerMorse.playDone deleting audiotrack  instance=")
-      var2.append(inst)
-      log(context, var2.toString())
+      log(context,"MyPlayerMorse.playDone deleting audiotrack  instance=$inst")
       if (audioTrack != null) {
         try {
-          unknown3()
+          mute()
           audioTrack!!.stop()
           audioTrack!!.release()
           audioTrack = null
@@ -1654,18 +1543,12 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
           audioTrack = null
         }
       }
-      var2 = StringBuilder()
-      var2.append("MyPlayerMorse.playDone deleting context reference  instance=")
-      var2.append(inst)
-      log(context, var2.toString())
+      log(context, "MyPlayerMorse.playDone deleting context reference  instance=$inst")
       if (wr_context != null) {
         wr_context?.clear()
         wr_context = null
       }
-      var2 = StringBuilder()
-      var2.append("MyPlayerMorse.playDone OUT instance=")
-      var2.append(inst)
-      var15 = var2.toString()
+      var15 = "MyPlayerMorse.playDone OUT instance=$inst"
     }
     log(context, var15)
   }
@@ -1742,42 +1625,21 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     }
     mSpacesAfterChar = arepeat * 3 / mdur
     s = System.currentTimeMillis()
-    var var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit text=")
-    var14.append(text)
-    log(context, var14.toString())
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit pref_call_freq=")
-    var14.append(pref_call_freq)
-    log(context, var14.toString())
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit samplerate=")
-    var14.append(samplerate)
-    log(context, var14.toString())
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit mdur=")
-    var14.append(mdur)
-    log(context, var14.toString())
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit mSpacesAfterChar=")
-    var14.append(mSpacesAfterChar)
-    log(context, var14.toString())
+    log(context, "MyPlayerMorse.playInit text=$text")
+    log(context, "MyPlayerMorse.playInit pref_call_freq=$pref_call_freq")
+    log(context, "MyPlayerMorse.playInit samplerate=$samplerate")
+    log(context, "MyPlayerMorse.playInit mdur=$mdur")
+    log(context, "MyPlayerMorse.playInit mSpacesAfterChar=$mSpacesAfterChar")
     log(context, "MyPlayerMorse.playInit Creating sequence")
     seqCreate()
     nelements = mList.size / 2
     bufferSize = samplerate * mdur * nelements / 1000
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit nelements ")
-    var14.append(nelements)
-    log(context, var14.toString())
+    log(context, "MyPlayerMorse.playInit nelements $nelements")
     if (d) {
       log(context, "MyPlayerMorse.playInit Initializing vibration")
       vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
     m = true
-    var14 = StringBuilder()
-    var14.append("MyPlayerMorse.playInit OUT instance=")
-    var14.append(inst)
-    log(context, var14.toString())
+    log(context, "MyPlayerMorse.playInit OUT instance=$inst")
   }
 }

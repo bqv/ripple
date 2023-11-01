@@ -17,6 +17,7 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
   private var a: MyAppNotificationFilters? = null
   private var b: MyAppFiltersArrayAdapter? = null
   private var c: ListView? = null
+
   public override fun handle(var1: MyAppNotificationFilter, var2: Int, var3: View) {
     log("ActivityAppFilters.onRowButtonClick")
     if (var3.getId() == R.id.b_delete) {
@@ -49,7 +50,7 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
     }
   }
 
-  override fun onActivityResult(var1: Int, var2: Int, var3: Intent) {
+  override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
     log("ActivityAppFilters.onActivityResult")
     if (var1 == 1) {
       if (var2 == -1) {
