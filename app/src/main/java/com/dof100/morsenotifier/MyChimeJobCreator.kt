@@ -26,14 +26,14 @@ internal class MyChimeJobCreator constructor() : JobCreator {
     val tags: Array<Any>
     val locale2: Locale
     when (ret) {
-      0 as Byte -> {
+      0.toByte() -> {
         job = MyJob()
         locale1 = Locale.US
         tags = arrayOf(var1)
         locale2 = locale1
       }
 
-      1 as Byte -> {
+      1.toByte() -> {
         job = MyJob()
         locale1 = Locale.US
         tags = arrayOf(var1)

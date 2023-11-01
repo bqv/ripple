@@ -122,27 +122,27 @@ class BRSystem : BroadcastReceiver() {
           val var9: Resources
           var var12: Int
           when (var6) {
-            0 as Byte -> {
+            0.toByte() -> {
               var9 = var1.resources
               var12 = R.string.MSG_SYSTEM_POWER_CONNECTED
             }
 
-            1 as Byte -> {
+            1.toByte() -> {
               var9 = var1.resources
               var12 = R.string.MSG_SYSTEM_POWER_DISCONNECTED
             }
 
-            2 as Byte -> {
+            2.toByte() -> {
               var9 = var1.resources
               var12 = R.string.MSG_SYSTEM_BATTERY_LOW
             }
 
-            3 as Byte -> {
+            3.toByte() -> {
               var9 = var1.resources
               var12 = R.string.MSG_SYSTEM_BATTERY_OK
             }
 
-            4 as Byte -> {
+            4.toByte() -> {
               var12 = a(
                 var1,
                 var2.getParcelableExtra<Parcelable>("networkInfo") as NetworkInfo?

@@ -53,9 +53,9 @@ class MyAppNotificationFilter constructor() {
       ret = -1
     }
     when (ret) {
-      0 as Byte -> return "All apps"
-      1 as Byte -> return "All system apps"
-      2 as Byte -> return "All non-system apps"
+      0.toByte() -> return "All apps"
+      1.toByte() -> return "All system apps"
+      2.toByte() -> return "All non-system apps"
       else -> {
         log(String.format("MyAppNotificationFilter.getAppName mPackage=%s", a))
         val packageManager: PackageManager? = context.getPackageManager()
@@ -117,9 +117,9 @@ class MyAppNotificationFilter constructor() {
     var var7: String?
     var var8: StringBuilder
     when (var9) {
-      0 as Byte -> var7 = "Notifications from all apps"
-      1 as Byte -> var7 = "Notifications from all android system apps"
-      2 as Byte -> var7 = "Notifications from all non-android system apps"
+      0.toByte() -> var7 = "Notifications from all apps"
+      1.toByte() -> var7 = "Notifications from all android system apps"
+      2.toByte() -> var7 = "Notifications from all non-android system apps"
       else -> {
         var7 = b(var1)
         var8 = StringBuilder()
@@ -191,12 +191,12 @@ class MyAppNotificationFilter constructor() {
     run label148@{
       run label147@{
         when (var12) {
-          0 as Byte -> return@label147
-          1 as Byte -> if (var1!!.b!!.startsWith("com.android") || (var1.b == "android")) {
+          0.toByte() -> return@label147
+          1.toByte() -> if (var1!!.b!!.startsWith("com.android") || (var1.b == "android")) {
             return@label147
           }
 
-          2 as Byte -> if (!var1!!.b!!.startsWith("com.android") && !(var1.b == "android")) {
+          2.toByte() -> if (!var1!!.b!!.startsWith("com.android") && !(var1.b == "android")) {
             return@label147
           }
 

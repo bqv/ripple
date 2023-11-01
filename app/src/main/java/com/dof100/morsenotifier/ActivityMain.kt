@@ -253,7 +253,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
     log("ActivityMain.checkAutostart question_AlreadyAsked")
   }
 
-  override fun onActivityResult(var1: Int, var2: Int, var3: Intent) {
+  override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
     log("ActivityMain.onActivityResult")
     if (var1 == 1) {
       App.Companion.c(getApplicationContext())

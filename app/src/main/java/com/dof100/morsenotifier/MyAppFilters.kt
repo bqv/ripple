@@ -58,9 +58,9 @@ internal class MyAppFilters constructor(var1: Context) {
       var4 = -1
     }
     when (var4) {
-      0 as Byte -> return 0
-      1 as Byte -> return 1
-      2 as Byte -> return 2
+      0.toByte() -> return 0
+      1.toByte() -> return 1
+      2.toByte() -> return 2
       else -> {
         log("MyAppFilters.getApplicationInfoIndex")
         var2 = 3

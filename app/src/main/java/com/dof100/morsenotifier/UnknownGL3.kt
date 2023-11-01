@@ -187,7 +187,7 @@ internal class UnknownGL3(var1: GL10, var2: Int, var3: Float) {
       var1.glColor4f(var6, var7, var8, 1.0f)
     }
     for (var12 in 0 until var9) {
-      var var14: Char = 0 as Char
+      var var14: Char = 0.toChar()
       run label23@{
         val var13 = var2[var12]
         if (var13.code >= 0) {
