@@ -99,7 +99,7 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
     a!!.a(this)
     b = MyAppFiltersArrayAdapter(this, a, this)
     this.setContentView(R.layout.activity_appfilters)
-    c = findViewById<View>(R.id.lv_apps_select) as ListView?
+    c = findViewById<ListView>(R.id.lv_apps_select)
     c!!.setAdapter(b)
     c!!.setOnItemClickListener(object : OnItemClickListener {
       public override fun onItemClick(
@@ -108,13 +108,10 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
         var3: Int,
         var4: Long
       ) {
-        val var6: StringBuilder = StringBuilder()
-        var6.append("ActivityAppFilters.onItemClick ")
-        var6.append(var2)
-        log(var6.toString())
+        log("ActivityAppFilters.onItemClick $var2")
       }
     })
-    (findViewById<View>(R.id.b_apps_select_add) as Button).setOnClickListener(this)
-    (findViewById<View>(R.id.b_apps_select_checkrecent) as Button).setOnClickListener(this)
+    findViewById<Button>(R.id.b_apps_select_add).setOnClickListener(this)
+    findViewById<Button>(R.id.b_apps_select_checkrecent).setOnClickListener(this)
   }
 }

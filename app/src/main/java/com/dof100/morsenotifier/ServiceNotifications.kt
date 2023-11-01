@@ -105,10 +105,7 @@ class ServiceNotifications constructor() : NotificationListenerService() {
 
   private fun b(): Boolean {
     val var1: Long = System.currentTimeMillis()
-    val var3: StringBuilder = StringBuilder()
-    var3.append("ServiceNotifications.notificationAnnounceCheckCandidates Queue length=")
-    var3.append(f!!.notifications.size)
-    log(this, var3.toString() as String?)
+    log(this, "ServiceNotifications.notificationAnnounceCheckCandidates Queue length=${f!!.notifications.size}")
     val var4: Iterator<*> = f!!.notifications.iterator()
     var var5: Int = -1
     while (true) {

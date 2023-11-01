@@ -278,10 +278,7 @@ internal class MyMorseRenderer constructor(
         var4
       )
     )
-    val var7: StringBuilder = StringBuilder()
-    var7.append("MyMorseRenderer.onSurfaceChanged aspect=")
-    var7.append(var5)
-    log(var7.toString())
+    log("MyMorseRenderer.onSurfaceChanged aspect=$var5")
     var1.glViewport(0, 0, var2, var4)
     var1.glMatrixMode(5889)
     var1.glLoadIdentity()

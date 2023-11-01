@@ -66,15 +66,9 @@ internal class MyAppFiltersArrayAdapter constructor(
       if (var2 == null) {
         log(context, "MyAppFiltersArrayAdapter.onClick ERROR f=null")
       } else {
-        var var3: StringBuilder = StringBuilder()
-        var3.append("MyAppFiltersArrayAdapter.onClick f.package=")
-        var3.append(var2.a)
-        log(var3.toString())
+        log("MyAppFiltersArrayAdapter.onClick f.package=${var2.a}")
         val var4: Int = appNotificationFilters!!.list.indexOf(var2)
-        var3 = StringBuilder()
-        var3.append("MyAppFiltersArrayAdapter.onClick index=")
-        var3.append(var4)
-        log(var3.toString())
+        log("MyAppFiltersArrayAdapter.onClick index=$var4")
         val var5: String
         if (var1.getId() == R.id.b_delete) {
           var5 = "MyAppFiltersArrayAdapter.onClick b_delete"

@@ -32,12 +32,7 @@ internal class MyRecentNotificationsArrayAdapter constructor(
 
   public override fun getView(var1: Int, var2: View?, var3: ViewGroup): View {
     var var1: Int = var1
-    val var4: StringBuilder = StringBuilder()
-    var4.append("MyAppFiltersArrayAdapter.getView position=")
-    var4.append(var1)
-    var4.append("  v=")
-    var4.append(var2)
-    log(var4.toString())
+    log("MyAppFiltersArrayAdapter.getView position=$var1  v=$var2")
     val var5: MyRecentAppNotification? = getItem(var1) as MyRecentAppNotification?
     var var12: MyRecentAppNotification? = var5
     if (var5 == null) {

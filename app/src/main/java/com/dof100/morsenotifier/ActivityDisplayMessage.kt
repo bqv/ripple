@@ -59,14 +59,8 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
         o = System.currentTimeMillis()
       } else {
         if (("LBR_ACTION_FINISH" == var2.getAction())) {
-          var var5: StringBuilder = StringBuilder()
-          var5.append("ActivityDisplayMessage.BroadcastReceiver LBR_ACTION_FINISH instance=")
-          var5.append(a)
-          log(var5.toString())
-          var5 = StringBuilder()
-          var5.append("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_FINISH  (stopping) instance=")
-          var5.append(a)
-          log(var5.toString())
+          log("ActivityDisplayMessage.BroadcastReceiver LBR_ACTION_FINISH instance=$a")
+          log("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_FINISH  (stopping) instance=$a")
           a()
         }
       }
@@ -154,12 +148,8 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
       k = var1.getInt("PARAM_STOPMETHOD", 1)
     }
     var var2: Point
-    var var20: StringBuilder
     run label158@{
-      var20 = StringBuilder()
-      var20.append("ActivityDisplayMessage.onCreate instance=")
-      var20.append(a)
-      log(var20.toString())
+      log("ActivityDisplayMessage.onCreate instance=$a")
       var2 = Point()
       val var21: WindowManager? = getWindowManager()
       val var24: String
@@ -343,10 +333,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
       log(this, "ActivityDisplayMessage.onCreate ERROR try setRenderer" as String?)
     }
     o = System.currentTimeMillis()
-    var20 = StringBuilder()
-    var20.append("ActivityDisplayMessage.onCreate OUT instance=")
-    var20.append(a)
-    log(var20.toString())
+    log("ActivityDisplayMessage.onCreate OUT instance=$a")
   }
 
   public override fun onDestroy() {
@@ -403,10 +390,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
   }
 
   public override fun onResume() {
-    var var1: StringBuilder = StringBuilder()
-    var1.append("ActivityDisplayMessage.onResume  instance=")
-    var1.append(a)
-    log(var1.toString())
+    log("ActivityDisplayMessage.onResume  instance=$a")
     super.onResume()
     t.run()
     val var2: LocalBroadcastManager = LocalBroadcastManager.getInstance(
@@ -418,10 +402,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
     var2.registerReceiver(r, var3)
     o = System.currentTimeMillis()
     s.postDelayed(t, 1000L)
-    var1 = StringBuilder()
-    var1.append("ActivityDisplayMessage.onResume  OUT instance=")
-    var1.append(a)
-    log(var1.toString())
+    log("ActivityDisplayMessage.onResume  OUT instance=$a")
   }
 
   override fun onStop() {

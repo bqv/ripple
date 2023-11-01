@@ -26,15 +26,9 @@ class ActivityAppFilter constructor() : Activity() {
   private var l: EditText? = null
   private var m: EditText? = null
   private fun a() {
-    var var1: StringBuilder = StringBuilder()
-    var1.append("ActivityAppFilter.filter2view package=")
-    var1.append(c!!.a)
-    log(var1.toString())
+    log("ActivityAppFilter.filter2view package=${c!!.a}")
     val var2: Int = a!!.a(c!!.a)
-    var1 = StringBuilder()
-    var1.append("ActivityAppFilter.filter2view package idx=")
-    var1.append(var2)
-    log(var1.toString())
+    log("ActivityAppFilter.filter2view package idx=$var2")
     d!!.post(object : Runnable {
       public override fun run() {
         if (var2 >= 0) {
@@ -56,12 +50,7 @@ class ActivityAppFilter constructor() : Activity() {
   private fun b() {
     val var1: Int = d!!.getSelectedItemPosition()
     c!!.a = (a!!.a.get(var1) as UnknownPkgMan).a
-    val var2: StringBuilder = StringBuilder()
-    var2.append("ActivityAppFilter.view2filter idx=")
-    var2.append(var1)
-    var2.append(" package=")
-    var2.append(c!!.a)
-    log(var2.toString())
+    log("ActivityAppFilter.view2filter idx=$var1 package=${c!!.a}")
     c!!.b = e!!.getText().toString()
     c!!.c = f!!.getText().toString()
     c!!.d = g!!.getText().toString()
@@ -83,15 +72,11 @@ class ActivityAppFilter constructor() : Activity() {
     a = MyAppFilters(this)
     var1 = getIntent().getExtras()
     var var2: Int
-    var var5: StringBuilder
     if (var1 != null) {
       var2 = var1.getInt("FILTERINDEX")
       if (var2 >= 0 && var2 < b!!.list.size) {
         c = b!!.list.get(var2)
-        var5 = StringBuilder()
-        var5.append("ActivityAppFilter.onCreate loaded filter at position = ")
-        var5.append(var2)
-        log(var5.toString())
+        log("ActivityAppFilter.onCreate loaded filter at position = $var2")
       } else {
         val var4: Locale = Locale.US
         val var3: Int = var2 + 1
@@ -106,10 +91,7 @@ class ActivityAppFilter constructor() : Activity() {
       c = MyAppNotificationFilter()
       b!!.list.add(c)
       var2 = b!!.list.size - 1
-      var5 = StringBuilder()
-      var5.append("ActivityAppFilter.onCreate created new filter at position = ")
-      var5.append(var2)
-      log(var5.toString())
+      log("ActivityAppFilter.onCreate created new filter at position = $var2")
     }
     this.setTitle(
       String.format(

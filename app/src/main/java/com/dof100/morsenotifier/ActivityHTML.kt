@@ -97,7 +97,7 @@ class ActivityHTML : Activity(), View.OnClickListener {
       a!!.setOnClickListener(this)
     }
     if (var6!!.lowercase(Locale.getDefault()).endsWith(".html")) {
-      val var18: StringBuilder = StringBuilder()
+      var var18 = ""
       run label65@{
         var var10000: IOException
         run label64@{
@@ -124,7 +124,7 @@ class ActivityHTML : Activity(), View.OnClickListener {
               return@label65
             }
             try {
-              var18.append(var6)
+              var18 = var6!!
             } catch (var8: IOException) {
               var10000 = var8
               var10001 = false
@@ -135,7 +135,7 @@ class ActivityHTML : Activity(), View.OnClickListener {
         val var20 = var10000
         var20.printStackTrace()
       }
-      var15 = var18.toString().replace("[APPNAME]", App.e!!).replace("[APPVERSION]", App.f!!)
+      var15 = var18.replace("[APPNAME]", App.e!!).replace("[APPVERSION]", App.f!!)
         .replace("[VERTICALALIGN]", var3!!).replace("[APPPLAYSTORE]", App.l!!)
         .replace("[APPPLAYSTOREPRO]", App.m!!)
       var15 = if (App.b) {

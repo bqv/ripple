@@ -96,11 +96,8 @@ class MyPreferenceNumber constructor(var1: Context, var2: AttributeSet) :
     var var1: String? = Integer.toString(c)
     var var2: String? = var1
     if (!g.isEmpty()) {
-      val var4: StringBuilder
-      if ((g == "%")) {
-        var4 = StringBuilder()
-      } else {
-        var4 = StringBuilder()
+      val var4 = StringBuilder()
+      if (!(g == "%")) {
         var4.append(var1)
         var1 = " "
       }
@@ -108,27 +105,16 @@ class MyPreferenceNumber constructor(var1: Context, var2: AttributeSet) :
       var4.append(g)
       var2 = var4.toString()
     }
-    val var3: StringBuilder = StringBuilder()
-    var3.append("MyNumberPreference.getValueStr =")
-    var3.append(var2)
-    log(var3.toString())
+    log("MyNumberPreference.getValueStr =$var2")
     return var2
   }
 
   protected fun a(var1: View) {
-    val var2: StringBuilder = StringBuilder()
-    var2.append("MyNumberPreference ")
-    var2.append(getKey())
-    var2.append(" myCreateView")
-    log(var2.toString())
+    log("MyNumberPreference ${getKey()} myCreateView")
     val var7: RelativeLayout =
-      (var1.findViewById<View>(16908304) as TextView).getParent() as RelativeLayout
+      var1.findViewById<TextView>(16908304).getParent() as RelativeLayout
     if (i != null) {
-      val var3: StringBuilder = StringBuilder()
-      var3.append("MyNumberPreference ")
-      var3.append(getKey())
-      var3.append(" myCreateView mValueTV!=null")
-      log(var3.toString())
+      log("MyNumberPreference ${getKey()} myCreateView mValueTV!=null")
       var7.removeView(i)
       i = null
     }
@@ -209,11 +195,7 @@ class MyPreferenceNumber constructor(var1: Context, var2: AttributeSet) :
   }
 
   override fun onCreateView(var1: ViewGroup): View {
-    val var2: StringBuilder = StringBuilder()
-    var2.append("MyNumberPreference ")
-    var2.append(getKey())
-    var2.append(" onCreateView")
-    log(var2.toString())
+    log("MyNumberPreference ${getKey()} onCreateView")
     val var3: View = super.onCreateView(var1)
     this.a(var3)
     return var3

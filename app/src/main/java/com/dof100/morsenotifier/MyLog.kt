@@ -36,21 +36,11 @@ internal object MyLog {
     webView.settings.useWideViewPort = true
     webView.settings.builtInZoomControls = true
     val logFile = File(activity.filesDir, "notif_log.txt")
-    var logMessage: StringBuilder
     if (logFile.exists()) {
-      logMessage = StringBuilder()
-      logMessage.append("MyLog.logShow ")
-      logMessage.append(logFile.absolutePath)
-      log(logMessage.toString())
-      logMessage = StringBuilder()
-      logMessage.append("file:///")
-      logMessage.append(logFile)
-      webView.loadUrl(logMessage.toString())
+      log("MyLog.logShow ${logFile.absolutePath}")
+      webView.loadUrl("file:///$logFile")
     } else {
-      logMessage = StringBuilder()
-      logMessage.append("MyLog.logShow: file not found: ")
-      logMessage.append(logFile)
-      log(logMessage.toString())
+      log("MyLog.logShow: file not found: $logFile")
     }
     webView.webViewClient = object : WebViewClient() {
       @TargetApi(24)
@@ -75,16 +65,17 @@ internal object MyLog {
     builder.setCancelable(false)
     builder.setPositiveButton("Send") { var112: DialogInterface?, var2x: Int ->
       log("MyLog.logShow: creating email")
-      val emailMessage = StringBuilder()
-      emailMessage.append("The log file below is about to be sent via email to 100dof.com\n")
-      emailMessage.append("for debugging purposes. \n")
-      emailMessage.append("Please take a minute to delete any sensitive personal\n")
-      emailMessage.append("information before sending it.\n")
-      emailMessage.append("\n")
-      emailMessage.append(String.format(Locale.US, "OS  : Android %s\n", VERSION.RELEASE))
-      emailMessage.append(String.format(Locale.US, "App: %s\n", activity.packageName))
-      emailMessage.append("\n")
-      emailMessage.append("--- LOG STARTS HERE --- \n")
+      val emailMessage = StringBuilder().apply {
+        append("The log file below is about to be sent via email to 100dof.com\n")
+        append("for debugging purposes. \n")
+        append("Please take a minute to delete any sensitive personal\n")
+        append("information before sending it.\n")
+        append("\n")
+        append(String.format(Locale.US, "OS  : Android %s\n", VERSION.RELEASE))
+        append(String.format(Locale.US, "App: %s\n", activity.packageName))
+        append("\n")
+        append("--- LOG STARTS HERE --- \n")
+      }
       run label42@{
         var ioException: IOException
         run label41@{

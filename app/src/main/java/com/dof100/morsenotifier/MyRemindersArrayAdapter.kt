@@ -25,12 +25,7 @@ internal class MyRemindersArrayAdapter constructor(var1: Context, var2: MyRemind
   }
 
   public override fun getView(var1: Int, var2: View?, var3: ViewGroup): View {
-    val var4: StringBuilder = StringBuilder()
-    var4.append("MyRemindersArrayAdapter.getView position=")
-    var4.append(var1)
-    var4.append("  v=")
-    var4.append(var2)
-    log(var4.toString())
+    log("MyRemindersArrayAdapter.getView position=$var1  v=$var2")
     val var5: MyReminder = b!!.a.get(var1) as MyReminder
     var var8: View? = var2
     if (var2 == null) {
@@ -57,10 +52,7 @@ internal class MyRemindersArrayAdapter constructor(var1: Context, var2: MyRemind
         log(context, "MyRemindersArrayAdapter.onClick ERROR f=null")
       } else {
         val var3: Int = b!!.a.indexOf(var2)
-        val var4: StringBuilder = StringBuilder()
-        var4.append("MyRemindersArrayAdapter.onClick index=")
-        var4.append(var3)
-        log(var4.toString())
+        log("MyRemindersArrayAdapter.onClick index=$var3")
         val var5: String
         if (var1.getId() == R.id.b_delete) {
           var5 = "MyRemindersArrayAdapter.onClick b_delete"

@@ -136,14 +136,10 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
 
   private fun b() {
     var var1: String
-    var var2: StringBuilder
     var var4: Boolean
     run label88@{
       var1 = a!!.getText().toString().lowercase(Locale.getDefault()).trim({ it <= ' ' })
-      var2 = StringBuilder()
-      var2.append("ActivityMain.onActionOK command=")
-      var2.append(var1)
-      log(var2.toString())
+      log("ActivityMain.onActionOK command=$var1")
       val var3: Boolean = var1.startsWith("recent notifications on")
       var4 = true
       var var5: String?
@@ -208,10 +204,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
       toast(this, (var5)!!)
     }
     if (!var4) {
-      var2 = StringBuilder()
-      var2.append("Unknown service command: ")
-      var2.append(var1)
-      toast(this, var2.toString())
+      toast(this, "Unknown service command: $var1")
     }
   }
 

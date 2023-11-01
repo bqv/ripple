@@ -45,12 +45,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
                 continue
               }
               var4.add(var7.toString())
-              val var10: StringBuilder = StringBuilder()
-              var10.append("MyPreferencesFragment.init_pref_voice_locale Locale: ")
-              var10.append(var7.toString())
-              var10.append(" supported ")
-              var10.append(var9)
-              var8 = var10.toString()
+              var8 = "MyPreferencesFragment.init_pref_voice_locale Locale: $var7 supported $var9"
             }
             log(var8)
           }
@@ -107,24 +102,19 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
           e(var1)
         } else {
           if (var1 is PreferenceCategory || var1 is PreferenceScreen) {
-            val var3: StringBuilder
             val var4: String
             if (!(var2 == "pref_morse") && !(var2 == "pref_audio") && !(var2 == "pref_display")) {
               if (!(var2 == "pref_voice") || !App.Companion.c) {
                 return
               }
-              var3 = StringBuilder()
               var4 = "MyPreferencesFragment.checkPreference: remove voice key = "
             } else {
               if (!App.Companion.d) {
                 return
               }
-              var3 = StringBuilder()
               var4 = "MyPreferencesFragment.checkPreference: remove morse key = "
             }
-            var3.append(var4)
-            var3.append(var2)
-            log(var3.toString())
+            log("${var4}${var2}")
             var1.setEnabled(false)
           }
         }
@@ -315,10 +305,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
   public override fun onSharedPreferenceChanged(var1: SharedPreferences, var2: String?) {
     val var3: Preference? = findPreference(var2)
     if (var3 == null) {
-      val var4: StringBuilder = StringBuilder()
-      var4.append("MyPreferencesFragment.onSharedPreferenceChanged: p=null key=")
-      var4.append(var2)
-      log(var4.toString())
+      log("MyPreferencesFragment.onSharedPreferenceChanged: p=null key=$var2")
     } else {
       this.b(var3)
     }

@@ -13,7 +13,6 @@ internal class UnknownPkgMan {
       a = ""
       b = ""
     } else {
-      var var7: StringBuilder
       run label40@{
         a = var2.packageName
         var var10001: Boolean
@@ -31,32 +30,20 @@ internal class UnknownPkgMan {
         try {
           b = var6
           if (b!!.startsWith("com.android.")) {
-            var7 = StringBuilder()
-            var7.append(b!!.substring(12, 13).uppercase(Locale.getDefault()))
-            var7.append(b!!.substring(13))
-            b = var7.toString()
+            b = "${b!!.substring(12, 13).uppercase(Locale.getDefault())}${b!!.substring(13)}"
           }
         } catch (var4: Exception) {
           var10001 = false
           return@label40
         }
         try {
-          var7 = StringBuilder()
-          var7.append(b)
-          var7.append(" (")
-          var7.append(var2.packageName)
-          var7.append(")")
-          b = var7.toString()
+          b = "$b (${var2.packageName})"
           return
         } catch (var3: Exception) {
           var10001 = false
         }
       }
-      var7 = StringBuilder()
-      var7.append(" (")
-      var7.append(var2.packageName)
-      var7.append(")")
-      b = var7.toString()
+      b = " (${var2.packageName})"
     }
   }
 

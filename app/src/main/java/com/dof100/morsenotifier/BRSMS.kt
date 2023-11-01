@@ -153,10 +153,7 @@ class BRSMS : BroadcastReceiver() {
         var19 = var5
         var20 = var24
       }
-      val var25 = StringBuilder()
-      var25.append("BRSMS: Exception smsReceiver")
-      var25.append(var20)
-      Log.e("BRSMS", var25.toString())
+      Log.e("BRSMS", "BRSMS: Exception smsReceiver $var20")
       var5 = var19
       var19 = var6
     }
@@ -165,9 +162,7 @@ class BRSMS : BroadcastReceiver() {
       String.format(
         Locale.US,
         "BRSMS.onReceive Sending intent to ServiceMain info=%s callerID=%s text=%s",
-        var5,
-        var19,
-        var4
+        var5, var19, var4
       )
     )
     val var23 = Intent(var1, ServiceMain::class.java)

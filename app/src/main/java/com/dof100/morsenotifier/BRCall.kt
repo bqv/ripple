@@ -38,15 +38,9 @@ class BRCall : BroadcastReceiver() {
           log(var1, "BRCall.onReceive EXTRA_STATE_???????. Broadcasting finish")
           App.Companion.b(var1)
         } else {
-          var var14 = StringBuilder()
-          var14.append("BRCall.onReceive EXTRA_STATE_RINGING lastState  = ")
-          var14.append(var6)
-          log(var1, var14.toString())
+          log(var1, "BRCall.onReceive EXTRA_STATE_RINGING lastState  = $var6")
           var4 = var2.hasExtra("incoming_number")
-          var14 = StringBuilder()
-          var14.append("BRCall.onReceive EXTRA_STATE_RINGING hasCallerID  = ")
-          var14.append(var4)
-          log(var1, var14.toString())
+          log(var1, "BRCall.onReceive EXTRA_STATE_RINGING hasCallerID  = $var4")
           if (VERSION.SDK_INT >= 28 && !var4) {
             log(
               var1,
@@ -54,10 +48,7 @@ class BRCall : BroadcastReceiver() {
             )
           } else {
             var3 = var2.getStringExtra("incoming_number")
-            val var12 = StringBuilder()
-            var12.append("BRCall.onReceive EXTRA_STATE_RINGING callerID   = ")
-            var12.append(var3)
-            log(var1, var12.toString())
+            log(var1, "BRCall.onReceive EXTRA_STATE_RINGING callerID   = $var3")
             var var13 = var3
             if (var3 == null) {
               var13 = ""
@@ -66,17 +57,11 @@ class BRCall : BroadcastReceiver() {
             var15.putLong("BRCall_lastTimeRinging", var9)
             var15.apply()
             var9 -= var7
-            var14 = StringBuilder()
-            var14.append("BRCall.onReceive EXTRA_STATE_RINGING dt     = ")
-            var14.append(var9)
-            log(var1, var14.toString())
+            log(var1, "BRCall.onReceive EXTRA_STATE_RINGING dt     = $var9")
             var7 = var9
             if (var9 < 0L) {
               var7 = 2501L
-              var14 = StringBuilder()
-              var14.append("BRCall.onReceive EXTRA_STATE_RINGING dt      -> ")
-              var14.append(2501L)
-              log(var1, var14.toString())
+              log(var1, "BRCall.onReceive EXTRA_STATE_RINGING dt      -> ${2501L}")
             }
             if (var7 < 2500L) {
               log(

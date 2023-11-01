@@ -91,42 +91,35 @@ class ActivityReminder constructor() : Activity(), View.OnClickListener {
     super.onCreate(var1)
     log("ActivityReminder.onCreate")
     this.setContentView(R.layout.activity_reminder)
-    (findViewById<View>(R.id.button_test) as Button).setOnClickListener(this)
+    findViewById<Button>(R.id.button_test).setOnClickListener(this)
     a = MyReminders(this)
     var1 = getIntent().getExtras()
     var var2: Int
-    val var3: StringBuilder
     if (var1 != null) {
       var2 = var1.getInt("OBJECTINDEX")
       b = a!!.a.get(var2) as MyReminder?
-      var3 = StringBuilder()
-      var3.append("ActivityReminder.onCreate loaded entry at position = ")
-      var3.append(var2)
-      log(var3.toString())
+      log("ActivityReminder.onCreate loaded entry at position = $var2")
       var2 = R.string.title_activity_reminders
     } else {
       b = MyReminder().also {
         a!!.a.add(it)
       }
       var2 = a!!.a.size
-      var3 = StringBuilder()
-      var3.append("ActivityReminder.onCreate created new entry at position = ")
-      var3.append(var2 - 1)
-      log(var3.toString())
+      log("ActivityReminder.onCreate created new entry at position = ${var2 - 1}")
       var2 = R.string.title_activity_settings
     }
     this.setTitle(var2)
-    c[0] = findViewById<View>(R.id.tb_dow0) as ToggleButton?
-    c[1] = findViewById<View>(R.id.tb_dow1) as ToggleButton?
-    c[2] = findViewById<View>(R.id.tb_dow2) as ToggleButton?
-    c[3] = findViewById<View>(R.id.tb_dow3) as ToggleButton?
-    c[4] = findViewById<View>(R.id.tb_dow4) as ToggleButton?
-    c[5] = findViewById<View>(R.id.tb_dow5) as ToggleButton?
-    c[6] = findViewById<View>(R.id.tb_dow6) as ToggleButton?
-    d = findViewById<View>(R.id.tp_hourmin) as TimePicker?
-    e = findViewById<View>(R.id.et_SayBefore) as EditText?
-    f = findViewById<View>(R.id.et_SayAfter) as EditText?
-    g = findViewById<View>(R.id.sp_SayTime) as Spinner?
+    c[0] = findViewById<ToggleButton>(R.id.tb_dow0)
+    c[1] = findViewById<ToggleButton>(R.id.tb_dow1)
+    c[2] = findViewById<ToggleButton>(R.id.tb_dow2)
+    c[3] = findViewById<ToggleButton>(R.id.tb_dow3)
+    c[4] = findViewById<ToggleButton>(R.id.tb_dow4)
+    c[5] = findViewById<ToggleButton>(R.id.tb_dow5)
+    c[6] = findViewById<ToggleButton>(R.id.tb_dow6)
+    d = findViewById<TimePicker>(R.id.tp_hourmin)
+    e = findViewById<EditText>(R.id.et_SayBefore)
+    f = findViewById<EditText>(R.id.et_SayAfter)
+    g = findViewById<Spinner>(R.id.sp_SayTime)
     d!!.setIs24HourView(true)
     b()
   }

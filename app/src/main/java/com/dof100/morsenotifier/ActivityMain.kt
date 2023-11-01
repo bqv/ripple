@@ -60,10 +60,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
 
   private fun c() {
     log("onActionRate")
-    val var1: StringBuilder = StringBuilder()
-    var1.append("market://details?id=")
-    var1.append(getPackageName())
-    val var2: String = var1.toString()
+    val var2 = "market://details?id=${getPackageName()}"
     try {
       val var4: Intent = Intent("android.intent.action.VIEW", Uri.parse(var2))
       this.startActivity(var4)

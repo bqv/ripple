@@ -49,11 +49,8 @@ class MyPreferenceList constructor(var1: Context, var2: AttributeSet) : ListPref
     } else {
       var var1: String = getEntry().toString()
       if (!b.isEmpty()) {
-        val var2: StringBuilder
-        if ((b == "%")) {
-          var2 = StringBuilder()
-        } else {
-          var2 = StringBuilder()
+        val var2 = StringBuilder()
+        if (!(b == "%")) {
           var2.append(var1)
           var1 = " "
         }
@@ -73,19 +70,11 @@ class MyPreferenceList constructor(var1: Context, var2: AttributeSet) : ListPref
   }
 
   protected fun a(var1: View) {
-    val var2: StringBuilder = StringBuilder()
-    var2.append("MyPreferenceList ")
-    var2.append(getKey())
-    var2.append(" myCreateView")
-    log(var2.toString())
+    log("MyPreferenceList ${getKey()} myCreateView")
     val var7: RelativeLayout =
       (var1.findViewById<View>(16908304) as TextView).getParent() as RelativeLayout
     if (d != null) {
-      val var3: StringBuilder = StringBuilder()
-      var3.append("MyPreferenceList ")
-      var3.append(getKey())
-      var3.append(" myCreateView mValueTV!=null")
-      log(var3.toString())
+      log("MyPreferenceList ${getKey()} myCreateView mValueTV!=null")
       var7.removeView(d)
       d = null
     }
@@ -135,11 +124,7 @@ class MyPreferenceList constructor(var1: Context, var2: AttributeSet) : ListPref
   }
 
   override fun onCreateView(var1: ViewGroup): View {
-    val var2: StringBuilder = StringBuilder()
-    var2.append("MyPreferenceList ")
-    var2.append(getKey())
-    var2.append(" onCreateView")
-    log(var2.toString())
+    log("MyPreferenceList ${getKey()} onCreateView")
     val var3: View = super.onCreateView(var1)
     this.a(var3)
     return var3

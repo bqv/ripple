@@ -40,12 +40,8 @@ class BRVolume : BroadcastReceiver() {
             "_def"
           )
           val var8 = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
-          var var24: StringBuilder
           for (var9 in 0..9) {
-            var24 = StringBuilder()
-            var24.append("BRVolume_LastVol")
-            var24.append(var9)
-            var8[var9] = var23.getInt(var24.toString(), -1)
+            var8[var9] = var23.getInt("BRVolume_LastVol$var9", -1)
           }
           var var10: Long
           var var12: Long
@@ -81,10 +77,7 @@ class BRVolume : BroadcastReceiver() {
           var var20: Boolean
           run label85@{
             run label84@{
-              var24 = StringBuilder()
-              var24.append("BRVolume_LastVol")
-              var24.append(var5)
-              var16.putInt(var24.toString(), var6)
+              var16.putInt("BRVolume_LastVol$var5", var6)
               when (var7) {
                 1 -> {}
                 2 -> if (var26) {
@@ -105,32 +98,20 @@ class BRVolume : BroadcastReceiver() {
           }
           var3 = ""
           if (var26) {
-            var24 = StringBuilder()
-            var24.append("")
-            var24.append(" DOWN")
-            var3 = var24.toString()
+            var3 = " DOWN"
           }
           var22 = var3
           if (var19) {
-            var24 = StringBuilder()
-            var24.append(var3)
-            var24.append(" UP  ")
-            var22 = var24.toString()
+            var22 = "$var3 UP  "
           }
           run label66@{
             var3 = var22
             if (var20) {
-              var var25 = StringBuilder()
-              var25.append(var22)
-              var25.append(" OK")
-              var22 = var25.toString()
+              var22 = "$var22 OK"
               var3 = var22
               if (var17 - var14 > 500L) {
                 var16.putLong("BRVolume_LastTimeBroadcast", var17)
-                var25 = StringBuilder()
-                var25.append(var22)
-                var25.append(" Broadcasting Finish")
-                var3 = var25.toString()
+                var3 = "$var22 Broadcasting Finish"
                 var26 = true
                 return@label66
               }

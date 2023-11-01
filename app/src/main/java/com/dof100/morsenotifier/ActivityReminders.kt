@@ -85,7 +85,7 @@ class ActivityReminders constructor() : Activity(), View.OnClickListener,
     a!!.a(this)
     b = MyRemindersArrayAdapter(this, a, this)
     this.setContentView(R.layout.activity_reminders)
-    c = findViewById<View>(R.id.lv_reminders_select) as ListView?
+    c = findViewById<ListView>(R.id.lv_reminders_select)
     c!!.setAdapter(b)
     c!!.setOnItemClickListener(object : OnItemClickListener {
       public override fun onItemClick(
@@ -94,12 +94,9 @@ class ActivityReminders constructor() : Activity(), View.OnClickListener,
         var3: Int,
         var4: Long
       ) {
-        val var6: StringBuilder = StringBuilder()
-        var6.append("ActivityReminders.onItemClick ")
-        var6.append(var2)
-        log(var6.toString())
+        log("ActivityReminders.onItemClick $var2")
       }
     })
-    (findViewById<View>(R.id.b_reminders_select_add) as Button).setOnClickListener(this)
+    findViewById<Button>(R.id.b_reminders_select_add).setOnClickListener(this)
   }
 }

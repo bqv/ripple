@@ -83,17 +83,10 @@ class App : Application() {
     i = "oppo".equals(g, ignoreCase = true)
     j = "vivo".equals(g, ignoreCase = true)
     k = "huawei".equals(g, ignoreCase = true)
-    var var7: StringBuilder
     if (n) {
-      var7 = StringBuilder()
-      var7.append("App.onCreate brand=")
-      var7.append(g)
-      log(var7.toString())
+      log("App.onCreate brand=$g")
     }
-    var7 = StringBuilder()
-    var7.append("market://details?id=")
-    var7.append(this.packageName)
-    l = var7.toString()
+    l = "market://details?id=${this.packageName}"
     m = l!!.replace(".free", "")
     q = null
     log("App.onCreate Initializing job manager...")

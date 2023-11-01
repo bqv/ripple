@@ -115,17 +115,13 @@ class MyAppNotificationFilter constructor() {
       var9 = -1
     }
     var var7: String?
-    var var8: StringBuilder
     when (var9) {
       0.toByte() -> var7 = "Notifications from all apps"
       1.toByte() -> var7 = "Notifications from all android system apps"
       2.toByte() -> var7 = "Notifications from all non-android system apps"
       else -> {
         var7 = b(var1)
-        var8 = StringBuilder()
-        var8.append("Notifications from ")
-        var8.append(var7!!.replace(".", ".\u200b"))
-        var7 = var8.toString()
+        var7 = "Notifications from ${var7!!.replace(".", ".\u200b")}"
       }
     }
     var var5: String?
@@ -134,10 +130,7 @@ class MyAppNotificationFilter constructor() {
     var var12: Locale?
     run label33@{
       if (!b!!.isEmpty()) {
-        var8 = StringBuilder()
-        var8.append(var7)
-        var8.append(String.format(Locale.US, " that contain '%s'", b))
-        val var4: String = var8.toString()
+        val var4 = String.format(Locale.US, "$var7 that contain '%s'", b)
         var2 = var4
         if (!c!!.isEmpty()) {
           var11 = StringBuilder()
@@ -150,7 +143,7 @@ class MyAppNotificationFilter constructor() {
       } else {
         var2 = var7
         if (!c!!.isEmpty()) {
-          val var6: StringBuilder = StringBuilder()
+          val var6 = StringBuilder()
           var6.append(var7)
           var12 = Locale.US
           var5 = " that do not contain '%s'"
@@ -219,11 +212,7 @@ class MyAppNotificationFilter constructor() {
           var1!!.b
         )
       )
-      var var11: StringBuilder = StringBuilder()
-      var11.append(var1.c)
-      var11.append(var1.d)
-      var11.append(var1.e)
-      var2 = var11.toString()
+      var2 = "${var1.c}${var1.d}${var1.e}"
       var var4: Array<String>
       var var5: Int
       var var6: Int
@@ -371,29 +360,16 @@ class MyAppNotificationFilter constructor() {
               log("MyAppNotificationFilter.checkNotification Filter matches OK")
               var2 = i
               var14 = var2
-              var var16: StringBuilder
               if (f) {
-                var16 = StringBuilder()
-                var16.append(var2!!.trim({ it <= ' ' }))
-                var16.append(" ")
-                var16.append(var1.c)
-                var14 = var16.toString()
+                var14 = "${var2!!.trim({ it <= ' ' })} ${var1.c}"
               }
               var2 = var14
               if (g) {
-                var11 = StringBuilder()
-                var11.append(var14!!.trim({ it <= ' ' }))
-                var11.append(" ")
-                var11.append(var1.d)
-                var2 = var11.toString()
+                var2 = "${var14!!.trim({ it <= ' ' })} ${var1.d}"
               }
               var14 = var2
               if (h) {
-                var16 = StringBuilder()
-                var16.append(var2!!.trim({ it <= ' ' }))
-                var16.append(" ")
-                var16.append(var1.e)
-                var14 = var16.toString()
+                var14 = "${var2!!.trim({ it <= ' ' })} ${var1.e}"
               }
               return var14!!.trim({ it <= ' ' })
             }
@@ -412,77 +388,33 @@ class MyAppNotificationFilter constructor() {
       String.format(
         Locale.US,
         "MyAppNotificationFilter.save - filter no %d, package  =%s",
-        var2,
-        a
+        var2, a
       )
     )
-    var var3: StringBuilder = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_Package")
-    var1.putString(var3.toString(), a)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaContains")
-    var1.putString(var3.toString(), b)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaContainsNot")
-    var1.putString(var3.toString(), c)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaCategory")
-    var1.putString(var3.toString(), d)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaID")
-    var1.putString(var3.toString(), e)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayTitle")
-    var1.putBoolean(var3.toString(), f)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayText")
-    var1.putBoolean(var3.toString(), g)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayTicker")
-    var1.putBoolean(var3.toString(), h)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_mSayBefore")
-    var1.putString(var3.toString(), i)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayAfter")
-    var1.putString(var3.toString(), j)
+    var1.putString("app_filter_${var2}_Package", a)
+    var1.putString("app_filter_${var2}_CriteriaContains", b)
+    var1.putString("app_filter_${var2}_CriteriaContainsNot", c)
+    var1.putString("app_filter_${var2}_CriteriaCategory", d)
+    var1.putString("app_filter_${var2}_CriteriaID", e)
+    var1.putBoolean("app_filter_${var2}_SayTitle", f)
+    var1.putBoolean("app_filter_${var2}_SayText", g)
+    var1.putBoolean("app_filter_${var2}_SayTicker", h)
+    var1.putString("app_filter_${var2}_mSayBefore", i)
+    var1.putString("app_filter_${var2}_SayAfter", j)
     log(String.format(Locale.US, "MyAppNotificationFilter.save %d", var2))
     log(String.format(Locale.US, "MyAppNotificationFilter.save package    =%s", a))
     log(
       String.format(
         Locale.US,
         "MyAppNotificationFilter.save contains   =%s contains not=%s",
-        b,
-        c
+        b, c
       )
     )
     log(
       String.format(
         Locale.US,
         "MyAppNotificationFilter.save Say title  =%b text =%b ticker=%b",
-        f,
-        g,
-        h
+        f, g, h
       )
     )
     log(String.format(Locale.US, "MyAppNotificationFilter.save Say before =%s after=%s", i, j))
@@ -490,56 +422,16 @@ class MyAppNotificationFilter constructor() {
 
   fun a(var1: SharedPreferences, var2: Int) {
     //TODO: this.MyAppNotificationFilter();
-    var var3: StringBuilder = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_Package")
-    a = var1.getString(var3.toString(), "All non-system apps")
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaContains")
-    b = var1.getString(var3.toString(), b)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaContainsNot")
-    c = var1.getString(var3.toString(), c)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaCategory")
-    d = var1.getString(var3.toString(), d)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_CriteriaID")
-    e = var1.getString(var3.toString(), e)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayTitle")
-    f = var1.getBoolean(var3.toString(), f)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayText")
-    g = var1.getBoolean(var3.toString(), g)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayTicker")
-    h = var1.getBoolean(var3.toString(), h)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_mSayBefore")
-    i = var1.getString(var3.toString(), i)
-    var3 = StringBuilder()
-    var3.append("app_filter_")
-    var3.append(var2)
-    var3.append("_SayAfter")
-    j = var1.getString(var3.toString(), j)
+    a = var1.getString("app_filter_${var2}_Package", "All non-system apps")
+    b = var1.getString("app_filter_${var2}_CriteriaContains", b)
+    c = var1.getString("app_filter_${var2}_CriteriaContainsNot", c)
+    d = var1.getString("app_filter_${var2}_CriteriaCategory", d)
+    e = var1.getString("app_filter_${var2}_CriteriaID", e)
+    f = var1.getBoolean("app_filter_${var2}_SayTitle", f)
+    g = var1.getBoolean("app_filter_${var2}_SayText", g)
+    h = var1.getBoolean("app_filter_${var2}_SayTicker", h)
+    i = var1.getString("app_filter_${var2}_mSayBefore", i)
+    j = var1.getString("app_filter_${var2}_SayAfter", j)
     log(
       String.format(
         Locale.US,

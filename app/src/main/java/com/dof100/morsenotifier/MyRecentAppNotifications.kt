@@ -16,11 +16,7 @@ internal class MyRecentAppNotifications constructor(var1: Context?) {
   }
 
   private fun arrange() {
-    var var1: StringBuilder = StringBuilder()
-    var1.append("MyRecentAppNotifications.arrange - in (")
-    var1.append(notifications.size)
-    var1.append(") entries")
-    log(var1.toString())
+    log("MyRecentAppNotifications.arrange - in (${notifications.size}) entries")
     if (!enabled) {
       notifications.clear()
     } else {
@@ -35,11 +31,7 @@ internal class MyRecentAppNotifications constructor(var1: Context?) {
         notifications.removeAt(0)
       }
     }
-    var1 = StringBuilder()
-    var1.append("MyRecentAppNotifications.arrange - out (")
-    var1.append(notifications.size)
-    var1.append(") entries")
-    log(var1.toString())
+    log("MyRecentAppNotifications.arrange - out (${notifications.size}) entries")
   }
 
   private fun save(var1: Context) {
