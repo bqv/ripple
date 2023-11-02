@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -177,26 +178,20 @@ internal object MyLog {
 
   @JvmStatic
   fun log(context: Context?, message: String?) {
-    if (enabled && context != null) {
-      val file = File(context.filesDir, "notif_log.txt")
-      try {
-        val writer = FileWriter(file, true)
-        val locale = Locale.US
-        val dateFormat = DateFormat.getDateTimeInstance()
-        val timestamp = Date()
+    Log.d("MorseNotifier", message ?: "")
+    if (!enabled || context == null) return
+    val file = File(context.filesDir, "notif_log.txt")
+    try {
+      val dateFormat = DateFormat.getDateTimeInstance()
+      val timestamp = Date()
+      FileWriter(file, true).use { writer ->
         writer.append(
-          String.format(
-            locale,
-            "%s:%s\r\n",
-            dateFormat.format(timestamp),
-            message
-          )
+          String.format(Locale.US, "%s:%s\r\n", dateFormat.format(timestamp), message)
         )
         writer.flush()
-        writer.close()
-      } catch (e: IOException) {
-        e.printStackTrace()
       }
+    } catch (e: IOException) {
+      e.printStackTrace()
     }
   }
 

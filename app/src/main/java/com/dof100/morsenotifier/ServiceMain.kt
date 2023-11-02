@@ -282,7 +282,7 @@ class ServiceMain : IntentService {
         "ServiceMain.play_message Audio=%b Vibration=%b Display=%b",
         enableAudio, enableVibration, enableDisplay))
     if (isTest) {
-      toast(this, "${this.getString(R.string.title_activity_about)} $message")
+      toast(this, "${this.getString(R.string.text_announcing)} $message")
     }
     if (enableAudio || enableVibration || enableDisplay) {
       val telephonyManager = this.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
