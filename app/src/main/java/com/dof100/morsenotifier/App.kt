@@ -6,112 +6,78 @@ import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
 import android.os.Build
 import android.preference.PreferenceManager
 import androidx.core.content.edit
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dof100.morsenotifier.MyLog.log
 import com.dof100.morsenotifier.MyLog.logClear
-import com.evernote.android.job.JobCreator
 import com.evernote.android.job.JobManager
 
 class App : Application() {
   override fun onCreate() {
     super.onCreate()
-    logClear((this as Context))
+    logClear(this as Context)
     log("App.onCreate")
-    n = false
-    var var1 = true
-    o = true
-    a = "MorseNotifierPro".contains("Free")
-    b = "MorseNotifierPro".contains("Pro")
-    c = "MorseNotifierPro".contains("Morse")
+    debugBuild = false
+    releaseBuild = true
+    freeBuild = "MorseNotifierPro".contains("Free")
+    proBuild = "MorseNotifierPro".contains("Pro")
+    morseMode = "MorseNotifierPro".contains("Morse")
     voiceMode = "MorseNotifierPro".contains("Voice")
-    run label68@{
-      run label72@{
-        var var10001: Boolean
-        run label65@{
-          try {
-            if ((this.getSystemService(UI_MODE_SERVICE) as UiModeManager).currentModeType == 4) {
-              return@label65
-            }
-          } catch (var6: Exception) {
-            var10001 = false
-            return@label72
-          }
-          var1 = false
-        }
-        try {
-          p = var1
-          return@label68
-        } catch (var5: Exception) {
-          var10001 = false
-        }
-      }
-      p = false
+    tvMode = try {
+      (this.getSystemService(UI_MODE_SERVICE) as UiModeManager).currentModeType == UI_MODE_TYPE_TELEVISION
+    } catch (e: Exception) {
+      false
     }
-    if (n) {
-      log("App.onCreate debug build")
-    }
-    if (o) {
-      log("App.onCreate release build")
-    }
-    if (c) {
-      log("App.onCreate flavor=MorseNotifier")
-    }
-    if (voiceMode) {
-      log("App.onCreate flavor=VoiceNotifier")
-    }
-    if (a) {
-      log("App.onCreate flavor=free")
-    }
-    if (b) {
-      log("App.onCreate flavor=pro")
-    }
-    if (p) {
-      log("App.onCreate Running on TV")
-    }
-    e = this.getString(this.applicationInfo.labelRes)
-    val var3 = this.packageName
-    val var2 = this.packageManager
+    if (debugBuild) { log("App.onCreate debug build") }
+    if (releaseBuild) { log("App.onCreate release build") }
+    if (morseMode) { log("App.onCreate flavor=MorseNotifier") }
+    if (voiceMode) { log("App.onCreate flavor=VoiceNotifier") }
+    if (freeBuild) { log("App.onCreate flavor=free") }
+    if (proBuild) { log("App.onCreate flavor=pro") }
+    if (tvMode) { log("App.onCreate Running on TV") }
+    labelRes = this.getString(this.applicationInfo.labelRes)
+    val packageName = this.packageName
+    val packageManager = this.packageManager
     try {
-      f = var2.getPackageInfo(var3, 0).versionName
-    } catch (var4: PackageManager.NameNotFoundException) {
-      var4.printStackTrace()
+      versionName = packageManager.getPackageInfo(packageName, 0).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+      e.printStackTrace()
     }
-    g = Build.MANUFACTURER
-    h = "xiaomi".equals(g, ignoreCase = true)
-    i = "oppo".equals(g, ignoreCase = true)
-    j = "vivo".equals(g, ignoreCase = true)
-    k = "huawei".equals(g, ignoreCase = true)
-    if (n) {
-      log("App.onCreate brand=$g")
-    }
-    l = "market://details?id=${this.packageName}"
-    m = l!!.replace(".free", "")
+    brand = Build.MANUFACTURER
+    isXiaomi = "xiaomi".equals(brand, ignoreCase = true)
+    isOppo = "oppo".equals(brand, ignoreCase = true)
+    isVivo = "vivo".equals(brand, ignoreCase = true)
+    isHuawei = "huawei".equals(brand, ignoreCase = true)
+    if (debugBuild) { log("App.onCreate brand=$brand") }
+    marketUrlFree = "market://details?id=${this.packageName}"
+    marketUrlPro = marketUrlFree!!.replace(".free", "")
     playerTTS = null
     log("App.onCreate Initializing job manager...")
-    JobManager.create((this as Context)).addJobCreator(MyChimeJobCreator() as JobCreator)
+    JobManager.create((this as Context)).addJobCreator(MyChimeJobCreator())
   }
 
   companion object {
-    var a = false
-    var b = false
-    var c = false
+    var freeBuild = false
+    var proBuild = false
+    var morseMode = false
     var voiceMode = false
-    var e: String? = null
-    var f: String? = null
-    var g: String? = null
-    var h = false
-    var i = false
-    var j = false
-    var k = false
-    var l: String? = null
-    var m: String? = null
-    private var n = false
-    private var o = false
-    private var p = false
+    var labelRes: String? = null
+    var versionName: String? = null
+    var brand: String? = null
+    var isXiaomi = false
+    var isOppo = false
+    var isVivo = false
+    var isHuawei = false
+    var marketUrlFree: String? = null
+    var marketUrlPro: String? = null
+    private var debugBuild = false
+    private var releaseBuild = false
+    private var tvMode = false
     private var playerTTS: MyPlayerTTS? = null
+
     fun getTTS(context: Context?): MyPlayerTTS? {
       if (playerTTS == null) {
         playerTTS = MyPlayerTTS(context, 0)
@@ -119,37 +85,36 @@ class App : Application() {
       return playerTTS
     }
 
-    fun a(context: Context?, pos: Int) {
+    fun broadcastSetPos(context: Context?, pos: Int) {
       LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent().apply {
         action = "LBR_ACTION_SETPOS"
         putExtra("LBR_ACTION_DATA_POS", pos)
       })
     }
 
-    fun a(var0: Activity?, var1: String): Boolean {
-      val var3 = PreferenceManager.getDefaultSharedPreferences(var0)
-      val var2 = "question_asked_$var1"
-      return var3.getBoolean(var2, false)
-    }
-
-    fun b(context: Activity?, var1: String) {
-      PreferenceManager.getDefaultSharedPreferences(context).edit {
-        val var3 = "question_asked_$var1"
-        putBoolean(var3, true).apply()
+    fun getQuestionAsked(context: Activity?, question: String): Boolean {
+      return PreferenceManager.getDefaultSharedPreferences(context).run {
+        getBoolean("question_asked_$question", false)
       }
     }
 
-    fun b(context: Context?) {
+    fun setQuestionAsked(context: Activity?, question: String) {
+      PreferenceManager.getDefaultSharedPreferences(context).edit {
+        putBoolean("question_asked_$question", true)
+      }
+    }
+
+    fun broadcastFinish(context: Context?) {
       log(context, "App.broadcastFinish sending LBR_ACTION_FINISH")
       LocalBroadcastManager.getInstance(context!!).sendBroadcast(Intent().apply { action = "LBR_ACTION_FINISH" })
     }
 
-    fun c(var0: Context) {
+    fun broadcastSettingsChanged(var0: Context) {
       log("App.broadcastSettingsChanged sending LBR_ACTION_SETTINGSCHANGED")
       LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(Intent().apply { action = "LBR_ACTION_SETTINGSCHANGED" })
     }
 
-    fun d(var0: Context) {
+    fun broadcastRecentNotificationsChanged(var0: Context) {
       log("App.broadcastSettingsChanged sending LBR_ACTION_RECENTNOTIFICATIONSCHANGED")
       LocalBroadcastManager.getInstance(var0.applicationContext).sendBroadcast(Intent().apply { action = "LBR_ACTION_RECENTNOTIFICATIONSCHANGED" })
     }

@@ -60,753 +60,1133 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
     log(context, "MyPlayerMorse constructor instance=$inst")
   }
 
-  private fun boop(character: Char, flag: Boolean) {
-    var pipe = flag
-    var character = character
-    if (!playPunctuation && ((character in '!'..'/') || (character in ':'..'@'))) {
-      character = ' '
-    }
-    var number: Int
-    // its a switch statement
-    run label598@{
-      run label597@{
-        run label654@{
-          run label594@{
-            run label593@{
-              run label592@{
-                run label591@{
-                  run label590@{
-                    run label589@{
-                      run label588@{
-                        run label587@{
-                          run label586@{
-                            run label585@{
-                              run label584@{
-                                run label583@{
-                                  run label582@{
-                                    run label581@{
-                                      run label580@{
-                                        run label579@{
-                                          run label578@{
-                                            run label577@{
-                                              run label576@{
-                                                run label655@{
-                                                  run label573@{
-                                                    run label572@{
-                                                      run label571@{
-                                                        run label570@{
-                                                          run label569@{
-                                                            run label568@{
-                                                              run label567@{
-                                                                run label566@{
-                                                                  run label565@{
-                                                                    run label564@{
-                                                                      run label563@{
-                                                                        run label562@{
-                                                                          run label561@{
-                                                                            run label560@{
-                                                                              run label559@{
-                                                                                run label558@{
-                                                                                  run label557@{
-                                                                                    run label656@{
-                                                                                      run label552@{
-                                                                                        run label551@{
-                                                                                          run label550@{
-                                                                                            run label549@{
-                                                                                              run label548@{
-                                                                                                run label547@{
-                                                                                                  run label546@{
-                                                                                                    run label657@{
-                                                                                                      run label658@{
-                                                                                                        run label659@{
-                                                                                                          run label535@{
-                                                                                                            run label534@{
-                                                                                                              run label533@{
-                                                                                                                run label532@{
-                                                                                                                  run label531@{
-                                                                                                                    run label530@{
-                                                                                                                      run label529@{
-                                                                                                                        run label528@{
-                                                                                                                          run label527@{
-                                                                                                                            run label526@{
-                                                                                                                              run label660@{
-                                                                                                                                run label523@{
-                                                                                                                                  run label522@{
-                                                                                                                                    run label521@{
-                                                                                                                                      run label661@{
-                                                                                                                                        run label662@{
-                                                                                                                                          run label504@{
-                                                                                                                                            run label503@{
-                                                                                                                                              run label663@{
-                                                                                                                                                run label500@{
-                                                                                                                                                  run label499@{
-                                                                                                                                                    run label670@{
-                                                                                                                                                      number = 0
-                                                                                                                                                      when (character) {
-                                                                                                                                                        '!' -> {
-                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                          this.beep(1, -1)
-                                                                                                                                                          return@label661
-                                                                                                                                                        }
-
-                                                                                                                                                        '"' -> this.beep(1, character.code)
-
-                                                                                                                                                        else -> run label669@ {
-                                                                                                                                                          run label665@{
-                                                                                                                                                            run label490@{
-                                                                                                                                                              when (character) {
-                                                                                                                                                                '&' -> {
-                                                                                                                                                                  this.beep(1, character.code)
-                                                                                                                                                                  return@label550
-                                                                                                                                                                }
-
-                                                                                                                                                                '\'' -> {
-                                                                                                                                                                  this.beep(1, character.code)
-                                                                                                                                                                  this.beep(-2, -1)
-                                                                                                                                                                  this.beep(2, -1)
-                                                                                                                                                                  return@label665
-                                                                                                                                                                }
-
-                                                                                                                                                                '(' -> {
-                                                                                                                                                                  this.beep(2, character.code)
-                                                                                                                                                                  this.beep(-1, -1)
-                                                                                                                                                                  this.beep(-1, -1)
-                                                                                                                                                                  return@label526
-                                                                                                                                                                }
-
-                                                                                                                                                                ')' -> {
-                                                                                                                                                                  this.beep(2, character.code)
-                                                                                                                                                                  this.beep(-1, -1)
-                                                                                                                                                                  this.beep(-1, -1)
-                                                                                                                                                                }
-
-                                                                                                                                                                else -> run label484@ {
-                                                                                                                                                                  when (character) {
-                                                                                                                                                                    '+' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      return@label533
-                                                                                                                                                                    }
-
-                                                                                                                                                                    ',' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(2, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      return@label534
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '-' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(1, -1)
-                                                                                                                                                                      return@label562
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '.' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(2, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(1, -1)
-                                                                                                                                                                      return@label557
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '/' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      return@label521
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '0' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '1' -> this.beep(1, character.code)
-
-                                                                                                                                                                    '2' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(1, -1)
-                                                                                                                                                                      return@label659
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '3' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      return@label534
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '4' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      return@label562
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '5' -> {
-                                                                                                                                                                      this.beep(1, character.code)
-                                                                                                                                                                      return@label571
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '6' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      return@label571
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '7' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      return@label658
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '8' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      return@label657
-                                                                                                                                                                    }
-
-                                                                                                                                                                    '9' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      return@label665
-                                                                                                                                                                    }
-
-                                                                                                                                                                    ':' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(2, -1)
-                                                                                                                                                                      return@label658
-                                                                                                                                                                    }
-
-                                                                                                                                                                    ';' -> {
-                                                                                                                                                                      this.beep(2, character.code)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-1, -1)
-                                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                                      this.beep(1, -1)
-                                                                                                                                                                      return@label533
-                                                                                                                                                                    }
-
-                                                                                                                                                                    else -> when (character) {
-                                                                                                                                                                      '?' -> {
-                                                                                                                                                                        this.beep(1, character.code)
-                                                                                                                                                                        this.beep(-2, -1)
-                                                                                                                                                                        this.beep(1, -1)
-                                                                                                                                                                        return@label657
-                                                                                                                                                                      }
-
-                                                                                                                                                                      '@' -> {
-                                                                                                                                                                        this.beep(1, character.code)
-                                                                                                                                                                        this.beep(-2, -1)
-                                                                                                                                                                        this.beep(2, -1)
-                                                                                                                                                                        return@label662
-                                                                                                                                                                      }
-
-                                                                                                                                                                      else -> when (character) {
-                                                                                                                                                                        'a' -> return@label584
-                                                                                                                                                                        'b' -> return@label561
-                                                                                                                                                                        'c' -> return@label547
-                                                                                                                                                                        'd' -> return@label578
-                                                                                                                                                                        'e' -> return@label597
-                                                                                                                                                                        'f' -> return@label564
-                                                                                                                                                                        'g' -> return@label565
-                                                                                                                                                                        'h' -> return@label580
-                                                                                                                                                                        'i' -> return@label589
-                                                                                                                                                                        'j' -> {
-                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                          return@label659
-                                                                                                                                                                        }
-
-                                                                                                                                                                        'k' -> return@label548
-                                                                                                                                                                        'l' -> return@label549
-                                                                                                                                                                        'm' -> return@label568
-                                                                                                                                                                        'n' -> return@label583
-                                                                                                                                                                        'o' -> return@label522
-                                                                                                                                                                        'p' -> return@label523
-                                                                                                                                                                        'q' -> return@label670
-                                                                                                                                                                        'r' -> return@label572
-                                                                                                                                                                        's' -> return@label586
-                                                                                                                                                                        't' -> return@label592
-                                                                                                                                                                        'u' -> {
-                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                          return@label585
-                                                                                                                                                                        }
-
-                                                                                                                                                                        'v' -> {
-                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                          return@label577
-                                                                                                                                                                        }
-
-                                                                                                                                                                        'w' -> return@label552
-                                                                                                                                                                        'x' -> return@label527
-                                                                                                                                                                        'y' -> return@label500
-                                                                                                                                                                        'z' -> return@label528
-                                                                                                                                                                        else -> when (character) {
-                                                                                                                                                                          'ä', 'æ' -> return@label530
-                                                                                                                                                                          'ç' -> return@label531
-                                                                                                                                                                          'è' -> return@label503
-                                                                                                                                                                          'é' -> return@label532
-                                                                                                                                                                          'å' -> {
-                                                                                                                                                                            this.beep(1, character.code)
-                                                                                                                                                                            return@label663
-                                                                                                                                                                          }
-
-                                                                                                                                                                          else -> {
-                                                                                                                                                                            when (character) {
-                                                                                                                                                                              'ð' -> {
-                                                                                                                                                                                this.beep(1, character.code)
-                                                                                                                                                                                return@label526
-                                                                                                                                                                              }
-
-                                                                                                                                                                              'ñ' -> return@label490
-                                                                                                                                                                              else -> when (character) {
-                                                                                                                                                                                'ά' -> return@label584
-                                                                                                                                                                                'έ' -> return@label597
-                                                                                                                                                                                'ή' -> return@label580
-                                                                                                                                                                                'ί' -> return@label589
-                                                                                                                                                                                else -> when (character) {
-                                                                                                                                                                                  'α' -> return@label584
-                                                                                                                                                                                  'β' -> return@label561
-                                                                                                                                                                                  'γ' -> return@label565
-                                                                                                                                                                                  'δ' -> return@label578
-                                                                                                                                                                                  'ε' -> return@label597
-                                                                                                                                                                                  'ζ' -> return@label528
-                                                                                                                                                                                  'η' -> return@label580
-                                                                                                                                                                                  'θ' -> return@label547
-                                                                                                                                                                                  'ι' -> return@label589
-                                                                                                                                                                                  'κ' -> return@label548
-                                                                                                                                                                                  'λ' -> return@label549
-                                                                                                                                                                                  'μ' -> return@label568
-                                                                                                                                                                                  'ν' -> return@label583
-                                                                                                                                                                                  else -> when (character) {
-                                                                                                                                                                                    'ο' -> return@label522
-                                                                                                                                                                                    'π' -> return@label523
-                                                                                                                                                                                    'ρ' -> return@label572
-                                                                                                                                                                                    'ς', 'σ' -> return@label586
-                                                                                                                                                                                    'τ' -> return@label592
-                                                                                                                                                                                    'υ' -> return@label500
-                                                                                                                                                                                    'φ' -> return@label564
-                                                                                                                                                                                    'χ' -> return@label527
-                                                                                                                                                                                    'ψ' -> return@label670
-                                                                                                                                                                                    'ω' -> return@label552
-                                                                                                                                                                                    else -> when (character) {
-                                                                                                                                                                                      'ό' -> return@label522
-                                                                                                                                                                                      'ύ' -> return@label500
-                                                                                                                                                                                      'ώ' -> return@label552
-                                                                                                                                                                                      else -> when (character) {
-                                                                                                                                                                                        '$' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                                                          this.beep(1, -1)
-                                                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                                                          this.beep(1, -1)
-                                                                                                                                                                                          return@label535
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        '=' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          return@label562
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        '_' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          return@label484
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        '|' -> {
-                                                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                                                          pipe = false
-                                                                                                                                                                                          return@label598
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'à' -> {}
-                                                                                                                                                                                        'ó', 'ö', 'ø' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          return@label660
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ü', 'ŭ' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          return@label560
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'þ' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          return@label657
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ą' -> return@label530
-                                                                                                                                                                                        'ć', 'ĉ' -> return@label531
-                                                                                                                                                                                        'đ', 'ę' -> return@label532
-                                                                                                                                                                                        'ĝ' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          return@label662
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ĥ', 'š' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          return@label504
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ĵ' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          return@label499
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ł' -> return@label503
-                                                                                                                                                                                        'ń' -> return@label490
-                                                                                                                                                                                        'ś' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                                                          this.beep(1, -1)
-                                                                                                                                                                                          this.beep(-2, -1)
-                                                                                                                                                                                          this.beep(1, -1)
-                                                                                                                                                                                          return@label550
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ŝ' -> {
-                                                                                                                                                                                          this.beep(1, character.code)
-                                                                                                                                                                                          return@label566
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ź' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          return@label669
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        'ż' -> {
-                                                                                                                                                                                          this.beep(2, character.code)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                                                          return@label535
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        else -> {
-                                                                                                                                                                                          this.beep(-3, -3)
-                                                                                                                                                                                          return@label598
-                                                                                                                                                                                        }
-                                                                                                                                                                                      }
-                                                                                                                                                                                    }
-                                                                                                                                                                                  }
-                                                                                                                                                                                }
-                                                                                                                                                                              }
-                                                                                                                                                                            }
-                                                                                                                                                                            this.beep(1, character.code)
-                                                                                                                                                                            return@label663
-                                                                                                                                                                          }
-                                                                                                                                                                        }
-                                                                                                                                                                      }
-                                                                                                                                                                    }
-                                                                                                                                                                  }
-                                                                                                                                                                  this.beep(-2, -1)
-                                                                                                                                                                  this.beep(2, -1)
-                                                                                                                                                                  return@label504
-                                                                                                                                                                } // goto@label484
-                                                                                                                                                              }
-                                                                                                                                                              this.beep(-2, -1)
-                                                                                                                                                              this.beep(1, -1)
-                                                                                                                                                              return@label663
-                                                                                                                                                            } // goto@label490
-                                                                                                                                                            this.beep(2, character.code)
-                                                                                                                                                            this.beep(-1, -1)
-                                                                                                                                                            this.beep(-1, -1)
-                                                                                                                                                            return@label661
-                                                                                                                                                          } // goto@label665
-                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                                          return@label499
-                                                                                                                                                        } // goto@label669
-                                                                                                                                                      }
-                                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                                      this.beep(2, -1)
-                                                                                                                                                      return@label521
-                                                                                                                                                    } // goto@label670
-                                                                                                                                                    this.beep(2, character.code)
-                                                                                                                                                    return@label529
-                                                                                                                                                  } // goto@label499
-                                                                                                                                                  this.beep(-2, -1)
-                                                                                                                                                  this.beep(2, -1)
-                                                                                                                                                  return@label660
-                                                                                                                                                } // goto@label500
-                                                                                                                                                this.beep(2, character.code)
-                                                                                                                                                return@label546
-                                                                                                                                              } // goto@label663
-                                                                                                                                              this.beep(-2, -1)
-                                                                                                                                              this.beep(2, -1)
-                                                                                                                                              return@label529
-                                                                                                                                            } // goto@label503
-                                                                                                                                            this.beep(1, character.code)
-                                                                                                                                            return@label535
-                                                                                                                                          } // goto@label504
-                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                          this.beep(-1, -1)
-                                                                                                                                          return@label659
-                                                                                                                                        } // goto@label662
-                                                                                                                                        this.beep(-1, -1)
-                                                                                                                                        this.beep(-1, -1)
-                                                                                                                                        return@label533
-                                                                                                                                      } // goto@label661
-                                                                                                                                      this.beep(-2, -1)
-                                                                                                                                      this.beep(2, -1)
-                                                                                                                                      return@label546
-                                                                                                                                    } // goto@label521
-                                                                                                                                    this.beep(-1, -1)
-                                                                                                                                    this.beep(-1, -1)
-                                                                                                                                    return@label566
-                                                                                                                                  } // goto@label522
-                                                                                                                                  this.beep(2, character.code)
-                                                                                                                                  return@label567
-                                                                                                                                } // goto@label523
-                                                                                                                                this.beep(1, character.code)
-                                                                                                                                return@label551
-                                                                                                                              } // goto@label660
-                                                                                                                              this.beep(-1, -1)
-                                                                                                                              this.beep(-1, -1)
-                                                                                                                              return@label551
-                                                                                                                            } // goto@label526
-                                                                                                                            this.beep(-2, -1)
-                                                                                                                            this.beep(1, -1)
-                                                                                                                            return@label551
-                                                                                                                          } // goto@label527
-                                                                                                                          this.beep(2, character.code)
-                                                                                                                          return@label563
-                                                                                                                        } // goto@label528
-                                                                                                                        this.beep(2, character.code)
-                                                                                                                        return@label656
-                                                                                                                      } // goto@label529
-                                                                                                                      this.beep(-1, -1)
-                                                                                                                      this.beep(-1, -1)
-                                                                                                                      return@label557
-                                                                                                                    } // goto@label530
-                                                                                                                    this.beep(1, character.code)
-                                                                                                                    return@label557
-                                                                                                                  } // goto@label531
-                                                                                                                  this.beep(2, character.code)
-                                                                                                                  this.beep(-1, -1)
-                                                                                                                  this.beep(-1, -1)
-                                                                                                                  return@label558
-                                                                                                                } // goto@label532
-                                                                                                                this.beep(1, character.code)
-                                                                                                                return@label558
-                                                                                                              } // goto@label533
-                                                                                                              this.beep(-2, -1)
-                                                                                                              this.beep(2, -1)
-                                                                                                              return@label559
-                                                                                                            } // goto@label534
-                                                                                                            this.beep(-2, -1)
-                                                                                                            this.beep(1, -1)
-                                                                                                            return@label560
-                                                                                                          } // goto@label535
-                                                                                                          this.beep(-2, -1)
-                                                                                                          this.beep(2, -1)
-                                                                                                          return@label563
-                                                                                                        } // goto@label659
-                                                                                                        this.beep(-2, -1)
-                                                                                                        this.beep(2, -1)
-                                                                                                        return@label567
-                                                                                                      } // goto@label658
-                                                                                                      this.beep(-1, -1)
-                                                                                                      this.beep(-1, -1)
-                                                                                                      return@label550
-                                                                                                    } // goto@label657
-                                                                                                    this.beep(-2, -1)
-                                                                                                    this.beep(2, -1)
-                                                                                                    return@label656
-                                                                                                  } // goto@label546
-                                                                                                  this.beep(-1, -1)
-                                                                                                  this.beep(-1, -1)
-                                                                                                  return@label560
-                                                                                                } // goto@label547
-                                                                                                this.beep(2, character.code)
-                                                                                                return@label559
-                                                                                              } // goto@label548
-                                                                                              this.beep(2, character.code)
-                                                                                              return@label655
-                                                                                            } // goto@label549
-                                                                                            this.beep(1, character.code)
-                                                                                            return@label573
-                                                                                          } // goto@label550
-                                                                                          this.beep(-2, -1)
-                                                                                          this.beep(2, -1)
-                                                                                          return@label569
-                                                                                        } // goto@label551
-                                                                                        this.beep(-2, -1)
-                                                                                        this.beep(2, -1)
-                                                                                        return@label570
-                                                                                      } // goto@label552
-                                                                                      this.beep(1, character.code)
-                                                                                      return@label576
-                                                                                    } // goto@label656
-                                                                                    this.beep(-1, -1)
-                                                                                    this.beep(-1, -1)
-                                                                                    return@label573
-                                                                                  } // goto@label557
-                                                                                  this.beep(-2, -1)
-                                                                                  this.beep(2, -1)
-                                                                                  return@label655
-                                                                                } // goto@label558
-                                                                                this.beep(-2, -1)
-                                                                                this.beep(1, -1)
-                                                                                return@label573
-                                                                              } // goto@label559
-                                                                              this.beep(-1, -1)
-                                                                              this.beep(-1, -1)
-                                                                              return@label579
-                                                                            } // goto@label560
-                                                                            this.beep(-2, -1)
-                                                                            this.beep(1, -1)
-                                                                            return@label576
-                                                                          } // goto@label561
-                                                                          this.beep(2, character.code)
-                                                                          return@label569
-                                                                        } // goto@label562
-                                                                        this.beep(-2, -1)
-                                                                        this.beep(1, -1)
-                                                                        return@label577
-                                                                      } // goto@label563
-                                                                      this.beep(-1, -1)
-                                                                      this.beep(-1, -1)
-                                                                      return@label577
-                                                                    } // goto@label564
-                                                                    this.beep(1, character.code)
-                                                                    return@label579
-                                                                  } // goto@label565
-                                                                  this.beep(2, character.code)
-                                                                  return@label570
-                                                                } // goto@label566
-                                                                this.beep(-2, -1)
-                                                                this.beep(1, -1)
-                                                                return@label579
-                                                              } // goto@label567
-                                                              this.beep(-1, -1)
-                                                              this.beep(-1, -1)
-                                                              return@label576
-                                                            } // goto@label568
-                                                            this.beep(2, character.code)
-                                                            return@label582
-                                                          } // goto@label569
-                                                          this.beep(-1, -1)
-                                                          this.beep(-1, -1)
-                                                          return@label581
-                                                        } // goto@label570
-                                                        this.beep(-1, -1)
-                                                        this.beep(-1, -1)
-                                                        return@label587
-                                                      } // goto@label571
-                                                      this.beep(-2, -1)
-                                                      this.beep(1, -1)
-                                                      return@label581
-                                                    } // goto@label572
-                                                    this.beep(1, character.code)
-                                                    return@label587
-                                                  } // goto@label573
-                                                  this.beep(-2, -1)
-                                                  this.beep(2, -1)
-                                                  return@label588
-                                                } // goto@label655
-                                                this.beep(-1, -1)
-                                                this.beep(-1, -1)
-                                                return@label585
-                                              } // goto@label576
-                                              this.beep(-2, -1)
-                                              this.beep(2, -1)
-                                              return@label582
-                                            } // goto@label577
-                                            this.beep(-2, -1)
-                                            this.beep(1, -1)
-                                            return@label585
-                                          } // goto@label578
-                                          this.beep(2, character.code)
-                                          return@label588
-                                        } // goto@label579
-                                        this.beep(-2, -1)
-                                        this.beep(1, -1)
-                                        return@label587
-                                      } // goto@label580
-                                      this.beep(1, character.code)
-                                    } // goto@label581
-                                    this.beep(-2, -1)
-                                    this.beep(1, -1)
-                                    return@label590
-                                  } // goto@label582
-                                  this.beep(-1, -1)
-                                  this.beep(-1, -1)
-                                  return@label591
-                                } // goto@label583
-                                this.beep(2, character.code)
-                                return@label593
-                              } // goto@label584
-                              this.beep(1, character.code)
-                              return@label591
-                            } // goto@label585
-                            this.beep(-2, -1)
-                            this.beep(1, -1)
-                            return@label591
-                          } // goto@label586
-                          this.beep(1, character.code)
-                          return@label590
-                        } // goto@label587
-                        this.beep(-2, -1)
-                        this.beep(2, -1)
-                        return@label593
-                      } // goto@label588
-                      this.beep(-1, -1)
-                      this.beep(-1, -1)
-                      return@label590
-                    } // goto@label589
-                    this.beep(1, character.code)
-                    return@label654
-                  } // goto@label590
-                  this.beep(-2, -1)
-                  this.beep(1, -1)
-                  return@label654
-                } // goto@label591
-                this.beep(-2, -1)
-                this.beep(2, -1)
-                return@label594
-              } // goto@label592
-              this.beep(2, character.code)
-              return@label594
-            } // goto@label593
-            this.beep(-1, -1)
-            this.beep(-1, -1)
-            return@label654
-          } // goto@label594
-          this.beep(-1, -1)
-          this.beep(-1, -1)
-          return@label598
-        } // goto@label654
+  private fun boop(char: Char, leaveGap: Boolean) {
+    val character =
+      if (!playPunctuation && ((char in '!'..'/') || (char in ':'..'@'))) ' '
+      else char
+    when(character) {
+      'a', 'ά', 'α' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'b', 'β' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
         this.beep(-2, -1)
         this.beep(1, -1)
-        return@label598
-      } // goto@label597
-      this.beep(1, character.code)
-    } // goto@label598
-    if (pipe) {
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'c', 'θ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'd', 'δ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'e', 'έ', 'ε' -> {
+        this.beep(1, character.code)
+      }
+      'f', 'φ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'g', 'γ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'h', 'ή', 'η' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'i', 'ί', 'ι' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'j' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'k', 'κ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'l', 'λ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'm', 'μ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'n', 'ν' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'o', 'ο', 'ό' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'p', 'π' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'q', 'ψ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'r', 'ρ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      's', 'ς', 'σ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      't', 'τ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'u' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'v' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'w', 'ω', 'ώ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'x', 'χ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'y', 'υ', 'ύ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'z', 'ζ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+
+      '0' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '1' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '2' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+      }
+      '3' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '4' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '5' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '6' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '7' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '8' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '9' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+
+      '!' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '"' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '&' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '\'' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '(' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      ')' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '+' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      ',' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '-' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '.' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '/' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      ':' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      ';' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '?' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      '@' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ä', 'æ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ç' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'è' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'é' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'å' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ð' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ñ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '$' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '=' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      '_' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'à' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ó', 'ö', 'ø' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ü', 'ŭ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'þ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ą' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ć', 'ĉ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'đ', 'ę' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ĝ' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ĥ', 'š' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ĵ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ł' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ń' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+      'ś' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ŝ' -> {
+        this.beep(1, character.code)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ź' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+      }
+      'ż' -> {
+        this.beep(2, character.code)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(1, -1)
+        this.beep(-2, -1)
+        this.beep(2, -1)
+        this.beep(-1, -1)
+        this.beep(-1, -1)
+      }
+
+      '|' -> {
+        this.beep(-2, -1)
+        return
+      }
+
+      else -> {
+        this.beep(-3, -3)
+      }
+    }
+    if (leaveGap) {
+      var number: Int = 0
       while (number++ < mSpacesAfterChar) {
         this.beep(-3, -3)
       }
     }
   }
 
-  private fun beep(int1: Int, int2: Int) {
-    mList.add(int1)
-    mList.add(int2)
+  private fun beep(signedRunLength: Int, character: Int) {
+    mList.add(signedRunLength)
+    mList.add(character) // char.code, or -1, or -3
   }
 
   private fun mute() {
@@ -918,14 +1298,12 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
           log("MyPlayerMorse.doInBackground. Creating tone instance=$inst")
           var bufferSizeInBytes: Int
           var nTries: Int
-          var var10001: Boolean
           var tmpTone: MyTone
           run label161@{
             run label170@{
               try {
                 tmpTone = MyTone(nelements * mdur, samplerate)
-              } catch (var26: Exception) {
-                var10001 = false
+              } catch (e: Exception) {
                 return@label170
               }
               bufferSizeInBytes = 0
@@ -935,34 +1313,31 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                     return@label161
                   }
                   nTries = mList[bufferSizeInBytes * 2]
-                } catch (var25: Exception) {
-                  var10001 = false
+                } catch (e: Exception) {
                   break
                 }
                 if (nTries == 1) {
                   try {
-                    tmpTone.a(
+                    tmpTone.act(
                       bufferSizeInBytes * mdur,
                       mdur,
                       pref_call_freq.toFloat(),
                       j.toFloat(),
                       (k * mdur).toFloat() / 100.0f
                     )
-                  } catch (var24: Exception) {
-                    var10001 = false
+                  } catch (e: Exception) {
                     break
                   }
                 } else if (nTries == 2) {
                   try {
-                    tmpTone.a(
+                    tmpTone.act(
                       bufferSizeInBytes * mdur,
                       mdur * 3,
                       pref_call_freq.toFloat(),
                       j.toFloat(),
                       (k * mdur).toFloat() / 100.0f
                     )
-                  } catch (var23: Exception) {
-                    var10001 = false
+                  } catch (e: Exception) {
                     break
                   }
                 }
@@ -974,10 +1349,9 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
             return null
           } // goto@label161
           log("MyPlayerMorse.doInBackground registering broadcast receiver instance=$inst")
-          val var6 = LocalBroadcastManager.getInstance(tmpContext)
-          val var30 = IntentFilter()
-          var30.addAction("LBR_ACTION_FINISH")
-          var6.registerReceiver(broadcastReceiver, var30)
+          LocalBroadcastManager.getInstance(tmpContext).registerReceiver(broadcastReceiver, IntentFilter().apply {
+            addAction("LBR_ACTION_FINISH")
+          })
           nSamplesDur = tmpTone.nSamples / nelements
           log("MyPlayerMorse.doInBackground AudioTrack play nElements=$nelements")
           log("MyPlayerMorse.doInBackground AudioTrack play nSamples=${tmpTone.nSamples}")
@@ -994,7 +1368,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
             log("MyPlayerMorse.doInBackground. Creating audiotrack. Buffersize=$bufferSize")
             bufferSizeInBytes = try {
               AudioTrack.getMinBufferSize(samplerate, 4, 2)
-            } catch (var18: Exception) {
+            } catch (e: Exception) {
               log("MyPlayerMorse.doInBackground. ERROR getMinBufferSize")
               samplerate * 4
             }
@@ -1003,57 +1377,46 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                 run label137@{
                   try {
                     if (VERSION.SDK_INT >= 26) {
-                      val var35 = AudioTrack.Builder()
-                      val var31 = AudioAttributes.Builder()
-                      val var32 = var35.setAudioAttributes(
-                        var31.setLegacyStreamType(
-                          mStream
-                        ).build()
-                      )
-                      val var36 = AudioFormat.Builder()
-                      audioTrack = var32.setAudioFormat(
-                        var36.setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                          .setSampleRate(
-                            samplerate
-                          ).setChannelMask(4).build()
-                      ).setBufferSizeInBytes(bufferSizeInBytes).setTransferMode(AudioTrack.MODE_STREAM).build()
+                      audioTrack = AudioTrack.Builder()
+                        .setAudioAttributes(
+                          AudioAttributes.Builder()
+                            .setLegacyStreamType(mStream)
+                            .build()
+                        )
+                        .setAudioFormat(
+                          AudioFormat.Builder()
+                            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                            .setSampleRate(samplerate)
+                            .setChannelMask(4)
+                            .build()
+                        )
+                        .setBufferSizeInBytes(bufferSizeInBytes)
+                        .setTransferMode(AudioTrack.MODE_STREAM)
+                        .build()
                       return@label139
                     }
-                  } catch (var21: IllegalArgumentException) {
-                    var10001 = false
+                  } catch (e: IllegalArgumentException) {
                     return@label138
-                  } catch (var22: Exception) {
-                    var10001 = false
+                  } catch (e: Exception) {
                     return@label137
                   }
                   try {
-                    val var33 = AudioTrack(mStream, samplerate, 4, 2, bufferSizeInBytes, 1)
-                    audioTrack = var33
+                    audioTrack = AudioTrack(mStream, samplerate, 4, 2, bufferSizeInBytes, 1)
                     return@label139
-                  } catch (var19: IllegalArgumentException) {
-                    var10001 = false
+                  } catch (e: IllegalArgumentException) {
                     return@label138
-                  } catch (var20: Exception) {
-                    var10001 = false
+                  } catch (e: Exception) {
                   }
                 } // goto@label137
-                log(
-                  String.format(
-                    Locale.US,
+                log(String.format(Locale.US,
                     "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. Exception mstream=%d sr=%d channels=%d encoding=%d length=%d",
-                    mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size
-                  )
-                )
+                    mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size))
                 mDoneLatch.countDown()
                 return null
               } // goto@label138
-              log(
-                String.format(
-                  Locale.US,
+              log(String.format(Locale.US,
                   "MyPlayerMorse.doInBackground. ERROR Creating audiotrack. IllegalArgumentException mstream=%d sr=%d channels=%d encoding=%d length=%d",
-                  mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size
-                )
-              )
+                  mStream, samplerate, 4, 2, tmpTone.mGeneratedSnd.size))
               mDoneLatch.countDown()
               return null
             } // goto@label139
@@ -1089,13 +1452,9 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               if (mRepeat1 > 0) {
                 val var7 = System.currentTimeMillis() - initTimestamp
                 val var9 = mRepeat1.toLong() - var7
-                log(
-                  String.format(
-                    Locale.US,
+                log(String.format(Locale.US,
                     "MyPlayerMorse.doInBackground Waiting %d-%d=%d msec",
-                    mRepeat1, var7, var9
-                  )
-                )
+                    mRepeat1, var7, var9))
                 if (var9 in 1..9999) {
                   try {
                     Thread.sleep(var9)
@@ -1124,8 +1483,8 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               try {
                 audioTrack!!.notificationMarkerPosition = tmpTone.nSamples - 1
                 audioTrack!!.positionNotificationPeriod = nSamplesDur
-                val var34 = audioTrack
-                val var37: AudioTrack.OnPlaybackPositionUpdateListener =
+                val audioTrack1 = audioTrack
+                val playbackPositionUpdateListener: AudioTrack.OnPlaybackPositionUpdateListener =
                   object : AudioTrack.OnPlaybackPositionUpdateListener {
                     override fun onMarkerReached(audioTrack: AudioTrack?) {
                       if (audioTrack == null) {
@@ -1145,7 +1504,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                       if (audioTrack == null) {
                         log("MyPlayerMorse.doInBackground onPeriodicNotification audiotrack=null instance=$inst")
                       } else {
-                        var var43: String
+                        var messageToLog: String
                         run label224@{
                           run label223@{
                             run label241@{
@@ -1154,10 +1513,10 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                 if (audioTrack.state != 1) {
                                   return@onPeriodicNotification
                                 }
-                              } catch (var39: IllegalStateException) {
+                              } catch (e: IllegalStateException) {
                                 var10001 = false
                                 return@label223
-                              } catch (var40: Exception) {
+                              } catch (e: Exception) {
                                 var10001 = false
                                 return@label241
                               }
@@ -1165,10 +1524,10 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                 if (audioTrack.playState != 3) {
                                   return@onPeriodicNotification
                                 }
-                              } catch (var37: IllegalStateException) {
+                              } catch (e: IllegalStateException) {
                                 var10001 = false
                                 return@label223
-                              } catch (var38: Exception) {
+                              } catch (e: Exception) {
                                 var10001 = false
                                 return@label241
                               }
@@ -1182,10 +1541,10 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                     if (var2x >= nelements) {
                                       return@label231
                                     }
-                                  } catch (var35: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var36: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
@@ -1194,10 +1553,10 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                     if (var3 < mList.size) {
                                       return@label230
                                     }
-                                  } catch (var33: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var34: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
@@ -1208,19 +1567,19 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                       audioTrack.setVolume(0.0f)
                                       return@label238
                                     }
-                                  } catch (var31: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var32: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
                                   try {
                                     audioTrack.setStereoVolume(0.0f, 0.0f)
-                                  } catch (var29: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var30: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
@@ -1230,20 +1589,20 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                   log("MyPlayerMorse.doInBackground onPeriodicNotification i>=nElements instance=$inst")
                                   mDoneLatch.countDown()
                                   return@onPeriodicNotification
-                                } catch (var27: IllegalStateException) {
+                                } catch (e: IllegalStateException) {
                                   var10001 = false
                                   return@label223
-                                } catch (var28: Exception) {
+                                } catch (e: Exception) {
                                   var10001 = false
                                   return@label241
                                 }
                               } // goto@label230
                               try {
                                 var3 = mList[var3]
-                              } catch (var25: IllegalStateException) {
+                              } catch (e: IllegalStateException) {
                                 var10001 = false
                                 return@label223
-                              } catch (var26: Exception) {
+                              } catch (e: Exception) {
                                 var10001 = false
                                 return@label241
                               }
@@ -1255,35 +1614,35 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                       audioTrack.setVolume(0.0f)
                                       return@label239
                                     }
-                                  } catch (var23: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var24: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
                                   try {
                                     audioTrack.setStereoVolume(0.0f, 0.0f)
-                                  } catch (var21: IllegalStateException) {
+                                  } catch (e: IllegalStateException) {
                                     var10001 = false
                                     return@label223
-                                  } catch (var22: Exception) {
+                                  } catch (e: Exception) {
                                     var10001 = false
                                     return@label241
                                   }
                                 } // goto@label239
                               }
-                              val var45: LongArray
+                              val timings: LongArray
                               try {
-                                App.a(tmpContext, var2x)
+                                App.broadcastSetPos(tmpContext, var2x)
                                 if (!vibrate || vibrator == null) {
                                   return@onPeriodicNotification
                                 }
-                                var45 = longArrayOf(0L, 0L, 0L)
-                              } catch (var19: IllegalStateException) {
+                                timings = longArrayOf(0L, 0L, 0L)
+                              } catch (e: IllegalStateException) {
                                 var10001 = false
                                 return@label223
-                              } catch (var20: Exception) {
+                              } catch (e: Exception) {
                                 var10001 = false
                                 return@label241
                               }
@@ -1295,132 +1654,132 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                                 var myPlayerMorse: MyPlayerMorse
                                 when (var3) {
                                   1 -> run lwhen@{
-                                    var45[0] = 0L
+                                    timings[0] = 0L
                                     try {
-                                      var45[1] = mdur.toLong()
-                                      var45[2] = mdur.toLong()
+                                      timings[1] = mdur.toLong()
+                                      timings[2] = mdur.toLong()
                                       if (VERSION.SDK_INT >= 26) {
                                         vibrator1 = vibrator
                                         return@label172
                                       }
-                                    } catch (var17: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var18: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                     try {
                                       myPlayerMorse = this@MyPlayerMorse
-                                      return@lwhen
-                                    } catch (var11: IllegalStateException) {
+                                      //return@lwhen
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var12: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
-                                    var45[0] = 0L
+                                    timings[0] = 0L
                                     try {
-                                      var45[1] = (mdur * 3).toLong()
-                                      var45[2] = mdur.toLong()
+                                      timings[1] = (mdur * 3).toLong()
+                                      timings[2] = mdur.toLong()
                                       if (VERSION.SDK_INT >= 26) {
                                         vibrator1 = vibrator
                                         return@label172
                                       }
-                                    } catch (var15: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var16: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                     try {
                                       myPlayerMorse = this@MyPlayerMorse
-                                      return@lwhen
-                                    } catch (var13: IllegalStateException) {
+                                      //return@lwhen
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var14: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
-                                    var45[0] = 0L
-                                    var45[1] = 0L
+                                    timings[0] = 0L
+                                    timings[1] = 0L
                                     try {
-                                      var45[2] = mdur.toLong()
+                                      timings[2] = mdur.toLong()
                                       return@onPeriodicNotification
-                                    } catch (var9: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var10: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                   }
 
                                   2 -> run lwhen@{
-                                    var45[0] = 0L
+                                    timings[0] = 0L
                                     try {
-                                      var45[1] = (mdur * 3).toLong()
-                                      var45[2] = mdur.toLong()
+                                      timings[1] = (mdur * 3).toLong()
+                                      timings[2] = mdur.toLong()
                                       if (VERSION.SDK_INT >= 26) {
                                         vibrator1 = vibrator
                                         return@label172
                                       }
-                                    } catch (var15: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var16: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                     try {
                                       myPlayerMorse = this@MyPlayerMorse
-                                      return@lwhen
-                                    } catch (var13: IllegalStateException) {
+                                      //return@lwhen
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var14: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
-                                    var45[0] = 0L
-                                    var45[1] = 0L
+                                    timings[0] = 0L
+                                    timings[1] = 0L
                                     try {
-                                      var45[2] = mdur.toLong()
+                                      timings[2] = mdur.toLong()
                                       return@onPeriodicNotification
-                                    } catch (var9: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var10: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                   }
 
                                   else -> {
-                                    var45[0] = 0L
-                                    var45[1] = 0L
+                                    timings[0] = 0L
+                                    timings[1] = 0L
                                     try {
-                                      var45[2] = mdur.toLong()
+                                      timings[2] = mdur.toLong()
                                       return@onPeriodicNotification
-                                    } catch (var9: IllegalStateException) {
+                                    } catch (e: IllegalStateException) {
                                       var10001 = false
                                       return@label223
-                                    } catch (var10: Exception) {
+                                    } catch (e: Exception) {
                                       var10001 = false
                                       return@label241
                                     }
                                   }
                                 }
                                 try {
-                                  myPlayerMorse.vibrator!!.vibrate(var45, -1)
+                                  myPlayerMorse.vibrator!!.vibrate(timings, -1)
                                   return@onPeriodicNotification
-                                } catch (var7: IllegalStateException) {
+                                } catch (e: IllegalStateException) {
                                   var10001 = false
                                   return@label223
-                                } catch (var8: Exception) {
+                                } catch (e: Exception) {
                                   var10001 = false
                                   return@label241
                                 }
@@ -1428,35 +1787,32 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
                               try {
                                 if (VERSION.SDK_INT < Build.VERSION_CODES.O) TODO()
                                 vibrator1!!.vibrate(
-                                  VibrationEffect.createWaveform(
-                                    var45,
-                                    -1
-                                  )
+                                  VibrationEffect.createWaveform(timings, -1)
                                 )
                                 return@onPeriodicNotification
-                              } catch (var5: IllegalStateException) {
+                              } catch (e: IllegalStateException) {
                                 var10001 = false
                                 return@label223
-                              } catch (var6: Exception) {
+                              } catch (e: Exception) {
                                 var10001 = false
                               }
                             } // goto@label241
-                            var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->Exception"
+                            messageToLog = "MyPlayerMorse.doInBackground onPeriodicNotification->Exception"
                             return@label224
                           } // goto@label223
-                          var43 = "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
+                          messageToLog = "MyPlayerMorse.doInBackground onPeriodicNotification->IllegalStateException"
                         } // goto@label224
-                        log(var43)
+                        log(messageToLog)
                         mDoneLatch.countDown()
                       }
                     }
                   }
-                var34!!.setPlaybackPositionUpdateListener(var37)
-              } catch (var12: IllegalStateException) {
+                audioTrack1!!.setPlaybackPositionUpdateListener(playbackPositionUpdateListener)
+              } catch (e: IllegalStateException) {
                 log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->IllegalStateException")
                 mDoneLatch.countDown()
                 return null
-              } catch (var13: Exception) {
+              } catch (e: Exception) {
                 log("MyPlayerMorse.doInBackground AudioTrack.setPlaybackPositionUpdateListener->Exception")
                 mDoneLatch.countDown()
                 return null
@@ -1465,7 +1821,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
               try {
                 audioTrack!!.write(tmpTone.mGeneratedSnd, 0, tmpTone.mGeneratedSnd.size)
                 null
-              } catch (var11: Exception) {
+              } catch (e: Exception) {
                 log("MyPlayerMorse.doInBackground ERROR mAudioTrack.write")
                 mDoneLatch.countDown()
                 null
@@ -1522,7 +1878,7 @@ internal class MyPlayerMorse(context: Context, private val inst: Int) : AsyncTas
       }
       log(context,"MyPlayerMorse.playDone broadcasting finish  instance=$inst")
       if (!commandStop) {
-        App.b(context)
+        App.broadcastFinish(context)
       }
       log(context,"MyPlayerMorse.playDone deleting audiotrack  instance=$inst")
       if (audioTrack != null) {

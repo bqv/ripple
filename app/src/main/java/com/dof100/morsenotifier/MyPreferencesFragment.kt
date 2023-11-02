@@ -104,7 +104,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
           if (var1 is PreferenceCategory || var1 is PreferenceScreen) {
             val var4: String
             if (!(var2 == "pref_morse") && !(var2 == "pref_audio") && !(var2 == "pref_display")) {
-              if (!(var2 == "pref_voice") || !App.Companion.c) {
+              if (!(var2 == "pref_voice") || !App.Companion.morseMode) {
                 return
               }
               var4 = "MyPreferencesFragment.checkPreference: remove voice key = "
@@ -284,7 +284,7 @@ class MyPreferencesFragment constructor() : PreferenceFragment(), OnSharedPrefer
 
   public override fun onDestroy() {
     log("MyPreferencesFragment.onDestroy")
-    App.Companion.c(getActivity().getApplicationContext())
+    App.Companion.broadcastSettingsChanged(getActivity().getApplicationContext())
     super.onDestroy()
   }
 

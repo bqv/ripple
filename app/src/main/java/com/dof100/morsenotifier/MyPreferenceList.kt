@@ -32,12 +32,12 @@ class MyPreferenceList constructor(var1: Context, var2: AttributeSet) : ListPref
     var var6: Boolean =
       Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enableFree", "true")
         .equals("true", ignoreCase = true)
-    if (App.Companion.a) {
+    if (App.Companion.freeBuild) {
       this.setEnabled(var6)
     }
     var6 = Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
       .equals("true", ignoreCase = true)
-    if (App.Companion.b) {
+    if (App.Companion.proBuild) {
       this.setEnabled(var6)
     }
   }

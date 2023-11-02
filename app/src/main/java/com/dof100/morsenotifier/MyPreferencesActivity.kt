@@ -14,7 +14,7 @@ class MyPreferencesActivity constructor() : PreferenceActivity() {
 
   public override fun onBuildHeaders(var1: List<Header>?) {
     val var2: Int
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = R.xml.pref_headers_morse
     } else {
       var2 = R.xml.pref_headers_voice

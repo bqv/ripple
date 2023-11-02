@@ -19,108 +19,100 @@ import android.widget.LinearLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dof100.morsenotifier.MyLog.log
 
-class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
-  private var a: Int = 0
-  private var b: Boolean = true
-  private var c: Int = 1
-  private var d: Int = 0
-  private var e: Boolean = true
-  private var f: Boolean = false
-  private var g: Int = 16777215
-  private var h: Int = 16776960
-  private var i: Int = 16711680
-  private var j: Int = 0
-  private var k: Int = 1
-  private var l: GLSurfaceView? = null
-  private var m: MyMorseRenderer? = null
-  private var n: ArrayList<*>? = ArrayList<Any?>()
-  private var o: Long = System.currentTimeMillis()
-  private var p: Long = 0L
-  private var q: Long = 0L
-  private val r: BroadcastReceiver = object : BroadcastReceiver() {
-    public override fun onReceive(var1: Context, var2: Intent) {
-      if (("LBR_ACTION_SETPOS" == var2.getAction())) {
-        val var3: Int = var2.getIntExtra("LBR_ACTION_DATA_POS", 0)
-        if (var3 >= 0) {
-          val var4: Int = var3 * 2
-          if (var4 < n!!.size && n!!.get(var4) as Int == -8) {
+class ActivityDisplayMessage : Activity(), View.OnClickListener {
+  private var paramInstance: Int = 0
+  private var paramEnableDialogSettings: Boolean = true
+  private var paramDisplayHow: Int = 1
+  private var paramDisplayPos: Int = 0
+  private var paramDisplayText: Boolean = true
+  private var paramDisplayFlash: Boolean = false
+  private var paramDisplayColor: Int = 16777215
+  private var paramDisplayColorMeHilight: Int = 16776960
+  private var paramDisplayColorTextHilight: Int = 16711680
+  private var paramDisplayInitialDelay: Int = 0
+  private var paramStopMethod: Int = 1
+  private var surfaceView: GLSurfaceView? = null
+  private var morseRenderer: MyMorseRenderer? = null
+  private var paramList: ArrayList<Int>? = ArrayList()
+  private var timestamp1: Long = System.currentTimeMillis()
+  private var timestamp3: Long = 0L
+  private var timestamp2: Long = 0L
+  private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(var1: Context, intent: Intent) {
+      if (("LBR_ACTION_SETPOS" == intent.action)) {
+        val actionDataPos: Int = intent.getIntExtra("LBR_ACTION_DATA_POS", 0)
+        if (actionDataPos >= 0) {
+          val index: Int = actionDataPos * 2
+          if (index < paramList!!.size && paramList!![index] == -8) {
             log("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_SETPOS -> MORSE_ELEMENT_STOP")
-            a()
+            action_finish()
           }
         }
-        if (m != null) {
-          l!!.queueEvent(object : Runnable {
-            public override fun run() {
-              m!!.a(var3)
-            }
-          })
-          l!!.invalidate()
+        if (morseRenderer != null) {
+          surfaceView!!.queueEvent { morseRenderer!!.a(actionDataPos) }
+          surfaceView!!.invalidate()
         }
-        o = System.currentTimeMillis()
+        timestamp1 = System.currentTimeMillis()
       } else {
-        if (("LBR_ACTION_FINISH" == var2.getAction())) {
-          log("ActivityDisplayMessage.BroadcastReceiver LBR_ACTION_FINISH instance=$a")
-          log("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_FINISH  (stopping) instance=$a")
-          a()
+        if (("LBR_ACTION_FINISH" == intent.action)) {
+          log("ActivityDisplayMessage.BroadcastReceiver LBR_ACTION_FINISH instance=$paramInstance")
+          log("ActivityDisplayMessage.BroadcastReceiver  got LBR_ACTION_FINISH  (stopping) instance=$paramInstance")
+          action_finish()
         }
       }
     }
   }
-  private val s: Handler = Handler()
-  private val t: Runnable = object : Runnable {
-    public override fun run() {
-      if (System.currentTimeMillis() - o > 9000L && !isFinishing()) {
+  private val handler: Handler = Handler()
+  private val runnable: Runnable = object : Runnable {
+    override fun run() {
+      if (System.currentTimeMillis() - timestamp1 > 9000L && !isFinishing) {
         log("ActivityDisplayMessage mLastTime) > DELAY_MSEC")
-        a()
+        action_finish()
       }
-      s.postDelayed(this, 1000L)
+      handler.postDelayed(this, 1000L)
     }
   }
 
-  private fun a() {
+  private fun action_finish() {
     log("ActivityDisplayMessage.action_finish")
-    l!!.setVisibility(4)
+    surfaceView!!.visibility = View.INVISIBLE
     finish()
   }
 
-  private fun b() {
-    val var1: String = "ActivityDisplayMessage.action_hide  instance=" +
-        a
-    log(var1)
-    l!!.setVisibility(4)
+  private fun action_hide() {
+    log("ActivityDisplayMessage.action_hide  instance=$paramInstance")
+    surfaceView!!.visibility = View.INVISIBLE
     finish()
   }
 
-  private fun c() {
-    val var1: String = "ActivityDisplayMessage.action_configure  instance=" +
-        a
-    log(var1)
-    App.Companion.b(getApplicationContext())
+  private fun action_configure() {
+    log("ActivityDisplayMessage.action_configure  instance=$paramInstance")
+    App.broadcastFinish(applicationContext)
     this.startActivity(Intent(this, ActivityMain::class.java))
-    l!!.setVisibility(View.INVISIBLE)
+    surfaceView!!.visibility = View.INVISIBLE
     finish()
   }
 
-  public override fun onClick(var1: View) {
+  override fun onClick(var1: View) {
     log("ActivityDisplayMessage.onClick")
     if (var1 != null) {
-      when (var1.getId()) {
+      when (var1.id) {
         R.id.btn_configure -> {
           log("ActivityDisplayMessage.onClick btn_configure")
-          c()
+          action_configure()
           return
         }
 
         R.id.btn_hide -> {
           log("ActivityDisplayMessage.onClick btn_hide")
-          b()
+          action_hide()
           return
         }
 
         R.id.btn_stop -> {
           log("ActivityDisplayMessage.onClick btn_stop")
-          App.Companion.b(getApplicationContext())
-          a()
+          App.broadcastFinish(applicationContext)
+          action_finish()
           return
         }
 
@@ -130,129 +122,125 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
   }
 
   override fun onCreate(var1: Bundle?) {
-    var var1: Bundle? = var1
-    super.onCreate(var1)
-    var1 = getIntent().getExtras()
-    if (var1 != null) {
-      a = var1.getInt("PARAM_INSTANCE", 0)
-      n = var1.getIntegerArrayList("PARAM_LIST")
-      b = var1.getBoolean("PARAM_ENABLEDIALOGSETTINGS")
-      c = var1.getInt("PARAM_DISPLAY_HOW", 1)
-      d = var1.getInt("PARAM_DISPLAY_POS", 0)
-      e = var1.getBoolean("PARAM_DISPLAY_TEXT", true)
-      f = var1.getBoolean("PARAM_DISPLAY_FLASH", false)
-      g = var1.getInt("PARAM_DISPLAY_COLOR", 16777215)
-      h = var1.getInt("PARAM_DISPLAY_COLOR_ME_HILIGHT", 16776960)
-      i = var1.getInt("PARAM_DISPLAY_COLOR_TEXT_HILIGHT", 16711680)
-      j = var1.getInt("PARAM_DISPLAY_INITIALDELAY", 0)
-      k = var1.getInt("PARAM_STOPMETHOD", 1)
+    var bundle: Bundle? = var1
+    super.onCreate(bundle)
+    bundle = intent.extras
+    if (bundle != null) {
+      paramInstance = bundle.getInt("PARAM_INSTANCE", 0)
+      paramList = bundle.getIntegerArrayList("PARAM_LIST")
+      paramEnableDialogSettings = bundle.getBoolean("PARAM_ENABLEDIALOGSETTINGS")
+      paramDisplayHow = bundle.getInt("PARAM_DISPLAY_HOW", 1)
+      paramDisplayPos = bundle.getInt("PARAM_DISPLAY_POS", 0)
+      paramDisplayText = bundle.getBoolean("PARAM_DISPLAY_TEXT", true)
+      paramDisplayFlash = bundle.getBoolean("PARAM_DISPLAY_FLASH", false)
+      paramDisplayColor = bundle.getInt("PARAM_DISPLAY_COLOR", 16777215)
+      paramDisplayColorMeHilight = bundle.getInt("PARAM_DISPLAY_COLOR_ME_HILIGHT", 16776960)
+      paramDisplayColorTextHilight = bundle.getInt("PARAM_DISPLAY_COLOR_TEXT_HILIGHT", 16711680)
+      paramDisplayInitialDelay = bundle.getInt("PARAM_DISPLAY_INITIALDELAY", 0)
+      paramStopMethod = bundle.getInt("PARAM_STOPMETHOD", 1)
     }
-    var var2: Point
+    var point: Point
     run label158@{
-      log("ActivityDisplayMessage.onCreate instance=$a")
-      var2 = Point()
-      val var21: WindowManager? = getWindowManager()
-      val var24: String
-      if (var21 != null) {
-        val var22: Display = var21.getDefaultDisplay()
-        try {
-          var22.getSize(var2)
-          return@label158
-        } catch (var19: Exception) {
-          var24 = "ActivityDisplayMessage.onCreate ERROR try tmpDisplay.getSize"
-        }
+      log("ActivityDisplayMessage.onCreate instance=$paramInstance")
+      point = Point()
+      val messageToLog: String = if (windowManager != null) {
+          val tmpDisplay: Display = windowManager.defaultDisplay
+          try {
+            tmpDisplay.getSize(point)
+            return@label158
+          } catch (var19: Exception) {
+            "ActivityDisplayMessage.onCreate ERROR try tmpDisplay.getSize"
+          }
       } else {
-        var24 = "ActivityDisplayMessage.onCreate ERROR getWindowManager=null"
+        "ActivityDisplayMessage.onCreate ERROR getWindowManager=null"
       }
-      log(this, var24 as String?)
-      var2.set(320, 100)
+      log(this, messageToLog)
+      point.set(320, 100)
     }
     var var10001: Boolean
     run label151@{
       run label150@{
-        val var27: Window?
+        val getWindow: Window?
         try {
-          var27 = getWindow()
-        } catch (var18: Exception) {
+          getWindow = window
+        } catch (e: Exception) {
           var10001 = false
           return@label150
         }
-        if (var27 != null) {
+        if (getWindow != null) {
           run label162@{
             run label143@{
               run label163@{
                 run label167@{
                   try {
-                    when (d) {
+                    when (paramDisplayPos) {
                       1 -> return@label163
                       2 -> return@label167
                       3 -> {}
                       else -> return@label143
                     }
-                  } catch (var16: Exception) {
+                  } catch (e: Exception) {
                     var10001 = false
                     return@label162
                   }
                   try {
                     log("ActivityDisplayMessage.onCreate setGravity(BOTTOM)")
-                    var27.setGravity(80)
+                    getWindow.setGravity(80)
                     return@label143
-                  } catch (var15: Exception) {
+                  } catch (e: Exception) {
                     var10001 = false
                     return@label162
                   }
                 }
                 try {
                   log("ActivityDisplayMessage.onCreate setGravity(CENTER)")
-                  var27.setGravity(17)
+                  getWindow.setGravity(17)
                   return@label143
-                } catch (var14: Exception) {
+                } catch (e: Exception) {
                   var10001 = false
                   return@label162
                 }
               }
               try {
                 log("ActivityDisplayMessage.onCreate setGravity(TOP)")
-                var27.setGravity(48)
-              } catch (var13: Exception) {
+                getWindow.setGravity(48)
+              } catch (e: Exception) {
                 var10001 = false
                 return@label162
               }
             }
             run label117@{
               try {
-                when (c) {
+                when (paramDisplayHow) {
                   1 -> {}
                   2, 3 -> return@label117
                   else -> return@label151
                 }
-              } catch (var12: Exception) {
+              } catch (e: Exception) {
                 var10001 = false
                 return@label162
               }
               try {
                 log("ActivityDisplayMessage.onCreate (window)")
-                var27.setType(256)
+                getWindow.setType(256)
                 return@label151
-              } catch (var11: Exception) {
+              } catch (e: Exception) {
                 var10001 = false
                 return@label162
               }
             }
             try {
               requestWindowFeature(1)
-              var27.setBackgroundDrawableResource(17170445)
-              var27.setFormat(-3)
-              var27.addFlags(262192)
-              val var3: WindowManager.LayoutParams = var27.getAttributes()
-              var3.width = var2.x
-              val var23: String =
-                "ActivityDisplayMessage.onCreate (scroll) params.width =" +
-                    var3.width
-              log(var23)
-              var27.setAttributes(var3)
+              getWindow.setBackgroundDrawableResource(17170445)
+              getWindow.setFormat(-3)
+              getWindow.addFlags(262192)
+              val params: WindowManager.LayoutParams = getWindow.attributes
+              params.width = point.x
+              val messageToLog = "ActivityDisplayMessage.onCreate (scroll) params.width =${params.width}"
+              log(messageToLog)
+              getWindow.attributes = params
               return@label151
-            } catch (var10: Exception) {
+            } catch (e: Exception) {
               var10001 = false
             }
           }
@@ -260,7 +248,7 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
           try {
             log(this, "ActivityDisplayMessage.onCreate ERROR getWindow=null")
             return@label151
-          } catch (var17: Exception) {
+          } catch (e: Exception) {
             var10001 = false
           }
         }
@@ -269,146 +257,134 @@ class ActivityDisplayMessage constructor() : Activity(), View.OnClickListener {
     }
     setFinishOnTouchOutside(false)
     this.setContentView(R.layout.activity_info)
-    val var4: LinearLayout = findViewById<View>(R.id.ll_btn) as LinearLayout
-    val var26: Button = findViewById<View>(R.id.btn_configure) as Button
-    val var28: Button = findViewById<View>(R.id.btn_stop) as Button
-    val var25: Button = findViewById<View>(R.id.btn_hide) as Button
-    l = findViewById<View>(R.id.glsurfaceview) as GLSurfaceView?
+    val llBtn: LinearLayout = findViewById(R.id.ll_btn)
+    val btnConfigure: Button = findViewById(R.id.btn_configure)
+    val btnStop: Button = findViewById(R.id.btn_stop)
+    val btnHide: Button = findViewById(R.id.btn_hide)
+    surfaceView = findViewById(R.id.glsurfaceview)
     run label98@{
       run label97@{
         run label96@{
           run label166@{
             try {
-              if (c != 1) {
+              if (paramDisplayHow != 1) {
                 return@label166
               }
-              if (!b) {
-                var26.setVisibility(8)
+              if (!paramEnableDialogSettings) {
+                btnConfigure.visibility = View.GONE
                 return@label96
               }
-            } catch (var9: Exception) {
+            } catch (e: Exception) {
               var10001 = false
               return@label97
             }
             try {
-              var26.setOnClickListener(this)
+              btnConfigure.setOnClickListener(this)
               return@label96
-            } catch (var8: Exception) {
+            } catch (e: Exception) {
               var10001 = false
               return@label97
             }
           }
           try {
-            var4.setVisibility(8)
-            var26.setVisibility(8)
-            var28.setVisibility(8)
-            var25.setVisibility(8)
+            llBtn.visibility = View.GONE
+            btnConfigure.visibility = View.GONE
+            btnStop.visibility = View.GONE
+            btnHide.visibility = View.GONE
             return@label98
-          } catch (var7: Exception) {
+          } catch (e: Exception) {
             var10001 = false
             return@label97
           }
         }
         try {
-          var28.setOnClickListener(this)
-          var25.setOnClickListener(this)
+          btnStop.setOnClickListener(this)
+          btnHide.setOnClickListener(this)
           return@label98
-        } catch (var6: Exception) {
+        } catch (e: Exception) {
           var10001 = false
         }
       }
-      log(
-        this,
-        "ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener"
-      )
+      log(this, "ActivityDisplayMessage.onCreate ERROR try setVisibility, setOnClickListener")
     }
     try {
-      val var29: MyMorseRenderer = MyMorseRenderer(n, c, e, f, g, h, i, j)
-      m = var29
-      l!!.setZOrderOnTop(true)
-      l!!.setEGLConfigChooser(8, 8, 8, 8, 16, 0)
-      l!!.getHolder().setFormat(1)
-      l!!.setRenderer(m)
-    } catch (var5: Exception) {
+      morseRenderer = MyMorseRenderer(paramList, paramDisplayHow, paramDisplayText, paramDisplayFlash, paramDisplayColor, paramDisplayColorMeHilight, paramDisplayColorTextHilight, paramDisplayInitialDelay)
+      surfaceView!!.setZOrderOnTop(true)
+      surfaceView!!.setEGLConfigChooser(8, 8, 8, 8, 16, 0)
+      surfaceView!!.holder.setFormat(1)
+      surfaceView!!.setRenderer(morseRenderer)
+    } catch (e: Exception) {
       log(this, "ActivityDisplayMessage.onCreate ERROR try setRenderer")
     }
-    o = System.currentTimeMillis()
-    log("ActivityDisplayMessage.onCreate OUT instance=$a")
+    timestamp1 = System.currentTimeMillis()
+    log("ActivityDisplayMessage.onCreate OUT instance=$paramInstance")
   }
 
   public override fun onDestroy() {
-    val var1: String = "ActivityDisplayMessage.onDestroy  instance=" +
-        a
-    log(var1)
+    log("ActivityDisplayMessage.onDestroy  instance=$paramInstance")
     super.onDestroy()
   }
 
-  public override fun onKeyDown(var1: Int, var2: KeyEvent): Boolean {
+  override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
     log("ActivityDisplayMessage.onKeyDown")
-    val var3: Long = System.currentTimeMillis()
-    if (var1 == 25) {
-      q = var3
-      if ((k == 1) || (k == 2) || (k == 3) || (k == 4 && var3 - p < 2000L)) {
-        log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN Broadcasting Finish")
-        App.Companion.b(getApplicationContext())
-        a()
-        return false
+    val now: Long = System.currentTimeMillis()
+    if (keyCode == 25) {
+      timestamp2 = now
+      return if ((paramStopMethod in 1..3) || (paramStopMethod == 4 && now - timestamp3 < 2000L)) {
+          log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN Broadcasting Finish")
+          App.broadcastFinish(applicationContext)
+          action_finish()
+        false
       } else {
-        log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN")
-        return false
+          log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_DOWN")
+        false
       }
-    } else if (var1 != 24) {
-      if (var1 == 4) {
-        log("ActivityDisplayMessage.onKeyDown KEYCODE_BACK")
-        App.Companion.b(getApplicationContext())
-        a()
-        return false
+    } else if (keyCode != 24) {
+      return if (keyCode == 4) {
+          log("ActivityDisplayMessage.onKeyDown KEYCODE_BACK")
+          App.broadcastFinish(applicationContext)
+          action_finish()
+        false
       } else {
-        return super.onKeyDown(var1, var2)
+        super.onKeyDown(keyCode, event)
       }
     } else {
-      p = var3
-      if (k != 3 && (k != 4 || var3 - q >= 2000L)) {
-        log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP")
-        return false
+      timestamp3 = now
+      return if (paramStopMethod != 3 && (paramStopMethod != 4 || now - timestamp2 >= 2000L)) {
+          log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP")
+        false
       } else {
-        log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP Broadcasting Finish")
-        App.Companion.b(getApplicationContext())
-        a()
-        return false
+          log("ActivityDisplayMessage.onKeyDown (no BRVolume) KEYCODE_VOLUME_UP Broadcasting Finish")
+          App.broadcastFinish(applicationContext)
+          action_finish()
+        false
       }
     }
   }
 
   public override fun onPause() {
-    log("ActivityDisplayMessage.onPause  instance=" + a)
-    LocalBroadcastManager.getInstance(
-      getApplicationContext()
-    ).unregisterReceiver(r)
-    s.removeCallbacks(t)
+    log("ActivityDisplayMessage.onPause  instance=$paramInstance")
+    LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(broadcastReceiver)
+    handler.removeCallbacks(runnable)
     super.onPause()
   }
 
   public override fun onResume() {
-    log("ActivityDisplayMessage.onResume  instance=$a")
+    log("ActivityDisplayMessage.onResume  instance=$paramInstance")
     super.onResume()
-    t.run()
-    val var2: LocalBroadcastManager = LocalBroadcastManager.getInstance(
-      getApplicationContext()
-    )
-    val var3: IntentFilter = IntentFilter()
+    runnable.run()
+    val var2: LocalBroadcastManager = LocalBroadcastManager.getInstance(applicationContext)
+    val var3 = IntentFilter()
     var3.addAction("LBR_ACTION_SETPOS")
     var3.addAction("LBR_ACTION_FINISH")
-    var2.registerReceiver(r, var3)
-    o = System.currentTimeMillis()
-    s.postDelayed(t, 1000L)
-    log("ActivityDisplayMessage.onResume  OUT instance=$a")
+    var2.registerReceiver(broadcastReceiver, var3)
+    timestamp1 = System.currentTimeMillis()
+    handler.postDelayed(runnable, 1000L)
+    log("ActivityDisplayMessage.onResume  OUT instance=$paramInstance")
   }
 
   override fun onStop() {
-    val var1: String = "ActivityDisplayMessage.onStop instance=" +
-        a
-    log(var1)
+    log("ActivityDisplayMessage.onStop instance=$paramInstance")
     super.onStop()
   }
 }

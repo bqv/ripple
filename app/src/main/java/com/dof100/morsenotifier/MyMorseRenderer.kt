@@ -7,22 +7,17 @@ import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
+import kotlin.math.atan2
 
-internal class MyMorseRenderer constructor(
-  var1: ArrayList<*>?,
-  var2: Int,
-  var3: Boolean,
-  var4: Boolean,
-  var5: Int,
-  var6: Int,
-  var7: Int,
-  var8: Int
+internal class MyMorseRenderer constructor(pList: ArrayList<Int>?, pDisplayHow: Int, pDisplayText: Boolean,
+                                           pDisplayFlash: Boolean, pDisplayColor: Int, pDisplayColorMeHilight: Int,
+                                           pDisplayColorTextHilight: Int, pDisplayInitialDelay: Int
 ) : GLSurfaceView.Renderer {
-  private val a: Int
-  private val b: Boolean
-  private val c: Boolean
+  private val mDisplayHow: Int
+  private val mDisplayText: Boolean
+  private val mDisplayFlash: Boolean
   private var d: UnknownGL3? = null
-  private val e: ArrayList<UnknownGL2> = ArrayList()
+  private val glList: ArrayList<UnknownGL2> = ArrayList()
   private var f: Int = -1
   private var g: Int = -1
   private var h: Int = -1
@@ -35,8 +30,8 @@ internal class MyMorseRenderer constructor(
   private val o: Float
   private val p: Float
   private val q: Float
-  private val r: Int
-  private val s: Long
+  private val mDisplayInitialDelay: Int
+  private val timestamp: Long
   private var t: Float = 1.0f
   private var u: Float = 1.0f
   private var v: Float = 1.0f
@@ -46,38 +41,38 @@ internal class MyMorseRenderer constructor(
   private var z: Float = 0.0f
 
   init {
-    var var2: Int = var2
-    var var5: Int = var5
-    var var6: Int = var6
+    var displayHow: Int = pDisplayHow
+    var displayColor: Int = pDisplayColor
+    var displayColorMeHilight: Int = pDisplayColorMeHilight
     log("MyMorseRenderer constructor")
-    a = var2
-    b = var3
-    c = var4
-    i = ((var5 shr 16) and 255).toFloat() / 255.0f
-    j = ((var5 shr 8) and 255).toFloat() / 255.0f
-    k = (var5 and 255).toFloat() / 255.0f
-    l = ((var6 shr 16) and 255).toFloat() / 255.0f
-    m = ((var6 shr 8) and 255).toFloat() / 255.0f
-    n = (var6 and 255).toFloat() / 255.0f
-    o = ((var7 shr 16) and 255).toFloat() / 255.0f
-    p = ((var7 shr 8) and 255).toFloat() / 255.0f
-    q = (var7 and 255).toFloat() / 255.0f
-    r = var8
-    s = System.currentTimeMillis()
-    e.clear()
-    var2 = 0
-    while (var2 < var1!!.size) {
-      var5 = var1.get(var2) as Int
-      var6 = var1.get(var2 + 1) as Int
-      e.add(UnknownGL2(var5, var6))
-      var2 += 2
+    mDisplayHow = displayHow
+    mDisplayText = pDisplayText
+    mDisplayFlash = pDisplayFlash
+    i = ((displayColor shr 16) and 255).toFloat() / 255.0f
+    j = ((displayColor shr 8) and 255).toFloat() / 255.0f
+    k = (displayColor and 255).toFloat() / 255.0f
+    l = ((displayColorMeHilight shr 16) and 255).toFloat() / 255.0f
+    m = ((displayColorMeHilight shr 8) and 255).toFloat() / 255.0f
+    n = (displayColorMeHilight and 255).toFloat() / 255.0f
+    o = ((pDisplayColorTextHilight shr 16) and 255).toFloat() / 255.0f
+    p = ((pDisplayColorTextHilight shr 8) and 255).toFloat() / 255.0f
+    q = (pDisplayColorTextHilight and 255).toFloat() / 255.0f
+    mDisplayInitialDelay = pDisplayInitialDelay
+    timestamp = System.currentTimeMillis()
+    glList.clear()
+    displayHow = 0
+    while (displayHow < pList!!.size) {
+      displayColor = pList[displayHow]
+      displayColorMeHilight = pList[displayHow + 1]
+      glList.add(UnknownGL2(displayColor, displayColorMeHilight))
+      displayHow += 2
     }
   }
 
   fun a(var1: Int) {
     f = var1
-    if (f >= 0 && f < e.size) {
-      val var2: UnknownGL2 = e.get(var1) as UnknownGL2
+    if (f >= 0 && f < glList.size) {
+      val var2: UnknownGL2 = glList[var1]
       if (var2.mode >= 0) {
         g = f
       } else if (var2.mode != -1) {
@@ -96,8 +91,8 @@ internal class MyMorseRenderer constructor(
     h = -1
   }
 
-  public override fun onDrawFrame(var1: GL10) {
-    val var2: Boolean = b
+  override fun onDrawFrame(var1: GL10) {
+    val var2: Boolean = mDisplayText
     var var3: UnknownGL2? = null
     if (var2) {
       if (d == null) {
@@ -106,11 +101,11 @@ internal class MyMorseRenderer constructor(
     } else {
       d = null
     }
-    val var4: Boolean = false
+    val var4 = false
     var var5: Boolean = var4
-    if (c) {
+    if (mDisplayFlash) {
       if (f >= 0) {
-        var3 = e.get(f) as UnknownGL2?
+        var3 = glList[f]
       }
       var5 = var4
       if (var3 != null) {
@@ -187,16 +182,16 @@ internal class MyMorseRenderer constructor(
     var1.glDisable(2896)
     var1.glFrontFace(2305)
     var1.glColor4f(1.0f, 1.0f, 0.0f, 1.0f)
-    val var20: Long = System.currentTimeMillis() - s
-    if (var20 < r.toLong()) {
-      GLES10.glTranslatef(x - x * var20.toFloat() / r.toFloat(), 0.0f, 0.0f)
+    val elapsed: Long = System.currentTimeMillis() - timestamp
+    if (elapsed < mDisplayInitialDelay.toLong()) {
+      GLES10.glTranslatef(x - x * elapsed.toFloat() / mDisplayInitialDelay.toFloat(), 0.0f, 0.0f)
     }
     GLES10.glTranslatef((-f).toFloat() * 0.5f, 0.0f, 0.0f)
     var var22: Int = -1
     var var23: Int = -1
-    for (var24 in e.indices) {
+    for (var24 in glList.indices) {
       var1.glColor4f(1.0f, 0.0f, 0.0f, 1.0f)
-      val var25: UnknownGL2 = e.get(var24) as UnknownGL2
+      val var25: UnknownGL2 = glList[var24]
       if (var25.mode >= 0) {
         var23 = var24
       } else if (var25.mode != -1) {
@@ -246,48 +241,34 @@ internal class MyMorseRenderer constructor(
     var1.glFlush()
   }
 
-  public override fun onSurfaceChanged(var1: GL10, var2: Int, var3: Int) {
-    log(
-      String.format(
-        Locale.US,
-        "MyMorseRenderer.onSurfaceChanged width=%d  height=%d ",
-        var2,
-        var3
-      )
-    )
-    var var4: Int = var3
-    if (var3 == 0) {
-      var4 = 1
+  override fun onSurfaceChanged(var1: GL10, width: Int, height: Int) {
+    log(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width=%d  height=%d ", width, height))
+    var height: Int = height
+    if (height == 0) {
+      height = 1
     }
-    val var5: Float = var2.toFloat() / var4.toFloat()
-    if (var4 > var2) {
+    val aspect: Float = width.toFloat() / height.toFloat()
+    if (height > width) {
       x = 4.0f
-      y = x / var5
+      y = x / aspect
     } else {
       y = 4.0f
-      x = y * var5
+      x = y * aspect
     }
     z = 4.0f
-    val var6: Float =
-      (Math.toDegrees(Math.atan2(y.toDouble(), (z + 25.0f).toDouble())) * 2.0).toFloat()
-    log(
-      String.format(
-        Locale.US,
-        "MyMorseRenderer.onSurfaceChanged width,height = %d,%d",
-        var2,
-        var4
-      )
+    val var6: Float = (Math.toDegrees(atan2(y.toDouble(), (z + 25.0f).toDouble())) * 2.0).toFloat()
+    log(String.format(Locale.US, "MyMorseRenderer.onSurfaceChanged width,height = %d,%d", width, height)
     )
-    log("MyMorseRenderer.onSurfaceChanged aspect=$var5")
-    var1.glViewport(0, 0, var2, var4)
+    log("MyMorseRenderer.onSurfaceChanged aspect=$aspect")
+    var1.glViewport(0, 0, width, height)
     var1.glMatrixMode(5889)
     var1.glLoadIdentity()
-    GLU.gluPerspective(var1, var6, var5, 0.1f, (z + 25.0f) * 2.0f)
+    GLU.gluPerspective(var1, var6, aspect, 0.1f, (z + 25.0f) * 2.0f)
   }
 
-  public override fun onSurfaceCreated(var1: GL10, var2: EGLConfig) {
+  override fun onSurfaceCreated(var1: GL10, var2: EGLConfig) {
     log("MyMorseRenderer.onSurfacecreated")
-    if (a == 1) {
+    if (mDisplayHow == 1) {
       t = 0.0f
       u = 0.0f
       v = 0.0f

@@ -25,7 +25,7 @@ internal class MyJob : Job() {
     val var7 = PreferenceManager.getDefaultSharedPreferences(var6)
     var var8 = this.context
     var var14: String
-    var14 = if (App.Companion.c) {
+    var14 = if (App.Companion.morseMode) {
       "_morsedef"
     } else {
       "_voicedef"
@@ -33,7 +33,7 @@ internal class MyJob : Job() {
     val var9 =
       Utils.prefGetBoolean(var8, var7, "pref_chime_enable", null as String?, var14, "_def")
     var8 = this.context
-    var14 = if (App.Companion.c) {
+    var14 = if (App.Companion.morseMode) {
       "_morsedef"
     } else {
       "_voicedef"
@@ -137,7 +137,7 @@ internal class MyJob : Job() {
     }
 
     fun scheduleNextReminder(var0: Context?) {
-      if (!App.Companion.b) {
+      if (!App.Companion.proBuild) {
         log("MyJob.scheduleNextReminder App!=pro exiting...")
       } else {
         log("MyJob.scheduleNextReminder")

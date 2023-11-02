@@ -84,7 +84,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
   private fun e() {
     log("onActionTips")
     val var1: String
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var1 = "http://www.100dof.com/software/morsenotifier/manual_morse_notifier.pdf"
     } else {
       var1 = "http://www.100dof.com/software/voicenotifier/manual_voice_notifier.pdf"
@@ -141,11 +141,11 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
       ) == 0)
     ) {
       log("ActivityMain.checkPermissions all permissions granted")
-    } else if (App.Companion.a(this, "PERMISSIONS")) {
+    } else if (App.Companion.getQuestionAsked(this, "PERMISSIONS")) {
       log("ActivityMain.checkPermissions question_AlreadyAsked")
       toast(this, "Permissions needed!")
     } else {
-      App.Companion.b(this, "PERMISSIONS")
+      App.Companion.setQuestionAsked(this, "PERMISSIONS")
       ActivityCompat.requestPermissions(
         this,
         arrayOf(
@@ -163,20 +163,20 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
     log("ActivityMain.checkNotificationAccess")
     if (!java.lang.Boolean.valueOf(getResources().getBoolean(R.bool.enableFeaturesAPI18))) {
       log("ActivityMain.checkNotificationAccess api18=false")
-    } else if (App.Companion.a) {
+    } else if (App.Companion.freeBuild) {
       log("ActivityMain.checkNotificationAccess Free version")
     } else if (ActivityAdvanced.Companion.a(this as Activity)) {
       log("ActivityMain.checkNotificationAccess collector is running")
-    } else if (App.Companion.a(this, "NOTIFICATIONACCESS")) {
+    } else if (App.Companion.getQuestionAsked(this, "NOTIFICATIONACCESS")) {
       log("ActivityMain.checkNotificationAccess question_AlreadyAsked")
       toast(this, "No notification access!")
     } else {
-      App.Companion.b(this, "NOTIFICATIONACCESS")
+      App.Companion.setQuestionAsked(this, "NOTIFICATIONACCESS")
       (AlertDialog.Builder(this)).setTitle(R.string.string_advanced_notificationlistener)
         .setMessage(
           getResources().getText(R.string.string_notify_protectedapps_text).toString()
-            .replace("\$BRAND$", (App.Companion.g)!!)
-            .replace("\$APPNAME$", (App.Companion.e)!!)
+            .replace("\$BRAND$", (App.Companion.brand)!!)
+            .replace("\$APPNAME$", (App.Companion.labelRes)!!)
         ).setPositiveButton(17039379, object : DialogInterface.OnClickListener {
         public override fun onClick(var1: DialogInterface, var2: Int) {
           var var2: Int = var2
@@ -192,15 +192,15 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
 
   private fun i() {
     run label48@{
-      if (App.Companion.h || App.Companion.i || App.Companion.j) {
-        if (App.Companion.a(this, "AUTOSTART")) {
+      if (App.Companion.isXiaomi || App.Companion.isOppo || App.Companion.isVivo) {
+        if (App.Companion.getQuestionAsked(this, "AUTOSTART")) {
           return@label48
         }
-        App.Companion.b(this, "AUTOSTART")
+        App.Companion.setQuestionAsked(this, "AUTOSTART")
         (AlertDialog.Builder(this)).setTitle(R.string.string_advanced_autostart).setMessage(
           getResources().getText(R.string.string_notify_powersave_text).toString()
-            .replace("\$BRAND$", (App.Companion.g)!!)
-            .replace("\$APPNAME$", (App.Companion.e)!!)
+            .replace("\$BRAND$", (App.Companion.brand)!!)
+            .replace("\$APPNAME$", (App.Companion.labelRes)!!)
         ).setPositiveButton(17039370, object : DialogInterface.OnClickListener {
           public override fun onClick(var1: DialogInterface, var2: Int) {
             ActivityAdvanced.Companion.a(this@ActivityMain as Context)
@@ -209,16 +209,16 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
           public override fun onClick(var1: DialogInterface, var2: Int) {}
         }).setIcon(17301543).show()
       }
-      if (App.Companion.h || App.Companion.i) {
-        if (App.Companion.a(this, "POWERSAVE")) {
+      if (App.Companion.isXiaomi || App.Companion.isOppo) {
+        if (App.Companion.getQuestionAsked(this, "POWERSAVE")) {
           return@label48
         }
-        App.Companion.b(this, "POWERSAVE")
+        App.Companion.setQuestionAsked(this, "POWERSAVE")
         (AlertDialog.Builder(this)).setTitle(R.string.string_advanced_powersave_text)
           .setMessage(
             getResources().getText(R.string.string_reminder).toString()
-              .replace("\$BRAND$", (App.Companion.g)!!)
-              .replace("\$APPNAME$", (App.Companion.e)!!)
+              .replace("\$BRAND$", (App.Companion.brand)!!)
+              .replace("\$APPNAME$", (App.Companion.labelRes)!!)
           ).setPositiveButton(17039370, object : DialogInterface.OnClickListener {
           public override fun onClick(var1: DialogInterface, var2: Int) {
             ActivityAdvanced.Companion.b(this@ActivityMain as Context)
@@ -227,16 +227,16 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
           public override fun onClick(var1: DialogInterface, var2: Int) {}
         }).setIcon(17301543).show()
       }
-      if (!App.Companion.k) {
+      if (!App.Companion.isHuawei) {
         return@i
       }
-      if (!App.Companion.a(this, "PROTECTEDAPPS")) {
-        App.Companion.b(this, "PROTECTEDAPPS")
+      if (!App.Companion.getQuestionAsked(this, "PROTECTEDAPPS")) {
+        App.Companion.setQuestionAsked(this, "PROTECTEDAPPS")
         (AlertDialog.Builder(this)).setTitle(R.string.string_advanced_protectedapps_text)
           .setMessage(
             getResources().getText(R.string.string_stop).toString()
-              .replace("\$BRAND$", (App.Companion.g)!!)
-              .replace("\$APPNAME$", (App.Companion.e)!!)
+              .replace("\$BRAND$", (App.Companion.brand)!!)
+              .replace("\$APPNAME$", (App.Companion.labelRes)!!)
           ).setPositiveButton(17039370, object : DialogInterface.OnClickListener {
           public override fun onClick(var1: DialogInterface, var2: Int) {
             ActivityAdvanced.Companion.c(this@ActivityMain)
@@ -253,7 +253,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
   override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
     log("ActivityMain.onActivityResult")
     if (var1 == 1) {
-      App.Companion.c(getApplicationContext())
+      App.Companion.broadcastSettingsChanged(getApplicationContext())
     }
   }
 
@@ -315,7 +315,7 @@ class ActivityMain constructor() : Activity(), View.OnClickListener {
       log("ActivityMain.oncreate ispro")
       var var2: Boolean = false
       var var3: Boolean = var2
-      if (App.Companion.c) {
+      if (App.Companion.morseMode) {
         var3 = var2
         if (this.a("com.dof100.morsenotifier.free")) {
           var3 = true

@@ -74,11 +74,11 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
     val var9 =
       Utils.unknown1(var1, var2, "http://mypreferencenamespace.100dof.com", "visiblePro", "true")
         .equals("true", ignoreCase = true)
-    if (App.a) {
+    if (App.freeBuild) {
       this.isEnabled = var6
       d = var8
     }
-    if (App.b) {
+    if (App.proBuild) {
       this.isEnabled = var7
       d = var9
     }
@@ -115,7 +115,7 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
         try {
           if (e == "PLAYSTORE") {
             context = c
-            intent = Intent("android.intent.action.VIEW", Uri.parse(App.l))
+            intent = Intent("android.intent.action.VIEW", Uri.parse(App.marketUrlFree))
             return@label71
           }
         } catch (var5: Exception) {
@@ -126,7 +126,7 @@ class MyPreferenceText(var1: Context, var2: AttributeSet) : Preference(var1, var
         try {
           if (e == "PLAYSTOREPRO") {
             context = c
-            intent = Intent("android.intent.action.VIEW", Uri.parse(App.m))
+            intent = Intent("android.intent.action.VIEW", Uri.parse(App.marketUrlPro))
             return@label71
           }
         } catch (var7: Exception) {

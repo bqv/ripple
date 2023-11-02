@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
@@ -26,7 +25,7 @@ class BRVolume : BroadcastReceiver() {
       } else {
         if (var5 in 0..9 && var6 != -1) {
           val var23 = PreferenceManager.getDefaultSharedPreferences(var1)
-          var22 = if (App.c) { "_morsedef" } else { "_voicedef" }
+          var22 = if (App.morseMode) { "_morsedef" } else { "_voicedef" }
           val var7 = Utils.prefGetInt(var1, var23, "pref_morse_volumedownstop", null as String?, var22, "_def")
           val var8 = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
           for (var9 in 0..9) {
@@ -114,7 +113,7 @@ class BRVolume : BroadcastReceiver() {
               var8[0], var8[1], var8[2], var8[3], var8[4], var8[5], var8[6], var8[7], var8[8], var8[9],
               var7, var3))
           if (var26) {
-            App.b(var1)
+            App.broadcastFinish(var1)
           }
           return@onReceive
         }

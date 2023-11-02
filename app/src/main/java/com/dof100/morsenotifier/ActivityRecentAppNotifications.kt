@@ -31,7 +31,7 @@ class ActivityRecentAppNotifications : Activity(), View.OnClickListener,
         a!!.clear(this)
         c!!.clear()
         c!!.notifyDataSetChanged()
-        App.Companion.d(this)
+        App.Companion.broadcastRecentNotificationsChanged(this)
       } else {
         if (var1.getId() == R.id.b_recentnotifications_criteria) {
           log("ActivityRecentAppNotifications.onClick b_Criteria")

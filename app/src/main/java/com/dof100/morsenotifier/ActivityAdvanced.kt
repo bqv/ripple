@@ -80,7 +80,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
       e!!.setText(R.string.string_advanced_permissions_readphonestate_denied)
       e!!.setTextColor(Color.RED)
     }
-    if (App.Companion.b) {
+    if (App.Companion.proBuild) {
       if (a(this as Activity)) {
         f!!.setText(R.string.string_advanced_notificationlistener_running)
         f!!.setTextColor(Color.GREEN)
@@ -102,32 +102,32 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
       f!!.setEnabled(false)
       f!!.setTextColor(Color.GRAY)
     }
-    if (!App.Companion.h && !App.Companion.i && !App.Companion.j) {
+    if (!App.Companion.isXiaomi && !App.Companion.isOppo && !App.Companion.isVivo) {
       g!!.setVisibility(View.GONE)
     } else {
       g!!.setVisibility(View.VISIBLE)
       h!!.setText(
         getResources().getText(R.string.string_advanced_autostart_text).toString()
-          .replace("\$BRAND$", (App.Companion.g)!!)
-          .replace("\$APPNAME$", (App.Companion.e)!!)
+          .replace("\$BRAND$", (App.Companion.brand)!!)
+          .replace("\$APPNAME$", (App.Companion.labelRes)!!)
       )
     }
-    if (!App.Companion.h && !App.Companion.i) {
+    if (!App.Companion.isXiaomi && !App.Companion.isOppo) {
       i!!.setVisibility(View.GONE)
     } else {
       i!!.setVisibility(View.VISIBLE)
       j!!.setText(
         getResources().getText(R.string.string_advanced_protectedapps).toString()
-          .replace("\$BRAND$", (App.Companion.g)!!)
-          .replace("\$APPNAME$", (App.Companion.e)!!)
+          .replace("\$BRAND$", (App.Companion.brand)!!)
+          .replace("\$APPNAME$", (App.Companion.labelRes)!!)
       )
     }
-    if (App.Companion.k) {
+    if (App.Companion.isHuawei) {
       k!!.setVisibility(View.VISIBLE)
       l!!.setText(
         getResources().getText(R.string.string_advanced_service_command).toString()
-          .replace("\$BRAND$", (App.Companion.g)!!)
-          .replace("\$APPNAME$", (App.Companion.e)!!)
+          .replace("\$BRAND$", (App.Companion.brand)!!)
+          .replace("\$APPNAME$", (App.Companion.labelRes)!!)
       )
     } else {
       k!!.setVisibility(View.GONE)
@@ -145,15 +145,15 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
       var var5: String?
       if (var3) {
         (MyRecentAppNotifications(this)).setEnable(this, true)
-        App.Companion.d(this)
+        App.Companion.broadcastRecentNotificationsChanged(this)
         var5 = "Recent notifications enabled."
       } else if (var1.startsWith("recent notifications off")) {
         (MyRecentAppNotifications(this)).setEnable(this, false)
-        App.Companion.d(this)
+        App.Companion.broadcastRecentNotificationsChanged(this)
         var5 = "Recent notifications disabled."
       } else if (var1.startsWith("recent notifications clear")) {
         (MyRecentAppNotifications(this)).clear(this)
-        App.Companion.d(this)
+        App.Companion.broadcastRecentNotificationsChanged(this)
         var5 = "Recent notifications cleared."
       } else {
         run label93@{
@@ -286,7 +286,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
       this
     )
     val var7: Boolean
-    if (VERSION.SDK_INT >= 18 && App.Companion.b) {
+    if (VERSION.SDK_INT >= 18 && App.Companion.proBuild) {
       var7 = true
     } else {
       var7 = false
@@ -298,7 +298,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
     var5.setEnabled(var7)
     var6.setEnabled(var7)
     var11.setEnabled(var7)
-    val var8: Boolean = App.Companion.a
+    val var8: Boolean = App.Companion.freeBuild
     val var9: Byte = 8
     var var10: Byte
     if (var8) {
@@ -329,7 +329,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
 
   companion object {
     fun a(var0: Context) {
-      if (App.Companion.h || App.Companion.i || App.Companion.j) {
+      if (App.Companion.isXiaomi || App.Companion.isOppo || App.Companion.isVivo) {
         var var1: Intent
         var var10001: Boolean
         run label86@{
@@ -337,7 +337,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
           run label91@{
             try {
               var1 = Intent()
-              if (App.Companion.h) {
+              if (App.Companion.isXiaomi) {
                 var2 = ComponentName(
                   "com.miui.securitycenter",
                   "com.miui.permcenter.autostart.AutoStartManagementActivity"
@@ -349,7 +349,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
               return@a
             }
             try {
-              if (App.Companion.i) {
+              if (App.Companion.isOppo) {
                 var2 = ComponentName(
                   "com.coloros.safecenter",
                   "com.coloros.safecenter.permission.startup.StartupAppListActivity"
@@ -361,7 +361,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
               return@a
             }
             try {
-              if (!App.Companion.j) {
+              if (!App.Companion.isVivo) {
                 return@label86
               }
               var2 = ComponentName(
@@ -455,7 +455,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
     }
 
     fun b(var0: Context) {
-      if (App.Companion.h || App.Companion.i) {
+      if (App.Companion.isXiaomi || App.Companion.isOppo) {
         var var1: Intent
         var var10001: Boolean
         run label67@{
@@ -470,7 +470,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
                   "com.miui.permcenter.autostart.AutoStartManagementActivity"
                 )
                 var1.setComponent(var2)
-                if (App.Companion.h) {
+                if (App.Companion.isXiaomi) {
                   return@label68
                 }
               } catch (var9: Exception) {
@@ -478,7 +478,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
                 return@b
               }
               try {
-                if (!App.Companion.i) {
+                if (!App.Companion.isOppo) {
                   return@label67
                 }
               } catch (var8: Exception) {
@@ -531,7 +531,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
     }
 
     fun c(var0: Context) {
-      if (App.Companion.k) {
+      if (App.Companion.isHuawei) {
         var var1: Intent
         var var10001: Boolean
         run label34@{
@@ -580,7 +580,7 @@ class ActivityAdvanced constructor() : Activity(), View.OnClickListener {
     }
 
     private fun f(var0: Context) {
-      if (App.Companion.a) {
+      if (App.Companion.freeBuild) {
         toast(var0, "App notifications are only available in the pro version")
       } else if (VERSION.SDK_INT < 18) {
         log(

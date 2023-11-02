@@ -32,10 +32,10 @@ class MyPreferenceButton constructor(private val a: Context, var2: AttributeSet)
     val var4: Boolean =
       Utils.unknown1(a, var2, "http://mypreferencenamespace.100dof.com", "enablePro", "true")
         .equals("true", ignoreCase = true)
-    if (App.Companion.a) {
+    if (App.Companion.freeBuild) {
       this.setEnabled(var3)
     }
-    if (App.Companion.b) {
+    if (App.Companion.proBuild) {
       this.setEnabled(var4)
     }
   }

@@ -51,13 +51,13 @@ class ServiceNotifications constructor() : NotificationListenerService() {
     log(this, "ServiceNotifications.load_params")
     val var1: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
     var var2: String?
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = "_morsedef"
     } else {
       var2 = "_voicedef"
     }
     c = Utils.prefGetBoolean(this, var1, "pref_audio_enable", null as String?, var2, "_def")
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = "_morsedef"
     } else {
       var2 = "_voicedef"
@@ -70,19 +70,19 @@ class ServiceNotifications constructor() : NotificationListenerService() {
       var2,
       "_def"
     )
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = "_morsedef"
     } else {
       var2 = "_voicedef"
     }
     e = Utils.prefGetBoolean(this, var1, "pref_display_enable", null as String?, var2, "_def")
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = "_morsedef"
     } else {
       var2 = "_voicedef"
     }
     a = Utils.prefGetBoolean(this, var1, "pref_apps_enable", null as String?, var2, "_def")
-    if (App.Companion.c) {
+    if (App.Companion.morseMode) {
       var2 = "_morsedef"
     } else {
       var2 = "_voicedef"

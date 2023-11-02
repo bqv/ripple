@@ -135,10 +135,10 @@ class ActivityHTML : Activity(), View.OnClickListener {
         val var20 = var10000
         var20.printStackTrace()
       }
-      var15 = var18.replace("[APPNAME]", App.e!!).replace("[APPVERSION]", App.f!!)
-        .replace("[VERTICALALIGN]", var3!!).replace("[APPPLAYSTORE]", App.l!!)
-        .replace("[APPPLAYSTOREPRO]", App.m!!)
-      var15 = if (App.b) {
+      var15 = var18.replace("[APPNAME]", App.labelRes!!).replace("[APPVERSION]", App.versionName!!)
+        .replace("[VERTICALALIGN]", var3!!).replace("[APPPLAYSTORE]", App.marketUrlFree!!)
+        .replace("[APPPLAYSTOREPRO]", App.marketUrlPro!!)
+      var15 = if (App.proBuild) {
         Utils.XMLDo(Utils.XMLDo(var15!!, "FREE", 1), "PRO", 2)
       } else {
         Utils.XMLDo(Utils.XMLDo(var15!!, "FREE", 2), "PRO", 1)

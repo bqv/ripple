@@ -28,8 +28,8 @@ class ActivityAbout constructor() : Activity() {
     } catch (var3: PackageManager.NameNotFoundException) {
       var3.printStackTrace()
     }
-    d = App.Companion.l
-    e = App.Companion.m
+    d = App.Companion.marketUrlFree
+    e = App.Companion.marketUrlPro
   }
 
   override fun onCreate(var1: Bundle?) {

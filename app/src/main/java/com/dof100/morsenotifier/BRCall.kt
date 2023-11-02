@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Build.VERSION
 import android.preference.PreferenceManager
 import android.telephony.TelephonyManager
-import androidx.core.content.edit
 import com.dof100.morsenotifier.MyLog.log
 import java.util.Locale
 
@@ -26,13 +25,13 @@ class BRCall : BroadcastReceiver() {
         var15.apply()
         if (TelephonyManager.EXTRA_STATE_IDLE == var3) {
           log(context, "BRCall.onReceive EXTRA_STATE_IDLE. Broadcasting finish")
-          App.b(context)
+          App.broadcastFinish(context)
         } else if (TelephonyManager.EXTRA_STATE_OFFHOOK == var3) {
           log(context, "BRCall.onReceive EXTRA_STATE_OFFHOOK. Broadcasting finish")
-          App.b(context)
+          App.broadcastFinish(context)
         } else if (TelephonyManager.EXTRA_STATE_RINGING != var3) {
           log(context, "BRCall.onReceive EXTRA_STATE_???????. Broadcasting finish")
-          App.b(context)
+          App.broadcastFinish(context)
         } else {
           log(context, "BRCall.onReceive EXTRA_STATE_RINGING lastState  = $var6")
           var4 = intent.hasExtra("incoming_number")
