@@ -229,6 +229,7 @@ class ServiceMain : IntentService {
           val intent = Intent(this, ActivityDisplayMessage::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             putExtra("PARAM_INSTANCE", instance)
             putExtra("PARAM_LIST", playerMorse.getList())
             putExtra("PARAM_DISPLAY_HOW", mDisplayHow)

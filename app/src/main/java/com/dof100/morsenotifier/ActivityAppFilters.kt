@@ -12,8 +12,7 @@ import android.widget.Button
 import android.widget.ListView
 import com.dof100.morsenotifier.MyLog.log
 
-class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
-  MyAppFiltersArrayAdapter.Handler {
+class ActivityAppFilters constructor() : Activity(), MyAppFiltersArrayAdapter.Handler {
   private var filters: MyAppNotificationFilters? = null
   private var adapter: MyAppFiltersArrayAdapter? = null
   private var listView: ListView? = null
@@ -38,9 +37,10 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
       }.create().show()
     } else if (view.getId() == R.id.b_edit) {
       log("ActivityAppFilters.onRowButtonClick b_edit")
-      this.startActivityForResult(Intent(this, ActivityAppFilter::class.java).apply {
+      Intent(this, ActivityAppFilter::class.java).apply {
         putExtra("FILTERINDEX", index)
-      }, 1)
+        startActivityForResult(this, 1)
+      }
     }
   }
 
@@ -60,19 +60,16 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
     }
   }
 
-  public override fun onClick(view: View) {
-    log("ActivityAppFilters.onClick")
-  }
-
   override fun onCreate(bundle: Bundle?) {
     super.onCreate(bundle)
     log("ActivityAppFilters.onCreate")
-    filters = MyAppNotificationFilters(this)
-    log("ActivityAppFilters.onCreate loadFilters")
-    filters!!.a(this)
+    filters = MyAppNotificationFilters(this).also {
+      log("ActivityAppFilters.onCreate loadFilters")
+      it.a(this)
+    }
     adapter = MyAppFiltersArrayAdapter(this, filters, this)
     this.setContentView(R.layout.activity_appfilters)
-    findViewById<ListView>(R.id.lv_apps_select).apply {
+    listView = findViewById<ListView>(R.id.lv_apps_select).apply {
       setAdapter(adapter)
       setOnItemClickListener { _: AdapterView<*>?, view: View, _: Int, _: Long ->
         log("ActivityAppFilters.onItemClick $view")
@@ -81,20 +78,21 @@ class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
     findViewById<Button>(R.id.b_apps_select_add).setOnClickListener {
       log("ActivityAppFilters.onClick b_apps_select_add")
       adapter!!.a()
-      this.startActivityForResult(Intent(this, ActivityAppFilter::class.java).apply {
+      Intent(this, ActivityAppFilter::class.java).apply {
         putExtra("FILTERINDEX", filters!!.list.size - 1)
-      }, 1)
+        startActivityForResult(this, 1)
+      }
     }
     findViewById<Button>(R.id.b_apps_select_checkrecent).setOnClickListener {
       log("ActivityRecentNotifications.onClick b_apps_select_checkrecent")
-      this.startActivity(Intent(this, ActivityRecentAppNotifications::class.java).apply {
+      Intent(this, ActivityRecentAppNotifications::class.java).apply {
         putExtra(
           getResources().getString(R.string.MSG_WHAT),
           getResources().getString(R.string.MSG_MN_ACTIVITYRECENTNOTIFICATIONS_START)
         )
         putExtra(getResources().getString(R.string.MSG_EXTRATEXT1), "")
         putExtra(getResources().getString(R.string.MSG_EXTRATEXT2), "")
-      })
+      }
     }
   }
 }
