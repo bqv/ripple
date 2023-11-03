@@ -41,7 +41,7 @@
     <string name="action_addfilter">Add filter</string>
     <string name="action_addreminder">Add reminder</string>
     <string name="action_advanced">Advanced…</string>
-    <string name="action_checkrecent">Recent not/tions</string>
+    <string name="action_checkrecent">Recent notifications</string>
     <string name="action_clear">Clear</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>

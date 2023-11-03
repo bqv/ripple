@@ -88,8 +88,9 @@ class ActivityAppFilter constructor() : Activity() {
       var2 = 0
     }
     if (c == null) {
-      c = MyAppNotificationFilter()
-      b!!.list.add(c)
+      c = MyAppNotificationFilter().also {
+        b!!.list.add(it)
+      }
       var2 = b!!.list.size - 1
       log("ActivityAppFilter.onCreate created new filter at position = $var2")
     }
