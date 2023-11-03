@@ -125,7 +125,7 @@ class ActivityAppFilter constructor() : Activity() {
   override fun onPause() {
     log("ActivityAppFilter.onPause")
     b()
-    //TODO: this.b.MyAppFilters(this);
+    this.b!!.b(this);
     super.onPause()
   }
 

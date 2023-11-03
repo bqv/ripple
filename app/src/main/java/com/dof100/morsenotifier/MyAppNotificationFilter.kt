@@ -18,6 +18,7 @@ class MyAppNotificationFilter constructor() {
   var h: Boolean = false
   var i: String? = ""
   var j: String? = ""
+
   private fun a() {
     a = "All non-system apps"
     b = ""
@@ -421,7 +422,7 @@ class MyAppNotificationFilter constructor() {
   }
 
   fun a(var1: SharedPreferences, var2: Int) {
-    //TODO: this.MyAppNotificationFilter();
+    this.a();
     a = var1.getString("app_filter_${var2}_Package", "All non-system apps")
     b = var1.getString("app_filter_${var2}_CriteriaContains", b)
     c = var1.getString("app_filter_${var2}_CriteriaContainsNot", c)

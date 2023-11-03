@@ -35,7 +35,7 @@ internal class MyAppFiltersArrayAdapter constructor(
 
   fun a() {
     insert(MyAppNotificationFilter(), appNotificationFilters!!.list.size)
-    //TODO: this.appNotificationFilters.MyAppFilters(this.context);
+    appNotificationFilters.b(this.context);
     notifyDataSetChanged()
   }
 
