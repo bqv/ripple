@@ -29,8 +29,8 @@ class ActivityAppFilters : Activity() {
         if (view.id == R.id.b_delete) {
           log("ActivityAppFilters.onRowButtonClick b_delete")
           AlertDialog.Builder(this@ActivityAppFilters).apply {
-            setTitle(R.string.uninstall_free_title)
-            setMessage(R.string.title_activity_advanced)
+            setTitle(R.string.action_delete)
+            setMessage(R.string.text_confirm)
             setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
               adapter.remove(filter)
               filters.b(this@ActivityAppFilters)
