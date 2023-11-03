@@ -7,33 +7,27 @@ import com.dof100.morsenotifier.MyLog.log
 import java.util.Collections
 
 internal class MyAppFilters constructor(var1: Context) {
-  val a: MutableList<Any?> = ArrayList<Any?>()
+  val mList: MutableList<PackagesRepository?> = ArrayList<PackagesRepository?>()
 
   init {
-    val var2: ArrayList<Any?> = ArrayList<Any?>()
-    val var3: PackageManager? = var1.getPackageManager()
-    var var4: Any = var2
-    if (var3 != null) {
-      var4 = var3.getInstalledApplications(128)
+    val packageManager: PackageManager? = var1.getPackageManager()
+    var installedApps: List<ApplicationInfo?> = ArrayList<ApplicationInfo?>()
+    if (packageManager != null) {
+      installedApps = packageManager.getInstalledApplications(128)
     }
-    val var5: Iterator<Any?> = (var4 as List<Any?>).iterator()
-    while (var5.hasNext()) {
-      val var6: PackagesRepository = PackagesRepository(var3, var5.next() as ApplicationInfo?)
-      a.add(var6)
+    val iterator: Iterator<ApplicationInfo?> = installedApps.iterator()
+    while (iterator.hasNext()) {
+      val packagesRepository: PackagesRepository = PackagesRepository(packageManager, iterator.next())
+      mList.add(packagesRepository)
     }
-    Collections.sort(a, object : Comparator<Any?> {
-      fun a(var1: PackagesRepository?, var2: PackagesRepository?): Int {
-        return var1!!.b!!.compareTo((var2!!.b)!!)
-      }
-
-      // $FF: synthetic method
-      public override fun compare(var1: Any?, var2: Any?): Int {
-        return this.a(var1 as PackagesRepository?, var2 as PackagesRepository?)
+    Collections.sort(mList, object : Comparator<PackagesRepository?> {
+      public override fun compare(left: PackagesRepository?, right: PackagesRepository?): Int {
+        return left!!.b!!.compareTo((right!!.b)!!)
       }
     })
-    a.add(0, PackagesRepository("All apps", "All apps"))
-    a.add(1, PackagesRepository("All system apps", "All system apps"))
-    a.add(2, PackagesRepository("All non-system apps", "All non-system apps"))
+    mList.add(0, PackagesRepository("All apps", "All apps"))
+    mList.add(1, PackagesRepository("All system apps", "All system apps"))
+    mList.add(2, PackagesRepository("All non-system apps", "All non-system apps"))
   }
 
   fun a(var1: String?): Int {
@@ -64,9 +58,9 @@ internal class MyAppFilters constructor(var1: Context) {
       else -> {
         log("MyAppFilters.getApplicationInfoIndex")
         var2 = 3
-        while (var2 < a.size) {
-          val var3: PackagesRepository? = a.get(var2) as PackagesRepository?
-          if (var3 != null && (var3.a == var1)) {
+        while (var2 < mList.size) {
+          val packagesRepository: PackagesRepository? = mList[var2]
+          if (packagesRepository != null && (packagesRepository.a == var1)) {
             return var2
           }
           ++var2
@@ -76,12 +70,12 @@ internal class MyAppFilters constructor(var1: Context) {
     }
   }
 
-  fun a(): ArrayList<Any?> {
-    val var1: ArrayList<Any?> = ArrayList<Any?>()
-    val var2: Iterator<Any?> = a.iterator()
-    while (var2.hasNext()) {
-      var1.add((var2.next() as PackagesRepository).b)
+  fun a(): ArrayList<String?> {
+    val list = ArrayList<String?>()
+    val iterator: Iterator<PackagesRepository?> = mList.iterator()
+    while (iterator.hasNext()) {
+      list.add((iterator.next() as PackagesRepository).b)
     }
-    return var1
+    return list
   }
 }

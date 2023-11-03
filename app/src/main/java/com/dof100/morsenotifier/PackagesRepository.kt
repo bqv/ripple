@@ -10,18 +10,18 @@ internal class PackagesRepository constructor(var a: String = "", var b: String?
 
     run label40@{
       a = applicationInfo.packageName
-      val var6: String
+      val appLabel: String
       if (packageManager != null) {
         try {
-          var6 = packageManager.getApplicationLabel(applicationInfo) as String
+          appLabel = packageManager.getApplicationLabel(applicationInfo) as String
         } catch (_: Exception) {
           return@label40
         }
       } else {
-        var6 = ""
+        appLabel = ""
       }
       try {
-        b = var6
+        b = appLabel
         if (b!!.startsWith("com.android.")) {
           b = "${b!!.substring(12, 13).uppercase(Locale.getDefault())}${b!!.substring(13)}"
         }

@@ -14,104 +14,102 @@ import com.dof100.morsenotifier.MyLog.log
 
 class ActivityAppFilters constructor() : Activity(), View.OnClickListener,
   MyAppFiltersArrayAdapter.Handler {
-  private var a: MyAppNotificationFilters? = null
-  private var b: MyAppFiltersArrayAdapter? = null
-  private var c: ListView? = null
+  private var filters: MyAppNotificationFilters? = null
+  private var adapter: MyAppFiltersArrayAdapter? = null
+  private var listView: ListView? = null
 
-  public override fun handle(var1: MyAppNotificationFilter, var2: Int, var3: View) {
+  public override fun handle(var1: MyAppNotificationFilter, index: Int, view: View) {
     log("ActivityAppFilters.onRowButtonClick")
-    if (var3.getId() == R.id.b_delete) {
+    if (view.getId() == R.id.b_delete) {
       log("ActivityAppFilters.onRowButtonClick b_delete")
-      val var5: AlertDialog.Builder = AlertDialog.Builder(this)
-      var5.setTitle(R.string.uninstall_free_title)
-      var5.setMessage(R.string.title_activity_advanced)
-      var5.setPositiveButton(R.string.action_yes, object : DialogInterface.OnClickListener {
-        public override fun onClick(var1x: DialogInterface, var2: Int) {
-          b!!.remove(var1)
-          //TODO: ActivityAppFilters.this.a.MyAppFilters(ActivityAppFilters.this);
-          b!!.notifyDataSetChanged()
-          c!!.invalidate()
-          var1x.dismiss()
-        }
-      })
-      var5.setNegativeButton(R.string.action_no, object : DialogInterface.OnClickListener {
-        public override fun onClick(var1: DialogInterface, var2: Int) {
-          var1.dismiss()
-        }
-      })
-      var5.create().show()
+      AlertDialog.Builder(this).apply {
+        setTitle(R.string.uninstall_free_title)
+        setMessage(R.string.title_activity_advanced)
+        setPositiveButton(R.string.action_yes, object : DialogInterface.OnClickListener {
+          public override fun onClick(dialog: DialogInterface, var2: Int) {
+            adapter!!.remove(var1)
+            //TODO: ActivityAppFilters.this.filters.MyAppFilters(ActivityAppFilters.this);
+            adapter!!.notifyDataSetChanged()
+            listView!!.invalidate()
+            dialog.dismiss()
+          }
+        })
+        setNegativeButton(R.string.action_no, object : DialogInterface.OnClickListener {
+          public override fun onClick(dialog: DialogInterface, var2: Int) {
+            dialog.dismiss()
+          }
+        })
+        create().show()
+      }
     } else {
-      if (var3.getId() == R.id.b_edit) {
+      if (view.getId() == R.id.b_edit) {
         log("ActivityAppFilters.onRowButtonClick b_edit")
-        val var4: Intent = Intent(this, ActivityAppFilter::class.java)
-        var4.putExtra("FILTERINDEX", var2)
-        this.startActivityForResult(var4, 1)
+        this.startActivityForResult(Intent(this, ActivityAppFilter::class.java).apply {
+          putExtra("FILTERINDEX", index)
+        }, 1)
       }
     }
   }
 
-  override fun onActivityResult(var1: Int, var2: Int, var3: Intent?) {
+  override fun onActivityResult(code: Int, result: Int, intent: Intent?) {
     log("ActivityAppFilters.onActivityResult")
-    if (var1 == 1) {
-      if (var2 == -1) {
+    if (code == 1) {
+      if (result == -1) {
         log("ActivityAppFilters.onActivityResult OK")
       }
-      if (var2 == 0) {
+      if (result == 0) {
         log("ActivityAppFilters.onActivityResult CANCEL")
       }
       log("ActivityAppFilters.onActivityResult loadFilters")
-      a!!.a(this)
-      b!!.notifyDataSetChanged()
-      c!!.invalidate()
+      filters!!.a(this)
+      adapter!!.notifyDataSetChanged()
+      listView!!.invalidate()
     }
   }
 
-  public override fun onClick(var1: View) {
+  public override fun onClick(view: View) {
     log("ActivityAppFilters.onClick")
-    if (var1 != null) {
-      val var2: Intent
-      if (var1.getId() == R.id.b_apps_select_add) {
+    if (view != null) {
+      if (view.getId() == R.id.b_apps_select_add) {
         log("ActivityAppFilters.onClick b_apps_select_add")
-        b!!.a()
-        var2 = Intent(this, ActivityAppFilter::class.java)
-        var2.putExtra("FILTERINDEX", a!!.list.size - 1)
-        this.startActivityForResult(var2, 1)
+        adapter!!.a()
+        this.startActivityForResult(Intent(this, ActivityAppFilter::class.java).apply {
+          putExtra("FILTERINDEX", filters!!.list.size - 1)
+        }, 1)
       } else {
-        if (var1.getId() == R.id.b_apps_select_checkrecent) {
+        if (view.getId() == R.id.b_apps_select_checkrecent) {
           log("ActivityRecentNotifications.onClick b_apps_select_checkrecent")
-          var2 = Intent(this, ActivityRecentAppNotifications::class.java)
-          var2.putExtra(
-            getResources().getString(R.string.MSG_WHAT),
-            getResources().getString(R.string.MSG_MN_ACTIVITYRECENTNOTIFICATIONS_START)
-          )
-          var2.putExtra(getResources().getString(R.string.MSG_EXTRATEXT1), "")
-          var2.putExtra(getResources().getString(R.string.MSG_EXTRATEXT2), "")
-          this.startActivity(var2)
+          this.startActivity(Intent(this, ActivityRecentAppNotifications::class.java).apply {
+            putExtra(
+              getResources().getString(R.string.MSG_WHAT),
+              getResources().getString(R.string.MSG_MN_ACTIVITYRECENTNOTIFICATIONS_START)
+            )
+            putExtra(getResources().getString(R.string.MSG_EXTRATEXT1), "")
+            putExtra(getResources().getString(R.string.MSG_EXTRATEXT2), "")
+          })
         }
       }
     }
   }
 
-  override fun onCreate(var1: Bundle?) {
-    super.onCreate(var1)
+  override fun onCreate(bundle: Bundle?) {
+    super.onCreate(bundle)
     log("ActivityAppFilters.onCreate")
-    a = MyAppNotificationFilters(this)
+    filters = MyAppNotificationFilters(this)
     log("ActivityAppFilters.onCreate loadFilters")
-    a!!.a(this)
-    b = MyAppFiltersArrayAdapter(this, a, this)
+    filters!!.a(this)
+    adapter = MyAppFiltersArrayAdapter(this, filters, this)
     this.setContentView(R.layout.activity_appfilters)
-    c = findViewById<ListView>(R.id.lv_apps_select)
-    c!!.setAdapter(b)
-    c!!.setOnItemClickListener(object : OnItemClickListener {
-      public override fun onItemClick(
-        var1: AdapterView<*>?,
-        var2: View,
-        var3: Int,
-        var4: Long
-      ) {
-        log("ActivityAppFilters.onItemClick $var2")
-      }
-    })
+    findViewById<ListView>(R.id.lv_apps_select).apply {
+      setAdapter(adapter)
+      setOnItemClickListener(object : OnItemClickListener {
+        public override fun onItemClick(
+          var1: AdapterView<*>?, view: View, var3: Int, var4: Long
+        ) {
+          log("ActivityAppFilters.onItemClick $view")
+        }
+      })
+    }
     findViewById<Button>(R.id.b_apps_select_add).setOnClickListener(this)
     findViewById<Button>(R.id.b_apps_select_checkrecent).setOnClickListener(this)
   }
